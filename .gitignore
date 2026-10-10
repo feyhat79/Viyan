@@ -6,3 +6,7 @@ desktop.ini
 # Temporäre Dateien
 *.tmp
 *.log
+
+# Lokale Arbeitsblätter & PDFs (Schutz vor versehentlichem Push)
+arbeitsblaetter/
+*.pdf
