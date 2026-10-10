@@ -41,3 +41,10 @@
    - Arbeitsblätter und PDFs dürfen **NIEMALS automatisch** zu GitHub gepusht werden!
    - Vor einem eventuellen Git-Push für Arbeitsblätter muss immer **zuerst ausdrücklich nachgefragt** werden:
      *„Soll dieses Arbeitsblatt zu GitHub synchronisiert werden oder nur lokal zum Ausdrucken bleiben?“*
+
+5. **Gymnasiales Niveau & Gestaffelte Anforderungsbereiche (AFB I – III):**
+   - Aufgaben dürfen **niemals trivial oder zu einfach** sein; der Anspruch orientiert sich klar am **Gymnasium**.
+   - Jedes Arbeitsblatt muss **unterschiedliche Schwierigkeitsgrade** bieten und alle drei Anforderungsbereiche abdecken:
+     - **AFB I (Basis & Reproduktion, ca. 30 %):** Fachbegriffe, Regeln nennen, Basissätze und einfache Zuordnungen/Lücken.
+     - **AFB II (Anwendung & Transfer, ca. 50 %):** Typische Klassenarbeitsfallen, Satztransformationen, anspruchsvolle Lückentexte im Fließtext, Fehlerdetektiv mit gezielter Korrektur, strukturierte Übersetzungen.
+     - **AFB III (Transfer, Begründung & freies Gestalten, ca. 20 %):** Eigene Textproduktion (z. B. Dialoge, freie Texte), grammatikalische Entscheidungen schriftlich begründen, knifflige Sonderfälle analysieren und lösen.
