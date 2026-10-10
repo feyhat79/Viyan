@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/quiz.css">
 </head>
 <body class="theme-englisch-page">
 
@@ -135,7 +136,7 @@
       </div>
     </section>
 
-    <!-- 4. Interaktive Übungen -->
+    <!-- 4. Interaktive Übungen & Selbsttest -->
     <section style="margin-bottom: 2.5rem;">
       <div class="section-badge badge-uebungen">
         <span class="badge-num" style="background: var(--theme-englisch);">4</span>
@@ -143,8 +144,18 @@
       </div>
 
       <p style="margin-bottom: 1.25rem;">
-        Löse die Aufgaben und klicke auf <strong>„Lösung anzeigen“</strong>:
+        Teste dein Wissen zu <strong>Parties, Dates &amp; Invitations</strong>! Wähle den <strong>Schnelltest (10 zufällige Fragen)</strong> für die schnelle Runde zwischendurch oder den <strong>kompletten Test (alle 25 Fragen)</strong> für die volle Power:
       </p>
+
+      <!-- Interaktiver Multiple-Choice Test Container -->
+      <div id="partiesQuizContainer" class="quiz-container"></div>
+
+      <!-- Zusätzliche schriftliche Aufgaben zum Aufklappen -->
+      <details style="background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem;">
+        <summary style="font-weight: 700; color: var(--theme-englisch); cursor: pointer; font-size: 1rem; user-select: none;">
+          📝 Zusätzliche schriftliche Übungen &amp; Schreibaufgaben anzeigen (11 Aufgaben)
+        </summary>
+        <div style="margin-top: 1.5rem;">
 
       <!-- Übung 1 -->
       <div class="exercise-card">
@@ -436,6 +447,8 @@
         </div>
       </div>
 
+        </div>
+      </details>
     </section>
 
     <!-- Bottom Navigation -->
@@ -451,5 +464,164 @@
   </div>
 
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/quiz-engine.js"></script>
+  <script>
+    const partiesQuizData = [
+      {
+        q: "Wie schreibt man die Ordnungszahl für <strong>5th</strong> als englisches Wort?",
+        options: ["fiveth", "fifth", "fivest", "fifeth"],
+        correct: 1,
+        exp: "Bei 5th ändert sich das Wort von <em>five</em> zu <strong>fifth</strong> (mit Doppel-f!)."
+      },
+      {
+        q: "Wie spricht man das Datum <strong>„12th August“</strong> im Englischen korrekt aus?",
+        options: ["the twelveth of August", "August the twelve", "the twelfth of August", "twelve of August"],
+        correct: 2,
+        exp: "Im gesprochenen Englisch sagt man <strong>„the twelfth of August“</strong> (Achtung: <em>twelfth</em> mit -f-!)."
+      },
+      {
+        q: "Welche Präposition steht vor Wochentagen und konkreten Tagesdaten?<br><em>„The party is _______ Saturday.“</em>",
+        options: ["in", "at", "on", "by"],
+        correct: 2,
+        exp: "Vor Wochentagen und konkreten Datumsangaben steht immer <strong>on</strong> (z. B. <em>on Saturday</em>, <em>on 3rd May</em>)."
+      },
+      {
+        q: "Welche Präposition gehört vor Monatsnamen und Jahreszahlen?<br><em>„My birthday is _______ September.“</em>",
+        options: ["on", "at", "in", "for"],
+        correct: 2,
+        exp: "Vor Monatsnamen (<em>in September</em>) und vor Jahreszahlen (<em>in 2024</em>) steht immer <strong>in</strong>."
+      },
+      {
+        q: "Welche Präposition steht vor genauen Uhrzeiten?<br><em>„The party starts _______ 5:30 p.m.“</em>",
+        options: ["at", "on", "in", "with"],
+        correct: 0,
+        exp: "Vor Uhrzeiten und festen Zeitpunkten steht immer <strong>at</strong> (z. B. <em>at 5:30 p.m.</em>, <em>at midnight</em>)."
+      },
+      {
+        q: "Was bedeutet die Abkürzung <strong>RSVP</strong> auf einer Einladungskarte?",
+        options: ["Bitte Geschenke mitbringen", "Um Rückmeldung / Antwort wird gebeten", "Eintritt frei", "Nur mit Verkleidung"],
+        correct: 1,
+        exp: "RSVP stammt aus dem Französischen (<em>répondez s'il vous plaît</em>) und bedeutet <strong>„Bitte um Antwort / Rückmeldung bis...“</strong>."
+      },
+      {
+        q: "Wie lautet die richtige Schreibung der Ordnungszahl für <strong>9th</strong>?",
+        options: ["nineth", "ninth", "ninethe", "nine"],
+        correct: 1,
+        exp: "Bei <strong>ninth</strong> fällt das stumme -e von <em>nine</em> komplett weg!"
+      },
+      {
+        q: "Was bedeutet die englische Redewendung <strong>„blow out the candles“</strong>?",
+        options: ["die Kerzen anzünden", "die Kerzen kaufen", "die Kerzen ausblasen", "die Kerzen verzieren"],
+        correct: 2,
+        exp: "<strong>to blow out</strong> bedeutet ausblasen (z. B. auf der Geburtstagstorte)."
+      },
+      {
+        q: "Dave veranstaltet die Feier und begrüßt alle Freunde. Er ist der...",
+        options: ["guest", "host", "venue", "present"],
+        correct: 1,
+        exp: "Der Gastgeber heißt <strong>host</strong> (Gastgeberin: <em>hostess</em>). Ein <em>guest</em> ist der Gast."
+      },
+      {
+        q: "Wie schreibt man die Ordnungszahl <strong>20th</strong> als englisches Wort?",
+        options: ["twentyth", "twentieth", "twentyst", "twentith"],
+        correct: 1,
+        exp: "Das -y am Ende von <em>twenty</em> verwandelt sich vor der Endung in -ie-: <strong>twentieth</strong>."
+      },
+      {
+        q: "Wie spricht man <strong>„1st January“</strong> im britischen Englisch aus?",
+        options: ["one of January", "the first of January", "first January", "the one January"],
+        correct: 1,
+        exp: "Beim Sprechen immer mit Artikel und Präposition: <strong>„the first of January“</strong>."
+      },
+      {
+        q: "Was ist eine <strong>„fancy dress party“</strong>?",
+        options: ["Ein feines Abendessen im Anzug", "Eine Kostüm- / Verkleidungsparty", "Eine Feier ohne Musik", "Ein Schulausflug"],
+        correct: 1,
+        exp: "Im britischen Englisch bedeutet <em>fancy dress party</em> <strong>Kostümparty</strong>."
+      },
+      {
+        q: "Welches Verb passt in die Lücke?<br><em>„We need to _______ the present in nice paper.“</em>",
+        options: ["wrap", "blow", "invite", "turn"],
+        correct: 0,
+        exp: "<strong>to wrap a present</strong> bedeutet ein Geschenk einpacken."
+      },
+      {
+        q: "Welches Wort bezeichnet den Ort oder die Location einer Feier?<br><em>„Our garden is the perfect _______ for the barbecue.“</em>",
+        options: ["guest", "invitation", "venue", "calendar"],
+        correct: 2,
+        exp: "<strong>venue</strong> bedeutet Veranstaltungsort oder Location."
+      },
+      {
+        q: "Welche Form ist die richtige Ordnungszahl für <strong>21st</strong>?",
+        options: ["twenty-one", "twenty-oneth", "twenty-first", "twentieth-one"],
+        correct: 2,
+        exp: "Nur die letzte Ziffer wird zur Ordnungszahl: <strong>twenty-first</strong> (21st)."
+      },
+      {
+        q: "Wie sagst du auf Englisch höflich zu, dass du zur Party kommst?",
+        options: ["I'm sorry, I can't make it.", "Thanks for the invitation! I'd love to come.", "I have no time for you.", "Why did you invite me?"],
+        correct: 1,
+        exp: "<strong>„I'd love to come!“</strong> bedeutet <em>„Ich würde sehr gerne kommen!“</em>."
+      },
+      {
+        q: "Wie formulierst du eine höfliche Absage auf eine Einladung?",
+        options: ["I don't want to come.", "Unfortunately, I can't make it, but have a great party!", "Your party is boring.", "See you next week."],
+        correct: 1,
+        exp: "<strong>„Unfortunately, I can't make it...“</strong> ist die klassische, freundliche Absage."
+      },
+      {
+        q: "Sam wird nächsten Freitag 12 Jahre alt:<br><em>„Sam is _______ 12 next Friday.“</em>",
+        options: ["doing", "making", "turning", "celebrating"],
+        correct: 2,
+        exp: "Im Englischen drückt man das Erreichen eines neuen Alters mit <strong>turning</strong> aus (z. B. <em>turning 12</em>)."
+      },
+      {
+        q: "Was muss man bei englischen Wochentagen und Monaten immer beachten?",
+        options: ["Sie werden immer kleingeschrieben", "Sie werden immer GROSSgeschrieben", "Sie enden immer auf -day", "Sie haben keine Mehrzahl"],
+        correct: 1,
+        exp: "Monate (z. B. <em>October</em>) und Wochentage (z. B. <em>Saturday</em>) werden im Englischen <strong>immer großgeschrieben</strong>!"
+      },
+      {
+        q: "Welche Präposition fehlt hier?<br><em>„Halloween is celebrated _______ 31st October.“</em>",
+        options: ["at", "in", "on", "of"],
+        correct: 2,
+        exp: "Vor einem konkreten Tagesdatum steht stets <strong>on</strong> (<em>on 31st October</em>)."
+      },
+      {
+        q: "Was gehört in die Lücke?<br><em>„Please bring your favourite music _______!“</em>",
+        options: ["along", "away", "out", "for"],
+        correct: 0,
+        exp: "<strong>to bring along</strong> bedeutet mitbringen."
+      },
+      {
+        q: "Welches Wort bezeichnet die Gäste auf einer Feier?",
+        options: ["hosts", "candles", "guests", "venues"],
+        correct: 2,
+        exp: "<strong>guests</strong> bedeutet Gäste (Einzahl: <em>guest</em>)."
+      },
+      {
+        q: "Wie lautet das Wort für die Ordnungszahl <strong>3rd</strong>?",
+        options: ["three", "third", "threeth", "thirth"],
+        correct: 1,
+        exp: "1st = first, 2nd = second, <strong>3rd = third</strong>."
+      },
+      {
+        q: "Welche Präposition steht vor Mitternacht?<br><em>„The party ends _______ midnight.“</em>",
+        options: ["in", "at", "on", "to"],
+        correct: 1,
+        exp: "Feste Zeitpunkte verlangen immer <strong>at</strong>: <em>at midnight</em>, <em>at noon</em>."
+      },
+      {
+        q: "Was bedeutet <strong>„I can't make it“</strong> im Kontext einer Einladung?",
+        options: ["Ich kann nichts basteln", "Ich schaffe es leider nicht / kann nicht kommen", "Ich kann keinen Kuchen backen", "Ich mache keine Feier"],
+        correct: 1,
+        exp: "<strong>„I can't make it“</strong> ist die feste Redewendung für <em>„Ich schaffe es leider nicht / kann nicht kommen“</em>."
+      }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initViyanQuiz('partiesQuizContainer', partiesQuizData);
+    });
+  </script>
 </body>
 </html>
