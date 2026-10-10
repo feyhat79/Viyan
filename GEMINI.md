@@ -6,8 +6,12 @@
 - Auf Nicht-Mathe-Seiten (Englisch, Deutsch) ausschließlich natives HTML (z. B. `&rarr;`) verwenden, kein ungerendertes LaTeX (`$\rightarrow$`).
 
 ## 2. Arbeitsblätter & Druck-PDFs (Druckerfreundlich & Lokal)
-1. **Nur PDF-Dateien (kein HTML im Zielordner):**
-   - Für Arbeitsblätter wird **ausschließlich die finale PDF-Datei** im Ordner `arbeitsblaetter/` abgelegt.
+1. **Fachspezifische Unterordner & nur PDF-Dateien:**
+   - Arbeitsblätter werden **immer in fachspezifischen Unterordnern** abgelegt:
+     - `arbeitsblaetter/englisch/`
+     - `arbeitsblaetter/mathe/`
+     - `arbeitsblaetter/deutsch/`
+   - Für Arbeitsblätter wird **ausschließlich die finale PDF-Datei** im jeweiligen Fachordner abgelegt.
    - Es werden **keine `.html`-Dateien** im Ordner `arbeitsblaetter/` belassen (temporäre HTML-Dateien zum PDF-Generieren werden nach dem Rendern sofort gelöscht).
 
 2. **Drucker- & Tintensparend (Eco-Print):**
