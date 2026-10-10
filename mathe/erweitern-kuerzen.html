@@ -1,0 +1,1888 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Brüche erweitern & kürzen | Mathe 6</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <!-- KaTeX für mathematische Formeln -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+  <script>
+    function triggerKaTeX() {
+      if (typeof renderMathInElement === "function") {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+          ],
+          throwOnError: false
+        });
+      } else {
+        setTimeout(triggerKaTeX, 30);
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', triggerKaTeX);
+    } else {
+      triggerKaTeX();
+    }
+    window.addEventListener('load', triggerKaTeX);
+  </script>
+
+  <style>
+    body { padding-bottom: 4rem; }
+    .page-container { max-width: 820px; margin: 0 auto; }
+
+    .page-title { font-size: 2rem; font-weight: 800; color: #111827; margin: 0 0 0.3rem 0; line-height: 1.2; }
+    .page-subtitle { font-size: 0.95rem; color: #64748b; margin: 0 0 1.5rem 0; }
+    .page-divider { border: none; border-top: 2px solid #2563eb; margin: 0 0 2.5rem 0; opacity: 0.25; }
+
+    /* Abschnitts-Badges */
+    .section-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 4px 14px 4px 4px; border-radius: 999px;
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.6px;
+      text-transform: uppercase; margin-bottom: 1.1rem;
+    }
+    .section-badge .badge-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 800; color: #fff;
+    }
+    .badge-erklaerung  { background: #eff6ff; color: #1d4ed8; }
+    .badge-erklaerung  .badge-num { background: #2563eb; }
+    .badge-erweitern   { background: #fff7ed; color: #c2410c; }
+    .badge-erweitern   .badge-num { background: #ea580c; }
+    .badge-kuerzen     { background: #f0fdf4; color: #15803d; }
+    .badge-kuerzen     .badge-num { background: #16a34a; }
+    .badge-interaktiv  { background: #f5f3ff; color: #6d28d9; }
+    .badge-interaktiv  .badge-num { background: #7c3aed; }
+    .badge-uebungen    { background: #fdf2f8; color: #be185d; }
+    .badge-uebungen    .badge-num { background: #db2777; }
+    .badge-selbsttest  { background: #fef3c7; color: #b45309; }
+    .badge-selbsttest  .badge-num { background: #f59e0b; }
+
+    .content-block { margin-bottom: 3.5rem; }
+    .erklaer-text { font-size: 0.975rem; color: #111827; line-height: 1.75; margin-bottom: 1rem; }
+
+    /* MERKE-Box */
+    .merke-box {
+      border: 2.5px solid #dc2626; border-radius: 10px;
+      padding: 1.1rem 1.3rem; margin: 1.5rem 0; position: relative; background: #fff;
+    }
+    .merke-tag {
+      position: absolute; top: -11px; left: 14px;
+      background: #dc2626; color: #fff; font-size: 0.65rem; font-weight: 800;
+      letter-spacing: 0.8px; text-transform: uppercase; padding: 2px 9px; border-radius: 4px;
+    }
+    .merke-box p { font-size: 0.95rem; font-weight: 600; color: #111827; margin: 0; line-height: 1.65; }
+    .merke-box p + p { margin-top: 0.5rem; font-weight: 400; font-size: 0.875rem; color: #374151; }
+
+    /* Regel-Box */
+    .regel-box {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 1.25rem 1.4rem;
+      margin: 1.35rem 0;
+    }
+    .regel-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .regel-box p {
+      font-size: 0.925rem;
+      color: #1e293b;
+      line-height: 1.65;
+      margin: 0 0 0.5rem 0;
+    }
+    .regel-box p:last-child { margin-bottom: 0; }
+
+    /* Verfeinerungs-Vergleich (Visual) */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .comparison-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .comparison-card.highlight {
+      border-color: #2563eb;
+      background: #eff6ff;
+    }
+    .comparison-card h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+    .comparison-fraction {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #1d4ed8;
+      margin: 0.5rem 0;
+    }
+    .comparison-desc {
+      font-size: 0.8rem;
+      color: #64748b;
+      line-height: 1.4;
+    }
+
+    /* Rechenschema mit Pfeilen */
+    .arrow-schema-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.25rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .arrow-schema-formula {
+      font-size: 1.35rem;
+      color: #111827;
+      margin: 0.75rem 0;
+    }
+
+    /* Warnhinweis / Fehlerfalle */
+    .falle-box {
+      background: #fff5f5;
+      border: 1.5px solid #fecaca;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+    }
+    .falle-header {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #b91c1c;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.4rem;
+    }
+    .falle-box p {
+      font-size: 0.9rem;
+      color: #7f1d1d;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Interaktive Werkzeuge */
+    .tool-card {
+      background: #fff;
+      border: 1.5px solid #ddd6fe;
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin: 1.5rem 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .tool-title { font-size: 1.05rem; font-weight: 700; color: #5b21b6; margin: 0 0 0.4rem 0; }
+    .tool-desc  { font-size: 0.88rem; color: #64748b; margin-bottom: 1.2rem; line-height: 1.55; }
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .control-label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #334155;
+    }
+    .btn-chip {
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      border: 1.5px solid #cbd5e1;
+      background: #f8fafc;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-chip:hover {
+      background: #ede9fe;
+      border-color: #8b5cf6;
+      color: #5b21b6;
+    }
+    .btn-chip.active {
+      background: #7c3aed;
+      border-color: #6d28d9;
+      color: #fff;
+    }
+
+    /* Visualisierungs-Balken */
+    .strip-wrapper {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+    .strip-svg-box {
+      width: 100%;
+      height: 70px;
+      margin: 0.75rem 0;
+    }
+    .strip-math-result {
+      font-size: 1.15rem;
+      text-align: center;
+      margin-top: 0.75rem;
+      font-weight: 700;
+      color: #1e3a8a;
+    }
+
+    /* Kürz-Labor */
+    .kuerz-panel {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+    .kuerz-display-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.25rem;
+      padding: 1rem;
+      background: #ffffff;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+    }
+    .kuerz-current-fraction {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1e3a8a;
+    }
+    .kuerz-history {
+      font-size: 0.95rem;
+      color: #475569;
+      font-weight: 600;
+    }
+    .divisor-button-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .btn-divisor {
+      padding: 0.5rem 1rem;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #0f172a;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-divisor:hover {
+      background: #eff6ff;
+      border-color: #3b82f6;
+      color: #1d4ed8;
+    }
+    .kuerz-status-msg {
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 0.6rem 0.8rem;
+      border-radius: 8px;
+      display: none;
+    }
+    .status-success { background: #dcfce7; color: #166534; border: 1px solid #86efac; display: block; }
+    .status-error   { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; display: block; }
+    .status-done    { background: #e0e7ff; color: #3730a3; border: 1px solid #a5b4fc; display: block; font-weight: 700; }
+
+    /* Übungs-Karten */
+    .uebung-card {
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 1.75rem;
+      background: #fff;
+    }
+    .uebung-header {
+      display: flex; align-items: flex-start; gap: 0.85rem;
+      padding: 1.15rem 1.3rem 0.75rem 1.3rem; background: #fff;
+    }
+    .uebung-num {
+      width: 30px; height: 30px; border-radius: 50%; border: 2px solid #db2777;
+      color: #be185d; font-size: 0.85rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
+    }
+    .uebung-text { font-size: 0.935rem; color: #111827; line-height: 1.65; flex: 1; }
+    .uebung-text strong { display: block; font-weight: 700; margin-bottom: 3px; font-size: 1rem; }
+    .uebung-tag {
+      display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.4px;
+      text-transform: uppercase; padding: 2px 8px; border-radius: 4px; margin-bottom: 4px;
+    }
+    .tag-erweitern { background: #fff7ed; color: #c2410c; }
+    .tag-kuerzen   { background: #f0fdf4; color: #15803d; }
+    .tag-falle     { background: #fef2f2; color: #b91c1c; }
+    .tag-sach      { background: #eff6ff; color: #1d4ed8; }
+
+    .uebung-btn {
+      width: calc(100% - 2.6rem); margin: 0 1.3rem 1.15rem 1.3rem;
+      padding: 0.65rem 1rem; background: #fff; border: 1.5px solid #d1d5db;
+      border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 600;
+      color: #374151; display: flex; justify-content: space-between; align-items: center;
+      transition: all 0.2s ease; text-align: left;
+    }
+    .uebung-btn:hover { background: #fdf2f8; border-color: #f472b6; color: #be185d; }
+    .uebung-solution { display: none; background: #fdf2f8; border-top: 1.5px solid #fbcfe8; padding: 1.25rem 1.4rem; }
+    .uebung-solution.open { display: block; }
+    .uebung-solution p { font-size: 0.885rem; color: #111827; line-height: 1.75; margin: 0 0 0.5rem 0; }
+    .uebung-solution .formula-block { background: #fce7f3; }
+
+    /* Formel-Block */
+    .formula-block {
+      background: #f1f5f9; border-radius: 10px;
+      padding: 0.85rem 1.2rem; margin: 0.75rem 0; text-align: center; overflow-x: auto;
+    }
+
+    /* Selbsttest Styles */
+    .quiz-card {
+      background: #ffffff;
+      border: 1.5px solid #fde68a;
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin: 1.5rem 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .quiz-status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #92400e;
+    }
+    .quiz-progress-track {
+      width: 100%;
+      height: 8px;
+      background: #fef3c7;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+    .quiz-progress-fill {
+      height: 100%;
+      background: #f59e0b;
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+    .quiz-q-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #111827;
+      line-height: 1.55;
+      margin-bottom: 1.2rem;
+    }
+    .quiz-options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 1.25rem;
+    }
+    .quiz-opt-btn {
+      width: 100%;
+      text-align: left;
+      padding: 0.85rem 1.1rem;
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 0.925rem;
+      font-weight: 600;
+      color: #1e293b;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.15s ease;
+    }
+    .quiz-opt-btn:hover:not(:disabled) {
+      background: #eff6ff;
+      border-color: #93c5fd;
+      color: #1d4ed8;
+    }
+    .quiz-opt-letter {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #475569;
+      font-size: 0.75rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .quiz-opt-btn.correct {
+      background: #ecfdf5 !important;
+      border-color: #10b981 !important;
+      color: #065f46 !important;
+    }
+    .quiz-opt-btn.correct .quiz-opt-letter {
+      background: #10b981;
+      color: #fff;
+    }
+    .quiz-opt-btn.wrong {
+      background: #fef2f2 !important;
+      border-color: #ef4444 !important;
+      color: #991b1b !important;
+    }
+    .quiz-opt-btn.wrong .quiz-opt-letter {
+      background: #ef4444;
+      color: #fff;
+    }
+    .quiz-explanation-box {
+      display: none;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: #334155;
+    }
+    .quiz-next-action {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .btn-quiz-next {
+      padding: 0.65rem 1.4rem;
+      background: #f59e0b;
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-quiz-next:hover {
+      background: #d97706;
+    }
+    .quiz-result-view {
+      display: none;
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+    .quiz-score-badge {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #d97706;
+      margin-bottom: 0.5rem;
+    }
+    .quiz-score-text {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.5rem;
+    }
+    .quiz-score-feedback {
+      font-size: 0.9rem;
+      color: #64748b;
+      max-width: 500px;
+      margin: 0 auto 1.5rem auto;
+      line-height: 1.6;
+    }
+    .quiz-intro-view {
+      text-align: center;
+      padding: 1.75rem 1rem;
+    }
+    .quiz-intro-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #fef3c7;
+      color: #92400e;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      margin-bottom: 0.75rem;
+    }
+    .quiz-intro-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #111827;
+      margin: 0 0 0.5rem 0;
+    }
+    .quiz-intro-desc {
+      font-size: 0.95rem;
+      color: #475569;
+      max-width: 520px;
+      margin: 0 auto 1.5rem auto;
+      line-height: 1.6;
+    }
+    .btn-quiz-start {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      background: #f59e0b;
+      color: #ffffff;
+      font-size: 1.05rem;
+      font-weight: 800;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+      transition: all 0.2s ease;
+    }
+    .btn-quiz-start:hover {
+      background: #d97706;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(217, 119, 6, 0.35);
+    }
+    .quick-jump-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: #fef3c7;
+      border: 1.5px solid #fde68a;
+      border-radius: 8px;
+      color: #92400e;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .quick-jump-btn:hover {
+      background: #fde68a;
+      border-color: #f59e0b;
+      color: #78350f;
+    }
+
+    /* Bottom Nav */
+    .bottom-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; gap: 1rem;
+    }
+    .btn-nav-prev {
+      padding: 0.65rem 1.2rem; border: 1.5px solid #d1d5db; border-radius: 9px;
+      background: #fff; color: #374151; font-size: 0.875rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-nav-prev:hover { border-color: #2563eb; color: #2563eb; }
+    .btn-nav-next {
+      padding: 0.65rem 1.4rem; border-radius: 9px; background: #1e3a8a; color: #fff;
+      font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: background 0.2s;
+    }
+    .btn-nav-next:hover { background: #1d4ed8; }
+
+    @media (max-width: 640px) {
+      .comparison-grid { grid-template-columns: 1fr; }
+      .bottom-nav { flex-direction: column; align-items: stretch; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container page-container">
+
+  <!-- Navigation zurück zum Mathe-6-Portal -->
+  <nav class="portal-nav" style="justify-content: space-between; margin-bottom: 1.5rem;">
+    <a href="index.html" class="portal-back" style="font-weight: 700; font-size: 0.85rem; text-decoration: none; color: var(--theme-mathe);">
+      &larr; Zur Übersicht &middot; Mathe 6
+    </a>
+    <span class="badge-pill badge-mathe">Thema 2 &middot; Gymnasium</span>
+  </nav>
+
+  <!-- Modul Header -->
+  <header style="margin-bottom: 2rem;">
+    <h1 class="page-title">Brüche erweitern &amp; kürzen</h1>
+    <p class="page-subtitle">
+      Derselbe Wert in feineren oder gröberen Stücken: Wie du Brüche verfeinerst, vereinfachst und sicher beherrschst.
+    </p>
+    <a href="#selbsttest" class="quick-jump-btn">Direkt zum Selbsttest (10 Fragen) &darr;</a>
+  </header>
+  <hr class="page-divider">
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 1 — DIE GRUNDIDEE (GLEICHER WERT, ANDERE EINTEILUNG)
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block">
+    <div class="section-badge badge-erklaerung">
+      <span class="badge-num">1</span> Grundidee: Was bedeutet Erweitern und Kürzen?
+    </div>
+
+    <p class="erklaer-text">
+      Stell dir eine leckere Pizza vor. Ob du die Pizza genau in <strong>zwei Hälften</strong> teilst und eine Hälfte isst,
+      oder ob du jede Hälfte noch einmal quer teilst und <strong>zwei von vier Vierteln</strong> isst:
+      Am Ende hast du <strong>haargenau dieselbe Menge Pizza</strong> im Bauch!
+    </p>
+    <p class="erklaer-text">
+      Das ist das wichtigste Grundprinzip der Bruchrechnung: Ein Bruch hat einen festen mathematischen <strong>Wert</strong> (eine Größe).
+      Diesen Wert können wir jedoch mit <strong>unterschiedlich großen Stücken</strong> darstellen.
+    </p>
+
+    <!-- Drei Bildkarten im Vergleich -->
+    <div class="comparison-grid">
+      <div class="comparison-card">
+        <h4>1. Ausgangsbruch</h4>
+        <div class="comparison-fraction">$\frac{1}{2}$</div>
+        <svg width="100%" height="45" viewBox="0 0 160 40" style="margin: 6px 0;">
+          <rect x="5" y="5" width="75" height="30" fill="#2563eb" rx="3" />
+          <rect x="80" y="5" width="75" height="30" fill="#f1f5f9" stroke="#cbd5e1" rx="3" />
+          <rect x="5" y="5" width="150" height="30" fill="none" stroke="#1e3a8a" stroke-width="2" rx="3" />
+          <line x1="80" y1="5" x2="80" y2="35" stroke="#1e3a8a" stroke-width="2" />
+        </svg>
+        <div class="comparison-desc">1 großes Stück von insgesamt 2 Stücken.</div>
+      </div>
+
+      <div class="comparison-card highlight">
+        <h4>2. Verfeinert (Erweitert mit 2)</h4>
+        <div class="comparison-fraction">$\frac{2}{4}$</div>
+        <svg width="100%" height="45" viewBox="0 0 160 40" style="margin: 6px 0;">
+          <rect x="5" y="5" width="37.5" height="30" fill="#2563eb" rx="2" />
+          <rect x="42.5" y="5" width="37.5" height="30" fill="#2563eb" rx="2" />
+          <rect x="80" y="5" width="37.5" height="30" fill="#f1f5f9" stroke="#cbd5e1" rx="2" />
+          <rect x="117.5" y="5" width="37.5" height="30" fill="#f1f5f9" stroke="#cbd5e1" rx="2" />
+          <rect x="5" y="5" width="150" height="30" fill="none" stroke="#1e3a8a" stroke-width="2" rx="3" />
+          <line x1="42.5" y1="5" x2="42.5" y2="35" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="2 2" />
+          <line x1="80" y1="5" x2="80" y2="35" stroke="#1e3a8a" stroke-width="2" />
+          <line x1="117.5" y1="5" x2="117.5" y2="35" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="2 2" />
+        </svg>
+        <div class="comparison-desc">Jedes Stück halbiert: 2 Stücke von 4.</div>
+      </div>
+
+      <div class="comparison-card">
+        <h4>3. Noch feiner (Erweitert mit 4)</h4>
+        <div class="comparison-fraction">$\frac{4}{8}$</div>
+        <svg width="100%" height="45" viewBox="0 0 160 40" style="margin: 6px 0;">
+          <rect x="5" y="5" width="75" height="30" fill="#2563eb" rx="2" />
+          <rect x="80" y="5" width="75" height="30" fill="#f1f5f9" rx="2" />
+          <rect x="5" y="5" width="150" height="30" fill="none" stroke="#1e3a8a" stroke-width="2" rx="3" />
+          <line x1="23.75" y1="5" x2="23.75" y2="35" stroke="#93c5fd" stroke-width="1" stroke-dasharray="2 2" />
+          <line x1="42.5" y1="5" x2="42.5" y2="35" stroke="#93c5fd" stroke-width="1" stroke-dasharray="2 2" />
+          <line x1="61.25" y1="5" x2="61.25" y2="35" stroke="#93c5fd" stroke-width="1" stroke-dasharray="2 2" />
+          <line x1="80" y1="5" x2="80" y2="35" stroke="#1e3a8a" stroke-width="2" />
+          <line x1="98.75" y1="5" x2="98.75" y2="35" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2 2" />
+          <line x1="117.5" y1="5" x2="117.5" y2="35" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2 2" />
+          <line x1="136.25" y1="5" x2="136.25" y2="35" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2 2" />
+        </svg>
+        <div class="comparison-desc">Weiter unterteilt: 4 Stücke von 8.</div>
+      </div>
+    </div>
+
+    <!-- MERKE KASTEN -->
+    <div class="merke-box">
+      <span class="merke-tag">MERKE</span>
+      <p>
+        Beim <strong>Erweitern</strong> und <strong>Kürzen</strong> ändert sich die <strong>Einteilung</strong> (Anzahl und Größe der Stücke),
+        aber der <strong>Wert des Bruchs (die gefärbte Fläche) bleibt exakt gleich</strong>!
+      </p>
+      <p>
+        $$\frac{1}{2} = \frac{2}{4} = \frac{3}{6} = \frac{4}{8} = \frac{5}{10} = \dots$$
+      </p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 2 — BRÜCHE ERWEITERN (VERFEINERN)
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block">
+    <div class="section-badge badge-erweitern">
+      <span class="badge-num">2</span> Brüche erweitern (Verfeinern)
+    </div>
+
+    <div class="regel-box">
+      <div class="regel-title">Die goldene Erweiterungsregel</div>
+      <p>
+        Man <strong>erweitert</strong> einen Bruch, indem man den <strong>Zähler</strong> und den <strong>Nenner</strong>
+        mit <strong>derselben Zahl multipliziert</strong> (zum Beispiel mit $2, 3, 4, 5, \dots$).
+      </p>
+    </div>
+
+    <div class="arrow-schema-card">
+      <span style="font-size: 0.85rem; font-weight: 700; color: #ea580c; text-transform: uppercase; letter-spacing: 0.5px;">Die Grundregel auf einen Blick</span>
+      <div class="arrow-schema-formula" style="font-size: 1.5rem; margin: 0.8rem 0;">
+        $$\frac{\text{Zähler} \cdot \text{Zahl}}{\text{Nenner} \cdot \text{Zahl}}$$
+      </div>
+      <p style="font-size: 0.9rem; color: #475569; margin: 0; text-align: center;">
+        Beispiel: Erweitere $\frac{3}{5}$ mit der Zahl $4$:
+      </p>
+      <div class="arrow-schema-formula" style="color: #ea580c; font-size: 1.5rem; margin: 0.8rem 0;">
+        $$\frac{3}{5} = \frac{3 \cdot 4}{5 \cdot 4} = \frac{12}{20}$$
+      </div>
+      <div style="background: #fff7ed; border: 1.5px solid #fed7aa; border-radius: 8px; padding: 0.6rem 1.2rem; font-size: 0.9rem; color: #9a3412; font-weight: 700; text-align: center;">
+        Merkregel: Oben mal $4$ &mdash; und unten mal $4$!
+      </div>
+    </div>
+
+    <p class="erklaer-text">
+      <strong>Warum multipliziert man beide Zahlen?</strong><br>
+      Wenn du jedes der $5$ Teile in $4$ kleinere Stücke zerschneidest, entstehen insgesamt $5 \cdot 4 = 20$ Stücke (neuer Nenner).
+      Deine $3$ gefärbten Teile zerfallen dadurch ebenfalls in jeweils $4$ kleine Stücke: Du hast nun $3 \cdot 4 = 12$ gefärbte Stücke (neuer Zähler).
+    </p>
+
+    <!-- FEHLERFALLE -->
+    <div class="falle-box">
+      <div class="falle-header">Häufige Fehlerfalle beim Erweitern!</div>
+      <p>
+        <strong>1. Nur oben multiplizieren? FALSCH!</strong> Wer rechnet $\frac{3 \cdot 4}{5} = \frac{12}{5}$, vervierfacht die Menge!<br>
+        <strong>2. Plus statt Mal rechnen? NIEMALS!</strong> Erweitern bedeutet <em>Multiplizieren</em>.
+        $\frac{3 + 2}{5 + 2} = \frac{5}{7} \neq \frac{3}{5}$. Addieren verändert den Wert des Bruchs komplett!
+      </p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 3 — BRÜCHE KÜRZEN (VERGRÖBERN & VEREINFACHEN)
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block">
+    <div class="section-badge badge-kuerzen">
+      <span class="badge-num">3</span> Brüche kürzen (Vergröbern &amp; Vereinfachen)
+    </div>
+
+    <div class="regel-box">
+      <div class="regel-title">Die Kürzungsregel</div>
+      <p>
+        Man <strong>kürzt</strong> einen Bruch, indem man den <strong>Zähler</strong> und den <strong>Nenner</strong>
+        durch <strong>dieselbe Zahl teilt</strong> (eine Zahl, durch die sich Zähler und Nenner ohne Rest teilen lassen).
+      </p>
+    </div>
+
+    <div class="arrow-schema-card">
+      <span style="font-size: 0.85rem; font-weight: 700; color: #16a34a; text-transform: uppercase; letter-spacing: 0.5px;">Die Kürzungsregel auf einen Blick</span>
+      <div class="arrow-schema-formula" style="font-size: 1.5rem; margin: 0.8rem 0;">
+        $$\frac{\text{Zähler} : \text{Zahl}}{\text{Nenner} : \text{Zahl}}$$
+      </div>
+      <p style="font-size: 0.9rem; color: #475569; margin: 0; text-align: center;">
+        Beispiel: Kürze $\frac{18}{24}$ durch die Zahl $6$:
+      </p>
+      <div class="arrow-schema-formula" style="color: #16a34a; font-size: 1.5rem; margin: 0.8rem 0;">
+        $$\frac{18}{24} = \frac{18 : 6}{24 : 6} = \frac{3}{4}$$
+      </div>
+      <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; border-radius: 8px; padding: 0.6rem 1.2rem; font-size: 0.9rem; color: #166534; font-weight: 700; text-align: center;">
+        Merkregel: Oben geteilt durch $6$ &mdash; und unten geteilt durch $6$!
+      </div>
+    </div>
+
+    <p class="erklaer-text">
+      <strong>Zwei Wege zum Ziel:</strong>
+    </p>
+    <ul style="font-size: 0.935rem; color: #1e293b; line-height: 1.8; margin-left: 1.5rem; margin-bottom: 1.25rem;">
+      <li>
+        <strong>Weg 1 (Schrittweise kürzen):</strong> Wenn du die größte Zahl nicht sofort siehst, teile in einfachen Schritten (z. B. zuerst durch $2$, dann durch $3$):
+        $$\frac{36}{48} \xrightarrow{: 2} \frac{18}{24} \xrightarrow{: 2} \frac{9}{12} \xrightarrow{: 3} \frac{3}{4}$$
+      </li>
+      <li>
+        <strong>Weg 2 (Auf einen Schlag mit einer großen Zahl kürzen):</strong> Wenn du direkt siehst, dass sich beide Zahlen durch $12$ teilen lassen, bist du sofort fertig:
+        $$\frac{36}{48} = \frac{36 : 12}{48 : 12} = \frac{3}{4}$$
+      </li>
+    </ul>
+
+    <!-- MERKE VOLLSTÄNDIG GEKÜRZT -->
+    <div class="merke-box">
+      <span class="merke-tag">MERKE</span>
+      <p>
+        Ein Bruch heißt <strong>vollständig gekürzt</strong> (oder steht in der <em>Grundform</em>),
+        wenn sich Zähler und Nenner <strong>durch keine gemeinsame Zahl mehr teilen lassen</strong> (außer durch die $1$).
+      </p>
+      <p>
+        Beispiel: Bei $\frac{3}{4}$ lassen sich die $3$ und die $4$ durch keine gemeinsame Zahl mehr teilen. Der Bruch ist fertig gekürzt!
+      </p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 4 — AUSPROBIEREN & ENTDECKEN (INTERAKTIV)
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block">
+    <div class="section-badge badge-interaktiv">
+      <span class="badge-num">4</span> Ausprobieren &amp; Entdecken
+    </div>
+
+    <!-- WERKZEUG 1: LIVE-BRUCH-SCHNEIDER -->
+    <div class="tool-card">
+      <div class="tool-title">1. Der interaktive Bruch-Schneider (Erweitern visualisieren)</div>
+      <div class="tool-desc">
+        Wähle einen Ausgangsbruch und klicke auf einen Erweiterungsfaktor.
+        Beobachte genau: Der blaue Anteil bleibt unverändert lang – nur die Anzahl der Stücke vervielfacht sich!
+      </div>
+
+      <div class="controls-row">
+        <span class="control-label">Ausgangsbruch:</span>
+        <button class="btn-chip active" onclick="setBaseFraction(1, 2, this)">1/2</button>
+        <button class="btn-chip" onclick="setBaseFraction(2, 3, this)">2/3</button>
+        <button class="btn-chip" onclick="setBaseFraction(3, 4, this)">3/4</button>
+        <button class="btn-chip" onclick="setBaseFraction(2, 5, this)">2/5</button>
+        <button class="btn-chip" onclick="setBaseFraction(3, 8, this)">3/8</button>
+      </div>
+
+      <div class="controls-row">
+        <span class="control-label">Erweitern mit:</span>
+        <button class="btn-chip active factor-btn" onclick="setExpandFactor(1, this)">&middot; 1</button>
+        <button class="btn-chip factor-btn" onclick="setExpandFactor(2, this)">&middot; 2</button>
+        <button class="btn-chip factor-btn" onclick="setExpandFactor(3, this)">&middot; 3</button>
+        <button class="btn-chip factor-btn" onclick="setExpandFactor(4, this)">&middot; 4</button>
+        <button class="btn-chip factor-btn" onclick="setExpandFactor(5, this)">&middot; 5</button>
+        <button class="btn-chip factor-btn" onclick="setExpandFactor(6, this)">&middot; 6</button>
+      </div>
+
+      <div class="strip-wrapper">
+        <svg id="expand-svg" class="strip-svg-box" viewBox="0 0 600 70" preserveAspectRatio="none">
+          <!-- Dynamisch per JS -->
+        </svg>
+        <div id="expand-formula" class="strip-math-result"></div>
+      </div>
+    </div>
+
+
+    <!-- WERKZEUG 2: KÜRZ-LABOR -->
+    <div class="tool-card">
+      <div class="tool-title">2. Das Kürz-Labor (Schritt für Schritt vereinfachen)</div>
+      <div class="tool-desc">
+        Wähle einen Bruch und klicke auf einen gemeinsamen Teiler, um ihn zu verkleinern.
+        Schaffst du es, den Bruch vollständig bis zur Grundform zu kürzen?
+      </div>
+
+      <div class="controls-row">
+        <span class="control-label">Bruch wählen:</span>
+        <button class="btn-chip active kuerz-preset" onclick="loadKuerzPreset(24, 36, this)">24/36</button>
+        <button class="btn-chip kuerz-preset" onclick="loadKuerzPreset(18, 24, this)">18/24</button>
+        <button class="btn-chip kuerz-preset" onclick="loadKuerzPreset(30, 45, this)">30/45</button>
+        <button class="btn-chip kuerz-preset" onclick="loadKuerzPreset(40, 60, this)">40/60</button>
+        <button class="btn-chip kuerz-preset" onclick="loadKuerzPreset(42, 56, this)">42/56</button>
+        <button class="btn-chip kuerz-preset" onclick="loadKuerzPreset(75, 100, this)">75/100</button>
+      </div>
+
+      <div class="kuerz-panel">
+        <div class="kuerz-display-box">
+          <div id="kuerz-curr-disp" class="kuerz-current-fraction">24/36</div>
+          <div id="kuerz-history-trail" class="kuerz-history">Start: 24/36</div>
+        </div>
+
+        <div style="font-size: 0.85rem; font-weight: 700; color: #475569; margin-bottom: 0.6rem; text-align: center;">
+          Wähle einen gemeinsamen Teiler:
+        </div>
+        <div class="divisor-button-grid">
+          <button class="btn-divisor" onclick="attemptKuerzen(2)">: 2</button>
+          <button class="btn-divisor" onclick="attemptKuerzen(3)">: 3</button>
+          <button class="btn-divisor" onclick="attemptKuerzen(4)">: 4</button>
+          <button class="btn-divisor" onclick="attemptKuerzen(5)">: 5</button>
+          <button class="btn-divisor" onclick="attemptKuerzen(6)">: 6</button>
+          <button class="btn-divisor" onclick="attemptKuerzen(7)">: 7</button>
+          <button class="btn-divisor" onclick="attemptKuerzen(8)">: 8</button>
+          <button class="btn-divisor" onclick="attemptKuerzen(9)">: 9</button>
+          <button class="btn-divisor" onclick="attemptKuerzen(10)">: 10</button>
+          <button class="btn-divisor" onclick="attemptKuerzen(12)">: 12</button>
+          <button class="btn-divisor" onclick="attemptKuerzen(25)">: 25</button>
+        </div>
+
+        <div id="kuerz-msg" class="kuerz-status-msg"></div>
+
+        <div style="text-align: center; margin-top: 1rem;">
+          <button class="btn-chip" style="font-size: 0.8rem; background: #fff;" onclick="resetCurrentKuerzen()">Zurücksetzen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 5 — GEFÜHRTE ÜBUNGSAUFGABEN
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block">
+    <div class="section-badge badge-uebungen">
+      <span class="badge-num">5</span> Geführte Übungsaufgaben
+    </div>
+
+    <p class="erklaer-text">
+      Rechne die Aufgaben zuerst auf einem Blatt Papier oder im Kopf. Klicke anschließend auf die Leiste, um den ausführlichen Rechenweg zu vergleichen.
+    </p>
+
+    <!-- AUFGABE 1 -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">1</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-erweitern">Erweitern</span>
+          <strong>Fehlende Zahlen beim Erweitern bestimmen</strong>
+          Bestimme die fehlende Zahl im Zähler bzw. Nenner:
+          <div style="margin: 0.5rem 0;">
+            a) $\frac{2}{3} = \frac{?}{15}$ &emsp;&emsp;
+            b) $\frac{5}{8} = \frac{35}{?}$ &emsp;&emsp;
+            c) $\frac{7}{12} = \frac{?}{48}$ &emsp;&emsp;
+            d) $\frac{3}{10} = \frac{300}{?}$
+          </div>
+        </div>
+      </div>
+      <button class="uebung-btn" onclick="toggleUebung(this)">
+        <span>Antwort &amp; Erklärung aufdecken</span>
+        <span>&darr;</span>
+      </button>
+      <div class="uebung-solution">
+        <p><strong>Lösungsweg:</strong> Man prüft stets zuerst, mit welcher Zahl multipliziert wurde (Erweiterungsfaktor):</p>
+        <p>
+          a) $15 : 3 = 5$ (Erweiterungsfaktor ist $5$). Also Zähler mit $5$ multiplizieren: $2 \cdot 5 = 10$.<br>
+          $$\frac{2}{3} = \frac{10}{15}$$
+        </p>
+        <p>
+          b) $35 : 5 = 7$ (Erweiterungsfaktor ist $7$). Also Nenner mit $7$ multiplizieren: $8 \cdot 7 = 56$.<br>
+          $$\frac{5}{8} = \frac{35}{56}$$
+        </p>
+        <p>
+          c) $48 : 12 = 4$ (Erweiterungsfaktor ist $4$). Zähler: $7 \cdot 4 = 28$.<br>
+          $$\frac{7}{12} = \frac{28}{48}$$
+        </p>
+        <p>
+          d) $300 : 3 = 100$ (Erweiterungsfaktor ist $100$). Nenner: $10 \cdot 100 = 1000$.<br>
+          $$\frac{3}{10} = \frac{300}{1000}$$
+        </p>
+      </div>
+    </div>
+
+    <!-- AUFGABE 2 -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">2</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-kuerzen">Kürzen</span>
+          <strong>Schrittweise und vollständig kürzen</strong>
+          Kürze die folgenden Brüche so weit wie möglich (bis zur Grundform):
+          <div style="margin: 0.5rem 0;">
+            a) $\frac{16}{24}$ &emsp;&emsp;
+            b) $\frac{45}{60}$ &emsp;&emsp;
+            c) $\frac{28}{42}$ &emsp;&emsp;
+            d) $\frac{75}{100}$
+          </div>
+        </div>
+      </div>
+      <button class="uebung-btn" onclick="toggleUebung(this)">
+        <span>Antwort &amp; Erklärung aufdecken</span>
+        <span>&darr;</span>
+      </button>
+      <div class="uebung-solution">
+        <p><strong>Lösungsweg:</strong></p>
+        <p>
+          a) $\frac{16}{24}$: Beide Zahlen lassen sich durch $8$ teilen:<br>
+          $$\frac{16}{24} = \frac{16 : 8}{24 : 8} = \frac{2}{3}$$
+          <em>(Schrittweise: erst durch $2 \rightarrow \frac{8}{12}$, dann durch $4 \rightarrow \frac{2}{3}$.)</em>
+        </p>
+        <p>
+          b) $\frac{45}{60}$: Beide Zahlen enden auf $5$ bzw. $0$, also durch $5$ teilbar: $\frac{45:5}{60:5} = \frac{9}{12}$. Nun noch durch $3$ teilen:<br>
+          $$\frac{9}{12} = \frac{9 : 3}{12 : 3} = \frac{3}{4}$$
+          <em>(Oder direkt in einem Schritt durch $15$ geteilt: $\frac{45:15}{60:15} = \frac{3}{4}$.)</em>
+        </p>
+        <p>
+          c) $\frac{28}{42}$: Beide lassen sich durch $14$ teilen (oder schrittweise erst durch $2 \rightarrow \frac{14}{21}$, dann durch $7$):<br>
+          $$\frac{28}{42} = \frac{2}{3}$$
+        </p>
+        <p>
+          d) $\frac{75}{100}$: Beide Zahlen lassen sich durch $25$ teilen:<br>
+          $$\frac{75}{100} = \frac{75 : 25}{100 : 25} = \frac{3}{4}$$
+        </p>
+      </div>
+    </div>
+
+    <!-- AUFGABE 3 -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">3</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-kuerzen">Grundform</span>
+          <strong>Welcher Bruch ist bereits vollständig gekürzt?</strong>
+          Untersuche die folgenden fünf Brüche:
+          <div style="margin: 0.5rem 0;">
+            A: $\frac{9}{14}$ &emsp;
+            B: $\frac{12}{27}$ &emsp;
+            C: $\frac{15}{28}$ &emsp;
+            D: $\frac{17}{51}$ &emsp;
+            E: $\frac{21}{35}$
+          </div>
+          Welche Brüche lassen sich nicht weiter kürzen (sind schon fertig gekürzt)?
+        </div>
+      </div>
+      <button class="uebung-btn" onclick="toggleUebung(this)">
+        <span>Antwort &amp; Erklärung aufdecken</span>
+        <span>&darr;</span>
+      </button>
+      <div class="uebung-solution">
+        <p><strong>Lösung:</strong> Bereits vollständig gekürzt sind <strong>A ($\frac{9}{14}$)</strong> und <strong>C ($\frac{15}{28}$)</strong>!</p>
+        <p>
+          <strong>Begründung für jeden Bruch:</strong><br>
+          • $\frac{9}{14}$: Teiler von $9$ sind $1, 3, 9$. Teiler von $14$ sind $1, 2, 7, 14$. Sie haben außer $1$ keinen gemeinsamen Teiler. &rarr; <strong>Vollständig gekürzt!</strong><br>
+          • $\frac{12}{27}$: Lässt sich durch $3$ kürzen ($\frac{12:3}{27:3} = \frac{4}{9}$).<br>
+          • $\frac{15}{28}$: Teiler von $15$ ($1, 3, 5, 15$), Teiler von $28$ ($1, 2, 4, 7, 14, 28$). Kein gemeinsamer Teiler außer $1$. &rarr; <strong>Vollständig gekürzt!</strong><br>
+          • $\frac{17}{51}$: Achtung Falle! $51 = 3 \cdot 17$. Lässt sich durch $17$ kürzen ($\frac{17:17}{51:17} = \frac{1}{3}$).<br>
+          • $\frac{21}{35}$: Beide in der 7er-Reihe, lässt sich durch $7$ kürzen ($\frac{21:7}{35:7} = \frac{3}{5}$).
+        </p>
+      </div>
+    </div>
+
+    <!-- AUFGABE 4 -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">4</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-falle">Fehlerdetektiv</span>
+          <strong>Finde den mathematischen Fehler</strong>
+          Drei Schüler haben Aufgaben gerechnet. Wer hat Recht und was ist bei den anderen falsch gelaufen?
+          <p style="margin: 0.5rem 0; font-size: 0.9rem;">
+            <strong>Maja:</strong> „$\frac{3}{4}$ erweitert mit $2$ ergibt $\frac{5}{6}$, weil man überall $2$ dazurechnet.“<br>
+            <strong>Leon:</strong> „$\frac{2}{5}$ erweitert mit $3$ ergibt $\frac{6}{5}$.“<br>
+            <strong>Jonas:</strong> „$\frac{14}{21}$ kann man durch $7$ kürzen, das ergibt $\frac{2}{3}$.“
+          </p>
+        </div>
+      </div>
+      <button class="uebung-btn" onclick="toggleUebung(this)">
+        <span>Antwort &amp; Erklärung aufdecken</span>
+        <span>&darr;</span>
+      </button>
+      <div class="uebung-solution">
+        <p><strong>Lösung:</strong> Nur <strong>Jonas</strong> hat völlig recht!</p>
+        <p>
+          • <strong>Maja macht den Plus-Fehler:</strong> Beim Erweitern wird niemals addiert, sondern multipliziert! Richtig ist: $\frac{3 \cdot 2}{4 \cdot 2} = \frac{6}{8}$.<br>
+          • <strong>Leon vergisst den Nenner:</strong> Er hat nur den Zähler multipliziert ($2 \cdot 3 = 6$). Erweitern muss man aber Zähler <em>und</em> Nenner: $\frac{2 \cdot 3}{5 \cdot 3} = \frac{6}{15}$.<br>
+          • <strong>Jonas rechnet fehlerfrei:</strong> $14 : 7 = 2$ und $21 : 7 = 3$. Das ergibt $\frac{2}{3}$.
+        </p>
+      </div>
+    </div>
+
+    <!-- AUFGABE 5 -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">5</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-sach">Sachaufgabe</span>
+          <strong>Sportturnier an der Schule</strong>
+          In der Klasse 6b sind $28$ Kinder. Beim Sportfest haben $21$ Kinder eine Ehren- oder Siegerurkunde erhalten.
+          <p style="margin: 0.4rem 0;">
+            a) Welcher Bruchteil der Klasse hat eine Urkunde erhalten? Gib den Anteil als <strong>vollständig gekürzten Bruch</strong> an.<br>
+            b) Welcher Anteil der Kinder hat keine Urkunde erhalten?
+          </p>
+        </div>
+      </div>
+      <button class="uebung-btn" onclick="toggleUebung(this)">
+        <span>Antwort &amp; Erklärung aufdecken</span>
+        <span>&darr;</span>
+      </button>
+      <div class="uebung-solution">
+        <p><strong>Lösung:</strong></p>
+        <p>
+          a) $21$ von $28$ Kindern entspricht dem Bruch $\frac{21}{28}$.<br>
+          Beide Zahlen sind durch $7$ teilbar:
+          $$\frac{21}{28} = \frac{21 : 7}{28 : 7} = \frac{3}{4}$$
+          Genau <strong>drei Viertel ($\frac{3}{4}$)</strong> der Klasse haben eine Urkunde erhalten.
+        </p>
+        <p>
+          b) Kinder ohne Urkunde: $28 - 21 = 7$ Kinder.<br>
+          Als Bruch: $\frac{7}{28} = \frac{7 : 7}{28 : 7} = \frac{1}{4}$.<br>
+          Genau <strong>ein Viertel ($\frac{1}{4}$)</strong> der Klasse hat keine Urkunde erhalten. (Beachte: $\frac{3}{4} + \frac{1}{4} = \frac{4}{4} = 1$ Ganzes!)
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 6 — INTERAKTIVER SELBSTTEST (10 FRAGEN AUS POOL VON 30)
+  ═══════════════════════════════════════════════════════ -->
+  <div id="selbsttest" class="content-block">
+    <div class="section-badge badge-selbsttest">
+      <span class="badge-num">6</span> Interaktiver Selbsttest
+    </div>
+
+    <div class="quiz-card">
+
+      <!-- Startbildschirm -->
+      <div id="quiz-intro-area" class="quiz-intro-view">
+        <span class="quiz-intro-badge">Lernstands-Check</span>
+        <h3 class="quiz-intro-title">Teste dein Wissen: Erweitern &amp; Kürzen</h3>
+        <p class="quiz-intro-desc">
+          Aus einem großen Fragenpool werden dir <strong>10 abwechslungsreiche Fragen</strong> gestellt.
+          Du erhältst zu jeder Antwort sofort eine fundierte mathematische Erklärung.
+        </p>
+        <button class="btn-quiz-start" onclick="startQuiz()">
+          Selbsttest jetzt starten &rarr;
+        </button>
+      </div>
+
+      <!-- Statusbar während des Tests -->
+      <div id="quiz-status-bar" class="quiz-status-bar" style="display: none;">
+        <span id="quiz-progress-text">Frage 1 von 10</span>
+        <span id="quiz-score-text">Punkte: 0 / 10</span>
+      </div>
+
+      <div id="quiz-progress-track" class="quiz-progress-track" style="display: none;">
+        <div id="quiz-progress-bar" class="quiz-progress-fill" style="width: 10%;"></div>
+      </div>
+
+      <!-- Fragen-Bereich -->
+      <div id="quiz-active-area" style="display: none;">
+        <div id="quiz-question" class="quiz-q-title"></div>
+        <div id="quiz-options" class="quiz-options-list"></div>
+        <div id="quiz-explanation" class="quiz-explanation-box"></div>
+        <div class="quiz-next-action">
+          <button id="quiz-next-btn" class="btn-quiz-next" onclick="nextQuestion()" style="display: none;">
+            Nächste Frage &rarr;
+          </button>
+        </div>
+      </div>
+
+      <!-- Ergebnis-Bereich -->
+      <div id="quiz-results" class="quiz-result-view">
+        <div id="quiz-final-score" class="quiz-score-badge"></div>
+        <div id="quiz-final-title" class="quiz-score-text"></div>
+        <div id="quiz-final-desc" class="quiz-score-feedback"></div>
+        <button class="btn-quiz-start" onclick="restartQuiz()">
+          Neuen Test starten (neue Fragen) &rarr;
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BOTTOM NAVIGATION
+  ═══════════════════════════════════════════════════════ -->
+  <div class="bottom-nav">
+    <a href="anteile.html" class="btn-nav-prev">
+      &larr; Zurück zu Thema 1: Anteile &amp; Größen
+    </a>
+    <a href="vergleichen-ordnen.html" class="btn-nav-next">
+      Weiter zu Thema 3: Vergleichen, Ordnen &amp; Prozente &rarr;
+    </a>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     JAVASCRIPT: INTERAKTIVE WERKZEUGE & QUIZ-ENGINE
+═══════════════════════════════════════════════════════ -->
+<script>
+  /* ----------------------------------------------------
+     1. AKKORDION FÜR ÜBUNGSAUFGABEN
+     ---------------------------------------------------- */
+  function toggleUebung(btn) {
+    const solution = btn.nextElementSibling;
+    const isOpen = solution.classList.contains('open');
+    if (isOpen) {
+      solution.classList.remove('open');
+      btn.querySelector('span:first-child').innerText = 'Antwort & Erklärung aufdecken';
+      btn.querySelector('span:last-child').innerHTML = '&darr;';
+    } else {
+      solution.classList.add('open');
+      btn.querySelector('span:first-child').innerText = 'Antwort verbergen';
+      btn.querySelector('span:last-child').innerHTML = '&uarr;';
+      setTimeout(triggerKaTeX, 30);
+    }
+  }
+
+
+  /* ----------------------------------------------------
+     2. WERKZEUG 1: BRUCH-SCHNEIDER (ERWEITERN LIVE)
+     ---------------------------------------------------- */
+  let baseZaehler = 1;
+  let baseNenner = 2;
+  let expandFactor = 1;
+
+  function setBaseFraction(z, n, btn) {
+    baseZaehler = z;
+    baseNenner = n;
+    document.querySelectorAll('.controls-row:first-of-type .btn-chip').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderExpandStrip();
+  }
+
+  function setExpandFactor(k, btn) {
+    expandFactor = k;
+    document.querySelectorAll('.factor-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderExpandStrip();
+  }
+
+  function renderExpandStrip() {
+    const totalPieces = baseNenner * expandFactor;
+    const filledPieces = baseZaehler * expandFactor;
+
+    const svg = document.getElementById('expand-svg');
+    const width = 600;
+    const height = 70;
+    const pieceWidth = width / totalPieces;
+
+    let svgHtml = '';
+
+    // Hintergrund & Segmente
+    for (let i = 0; i < totalPieces; i++) {
+      const x = i * pieceWidth;
+      const isFilled = i < filledPieces;
+      const fill = isFilled ? '#2563eb' : '#f8fafc';
+      const stroke = isFilled ? '#1d4ed8' : '#cbd5e1';
+
+      svgHtml += `<rect x="${x}" y="5" width="${pieceWidth}" height="${height - 10}" fill="${fill}" stroke="${stroke}" stroke-width="1" />`;
+
+      // Dickere Begrenzung für die ursprünglichen Abschnitte
+      if ((i + 1) % expandFactor === 0 && (i + 1) !== totalPieces) {
+        const lineX = (i + 1) * pieceWidth;
+        svgHtml += `<line x1="${lineX}" y1="2" x2="${lineX}" y2="${height - 2}" stroke="#1e3a8a" stroke-width="3" />`;
+      }
+    }
+
+    // Außenrahmen
+    svgHtml += `<rect x="1" y="5" width="${width - 2}" height="${height - 10}" fill="none" stroke="#1e3a8a" stroke-width="2.5" rx="4" />`;
+    svg.innerHTML = svgHtml;
+
+    // KaTeX Rechnung aktualisieren
+    const formulaDiv = document.getElementById('expand-formula');
+    if (expandFactor === 1) {
+      formulaDiv.innerHTML = `$$\\text{Ausgangsbruch: } \\frac{${baseZaehler}}{${baseNenner}}$$`;
+    } else {
+      formulaDiv.innerHTML = `$$\\frac{${baseZaehler}}{${baseNenner}} = \\frac{${baseZaehler} \\cdot ${expandFactor}}{${baseNenner} \\cdot ${expandFactor}} = \\frac{${filledPieces}}{${totalPieces}}$$`;
+    }
+    setTimeout(triggerKaTeX, 30);
+  }
+
+
+  /* ----------------------------------------------------
+     3. WERKZEUG 2: KÜRZ-LABOR
+     ---------------------------------------------------- */
+  let initialKuerzZ = 24;
+  let initialKuerzN = 36;
+  let currentKuerzZ = 24;
+  let currentKuerzN = 36;
+  let kuerzHistory = [];
+
+  function gcd(a, b) {
+    return b === 0 ? a : gcd(b, a % b);
+  }
+
+  function loadKuerzPreset(z, n, btn) {
+    initialKuerzZ = z;
+    initialKuerzN = n;
+    currentKuerzZ = z;
+    currentKuerzN = n;
+    kuerzHistory = [`\\frac{${z}}{${n}}`];
+
+    document.querySelectorAll('.kuerz-preset').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    updateKuerzUI('');
+  }
+
+  function resetCurrentKuerzen() {
+    currentKuerzZ = initialKuerzZ;
+    currentKuerzN = initialKuerzN;
+    kuerzHistory = [`\\frac{${initialKuerzZ}}{${initialKuerzN}}`];
+    updateKuerzUI('');
+  }
+
+  function attemptKuerzen(d) {
+    const msgBox = document.getElementById('kuerz-msg');
+
+    if (currentKuerzZ % d === 0 && currentKuerzN % d === 0) {
+      currentKuerzZ = currentKuerzZ / d;
+      currentKuerzN = currentKuerzN / d;
+      kuerzHistory.push(`\\xrightarrow{:${d}} \\frac{${currentKuerzZ}}{${currentKuerzN}}`);
+
+      const g = gcd(currentKuerzZ, currentKuerzN);
+      if (g === 1) {
+        updateKuerzUI('success-done', `Richtig! Gekürzt durch ${d}. Der Bruch ist nun vollständig gekürzt (Grundform)!`);
+      } else {
+        updateKuerzUI('success', `Klasse! Durch ${d} gekürzt ergibt ${currentKuerzZ}/${currentKuerzN}. Kannst du noch weiter kürzen?`);
+      }
+    } else {
+      let reason = '';
+      if (currentKuerzZ % d !== 0 && currentKuerzN % d !== 0) {
+        reason = `Weder ${currentKuerzZ} noch ${currentKuerzN} sind ohne Rest durch ${d} teilbar.`;
+      } else if (currentKuerzZ % d !== 0) {
+        reason = `Der Zähler ${currentKuerzZ} ist nicht ohne Rest durch ${d} teilbar.`;
+      } else {
+        reason = `Der Nenner ${currentKuerzN} ist nicht ohne Rest durch ${d} teilbar.`;
+      }
+      updateKuerzUI('error', `Kürzen durch ${d} geht nicht! ${reason}`);
+    }
+  }
+
+  function updateKuerzUI(statusType, text = '') {
+    const disp = document.getElementById('kuerz-curr-disp');
+    disp.innerHTML = `$\\frac{${currentKuerzZ}}{${currentKuerzN}}$`;
+
+    const trail = document.getElementById('kuerz-history-trail');
+    trail.innerHTML = `$${kuerzHistory.join(' ')}$`;
+
+    const msgBox = document.getElementById('kuerz-msg');
+    msgBox.className = 'kuerz-status-msg';
+
+    if (statusType === 'success') {
+      msgBox.classList.add('status-success');
+      msgBox.innerText = text;
+    } else if (statusType === 'success-done') {
+      msgBox.classList.add('status-done');
+      msgBox.innerText = text;
+    } else if (statusType === 'error') {
+      msgBox.classList.add('status-error');
+      msgBox.innerText = text;
+    } else {
+      msgBox.style.display = 'none';
+    }
+
+    setTimeout(triggerKaTeX, 30);
+  }
+
+
+  /* ----------------------------------------------------
+     4. QUIZ-POOL MIT 30 MATHEMATISCHEN FRAGEN
+     ---------------------------------------------------- */
+  const quizPool = [
+    // 1
+    {
+      q: "Was bedeutet es, einen Bruch zu <strong>erweitern</strong>?",
+      opts: [
+        "Zähler und Nenner mit derselben Zahl multiplizieren",
+        "Zähler und Nenner um dieselbe Zahl vergrößern (addieren)",
+        "Nur den Zähler mit einer Zahl multiplizieren",
+        "Zähler und Nenner vertauschen"
+      ],
+      c: 0,
+      exp: "Erweitern heißt: Zähler und Nenner mit derselben Zahl multiplizieren, zum Beispiel $\\frac{2 \\cdot 3}{5 \\cdot 3} = \\frac{6}{15}$."
+    },
+    // 2
+    {
+      q: "Wie verändert sich der mathematische <strong>Wert</strong> eines Bruchs beim Erweitern oder Kürzen?",
+      opts: [
+        "Er bleibt exakt unverändert",
+        "Er wird beim Erweitern größer und beim Kürzen kleiner",
+        "Er wird beim Erweitern kleiner",
+        "Er verdoppelt sich stets"
+      ],
+      c: 0,
+      exp: "Der Wert (die gefärbte Gesamtmenge) bleibt absolut identisch. Es ändert sich lediglich die Anzahl und Größe der Teilstücke."
+    },
+    // 3
+    {
+      q: "Erweitere den Bruch $\\frac{3}{4}$ mit der Erweiterungszahl $5$. Welcher Bruch entsteht?",
+      opts: [
+        "$\\frac{15}{20}$",
+        "$\\frac{8}{9}$",
+        "$\\frac{15}{4}$",
+        "$\\frac{3}{20}$"
+      ],
+      c: 0,
+      exp: "Zähler und Nenner werden mit $5$ multipliziert: $\\frac{3 \\cdot 5}{4 \\cdot 5} = \\frac{15}{20}$."
+    },
+    // 4
+    {
+      q: "Welcher Zähler fehlt in der Gleichung: $\\frac{5}{6} = \\frac{?}{30}$?",
+      opts: [
+        "$25$",
+        "$20$",
+        "$15$",
+        "$30$"
+      ],
+      c: 0,
+      exp: "Der Nenner wurde mit $5$ multipliziert ($6 \\cdot 5 = 30$). Also muss auch der Zähler mit $5$ multipliziert werden: $5 \\cdot 5 = 25$."
+    },
+    // 5
+    {
+      q: "Welcher Nenner fehlt in der Gleichung: $\\frac{4}{9} = \\frac{28}{?}$?",
+      opts: [
+        "$63$",
+        "$36$",
+        "$72$",
+        "$54$"
+      ],
+      c: 0,
+      exp: "Der Zähler wurde mit $7$ multipliziert ($4 \\cdot 7 = 28$). Also muss auch der Nenner mit $7$ multipliziert werden: $9 \\cdot 7 = 63$."
+    },
+    // 6
+    {
+      q: "Warum ist die Rechnung $\\frac{2 + 3}{5 + 3} = \\frac{5}{8}$ <strong>kein</strong> Erweitern von $\\frac{2}{5}$?",
+      opts: [
+        "Weil beim Erweitern multipliziert werden muss, niemals addiert",
+        "Weil man nur mit geraden Zahlen erweitern darf",
+        "Weil $5$ und $8$ keine Primzahlen sind",
+        "Weil $\\frac{5}{8}$ kleiner als $\\frac{2}{5}$ ist"
+      ],
+      c: 0,
+      exp: "Erweitern ist eine reine Multiplikation. Wer addiert, verändert das Verhältnis der Anteile völlig: $\\frac{2}{5} = 0,40$, aber $\\frac{5}{8} = 0,625$."
+    },
+    // 7
+    {
+      q: "Was bedeutet es, einen Bruch zu <strong>kürzen</strong>?",
+      opts: [
+        "Zähler und Nenner durch dieselbe Zahl teilen",
+        "Zähler und Nenner um dieselbe Zahl verringern (subtrahieren)",
+        "Nur den Nenner durch zwei teilen",
+        "Die Nullen am Ende wegstreichen"
+      ],
+      c: 0,
+      exp: "Kürzen bedeutet: Zähler und Nenner durch dieselbe Zahl teilen, zum Beispiel $\\frac{6 : 3}{9 : 3} = \\frac{2}{3}$."
+    },
+    // 8
+    {
+      q: "Kürze den Bruch $\\frac{12}{16}$ vollständig. Was ist das Ergebnis?",
+      opts: [
+        "$\\frac{3}{4}$",
+        "$\\frac{6}{8}$",
+        "$\\frac{2}{3}$",
+        "$\\frac{1}{4}$"
+      ],
+      c: 0,
+      exp: "Der größte gemeinsame Teiler von $12$ und $16$ ist $4$. $\\frac{12 : 4}{16 : 4} = \\frac{3}{4}$."
+    },
+    // 9
+    {
+      q: "Mit welcher Kürzungszahl wurde hier gekürzt: $\\frac{24}{32} = \\frac{3}{4}$?",
+      opts: [
+        "$8$",
+        "$6$",
+        "$4$",
+        "$12$"
+      ],
+      c: 0,
+      exp: "$24 : 8 = 3$ und $32 : 8 = 4$. Es wurde mit $8$ gekürzt."
+    },
+    // 10
+    {
+      q: "Wann nennt man einen Bruch <strong>vollständig gekürzt</strong>?",
+      opts: [
+        "Wenn sich Zähler und Nenner durch keine Zahl mehr teilen lassen (außer durch $1$)",
+        "Wenn im Zähler eine $1$ steht",
+        "Wenn der Zähler ungerade und der Nenner gerade ist",
+        "Wenn der Bruch kleiner als $\\frac{1}{2}$ ist"
+      ],
+      c: 0,
+      exp: "Ein Bruch ist vollständig gekürzt (in der Grundform), wenn man ihn nicht mehr weiter teilen kann (außer durch $1$)."
+    },
+    // 11
+    {
+      q: "Welcher der folgenden Brüche ist <strong>bereits vollständig gekürzt</strong>?",
+      opts: [
+        "$\\frac{8}{15}$",
+        "$\\frac{6}{9}$",
+        "$\\frac{14}{21}$",
+        "$\\frac{10}{25}$"
+      ],
+      c: 0,
+      exp: "$8$ und $15$ haben keinen gemeinsamen Teiler außer $1$. $\\frac{6}{9}$ lässt sich durch $3$ teilen, $\\frac{14}{21}$ durch $7$ und $\\frac{10}{25}$ durch $5$."
+    },
+    // 12
+    {
+      q: "Welcher Bruch ist <strong>nicht gleichwertig</strong> zu $\\frac{2}{3}$?",
+      opts: [
+        "$\\frac{8}{15}$",
+        "$\\frac{4}{6}$",
+        "$\\frac{10}{15}$",
+        "$\\frac{16}{24}$"
+      ],
+      c: 0,
+      exp: "$\\frac{2}{3}$ mit $5$ erweitert ergibt $\\frac{10}{15}$, nicht $\\frac{8}{15}$."
+    },
+    // 13
+    {
+      q: "Erweitere $\\frac{7}{20}$ so, dass der Nenner $100$ lautet. Wie heißt der Zähler?",
+      opts: [
+        "$35$",
+        "$28$",
+        "$70$",
+        "$45$"
+      ],
+      c: 0,
+      exp: "$100 : 20 = 5$ (Erweiterungsfaktor $5$). $7 \\cdot 5 = 35$."
+    },
+    // 14
+    {
+      q: "Kürze $\\frac{36}{48}$ direkt in einem Schritt durch die Zahl $12$.",
+      opts: [
+        "$\\frac{3}{4}$",
+        "$\\frac{6}{8}$",
+        "$\\frac{2}{3}$",
+        "$\\frac{4}{5}$"
+      ],
+      c: 0,
+      exp: "$36 : 12 = 3$ und $48 : 12 = 4$. Das Ergebnis lautet $\\frac{3}{4}$."
+    },
+    // 15
+    {
+      q: "Ein Schüler rechnet: $\\frac{3}{4}$ erweitert mit $2$ ist $\\frac{6}{4}$. Welcher Fehler liegt vor?",
+      opts: [
+        "Er hat nur den Zähler multipliziert und den Nenner vergessen",
+        "Er hat fälschlicherweise dividiert",
+        "Er hat $2$ addiert statt multipliziert",
+        "Es liegt gar kein Fehler vor"
+      ],
+      c: 0,
+      exp: "Beim Erweitern müssen stets Zähler <strong>und</strong> Nenner multipliziert werden: $\\frac{3 \\cdot 2}{4 \\cdot 2} = \\frac{6}{8}$."
+    },
+    // 16
+    {
+      q: "Welche Zahl fehlt: $\\frac{?}{8} = \\frac{21}{56}$?",
+      opts: [
+        "$3$",
+        "$4$",
+        "$7$",
+        "$2$"
+      ],
+      c: 0,
+      exp: "Von $56$ auf $8$ wurde durch $7$ gekürzt ($56 : 7 = 8$). Also rechnet man auch im Zähler: $21 : 7 = 3$."
+    },
+    // 17
+    {
+      q: "Kürze schrittweise: $\\frac{48}{72} \\xrightarrow{: 8} \\frac{6}{9} \\xrightarrow{: 3} ?$ Welcher Bruch entsteht?",
+      opts: [
+        "$\\frac{2}{3}$",
+        "$\\frac{3}{4}$",
+        "$\\frac{1}{2}$",
+        "$\\frac{2}{4}$"
+      ],
+      c: 0,
+      exp: "$6 : 3 = 2$ und $9 : 3 = 3$. Das vollständig gekürzte Ergebnis lautet $\\frac{2}{3}$."
+    },
+    // 18
+    {
+      q: "Darf man einen Bruch mit der Zahl $0$ erweitern?",
+      opts: [
+        "Nein, denn der Nenner darf niemals $0$ werden",
+        "Ja, das Ergebnis ist immer $0$",
+        "Ja, das darf man bei jedem Bruch tun",
+        "Nur dann, wenn der Zähler auch $0$ ist"
+      ],
+      c: 0,
+      exp: "Durch $0$ darf man in der Mathematik nicht dividieren. Deshalb darf im Nenner niemals eine $0$ stehen."
+    },
+    // 19
+    {
+      q: "Welcher der folgenden Brüche lässt sich durch $9$ kürzen?",
+      opts: [
+        "$\\frac{27}{54}$",
+        "$\\frac{18}{25}$",
+        "$\\frac{36}{40}$",
+        "$\\frac{45}{70}$"
+      ],
+      c: 0,
+      exp: "Sowohl $27$ als auch $54$ sind Vielfache von $9$ ($27 = 3 \\cdot 9$, $54 = 6 \\cdot 9$)."
+    },
+    // 20
+    {
+      q: "Ein Rechteck besteht aus $12$ gleich großen Quadraten. $8$ Quadrate sind grün angemalt. Welcher <strong>vollständig gekürzte</strong> Bruch beschreibt den grünen Anteil?",
+      opts: [
+        "$\\frac{2}{3}$",
+        "$\\frac{8}{12}$",
+        "$\\frac{4}{6}$",
+        "$\\frac{3}{4}$"
+      ],
+      c: 0,
+      exp: "Der Anteil ist $\\frac{8}{12}$. Gekürzt mit $4$ ergibt sich die Grundform $\\frac{2}{3}$."
+    },
+    // 21
+    {
+      q: "Erweitere $\\frac{1}{8}$ so, dass der Nenner $1000$ lautet. Welcher Zähler entsteht?",
+      opts: [
+        "$125$",
+        "$100$",
+        "$250$",
+        "$80$"
+      ],
+      c: 0,
+      exp: "$1000 : 8 = 125$. Also wird mit $125$ erweitert: $\\frac{1 \\cdot 125}{8 \\cdot 125} = \\frac{125}{1000}$."
+    },
+    // 22
+    {
+      q: "Lisa behauptet: <em>„Wenn Zähler und Nenner ungerade sind, kann man den Bruch niemals kürzen.“</em> Stimmt das?",
+      opts: [
+        "Nein, z. B. lässt sich $\\frac{9}{15}$ durch $3$ kürzen",
+        "Ja, ungerade Zahlen lassen sich nie teilen",
+        "Ja, man kann nur durch $2$ kürzen",
+        "Nein, aber nur wenn beide Zahlen Primzahlen sind"
+      ],
+      c: 0,
+      exp: "Ungerade Zahlen können gemeinsame ungerade Teiler haben (wie $3, 5, 7, \\dots$). $\\frac{9}{15} = \\frac{3}{5}$."
+    },
+    // 23
+    {
+      q: "Wie viele Zwölftel ($\\frac{1}{12}$) entsprechen dem Bruch $\\frac{3}{4}$?",
+      opts: [
+        "$9$ Zwölftel",
+        "$6$ Zwölftel",
+        "$8$ Zwölftel",
+        "$7$ Zwölftel"
+      ],
+      c: 0,
+      exp: "Erweitere $\\frac{3}{4}$ auf Zwölftel: $12 : 4 = 3$, also $3 \\cdot 3 = 9$. Es sind $\\frac{9}{12}$."
+    },
+    // 24
+    {
+      q: "Welcher Teiler ist ein <strong>gemeinsamer Teiler</strong> von $28$ und $42$?",
+      opts: [
+        "$7$",
+        "$4$",
+        "$6$",
+        "$9$"
+      ],
+      c: 0,
+      exp: "$28 = 4 \\cdot 7$ und $42 = 6 \\cdot 7$. Die $7$ ist ein gemeinsamer Teiler."
+    },
+    // 25
+    {
+      q: "Von $30$ Kindern einer Klasse spielen $18$ ein Musikinstrument. Welcher vollständig gekürzte Anteil ist das?",
+      opts: [
+        "$\\frac{3}{5}$",
+        "$\\frac{18}{30}$",
+        "$\\frac{9}{15}$",
+        "$\\frac{2}{3}$"
+      ],
+      c: 0,
+      exp: "Beide Zahlen lassen sich durch $6$ teilen: $\\frac{18 : 6}{30 : 6} = \\frac{3}{5}$."
+    },
+    // 26
+    {
+      q: "Was ist das Ergebnis, wenn man $\\frac{60}{84}$ vollständig kürzt?",
+      opts: [
+        "$\\frac{5}{7}$",
+        "$\\frac{15}{21}$",
+        "$\\frac{10}{14}$",
+        "$\\frac{4}{7}$"
+      ],
+      c: 0,
+      exp: "Beide Zahlen sind durch $12$ teilbar: $60 : 12 = 5$ und $84 : 12 = 7$. Grundform: $\\frac{5}{7}$."
+    },
+    // 27
+    {
+      q: "Zwei Brüche haben dieselbe Grundform $\\frac{2}{5}$. Welches Zahlenpaar gehört dazu?",
+      opts: [
+        "$\\frac{6}{15}$ und $\\frac{14}{35}$",
+        "$\\frac{4}{10}$ und $\\frac{6}{20}$",
+        "$\\frac{8}{20}$ und $\\frac{10}{30}$",
+        "$\\frac{12}{25}$ und $\\frac{14}{35}$"
+      ],
+      c: 0,
+      exp: "$\\frac{6}{15}$ (gekürzt mit $3$) ergibt $\\frac{2}{5}$. $\\frac{14}{35}$ (gekürzt mit $7$) ergibt ebenfalls $\\frac{2}{5}$."
+    },
+    // 28
+    {
+      q: "Wie lautet die Grundform von $\\frac{13}{39}$?",
+      opts: [
+        "$\\frac{1}{3}$",
+        "$\\frac{1}{4}$",
+        "$\\frac{13}{39}$ ist schon Grundform",
+        "$\\frac{3}{9}$"
+      ],
+      c: 0,
+      exp: "$39 = 3 \\cdot 13$. Durch $13$ gekürzt: $\\frac{13 : 13}{39 : 13} = \\frac{1}{3}$."
+    },
+    // 29
+    {
+      q: "Ein Bruch wird zuerst mit $3$ erweitert und danach mit $3$ gekürzt. Was passiert mit dem Bruch?",
+      opts: [
+        "Man erhält genau wieder den ursprünglichen Bruch",
+        "Er wird neunmal so groß",
+        "Er wird dreimal so klein",
+        "Man kann das nicht vorhersagen"
+      ],
+      c: 0,
+      exp: "Erweitern und Kürzen mit derselben Zahl sind zueinander entgegengesetzte Rechenoperationen. Sie heben sich genau auf."
+    },
+    // 30
+    {
+      q: "Welcher Bruch lässt sich durch $25$ kürzen?",
+      opts: [
+        "$\\frac{75}{125}$",
+        "$\\frac{35}{55}$",
+        "$\\frac{40}{100}$",
+        "$\\frac{20}{75}$"
+      ],
+      c: 0,
+      exp: "$75 = 3 \\cdot 25$ und $125 = 5 \\cdot 25$. Das Ergebnis ist $\\frac{3}{5}$."
+    }
+  ];
+
+  /* ----------------------------------------------------
+     5. QUIZ-LOGIK & SHUFFLE-ENGINE
+     ---------------------------------------------------- */
+  let currentQuizSet = [];
+  let currentQIdx = 0;
+  let quizScore = 0;
+  let answered = false;
+
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function startQuiz() {
+    const intro = document.getElementById('quiz-intro-area');
+    if (intro) intro.style.display = 'none';
+
+    document.getElementById('quiz-status-bar').style.display = 'flex';
+    document.getElementById('quiz-progress-track').style.display = 'block';
+    document.getElementById('quiz-active-area').style.display = 'block';
+    document.getElementById('quiz-results').style.display = 'none';
+
+    // 10 Zufallsfragen aus 30
+    const shuffledPool = shuffle(quizPool);
+    currentQuizSet = shuffledPool.slice(0, 10).map(item => {
+      const correctText = item.opts[item.c];
+      const shuffledOpts = shuffle(item.opts);
+      const newCorrectIdx = shuffledOpts.indexOf(correctText);
+      return {
+        q: item.q,
+        opts: shuffledOpts,
+        c: newCorrectIdx,
+        exp: item.exp
+      };
+    });
+
+    currentQIdx = 0;
+    quizScore = 0;
+    renderQuizQuestion();
+  }
+
+  function renderQuizQuestion() {
+    answered = false;
+    const q = currentQuizSet[currentQIdx];
+    const letters = ['A', 'B', 'C', 'D'];
+
+    document.getElementById('quiz-progress-text').innerText = 'Frage ' + (currentQIdx + 1) + ' von 10';
+    document.getElementById('quiz-score-text').innerText = 'Punkte: ' + quizScore + ' / 10';
+    document.getElementById('quiz-progress-bar').style.width = ((currentQIdx + 1) * 10) + '%';
+
+    document.getElementById('quiz-question').innerHTML = (currentQIdx + 1) + '. ' + q.q;
+
+    const optContainer = document.getElementById('quiz-options');
+    optContainer.innerHTML = '';
+
+    q.opts.forEach((optText, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt-btn';
+      btn.innerHTML = '<span class="quiz-opt-letter">' + letters[idx] + '</span><span>' + optText + '</span>';
+      btn.onclick = () => selectQuizOption(idx, btn);
+      optContainer.appendChild(btn);
+    });
+
+    const expBox = document.getElementById('quiz-explanation');
+    expBox.style.display = 'none';
+    expBox.innerHTML = '';
+
+    const nextBtn = document.getElementById('quiz-next-btn');
+    nextBtn.style.display = 'none';
+    nextBtn.innerText = (currentQIdx === 9) ? 'Ergebnis anzeigen' : 'Nächste Frage \u2192';
+
+    setTimeout(triggerKaTeX, 40);
+  }
+
+  function selectQuizOption(selectedIdx, clickedBtn) {
+    if (answered) return;
+    answered = true;
+
+    const q = currentQuizSet[currentQIdx];
+    const buttons = document.querySelectorAll('#quiz-options .quiz-opt-btn');
+    buttons.forEach(b => b.disabled = true);
+
+    if (selectedIdx === q.c) {
+      clickedBtn.classList.add('correct');
+      quizScore++;
+      document.getElementById('quiz-score-text').innerText = 'Punkte: ' + quizScore + ' / 10';
+    } else {
+      clickedBtn.classList.add('wrong');
+      buttons[q.c].classList.add('correct');
+    }
+
+    const expBox = document.getElementById('quiz-explanation');
+    expBox.style.display = 'block';
+    expBox.innerHTML = '<strong>Erklärung:</strong> ' + q.exp;
+
+    document.getElementById('quiz-next-btn').style.display = 'inline-block';
+    setTimeout(triggerKaTeX, 40);
+  }
+
+  function nextQuestion() {
+    currentQIdx++;
+    if (currentQIdx < 10) {
+      renderQuizQuestion();
+    } else {
+      showQuizResults();
+    }
+  }
+
+  function showQuizResults() {
+    document.getElementById('quiz-status-bar').style.display = 'none';
+    document.getElementById('quiz-progress-track').style.display = 'none';
+    document.getElementById('quiz-active-area').style.display = 'none';
+    const res = document.getElementById('quiz-results');
+    res.style.display = 'block';
+
+    document.getElementById('quiz-final-score').innerText = quizScore + ' / 10 Punkte';
+
+    let title = '';
+    let desc = '';
+    if (quizScore === 10) {
+      title = 'Hervorragend! Volle Punktzahl!';
+      desc = 'Du beherrschst das Erweitern und Kürzen von Brüchen meisterhaft. Zähler, Nenner, Grundformen und Rechenregeln sitzen perfekt!';
+    } else if (quizScore >= 8) {
+      title = 'Klasse Leistung!';
+      desc = 'Sehr starkes Ergebnis! Du hast die Regeln zum Erweitern und Kürzen sowie die Fehlerfallen sicher im Griff.';
+    } else if (quizScore >= 6) {
+      title = 'Solide Arbeit!';
+      desc = 'Mehr als die Hälfte der Fragen hast du richtig beantwortet. Schau dir die Rechenregeln und das Kürz-Labor oben noch einmal an, um noch sicherer zu werden.';
+    } else {
+      title = 'Noch etwas Übung nötig!';
+      desc = 'Lies dir die Erklärungen zu Block 2 und 3 noch einmal in Ruhe durch. Starte dann einfach einen neuen Testdurchlauf mit 10 neuen Fragen!';
+    }
+
+    document.getElementById('quiz-final-title').innerText = title;
+    document.getElementById('quiz-final-desc').innerText = desc;
+  }
+
+  function restartQuiz() {
+    startQuiz();
+  }
+
+  // Initialisierung beim Laden
+  document.addEventListener('DOMContentLoaded', () => {
+    renderExpandStrip();
+    loadKuerzPreset(24, 36, document.querySelector('.kuerz-preset'));
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1770 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Brüche: Anteile & Größen | Mathe 6</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <!-- KaTeX für mathematische Formeln -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+  <script>
+    function triggerKaTeX() {
+      if (typeof renderMathInElement === "function") {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+          ],
+          throwOnError: false
+        });
+      } else {
+        setTimeout(triggerKaTeX, 30);
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', triggerKaTeX);
+    } else {
+      triggerKaTeX();
+    }
+    window.addEventListener('load', triggerKaTeX);
+  </script>
+
+  <style>
+    body { padding-bottom: 4rem; }
+    .page-container { max-width: 820px; margin: 0 auto; }
+
+    .page-title { font-size: 2rem; font-weight: 800; color: #111827; margin: 0 0 0.3rem 0; line-height: 1.2; }
+    .page-subtitle { font-size: 0.95rem; color: #64748b; margin: 0 0 1.5rem 0; }
+    .page-divider { border: none; border-top: 2px solid #2563eb; margin: 0 0 2.5rem 0; opacity: 0.25; }
+
+    /* Abschnitts-Badges */
+    .section-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 4px 14px 4px 4px; border-radius: 999px;
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.6px;
+      text-transform: uppercase; margin-bottom: 1.1rem;
+    }
+    .section-badge .badge-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 800; color: #fff;
+    }
+    .badge-erklaerung  { background: #eff6ff; color: #1d4ed8; }
+    .badge-erklaerung  .badge-num { background: #2563eb; }
+    .badge-modelle     { background: #fff7ed; color: #c2410c; }
+    .badge-modelle     .badge-num { background: #f59e0b; }
+    .badge-groessen    { background: #fdf2f8; color: #be185d; }
+    .badge-groessen    .badge-num { background: #db2777; }
+    .badge-interaktiv  { background: #f5f3ff; color: #6d28d9; }
+    .badge-interaktiv  .badge-num { background: #7c3aed; }
+    .badge-uebungen    { background: #f0fdf4; color: #15803d; }
+    .badge-uebungen    .badge-num { background: #10b981; }
+    .badge-selbsttest  { background: #fef3c7; color: #b45309; }
+    .badge-selbsttest  .badge-num { background: #f59e0b; }
+
+    /* Selbsttest Styles */
+    .quiz-card {
+      background: #ffffff;
+      border: 1.5px solid #fde68a;
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin: 1.5rem 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .quiz-status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #92400e;
+    }
+    .quiz-progress-track {
+      width: 100%;
+      height: 8px;
+      background: #fef3c7;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+    .quiz-progress-fill {
+      height: 100%;
+      background: #f59e0b;
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+    .quiz-q-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #111827;
+      line-height: 1.55;
+      margin-bottom: 1.2rem;
+    }
+    .quiz-options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 1.25rem;
+    }
+    .quiz-opt-btn {
+      width: 100%;
+      text-align: left;
+      padding: 0.85rem 1.1rem;
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 0.925rem;
+      font-weight: 600;
+      color: #1e293b;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.15s ease;
+    }
+    .quiz-opt-btn:hover:not(:disabled) {
+      background: #eff6ff;
+      border-color: #93c5fd;
+      color: #1d4ed8;
+    }
+    .quiz-opt-letter {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #475569;
+      font-size: 0.75rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .quiz-opt-btn.correct {
+      background: #ecfdf5 !important;
+      border-color: #10b981 !important;
+      color: #065f46 !important;
+    }
+    .quiz-opt-btn.correct .quiz-opt-letter {
+      background: #10b981;
+      color: #fff;
+    }
+    .quiz-opt-btn.wrong {
+      background: #fef2f2 !important;
+      border-color: #ef4444 !important;
+      color: #991b1b !important;
+    }
+    .quiz-opt-btn.wrong .quiz-opt-letter {
+      background: #ef4444;
+      color: #fff;
+    }
+    .quiz-explanation-box {
+      display: none;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: #334155;
+    }
+    .quiz-next-action {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .btn-quiz-next {
+      padding: 0.65rem 1.4rem;
+      background: #f59e0b;
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-quiz-next:hover {
+      background: #d97706;
+    }
+    .quiz-result-view {
+      display: none;
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+    .quiz-score-badge {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #d97706;
+      margin-bottom: 0.5rem;
+    }
+    .quiz-score-text {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.5rem;
+    }
+    .quiz-score-feedback {
+      font-size: 0.9rem;
+      color: #64748b;
+      max-width: 500px;
+      margin: 0 auto 1.5rem auto;
+      line-height: 1.6;
+    }
+    /* Quiz Intro & Start */
+    .quiz-intro-view {
+      text-align: center;
+      padding: 1.75rem 1rem;
+    }
+    .quiz-intro-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #fef3c7;
+      color: #92400e;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      margin-bottom: 0.75rem;
+    }
+    .quiz-intro-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #111827;
+      margin: 0 0 0.5rem 0;
+    }
+    .quiz-intro-desc {
+      font-size: 0.95rem;
+      color: #475569;
+      max-width: 520px;
+      margin: 0 auto 1.5rem auto;
+      line-height: 1.6;
+    }
+    .btn-quiz-start {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      background: #f59e0b;
+      color: #ffffff;
+      font-size: 1.05rem;
+      font-weight: 800;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+      transition: all 0.2s ease;
+    }
+    .btn-quiz-start:hover {
+      background: #d97706;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(217, 119, 6, 0.35);
+    }
+    .quick-jump-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: #fef3c7;
+      border: 1.5px solid #fde68a;
+      border-radius: 8px;
+      color: #92400e;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .quick-jump-btn:hover {
+      background: #fde68a;
+      border-color: #f59e0b;
+      color: #78350f;
+    }
+
+    .content-block { margin-bottom: 3.5rem; }
+    .erklaer-text { font-size: 0.975rem; color: #111827; line-height: 1.75; margin-bottom: 1rem; }
+
+    /* Aufbau des Bruchs (Grafische Box) */
+    .bruch-baukasten {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .bruch-visual {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 520px;
+    }
+    .bruch-part-desc {
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+    .bruch-part-desc strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+    .desc-zaehler { color: #1e40af; text-align: right; }
+    .desc-nenner  { color: #047857; text-align: left; }
+    .bruch-display {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1;
+      padding: 0 0.8rem;
+    }
+    .bruch-zaehler { color: #2563eb; padding-bottom: 4px; }
+    .bruch-strich  { width: 100%; height: 3.5px; background: #111827; border-radius: 2px; }
+    .bruch-nenner  { color: #059669; padding-top: 4px; }
+
+    /* MERKE-Box */
+    .merke-box {
+      border: 2px solid #dc2626; border-radius: 10px;
+      padding: 1.1rem 1.3rem; margin: 1.5rem 0; position: relative; background: #fff;
+    }
+    .merke-tag {
+      position: absolute; top: -11px; left: 14px;
+      background: #dc2626; color: #fff; font-size: 0.65rem; font-weight: 800;
+      letter-spacing: 0.8px; text-transform: uppercase; padding: 2px 9px; border-radius: 4px;
+    }
+    .merke-box p { font-size: 0.95rem; font-weight: 600; color: #111827; margin: 0; line-height: 1.65; }
+    .merke-box p + p { margin-top: 0.5rem; font-weight: 400; font-size: 0.875rem; color: #374151; }
+
+    /* Schema-Kasten: 2-Schritte-Maschine */
+    .maschine-box {
+      background: #fff; border: 1.5px solid #cbd5e1;
+      border-radius: 14px; padding: 1.3rem 1.4rem; margin: 1.25rem 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .maschine-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 1rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
+    .maschine-step {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .maschine-step.step-1 { border-color: #93c5fd; background: #eff6ff; }
+    .maschine-step.step-2 { border-color: #a7f3d0; background: #ecfdf5; }
+    .maschine-step .step-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.4rem;
+    }
+    .step-1 .step-title { color: #1d4ed8; }
+    .step-2 .step-title { color: #047857; }
+    .maschine-step .step-action {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 0.3rem;
+    }
+    .maschine-step .step-sub {
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+    .maschine-arrow {
+      font-size: 1.5rem;
+      color: #94a3b8;
+      font-weight: 800;
+    }
+
+    /* Skizzen Container */
+    .skizze-wrap {
+      text-align: center;
+      margin: 1.25rem 0 1.5rem 0;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.25rem 1rem 0.9rem 1rem;
+    }
+    .skizze-wrap svg {
+      display: inline-block;
+      max-width: 100%;
+      height: auto;
+    }
+    .skizze-caption {
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-top: 0.65rem;
+      font-style: italic;
+    }
+
+    /* Interaktiver Bruch-Zeichner */
+    .tool-card {
+      background: #fff;
+      border: 1.5px solid #ddd6fe;
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin: 1.5rem 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .tool-title { font-size: 1.05rem; font-weight: 700; color: #5b21b6; margin: 0 0 0.4rem 0; }
+    .tool-desc  { font-size: 0.88rem; color: #64748b; margin-bottom: 1.2rem; line-height: 1.55; }
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .control-label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #334155;
+    }
+    .btn-stepper {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1.5px solid #cbd5e1;
+      background: #f8fafc;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+    .btn-stepper:hover {
+      background: #eff6ff;
+      border-color: #3b82f6;
+    }
+    .val-display {
+      min-width: 28px;
+      text-align: center;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #111827;
+    }
+    .preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      align-items: center;
+      text-align: center;
+    }
+    .preview-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    .preview-box h5 {
+      margin: 0 0 0.75rem 0;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    /* Interaktiver Größenrechner */
+    .calc-groessen-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+    .groessen-preset-btn {
+      padding: 0.65rem 0.9rem;
+      background: #fdf2f8;
+      border: 1.5px solid #fbcfe8;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #9d174d;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .groessen-preset-btn:hover, .groessen-preset-btn.active {
+      background: #db2777;
+      border-color: #be185d;
+      color: #fff;
+    }
+    .groesse-result-card {
+      background: #fff;
+      border: 1.5px solid #f472b6;
+      border-radius: 10px;
+      padding: 1.1rem 1.3rem;
+      margin-top: 1rem;
+    }
+
+    /* Übungs-Karten */
+    .uebung-card {
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 1.75rem;
+      background: #fff;
+    }
+    .uebung-header {
+      display: flex; align-items: flex-start; gap: 0.85rem;
+      padding: 1.15rem 1.3rem 0.75rem 1.3rem; background: #fff;
+    }
+    .uebung-num {
+      width: 30px; height: 30px; border-radius: 50%; border: 2px solid #10b981;
+      color: #065f46; font-size: 0.85rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
+    }
+    .uebung-text { font-size: 0.935rem; color: #111827; line-height: 1.65; flex: 1; }
+    .uebung-text strong { display: block; font-weight: 700; margin-bottom: 3px; font-size: 1rem; }
+    .uebung-tag {
+      display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.4px;
+      text-transform: uppercase; padding: 2px 8px; border-radius: 4px; margin-bottom: 4px;
+    }
+    .tag-flaeche  { background: #eff6ff; color: #1d4ed8; }
+    .tag-falle    { background: #fef2f2; color: #b91c1c; }
+    .tag-einheit  { background: #fdf2f8; color: #be185d; }
+    .tag-sach     { background: #f0fdf4; color: #15803d; }
+
+    .uebung-btn {
+      width: calc(100% - 2.6rem); margin: 0 1.3rem 1.15rem 1.3rem;
+      padding: 0.65rem 1rem; background: #fff; border: 1.5px solid #d1d5db;
+      border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 600;
+      color: #374151; display: flex; justify-content: space-between; align-items: center;
+      transition: all 0.2s ease; text-align: left;
+    }
+    .uebung-btn:hover { background: #f0fdf4; border-color: #86efac; color: #065f46; }
+    .uebung-solution { display: none; background: #f0fdf4; border-top: 1.5px solid #d1fae5; padding: 1.25rem 1.4rem; }
+    .uebung-solution.open { display: block; }
+    .uebung-solution p { font-size: 0.885rem; color: #111827; line-height: 1.75; margin: 0 0 0.5rem 0; }
+    .uebung-solution .formula-block { background: #dcfce7; }
+
+    /* Formel-Block */
+    .formula-block {
+      background: #f1f5f9; border-radius: 10px;
+      padding: 0.85rem 1.2rem; margin: 0.75rem 0; text-align: center; overflow-x: auto;
+    }
+
+    /* Bottom Nav */
+    .bottom-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; gap: 1rem;
+    }
+    .btn-nav-prev {
+      padding: 0.65rem 1.2rem; border: 1.5px solid #d1d5db; border-radius: 9px;
+      background: #fff; color: #374151; font-size: 0.875rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-nav-prev:hover { border-color: #2563eb; color: #2563eb; }
+    .btn-nav-next {
+      padding: 0.65rem 1.4rem; border-radius: 9px; background: #1e3a8a; color: #fff;
+      font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: background 0.2s;
+    }
+    .btn-nav-next:hover { background: #1d4ed8; }
+
+    @media (max-width: 640px) {
+      .preview-grid { grid-template-columns: 1fr; }
+      .maschine-grid { grid-template-columns: 1fr; }
+      .maschine-arrow { transform: rotate(90deg); margin: 0.2rem 0; }
+      .bottom-nav { flex-direction: column; align-items: stretch; text-align: center; }
+      .uebung-btn { width: calc(100% - 1.8rem); margin-left: 0.9rem; margin-right: 0.9rem; }
+      .uebung-header { padding: 1rem 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container page-container">
+
+  <!-- Navigation -->
+  <nav class="portal-nav">
+    <a href="index.html" class="nav-back-link">&#8592; Mathematik 6</a>
+    <span class="badge-pill badge-mathe">Thema 1</span>
+  </nav>
+
+  <!-- Seitenüberschrift -->
+  <h1 class="page-title">Brüche: Anteile &amp; Größen</h1>
+  <p class="page-subtitle">Vom Ganzen zum Bruch &middot; Schritt für Schritt veranschaulicht &middot; Klasse 6 Gymnasium</p>
+  <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+    <a href="#selbsttest" class="quick-jump-btn">Direkt zum Selbsttest (10 Fragen) &darr;</a>
+  </div>
+  <hr class="page-divider">
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 1 — WAS IST EIN BRUCH? (DAS BAUKASTEN-PRINZIP)
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block">
+    <div class="section-badge badge-erklaerung">
+      <span class="badge-num">1</span> Grundidee: Was ist ein Bruch?
+    </div>
+
+    <p class="erklaer-text">
+      Bisher kanntest du nur ganze Zahlen wie $1, 2, 3$ oder $10$.
+      Doch was machst du, wenn du dir mit drei Freunden eine einzige Pizza teilst?
+      Oder wenn du eine Tafel Schokolade gerecht aufteilen willst?
+    </p>
+    <p class="erklaer-text">
+      Genau hier kommen <strong>Brüche</strong> ins Spiel. Ein Bruch beschreibt immer einen
+      <strong>Anteil von einem Ganzen</strong>.
+    </p>
+
+    <!-- Grafischer Baukasten des Bruchs -->
+    <div class="bruch-baukasten">
+      <div class="bruch-visual">
+        <div class="bruch-part-desc desc-zaehler">
+          <strong>ZÄHLER (oben)</strong>
+          Er <em>zählt</em>: Wie viele Teile nehmen oder färben wir?
+        </div>
+
+        <div class="bruch-display">
+          <span class="bruch-zaehler">3</span>
+          <span class="bruch-strich"></span>
+          <span class="bruch-nenner">4</span>
+        </div>
+
+        <div class="bruch-part-desc desc-nenner">
+          <strong>NENNER (unten)</strong>
+          Er <em>benennt</em>: In wie viele <strong>gleich große</strong> Teile ist das Ganze zerteilt?
+        </div>
+      </div>
+      <div style="font-size: 0.85rem; color: #475569; margin-top: 1rem; text-align: center;">
+        <em>Tipp:</em> Der <strong>Bruchstrich</strong> bedeutet mathematisch genau dasselbe wie ein <strong>Geteilt-Zeichen</strong> ($:$).
+        <br>$\frac{3}{4}$ bedeutet also: $3$ geteilt durch $4$.
+      </div>
+    </div>
+
+    <!-- Rote MERKE-Box -->
+    <div class="merke-box">
+      <span class="merke-tag">MERKE</span>
+      <p>Die Stücke müssen IMMER exakt gleich groß sein!</p>
+      <p>
+        Wenn eine Pizza in 4 Stücke geschnitten wird, aber ein Stück riesig und die anderen winzig sind,
+        dann ist das große Stück <strong>kein</strong> $\frac{1}{4}$!
+        Ein Bruch funktioniert nur bei einer <strong>vollkommen gerechten, gleichmäßigen Aufteilung</strong>.
+      </p>
+    </div>
+
+    <!-- Aha-Effekt Kasten -->
+    <div style="background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: 12px; padding: 1.1rem 1.3rem; margin: 1.5rem 0;">
+      <h4 style="font-size: 0.9rem; font-weight: 800; color: #1e3a8a; margin: 0 0 0.5rem 0; text-transform: uppercase;">
+        Der große Aha-Effekt: Warum ist $\frac{1}{8}$ kleiner als $\frac{1}{4}$?
+      </h4>
+      <p style="font-size: 0.9rem; color: #1e3a8a; line-height: 1.65; margin: 0;">
+        Obwohl die Zahl $8$ größer ist als $4$, ist das Stück $\frac{1}{8}$ <strong>viel kleiner</strong>!
+        <br>
+        <strong>Die Erklärung:</strong> Stell dir vor, du teilst eine Schokolade mit $4$ Freunden. Jeder bekommt ein schönes großes Stück.
+        Teilst du dieselbe Schokolade aber mit $8$ Freunden, muss jedes einzelne Stück viel schmaler geschnitten werden.
+        <br>
+        <strong>Faustregel:</strong> <em>Je größer die Zahl im Nenner (unten), desto kleiner ist jedes einzelne Teil!</em>
+      </p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 2 — DIE DREI ANSCHAULICHEN MODELLE (SKIZZEN)
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block">
+    <div class="section-badge badge-modelle">
+      <span class="badge-num">2</span> Die drei Modelle im Bild
+    </div>
+
+    <p class="erklaer-text">
+      Am Gymnasium stellen wir Anteile auf drei verschiedene Weisen dar. Alle drei zeigen denselben Bruch: $\frac{3}{4}$.
+    </p>
+
+    <div class="skizze-wrap">
+      <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- 1. KREISMODELL (PIZZA) -->
+        <g transform="translate(40, 20)">
+          <text x="70" y="15" text-anchor="middle" font-size="11.5" font-weight="800" fill="#1e3a8a" font-family="'Plus Jakarta Sans', sans-serif">1. KREISMODELL</text>
+          
+          <!-- Kreis mit 4 Vierteln, 3 blau eingefärbt -->
+          <circle cx="70" cy="85" r="50" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+          <!-- Sektor 1: 0 bis 90 Grad -->
+          <path d="M70,85 L70,35 A50,50 0 0,1 120,85 Z" fill="#3b82f6"/>
+          <!-- Sektor 2: 90 bis 180 Grad -->
+          <path d="M70,85 L120,85 A50,50 0 0,1 70,135 Z" fill="#3b82f6"/>
+          <!-- Sektor 3: 180 bis 270 Grad -->
+          <path d="M70,85 L70,135 A50,50 0 0,1 20,85 Z" fill="#3b82f6"/>
+          <!-- Sektor 4: 270 bis 360 Grad (bleibt hell) -->
+
+          <!-- Trennlinien -->
+          <line x1="70" y1="35" x2="70" y2="135" stroke="#1e3a8a" stroke-width="1.8"/>
+          <line x1="20" y1="85" x2="120" y2="85" stroke="#1e3a8a" stroke-width="1.8"/>
+
+          <text x="70" y="160" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af" font-family="'Plus Jakarta Sans', sans-serif">3 von 4 Teilen gefärbt</text>
+        </g>
+
+        <!-- 2. RECHTECKMODELL (SCHOKOLADENTAFEL) -->
+        <g transform="translate(245, 20)">
+          <text x="95" y="15" text-anchor="middle" font-size="11.5" font-weight="800" fill="#1e3a8a" font-family="'Plus Jakarta Sans', sans-serif">2. RECHTECKMODELL</text>
+          
+          <!-- Tafel 4 gleiche Streifen -->
+          <rect x="15" y="45" width="160" height="75" fill="#f8fafc" stroke="#2563eb" stroke-width="2" rx="4"/>
+          <!-- 3 gefärbte Streifen -->
+          <rect x="15" y="45" width="40" height="75" fill="#3b82f6" stroke="#1e3a8a" stroke-width="1"/>
+          <rect x="55" y="45" width="40" height="75" fill="#3b82f6" stroke="#1e3a8a" stroke-width="1"/>
+          <rect x="95" y="45" width="40" height="75" fill="#3b82f6" stroke="#1e3a8a" stroke-width="1"/>
+          <rect x="135" y="45" width="40" height="75" fill="#eff6ff" stroke="#1e3a8a" stroke-width="1"/>
+
+          <!-- Zahlenbeschriftung -->
+          <text x="35" y="88" text-anchor="middle" font-size="12" font-weight="800" fill="#fff" font-family="'Plus Jakarta Sans', sans-serif">1</text>
+          <text x="75" y="88" text-anchor="middle" font-size="12" font-weight="800" fill="#fff" font-family="'Plus Jakarta Sans', sans-serif">2</text>
+          <text x="115" y="88" text-anchor="middle" font-size="12" font-weight="800" fill="#fff" font-family="'Plus Jakarta Sans', sans-serif">3</text>
+          <text x="155" y="88" text-anchor="middle" font-size="12" font-weight="800" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif">4</text>
+
+          <text x="95" y="160" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af" font-family="'Plus Jakarta Sans', sans-serif">4 gleich breite Streifen</text>
+        </g>
+
+        <!-- 3. STRECKENMODELL (BAND / METERSTAB) -->
+        <g transform="translate(460, 20)">
+          <text x="100" y="15" text-anchor="middle" font-size="11.5" font-weight="800" fill="#1e3a8a" font-family="'Plus Jakarta Sans', sans-serif">3. STRECKENMODELL</text>
+          
+          <!-- Zahlenstrahl / Band -->
+          <line x1="20" y1="80" x2="180" y2="80" stroke="#cbd5e1" stroke-width="8" stroke-linecap="round"/>
+          <!-- Gefärbter Teil (3/4 = 120px von 160px) -->
+          <line x1="20" y1="80" x2="140" y2="80" stroke="#3b82f6" stroke-width="8" stroke-linecap="round"/>
+
+          <!-- Teilstriche -->
+          <line x1="20" y1="68" x2="20" y2="92" stroke="#1e3a8a" stroke-width="2.5"/>
+          <line x1="60" y1="72" x2="60" y2="88" stroke="#1e3a8a" stroke-width="1.8"/>
+          <line x1="100" y1="72" x2="100" y2="88" stroke="#1e3a8a" stroke-width="1.8"/>
+          <line x1="140" y1="68" x2="140" y2="92" stroke="#dc2626" stroke-width="2.5"/>
+          <line x1="180" y1="68" x2="180" y2="92" stroke="#1e3a8a" stroke-width="2.5"/>
+
+          <!-- Beschriftung -->
+          <text x="20" y="112" text-anchor="middle" font-size="11" font-weight="700" fill="#475569" font-family="'Plus Jakarta Sans', sans-serif">0</text>
+          <text x="60" y="112" text-anchor="middle" font-size="9" fill="#64748b" font-family="'Plus Jakarta Sans', sans-serif">1/4</text>
+          <text x="100" y="112" text-anchor="middle" font-size="9" fill="#64748b" font-family="'Plus Jakarta Sans', sans-serif">2/4</text>
+          <text x="140" y="115" text-anchor="middle" font-size="12" font-weight="800" fill="#dc2626" font-family="'Plus Jakarta Sans', sans-serif">3/4</text>
+          <text x="180" y="112" text-anchor="middle" font-size="11" font-weight="700" fill="#475569" font-family="'Plus Jakarta Sans', sans-serif">1 (Ganzes)</text>
+
+          <text x="100" y="160" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af" font-family="'Plus Jakarta Sans', sans-serif">Punkt bei 3 von 4 Abschnitten</text>
+        </g>
+      </svg>
+      <p class="skizze-caption">Drei Darstellungen, derselbe Wert: Der Anteil $\frac{3}{4}$ im Kreis, im Rechteck und auf der Strecke.</p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 3 — DER EINHEITEN-TRICK: ANTEILE VON GRÖSSEN
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block">
+    <div class="section-badge badge-groessen">
+      <span class="badge-num">3</span> Der Einheiten-Trick: Anteile von Größen berechnen
+    </div>
+
+    <p class="erklaer-text">
+      Jetzt wird es richtig spannend: In der Schule sollst du oft Bruchteile von echten Größen berechnen, zum Beispiel:
+      <br>
+      <strong>Wie viel sind $\frac{3}{4}$ von $1\,\text{Meter}$?</strong>
+    </p>
+    <p class="erklaer-text">
+      $1$ Meter lässt sich nicht gut durch $4$ teilen, ohne dass ein Komma entsteht.
+      Deshalb wenden wir den genialen <strong>Einheiten-Trick</strong> an: Wir wandeln das Ganze zuerst in eine <strong>kleinere Einheit</strong> um!
+    </p>
+
+    <!-- Umrechnungs-Merkbox -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.75rem; margin: 1.25rem 0;">
+      <div style="background: #fdf2f8; border: 1.5px solid #fbcfe8; border-radius: 8px; padding: 0.75rem; text-align: center;">
+        <span style="font-size: 0.75rem; font-weight: 800; color: #9d174d; text-transform: uppercase;">Länge</span>
+        <div style="font-size: 1.05rem; font-weight: 800; color: #111827; margin-top: 2px;">$1\,\text{m} = 100\,\text{cm}$</div>
+      </div>
+      <div style="background: #fdf2f8; border: 1.5px solid #fbcfe8; border-radius: 8px; padding: 0.75rem; text-align: center;">
+        <span style="font-size: 0.75rem; font-weight: 800; color: #9d174d; text-transform: uppercase;">Zeit</span>
+        <div style="font-size: 1.05rem; font-weight: 800; color: #111827; margin-top: 2px;">$1\,\text{h} = 60\,\text{min}$</div>
+      </div>
+      <div style="background: #fdf2f8; border: 1.5px solid #fbcfe8; border-radius: 8px; padding: 0.75rem; text-align: center;">
+        <span style="font-size: 0.75rem; font-weight: 800; color: #9d174d; text-transform: uppercase;">Gewicht</span>
+        <div style="font-size: 1.05rem; font-weight: 800; color: #111827; margin-top: 2px;">$1\,\text{kg} = 1000\,\text{g}$</div>
+      </div>
+      <div style="background: #fdf2f8; border: 1.5px solid #fbcfe8; border-radius: 8px; padding: 0.75rem; text-align: center;">
+        <span style="font-size: 0.75rem; font-weight: 800; color: #9d174d; text-transform: uppercase;">Große Länge</span>
+        <div style="font-size: 1.05rem; font-weight: 800; color: #111827; margin-top: 2px;">$1\,\text{km} = 1000\,\text{m}$</div>
+      </div>
+    </div>
+
+    <!-- Die 2-Schritte-Maschine -->
+    <div class="maschine-box">
+      <h4 style="font-size: 0.9rem; font-weight: 800; color: #1e3a8a; text-transform: uppercase; margin: 0;">
+        Die 2-Schritte-Rechenmaschine
+      </h4>
+      <p style="font-size: 0.88rem; color: #475569; margin: 0.3rem 0 0 0;">
+        Sobald du in der kleineren Einheit bist, rechnest du immer genau zwei feste Schritte:
+      </p>
+
+      <div class="maschine-grid">
+        <div class="maschine-step step-1">
+          <div class="step-title">Schritt 1 &middot; Geteilt</div>
+          <div class="step-action">: Nenner (unten)</div>
+          <div class="step-sub">Du erfährst, wie viel <strong>1 Teil</strong> wert ist.</div>
+        </div>
+
+        <div class="maschine-arrow">&rarr;</div>
+
+        <div class="maschine-step step-2">
+          <div class="step-title">Schritt 2 &middot; Mal</div>
+          <div class="step-action">&times; Zähler (oben)</div>
+          <div class="step-sub">Du nimmst so viele Teile, wie du brauchst.</div>
+        </div>
+      </div>
+
+      <!-- Musterbeispiel visualisiert -->
+      <div style="background: #f8fafc; border-top: 1.5px solid #e2e8f0; margin-top: 1.25rem; padding-top: 1rem;">
+        <strong>Konkretes Musterbeispiel: $\frac{3}{4}$ von $1\,\text{m}$</strong>
+        <div class="formula-block" style="background: #fff; border: 1px solid #cbd5e1; margin-top: 0.5rem;">
+          $$1\,\text{m} = 100\,\text{cm}$$
+          $$\text{Schritt 1: } 100\,\text{cm} : 4 = 25\,\text{cm} \quad (\text{das ist } \tfrac{1}{4})$$
+          $$\text{Schritt 2: } 25\,\text{cm} \cdot 3 = \mathbf{75\,\text{cm}} \quad (\text{das sind } \tfrac{3}{4})$$
+        </div>
+        <div style="font-size: 0.88rem; color: #065f46; font-weight: 700; background: #ecfdf5; padding: 0.5rem 0.8rem; border-radius: 6px;">
+          Antwort: $\frac{3}{4}$ von $1\,\text{Meter}$ sind genau $75\,\text{cm}$.
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 4 — ZWEI INTERAKTIVE WERKZEUGE ZUM AUSPROBIEREN
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block">
+    <div class="section-badge badge-interaktiv">
+      <span class="badge-num">4</span> Ausprobieren &amp; Entdecken
+    </div>
+
+    <!-- WERKZEUG 1: BRUCH-ZEICHNER -->
+    <div class="tool-card">
+      <div class="tool-title">1. Der Live-Bruch-Zeichner</div>
+      <div class="tool-desc">
+        Klicke auf die Plus- und Minus-Buttons, um Zähler und Nenner zu ändern.
+        Beobachte live, wie sich Schokoriegel und Kreis verändern!
+      </div>
+
+      <div class="controls-row">
+        <!-- Zähler Stepper -->
+        <div class="control-group">
+          <span class="control-label" style="color: #2563eb;">Zähler:</span>
+          <button class="btn-stepper" onclick="adjustZaehler(-1)">&minus;</button>
+          <span id="disp-zaehler" class="val-display" style="color: #2563eb;">3</span>
+          <button class="btn-stepper" onclick="adjustZaehler(1)">+</button>
+        </div>
+
+        <div style="font-size: 1.5rem; font-weight: 800; color: #cbd5e1;">/</div>
+
+        <!-- Nenner Stepper -->
+        <div class="control-group">
+          <span class="control-label" style="color: #059669;">Nenner:</span>
+          <button class="btn-stepper" onclick="adjustNenner(-1)">&minus;</button>
+          <span id="disp-nenner" class="val-display" style="color: #059669;">4</span>
+          <button class="btn-stepper" onclick="adjustNenner(1)">+</button>
+        </div>
+      </div>
+
+      <div class="preview-grid">
+        <div class="preview-box">
+          <h5>Schokoriegel-Ansicht</h5>
+          <div id="bar-container" style="display: flex; height: 50px; border: 2px solid #2563eb; border-radius: 6px; overflow: hidden; background: #fff;">
+            <!-- Balken-Segmente per JS -->
+          </div>
+          <div id="bar-label" style="font-size: 0.85rem; font-weight: 700; color: #1e40af; margin-top: 0.6rem;"></div>
+        </div>
+
+        <div class="preview-box">
+          <h5>Kreis-Ansicht</h5>
+          <div style="display: flex; justify-content: center;">
+            <svg id="pie-svg" width="120" height="120" viewBox="-60 -60 120 120">
+              <!-- SVG Slices per JS -->
+            </svg>
+          </div>
+          <div id="pie-label" style="font-size: 0.85rem; font-weight: 700; color: #1e40af; margin-top: 0.6rem;"></div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- WERKZEUG 2: GRÖSSENRECHNER -->
+    <div class="tool-card" style="border-color: #fbcfe8;">
+      <div class="tool-title" style="color: #be185d;">2. Die interaktive Größen-Rechenmaschine</div>
+      <div class="tool-desc">
+        Wähle ein typisches Schulbeispiel aus, um die Rechnung Schritt für Schritt mitzuerleben:
+      </div>
+
+      <div class="calc-groessen-grid">
+        <button class="groessen-preset-btn active" onclick="setPreset(3, 4, '1 m', 100, 'cm', this)">$\frac{3}{4}$ von $1\,\text{m}$</button>
+        <button class="groessen-preset-btn" onclick="setPreset(2, 5, '1 m', 100, 'cm', this)">$\frac{2}{5}$ von $1\,\text{m}$</button>
+        <button class="groessen-preset-btn" onclick="setPreset(3, 4, '1 h', 60, 'min', this)">$\frac{3}{4}$ von $1\,\text{h}$</button>
+        <button class="groessen-preset-btn" onclick="setPreset(1, 4, '1 kg', 1000, 'g', this)">$\frac{1}{4}$ von $1\,\text{kg}$</button>
+        <button class="groessen-preset-btn" onclick="setPreset(5, 8, '1 km', 1000, 'm', this)">$\frac{5}{8}$ von $1\,\text{km}$</button>
+      </div>
+
+      <div id="groesse-output" class="groesse-result-card">
+        <!-- Live-Ausgabe via JS -->
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 5 — ÜBUNGSAUFGABEN MIT MUSTERLÖSUNGEN
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block">
+    <div class="section-badge badge-uebungen">
+      <span class="badge-num">5</span> Typische Gymnasiums-Aufgaben
+    </div>
+
+    <!-- AUFGABE 1 -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">1</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-flaeche">Flächenanteil ablesen</span>
+          <strong>Anteil an einer Schokoladentafel bestimmen</strong>
+          Eine Schokoladentafel besteht aus insgesamt $12$ gleich großen Rippchen (3 Reihen mit je 4 Rippchen).
+          Felix isst $5$ dieser Rippchen auf.
+          <br>
+          a) Welcher Bruchteil der Schokolade wurde gegessen?
+          <br>
+          b) Welcher Bruchteil ist noch übrig?
+        </div>
+      </div>
+
+      <button class="uebung-btn" onclick="toggleUebung(this)">
+        Lösung anzeigen <span>&#9660;</span>
+      </button>
+      <div class="uebung-solution">
+        <p><strong>So gehst du vor:</strong></p>
+        <p>&bull; Der <strong>Nenner</strong> (unten) ist die Gesamtzahl aller Rippchen: $12$.</p>
+        <p>&bull; Der <strong>Zähler</strong> (oben) ist die Anzahl der Teile, um die es geht.</p>
+        <div class="formula-block">
+          $$\text{a) Gegessener Anteil: } \mathbf{\frac{5}{12}}$$
+          $$\text{b) Übrige Rippchen: } 12 - 5 = 7 \;\Longrightarrow\; \mathbf{\frac{7}{12}}$$
+        </div>
+        <p><strong>Antwort:</strong> Felix hat $\frac{5}{12}$ der Tafel gegessen. Es sind noch $\frac{7}{12}$ übrig.</p>
+      </div>
+    </div>
+
+
+    <!-- AUFGABE 2 -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">2</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-falle">Achtung Klassenarbeits-Falle!</span>
+          <strong>Sind alle Teile wirklich gleich groß?</strong>
+          Tim zeichnet ein Dreieck und teilt es mit zwei geraden Linien in drei Stücke. Er malt eines der Stücke rot an und sagt stolz:
+          <em>„Ich habe genau $\frac{1}{3}$ des Dreiecks angemalt!“</em>
+          <br>
+          Warum hat Tim unrecht? Begründe mit mathematischen Fachbegriffen.
+        </div>
+      </div>
+
+      <button class="uebung-btn" onclick="toggleUebung(this)">
+        Lösung anzeigen <span>&#9660;</span>
+      </button>
+      <div class="uebung-solution">
+        <p><strong>Die Begründung für die Klassenarbeit:</strong></p>
+        <p>
+          Tim hat zwar $3$ Teile gezeichnet und $1$ Teil gefärbt, aber die Stücke sind <strong>nicht flächengleich (nicht gleich groß)</strong>!
+        </p>
+        <p>
+          Ein Bruch darf nur dann gebildet werden, wenn das Ganze in <strong>vollkommen gleich große Teilstücke</strong> zerlegt wurde.
+          Deshalb stellt das gefärbte Stück <strong>kein Drittel ($\frac{1}{3}$)</strong> dar.
+        </p>
+      </div>
+    </div>
+
+
+    <!-- AUFGABE 3 -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">3</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-einheit">Einheiten-Trick</span>
+          <strong>Anteile von Längen berechnen</strong>
+          Ein Geschenkband ist genau $1\,\text{Meter}$ lang. Du schneidest $\frac{2}{5}$ des Bandes für ein Paket ab.
+          Wie viele Zentimeter lang ist dein abgeschnittenes Band?
+        </div>
+      </div>
+
+      <button class="uebung-btn" onclick="toggleUebung(this)">
+        Lösung anzeigen <span>&#9660;</span>
+      </button>
+      <div class="uebung-solution">
+        <p><strong>Rechenweg mit der 2-Schritte-Maschine:</strong></p>
+        <p>1. In die kleinere Einheit umwandeln: $1\,\text{m} = 100\,\text{cm}$.</p>
+        <div class="formula-block">
+          $$\text{Schritt 1 (: Nenner): } 100\,\text{cm} : 5 = 20\,\text{cm} \quad (\text{das ist } \tfrac{1}{5})$$
+          $$\text{Schritt 2 (&times; Zähler): } 20\,\text{cm} \cdot 2 = \mathbf{40\,\text{cm}} \quad (\text{das sind } \tfrac{2}{5})$$
+        </div>
+        <p><strong>Antwort:</strong> Das abgeschnittene Band ist genau $40\,\text{cm}$ lang.</p>
+      </div>
+    </div>
+
+
+    <!-- AUFGABE 4 -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">4</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-sach">Sachaufgabe: Zeit</span>
+          <strong>Hausaufgaben-Zeit in Minuten berechnen</strong>
+          Lena lernt für ihre Mathearbeit. Sie stoppt die Zeit: Nach genau $\frac{3}{4}$ einer Stunde ist sie fertig.
+          Wie viele Minuten hat Lena gelernt?
+        </div>
+      </div>
+
+      <button class="uebung-btn" onclick="toggleUebung(this)">
+        Lösung anzeigen <span>&#9660;</span>
+      </button>
+      <div class="uebung-solution">
+        <p><strong>Rechenweg:</strong></p>
+        <p>1. In Minuten umwandeln: $1\,\text{h} = 60\,\text{min}$.</p>
+        <div class="formula-block">
+          $$\text{Schritt 1 (: Nenner 4): } 60\,\text{min} : 4 = 15\,\text{min} \quad (\text{eine Viertelstunde})$$
+          $$\text{Schritt 2 (&times; Zähler 3): } 15\,\text{min} \cdot 3 = \mathbf{45\,\text{min}} \quad (\text{eine Dreiviertelstunde})$$
+        </div>
+        <p><strong>Antwort:</strong> Lena hat genau $45\,\text{Minuten}$ lang gelernt (eine Dreiviertelstunde).</p>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 6 — INTERAKTIVER SELBSTTEST (10 ZUFALLSFRAGEN)
+  ═══════════════════════════════════════════════════════ -->
+  <div id="selbsttest" class="content-block">
+    <div class="section-badge badge-selbsttest">
+      <span class="badge-num">6</span> Interaktiver Selbsttest (10 Zufallsfragen)
+    </div>
+
+    <p class="erklaer-text">
+      Bist du fit bei den Brüchen? Teste jetzt dein Wissen!
+      Bei jedem Teststart werden <strong>10 zufällige Fragen aus einem Pool von 30 Fragen</strong> ausgewählt.
+      Nach jedem Klick erfährst du sofort, ob deine Antwort richtig war &ndash; inklusive einer anschaulichen Erklärung!
+    </p>
+
+    <div class="quiz-card">
+      <!-- Start-Bildschirm mit Startbutton -->
+      <div id="quiz-intro-area" class="quiz-intro-view">
+        <span class="quiz-intro-badge">Pool aus 30 Fragen &middot; 10 Zufallsfragen</span>
+        <h4 class="quiz-intro-title">Bist du bereit für die Bruch-Challenge?</h4>
+        <p class="quiz-intro-desc">
+          Teste dein Wissen zu Zähler, Nenner, echten Brüchen, Bildmodellen und dem Einheiten-Trick!
+          Klicke auf den Button, um die ersten 10 zufälligen Fragen zu starten.
+        </p>
+        <button class="btn-quiz-start" onclick="startQuiz()">
+          Selbsttest jetzt starten &rarr;
+        </button>
+      </div>
+
+      <!-- Status Leiste (während des Tests) -->
+      <div id="quiz-status-bar" class="quiz-status-bar" style="display: none;">
+        <span id="quiz-progress-text">Frage 1 von 10</span>
+        <span id="quiz-score-text">Punkte: 0 / 10</span>
+      </div>
+
+      <!-- Fortschrittsbalken -->
+      <div id="quiz-progress-track" class="quiz-progress-track" style="display: none;">
+        <div id="quiz-progress-bar" class="quiz-progress-fill" style="width: 10%;"></div>
+      </div>
+
+      <!-- Fragen-Container -->
+      <div id="quiz-active-area" style="display: none;">
+        <div id="quiz-question" class="quiz-q-title"></div>
+        <div id="quiz-options" class="quiz-options-list"></div>
+        <div id="quiz-explanation" class="quiz-explanation-box"></div>
+        <div class="quiz-next-action">
+          <button id="quiz-next-btn" class="btn-quiz-next" style="display: none;" onclick="nextQuestion()">Nächste Frage &rarr;</button>
+        </div>
+      </div>
+
+      <!-- End-Auswertung -->
+      <div id="quiz-results" class="quiz-result-view">
+        <div id="quiz-final-score" class="quiz-score-badge"></div>
+        <div id="quiz-final-title" class="quiz-score-text"></div>
+        <div id="quiz-final-desc" class="quiz-score-feedback"></div>
+        <button class="btn-quiz-start" onclick="startQuiz()">10 neue Zufallsfragen starten &circlearrowright;</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <a href="index.html" class="btn-nav-prev">&#8592; Zur Übersicht Klasse 6</a>
+    <a href="erweitern-kuerzen.html" class="btn-nav-next">Weiter zu Thema 2: Erweitern &amp; Kürzen &rarr;</a>
+  </div>
+
+</div>
+
+<script>
+  /* ── Übungsaufgaben aufklappen ─────────────────────────── */
+  function toggleUebung(btn) {
+    const solution = btn.nextElementSibling;
+    const arrow = btn.querySelector('span');
+    const isOpen = solution.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    arrow.innerHTML = isOpen ? '&#9650;' : '&#9660;';
+    if (isOpen) setTimeout(triggerKaTeX, 50);
+  }
+
+  /* ── 1. Interaktiver Bruch-Zeichner ────────────────────── */
+  let currentZ = 3;
+  let currentN = 4;
+
+  function adjustZaehler(delta) {
+    const next = currentZ + delta;
+    if (next >= 0 && next <= currentN) {
+      currentZ = next;
+      updateVisuals();
+    }
+  }
+
+  function adjustNenner(delta) {
+    const next = currentN + delta;
+    if (next >= 2 && next <= 12) {
+      currentN = next;
+      if (currentZ > currentN) currentZ = currentN;
+      updateVisuals();
+    }
+  }
+
+  function updateVisuals() {
+    document.getElementById('disp-zaehler').innerText = currentZ;
+    document.getElementById('disp-nenner').innerText = currentN;
+
+    // Balken zeichnen
+    const bar = document.getElementById('bar-container');
+    bar.innerHTML = '';
+    for (let i = 0; i < currentN; i++) {
+      const seg = document.createElement('div');
+      seg.style.flex = '1';
+      seg.style.height = '100%';
+      seg.style.borderRight = (i < currentN - 1) ? '1.5px solid #1e3a8a' : 'none';
+      seg.style.background = (i < currentZ) ? '#3b82f6' : '#eff6ff';
+      seg.style.transition = 'background 0.2s';
+      bar.appendChild(seg);
+    }
+    document.getElementById('bar-label').innerText = currentZ + ' von ' + currentN + ' Teilen gefärbt';
+
+    // Kreis zeichnen (SVG)
+    const pie = document.getElementById('pie-svg');
+    pie.innerHTML = '';
+    const r = 50;
+
+    for (let i = 0; i < currentN; i++) {
+      const startAngle = (i / currentN) * 2 * Math.PI - Math.PI / 2;
+      const endAngle = ((i + 1) / currentN) * 2 * Math.PI - Math.PI / 2;
+
+      const x1 = r * Math.cos(startAngle);
+      const y1 = r * Math.sin(startAngle);
+      const x2 = r * Math.cos(endAngle);
+      const y2 = r * Math.sin(endAngle);
+
+      const largeArc = (endAngle - startAngle > Math.PI) ? 1 : 0;
+      const d = ['M', 0, 0, 'L', x1, y1, 'A', r, r, 0, largeArc, 1, x2, y2, 'Z'].join(' ');
+
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', d);
+      path.setAttribute('fill', (i < currentZ) ? '#3b82f6' : '#eff6ff');
+      path.setAttribute('stroke', '#1e3a8a');
+      path.setAttribute('stroke-width', '1.2');
+      pie.appendChild(path);
+    }
+    document.getElementById('pie-label').innerText = currentZ + '/' + currentN + ' des Kreises';
+  }
+
+  /* ── 2. Interaktive Größen-Rechenmaschine ──────────────── */
+  function setPreset(z, n, name, totalVal, unit, btnEl) {
+    // Active class auf Buttons
+    document.querySelectorAll('.groessen-preset-btn').forEach(b => b.classList.remove('active'));
+    if (btnEl && btnEl.classList) {
+      btnEl.classList.add('active');
+    } else {
+      const firstBtn = document.querySelector('.groessen-preset-btn');
+      if (firstBtn) firstBtn.classList.add('active');
+    }
+
+    const onePart = totalVal / n;
+    const finalVal = onePart * z;
+
+    let html = '';
+    html += '<div style="font-size: 1.05rem; font-weight: 800; color: #111827; margin-bottom: 0.75rem;">';
+    html += 'Aufgabe: Berechne $\\frac{' + z + '}{' + n + '}$ von $' + name + '$';
+    html += '</div>';
+
+    html += '<div style="background: #fdf2f8; border: 1px solid #fbcfe8; border-radius: 8px; padding: 0.85rem; font-size: 0.9rem; line-height: 1.7;">';
+    html += '<strong>Schritt 1 (Einheitentrick):</strong> $' + name + ' = ' + totalVal + '\\,\\text{' + unit + '}$<br>';
+    html += '<strong>Schritt 2 (Durch Nenner ' + n + ' teilen):</strong> $' + totalVal + '\\,\\text{' + unit + '} : ' + n + ' = ' + formatNum(onePart) + '\\,\\text{' + unit + '}$ (Wert von $1$ Stück)<br>';
+    html += '<strong>Schritt 3 (Mit Zähler ' + z + ' malnehmen):</strong> $' + formatNum(onePart) + '\\,\\text{' + unit + '} \\cdot ' + z + ' = \\mathbf{' + formatNum(finalVal) + '\\,\\text{' + unit + '}}$';
+    html += '</div>';
+
+    html += '<div style="margin-top: 0.85rem; font-weight: 700; color: #9d174d; font-size: 0.95rem;">';
+    html += '&rArr; Ergebnis: $\\frac{' + z + '}{' + n + '}$ von $' + name + '$ entsprechen genau $\\mathbf{' + formatNum(finalVal) + '\\,\\text{' + unit + '}}$.';
+    html += '</div>';
+
+    const out = document.getElementById('groesse-output');
+    out.innerHTML = html;
+    setTimeout(triggerKaTeX, 50);
+  }
+
+  function formatNum(n) {
+    if (Math.abs(n - Math.round(n)) < 1e-6) return String(Math.round(n));
+    return Number(n.toFixed(2)).toString().replace('.', ',');
+  }
+
+  /* ── 3. Interaktiver Selbsttest (Pool aus 30 Fragen, 10 Zufall) ── */
+  const quizPool = [
+    // 1
+    {
+      q: "Was gibt der <strong>Nenner</strong> (die Zahl unten) bei einem Bruch an?",
+      opts: [
+        "In wie viele gleich große Teile das Ganze zerlegt ist",
+        "Wie viele Teile man davon genommen hat",
+        "Wie viele ganze Pizzen vorhanden sind",
+        "Das Gesamtergebnis der Bruchrechnung"
+      ],
+      c: 0,
+      exp: "Der <strong>Nenner</strong> <em>benennt</em> die Teile (z. B. Viertel oder Achtel) und sagt dir, in wie viele gleich große Stücke das Ganze geteilt wurde."
+    },
+    // 2
+    {
+      q: "Was gibt der <strong>Zähler</strong> (die Zahl oben) bei einem Bruch an?",
+      opts: [
+        "Wie viele der gleich großen Teile genommen oder gefärbt werden",
+        "In wie viele Teile das Ganze geschnitten wird",
+        "Wie groß das gesamte Blech ist",
+        "Wie viele Teile am Ende übrig bleiben"
+      ],
+      c: 0,
+      exp: "Der <strong>Zähler</strong> <em>zählt</em> die Teile: Bei $\\frac{3}{4}$ zählen wir genau $3$ der vorhandenen Viertel."
+    },
+    // 3
+    {
+      q: "Welche Rechenoperation verbirgt sich hinter dem <strong>Bruchstrich</strong>?",
+      opts: [
+        "Geteilt durch ($:$)",
+        "Malnehmen ($\\cdot$)",
+        "Plusrechnen ($+$)",
+        "Minusrechnen ($-$)"
+      ],
+      c: 0,
+      exp: "Der Bruchstrich bedeutet mathematisch genau dasselbe wie <strong>geteilt durch</strong> ($:$). $\\frac{3}{4}$ bedeutet $3 : 4$."
+    },
+    // 4
+    {
+      q: "Ein Kuchen wird in $6$ gleich große Stücke geschnitten. Du isst $1$ Stück. Welcher Bruch beschreibt deinen Anteil?",
+      opts: [
+        "$\\frac{1}{6}$",
+        "$\\frac{6}{1}$",
+        "$\\frac{5}{6}$",
+        "$\\frac{1}{5}$"
+      ],
+      c: 0,
+      exp: "Das Ganze hat $6$ gleiche Teile (Nenner = $6$), und du nimmst $1$ Teil (Zähler = $1$). Also $\\frac{1}{6}$."
+    },
+    // 5
+    {
+      q: "Wie nennt man einen Bruch, bei dem der Zähler kleiner ist als der Nenner (z. B. $\\frac{3}{5}$)?",
+      opts: [
+        "Echter Bruch",
+        "Unechter Bruch",
+        "Scheinbruch",
+        "Gemischter Bruch"
+      ],
+      c: 0,
+      exp: "Ist der Zähler kleiner als der Nenner, handelt es sich um einen <strong>echten Bruch</strong>. Er ist immer kleiner als $1$ Ganzes."
+    },
+    // 6
+    {
+      q: "Was bedeutet ein Bruch, bei dem Zähler und Nenner genau gleich groß sind (z. B. $\\frac{4}{4}$ oder $\\frac{8}{8}$)?",
+      opts: [
+        "Genau $1$ Ganzes",
+        "Genau $0$",
+        "Ein halbes Ganzes",
+        "Das lässt sich nicht bestimmen"
+      ],
+      c: 0,
+      exp: "Wenn du alle $4$ von $4$ Vierteln hast, hast du den vollständigen Kuchen: $\\frac{4}{4} = 4 : 4 = 1$."
+    },
+    // 7
+    {
+      q: "Wie nennt man Brüche, die im Zähler oben eine $1$ stehen haben (wie $\\frac{1}{2}, \\frac{1}{3}, \\frac{1}{4}$)?",
+      opts: [
+        "Stammbrüche",
+        "Grundbrüche",
+        "Einerbrüche",
+        "Hauptbrüche"
+      ],
+      c: 0,
+      exp: "Brüche mit einer $1$ im Zähler heißen <strong>Stammbrüche</strong>. Sie beschreiben genau ein Einzelstück des Ganzen."
+    },
+    // 8
+    {
+      q: "Welche Zahl darf bei einem Bruch <strong>niemals im Nenner</strong> (unten) stehen?",
+      opts: [
+        "Die Zahl $0$",
+        "Die Zahl $1$",
+        "Eine ungerade Zahl",
+        "Eine große Zahl wie $1000$"
+      ],
+      c: 0,
+      exp: "Durch <strong>Null</strong> darf man in der Mathematik niemals teilen! Deshalb darf der Nenner niemals $0$ sein."
+    },
+    // 9
+    {
+      q: "Eine Schokolade hat $24$ Rippchen. Anna isst $6$ Rippchen. Welcher Bruchteil der Schokolade ist das?",
+      opts: [
+        "$\\frac{6}{24}$",
+        "$\\frac{18}{24}$",
+        "$\\frac{6}{18}$",
+        "$\\frac{24}{6}$"
+      ],
+      c: 0,
+      exp: "Von $24$ Rippchen (Nenner) wurden $6$ gegessen (Zähler). Der Anteil ist $\\frac{6}{24}$ (gekürzt $\\frac{1}{4}$)."
+    },
+    // 10
+    {
+      q: "Eine Schokolade hat $10$ Stücke. Ben isst $3$ Stücke. Welcher Anteil ist noch <strong>übrig</strong>?",
+      opts: [
+        "$\\frac{7}{10}$",
+        "$\\frac{3}{10}$",
+        "$\\frac{10}{7}$",
+        "$\\frac{7}{3}$"
+      ],
+      c: 0,
+      exp: "Pass gut auf: Ben isst $3$, also bleiben $10 - 3 = 7$ Stücke übrig. Der übrig gebliebene Anteil ist $\\frac{7}{10}$."
+    },
+    // 11
+    {
+      q: "Ein Kreis ist in $8$ gleich große Tortenstücke zerteilt. $5$ Stücke sind rot angemalt. Welcher Anteil ist <strong>nicht rot</strong>?",
+      opts: [
+        "$\\frac{3}{8}$",
+        "$\\frac{5}{8}$",
+        "$\\frac{8}{5}$",
+        "$\\frac{3}{5}$"
+      ],
+      c: 0,
+      exp: "Nicht rot sind $8 - 5 = 3$ Stücke. Der unbemalte Anteil ist $\\frac{3}{8}$."
+    },
+    // 12
+    {
+      q: "Auf einem Zahlenstrahl von $0$ bis $1$ ist die Strecke in $5$ gleiche Abschnitte geteilt. Welcher Bruch steht am 2. Teilstrich?",
+      opts: [
+        "$\\frac{2}{5}$",
+        "$\\frac{5}{2}$",
+        "$\\frac{3}{5}$",
+        "$\\frac{1}{5}$"
+      ],
+      c: 0,
+      exp: "Jeder Schritt auf der Strecke ist $\\frac{1}{5}$ lang. Nach $2$ Schritten bist du bei $\\frac{2}{5}$."
+    },
+    // 13
+    {
+      q: "Eine Pizza wird in $12$ Stücke geschnitten. Wie viele Stücke musst du essen, um genau die halbe Pizza ($\\frac{1}{2}$) zu essen?",
+      opts: [
+        "$6$ Stücke",
+        "$4$ Stücke",
+        "$2$ Stücke",
+        "$8$ Stücke"
+      ],
+      c: 0,
+      exp: "Die Hälfte von $12$ Stücken sind $12 : 2 = 6$ Stücke (denn $\\frac{6}{12} = \\frac{1}{2}$)."
+    },
+    // 14
+    {
+      q: "Eine Flagge besteht aus drei gleich breiten Streifen: Schwarz, Rot, Gold. Welcher Bruchteil der Flagge ist Rot?",
+      opts: [
+        "$\\frac{1}{3}$",
+        "$\\frac{1}{2}$",
+        "$\\frac{2}{3}$",
+        "$\\frac{1}{4}$"
+      ],
+      c: 0,
+      exp: "Es gibt $3$ gleich breite Streifen, davon ist genau $1$ rot. Der Anteil ist $\\frac{1}{3}$."
+    },
+    // 15
+    {
+      q: "Ein quadratisches Gitter hat $16$ Kästchen ($4 \\times 4$). $4$ Kästchen sind blau gefärbt. Welcher Bruchteil ist blau?",
+      opts: [
+        "$\\frac{4}{16}$",
+        "$\\frac{12}{16}$",
+        "$\\frac{4}{12}$",
+        "$\\frac{1}{16}$"
+      ],
+      c: 0,
+      exp: "$4$ von $16$ Kästchen sind blau, also $\\frac{4}{16}$ (das entspricht genau einem Viertel $\\frac{1}{4}$)."
+    },
+    // 16
+    {
+      q: "In einer Klasse mit $25$ Kindern tragen $10$ Kinder eine Brille. Welcher Bruchteil der Klasse trägt eine Brille?",
+      opts: [
+        "$\\frac{10}{25}$",
+        "$\\frac{15}{25}$",
+        "$\\frac{10}{15}$",
+        "$\\frac{25}{10}$"
+      ],
+      c: 0,
+      exp: "$10$ Brillenträger von insgesamt $25$ Kindern entsprechen dem Anteil $\\frac{10}{25}$."
+    },
+    // 17
+    {
+      q: "Welcher Stammbruch ist <strong>größer</strong>: $\\frac{1}{3}$ oder $\\frac{1}{5}$?",
+      opts: [
+        "$\\frac{1}{3}$ ist größer als $\\frac{1}{5}$",
+        "$\\frac{1}{5}$ ist größer als $\\frac{1}{3}$",
+        "Beide sind genau gleich groß",
+        "Das hängt von der Pizza ab"
+      ],
+      c: 0,
+      exp: "Wenn du eine Pizza nur durch $3$ Personen teilst, bekommt jeder ein deutlich größeres Stück, als wenn $5$ Personen mitessen! Also ist $\\frac{1}{3} > \\frac{1}{5}$."
+    },
+    // 18
+    {
+      q: "Warum ist $\\frac{1}{10}$ kleiner als $\\frac{1}{2}$?",
+      opts: [
+        "Weil das Ganze in $10$ Teile zerlegt wird und jedes Stück dadurch viel kleiner wird",
+        "Weil die Zahl $10$ größer ist als $2$",
+        "Weil der Zähler oben kleiner als der Nenner ist",
+        "Weil Zehntel immer ungerade sind"
+      ],
+      c: 0,
+      exp: "Je größer der Nenner (unten), in desto mehr Stücke wird geteilt &ndash; umso kleiner ist jedes Einzelstück!"
+    },
+    // 19
+    {
+      q: "Ein Rechteck wird durch einen schrägen Strich in ein kleines Dreieck und ein großes Viereck geteilt. Warum ist das Dreieck <strong>nicht</strong> $\\frac{1}{2}$?",
+      opts: [
+        "Weil die beiden Teile nicht gleich groß (flächengleich) sind",
+        "Weil ein Dreieck keine Schokolade ist",
+        "Weil man nur Kreise halbieren darf",
+        "Weil Dreiecke keine Brüche haben können"
+      ],
+      c: 0,
+      exp: "Die wichtigste Grundregel bei Brüchen: Alle Teile müssen <strong>exakt gleich groß</strong> sein! Ungleiche Teile ergeben keinen Bruch."
+    },
+    // 20
+    {
+      q: "Was ist größer: $\\frac{3}{7}$ oder $\\frac{5}{7}$?",
+      opts: [
+        "$\\frac{5}{7}$",
+        "$\\frac{3}{7}$",
+        "Beide sind gleich groß",
+        "Das kann man nicht vergleichen"
+      ],
+      c: 0,
+      exp: "Da die Teile gleich groß sind (beide Male Siebtel), sind $5$ Stücke natürlich mehr als $3$ Stücke: $\\frac{5}{7} > \\frac{3}{7}$."
+    },
+    // 21
+    {
+      q: "Welcher Bruch entspricht genau dem Wert $0$?",
+      opts: [
+        "$\\frac{0}{5}$",
+        "$\\frac{5}{0}$",
+        "$\\frac{1}{5}$",
+        "$\\frac{5}{5}$"
+      ],
+      c: 0,
+      exp: "$\\frac{0}{5} = 0 : 5 = 0$. Wenn man $0$ Stücke nimmt, hat man nichts."
+    },
+    // 22
+    {
+      q: "Ein Schüler behauptet: <em>„$\\frac{4}{3}$ ist kleiner als $1$, weil ein Bruch immer kleiner als $1$ ist.“</em> Stimmt das?",
+      opts: [
+        "Nein, $\\frac{4}{3}$ ist größer als $1$ ($1$ Ganzes und noch $\\frac{1}{3}$ dazu)",
+        "Ja, Brüche sind immer kleiner als $1$",
+        "Ja, weil $3$ im Nenner steht",
+        "Nein, $\\frac{4}{3}$ ist genau gleich $1$"
+      ],
+      c: 0,
+      exp: "Wenn der Zähler größer ist als der Nenner, ist der Bruch <strong>größer als ein Ganzes</strong>. $\\frac{4}{3} = 1\\frac{1}{3}$."
+    },
+    // 23
+    {
+      q: "Wie viele Zentimeter sind $\\frac{1}{2}\\,\\text{Meter}$?",
+      opts: [
+        "$50\\,\\text{cm}$",
+        "$20\\,\\text{cm}$",
+        "$25\\,\\text{cm}$",
+        "$5\\,\\text{cm}$"
+      ],
+      c: 0,
+      exp: "Einheiten-Trick: $1\\,\\text{m} = 100\\,\\text{cm}$. $100\\,\\text{cm} : 2 = 50\\,\\text{cm}$."
+    },
+    // 24
+    {
+      q: "Wie viele Zentimeter sind $\\frac{1}{4}\\,\\text{Meter}$?",
+      opts: [
+        "$25\\,\\text{cm}$",
+        "$40\\,\\text{cm}$",
+        "$75\\,\\text{cm}$",
+        "$10\\,\\text{cm}$"
+      ],
+      c: 0,
+      exp: "$1\\,\\text{m} = 100\\,\\text{cm}$. $100\\,\\text{cm} : 4 = 25\\,\\text{cm}$."
+    },
+    // 25
+    {
+      q: "Wie viele Zentimeter sind $\\frac{3}{4}\\,\\text{Meter}$?",
+      opts: [
+        "$75\\,\\text{cm}$",
+        "$25\\,\\text{cm}$",
+        "$50\\,\\text{cm}$",
+        "$34\\,\\text{cm}$"
+      ],
+      c: 0,
+      exp: "$100\\,\\text{cm} : 4 = 25\\,\\text{cm}$ (ein Viertel). Dann $25\\,\\text{cm} \\cdot 3 = 75\\,\\text{cm}$ (drei Viertel)."
+    },
+    // 26
+    {
+      q: "Wie viele Minuten hat eine halbe Stunde ($\\frac{1}{2}\\,\\text{h}$)?",
+      opts: [
+        "$30\\,\\text{min}$",
+        "$50\\,\\text{min}$",
+        "$20\\,\\text{min}$",
+        "$15\\,\\text{min}$"
+      ],
+      c: 0,
+      exp: "$1\\,\\text{h} = 60\\,\\text{min}$. $60\\,\\text{min} : 2 = 30\\,\\text{min}$."
+    },
+    // 27
+    {
+      q: "Wie viele Minuten sind eine Viertelstunde ($\\frac{1}{4}\\,\\text{h}$)?",
+      opts: [
+        "$15\\,\\text{min}$",
+        "$25\\,\\text{min}$",
+        "$20\\,\\text{min}$",
+        "$10\\,\\text{min}$"
+      ],
+      c: 0,
+      exp: "$60\\,\\text{min} : 4 = 15\\,\\text{min}$."
+    },
+    // 28
+    {
+      q: "Wie viele Gramm sind $\\frac{1}{2}\\,\\text{Kilogramm}$?",
+      opts: [
+        "$500\\,\\text{g}$",
+        "$250\\,\\text{g}$",
+        "$50\\,\\text{g}$",
+        "$100\\,\\text{g}$"
+      ],
+      c: 0,
+      exp: "$1\\,\\text{kg} = 1000\\,\\text{g}$. $1000\\,\\text{g} : 2 = 500\\,\\text{g}$."
+    },
+    // 29
+    {
+      q: "Wie viele Meter sind $\\frac{1}{4}\\,\\text{Kilometer}$?",
+      opts: [
+        "$250\\,\\text{m}$",
+        "$400\\,\\text{m}$",
+        "$100\\,\\text{m}$",
+        "$750\\,\\text{m}$"
+      ],
+      c: 0,
+      exp: "$1\\,\\text{km} = 1000\\,\\text{m}$. $1000\\,\\text{m} : 4 = 250\\,\\text{m}$."
+    },
+    // 30
+    {
+      q: "Berechne: Was sind $\\frac{2}{3}$ von $18$ Äpfeln?",
+      opts: [
+        "$12$ Äpfel",
+        "$6$ Äpfel",
+        "$9$ Äpfel",
+        "$15$ Äpfel"
+      ],
+      c: 0,
+      exp: "Schritt 1: $18 : 3 = 6$ Äpfel (das ist $\\frac{1}{3}$). Schritt 2: $6 \\cdot 2 = 12$ Äpfel (das sind $\\frac{2}{3}$)."
+    }
+  ];
+
+  let currentQuizSet = [];
+  let currentQIdx = 0;
+  let quizScore = 0;
+  let answered = false;
+
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function startQuiz() {
+    // Startbildschirm ausblenden, Quiz-UI einblenden
+    const intro = document.getElementById('quiz-intro-area');
+    if (intro) intro.style.display = 'none';
+
+    document.getElementById('quiz-status-bar').style.display = 'flex';
+    document.getElementById('quiz-progress-track').style.display = 'block';
+    document.getElementById('quiz-active-area').style.display = 'block';
+    document.getElementById('quiz-results').style.display = 'none';
+
+    // 10 Zufallsfragen aus 30
+    const shuffledPool = shuffle(quizPool);
+    currentQuizSet = shuffledPool.slice(0, 10).map(item => {
+      // Shufflen der 4 Antworten
+      const correctText = item.opts[item.c];
+      const shuffledOpts = shuffle(item.opts);
+      const newCorrectIdx = shuffledOpts.indexOf(correctText);
+      return {
+        q: item.q,
+        opts: shuffledOpts,
+        c: newCorrectIdx,
+        exp: item.exp
+      };
+    });
+
+    currentQIdx = 0;
+    quizScore = 0;
+    renderQuizQuestion();
+  }
+
+  function renderQuizQuestion() {
+    answered = false;
+    const q = currentQuizSet[currentQIdx];
+    const letters = ['A', 'B', 'C', 'D'];
+
+    document.getElementById('quiz-progress-text').innerText = 'Frage ' + (currentQIdx + 1) + ' von 10';
+    document.getElementById('quiz-score-text').innerText = 'Punkte: ' + quizScore + ' / 10';
+    document.getElementById('quiz-progress-bar').style.width = ((currentQIdx + 1) * 10) + '%';
+
+    document.getElementById('quiz-question').innerHTML = (currentQIdx + 1) + '. ' + q.q;
+
+    const optContainer = document.getElementById('quiz-options');
+    optContainer.innerHTML = '';
+
+    q.opts.forEach((optText, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt-btn';
+      btn.innerHTML = '<span class="quiz-opt-letter">' + letters[idx] + '</span><span>' + optText + '</span>';
+      btn.onclick = () => selectQuizOption(idx, btn);
+      optContainer.appendChild(btn);
+    });
+
+    const expBox = document.getElementById('quiz-explanation');
+    expBox.style.display = 'none';
+    expBox.innerHTML = '';
+
+    const nextBtn = document.getElementById('quiz-next-btn');
+    nextBtn.style.display = 'none';
+    nextBtn.innerText = (currentQIdx === 9) ? 'Ergebnis anzeigen' : 'Nächste Frage \u2192';
+
+    setTimeout(triggerKaTeX, 40);
+  }
+
+  function selectQuizOption(selectedIdx, clickedBtn) {
+    if (answered) return;
+    answered = true;
+
+    const q = currentQuizSet[currentQIdx];
+    const buttons = document.querySelectorAll('#quiz-options .quiz-opt-btn');
+    buttons.forEach(b => b.disabled = true);
+
+    if (selectedIdx === q.c) {
+      clickedBtn.classList.add('correct');
+      quizScore++;
+      document.getElementById('quiz-score-text').innerText = 'Punkte: ' + quizScore + ' / 10';
+    } else {
+      clickedBtn.classList.add('wrong');
+      buttons[q.c].classList.add('correct');
+    }
+
+    const expBox = document.getElementById('quiz-explanation');
+    expBox.style.display = 'block';
+    expBox.innerHTML = '<strong>Erklärung:</strong> ' + q.exp;
+
+    document.getElementById('quiz-next-btn').style.display = 'inline-block';
+    setTimeout(triggerKaTeX, 40);
+  }
+
+  function nextQuestion() {
+    currentQIdx++;
+    if (currentQIdx < 10) {
+      renderQuizQuestion();
+    } else {
+      showQuizResults();
+    }
+  }
+
+  function showQuizResults() {
+    document.getElementById('quiz-status-bar').style.display = 'none';
+    document.getElementById('quiz-progress-track').style.display = 'none';
+    document.getElementById('quiz-active-area').style.display = 'none';
+    const res = document.getElementById('quiz-results');
+    res.style.display = 'block';
+
+    document.getElementById('quiz-final-score').innerText = quizScore + ' / 10 Punkte';
+
+    let title = '';
+    let desc = '';
+    if (quizScore === 10) {
+      title = 'Volle Punktzahl! Du bist ein echter Bruch-Meister!';
+      desc = 'Hervorragend! Du hast alle 10 Fragen fehlerfrei gemeistert und das Thema Brüche und Anteile perfekt verstanden.';
+    } else if (quizScore >= 8) {
+      title = 'Super Leistung!';
+      desc = 'Klasse Ergebnis! Du hast die Grundlagen der Bruchrechnung und den Einheiten-Trick schon richtig gut drauf.';
+    } else if (quizScore >= 6) {
+      title = 'Gute Arbeit!';
+      desc = 'Du hast mehr als die Hälfte richtig! Schau dir die Merkregeln und die Bildmodelle oben noch einmal kurz an, dann schaffst du beim nächsten Mal noch mehr.';
+    } else {
+      title = 'Noch ein bisschen Übung!';
+      desc = 'Lies dir die Erklärungen zu Zähler, Nenner und dem Einheiten-Trick oben noch einmal in Ruhe durch. Starte dann einfach einen neuen Versuch mit 10 frischen Fragen!';
+    }
+
+    document.getElementById('quiz-final-title').innerText = title;
+    document.getElementById('quiz-final-desc').innerText = desc;
+  }
+
+  function restartQuiz() {
+    startQuiz();
+  }
+
+  // Initialisierung beim Laden
+  document.addEventListener('DOMContentLoaded', () => {
+    updateVisuals();
+    const firstPreset = document.querySelector('.groessen-preset-btn');
+    setPreset(3, 4, '1 m', 100, 'cm', firstPreset);
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1965 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Brüche vergleichen, ordnen & Prozente | Mathe 6</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <!-- KaTeX für mathematische Formeln -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+  <script>
+    function triggerKaTeX() {
+      if (typeof renderMathInElement === "function") {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+          ],
+          throwOnError: false
+        });
+      } else {
+        setTimeout(triggerKaTeX, 30);
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', triggerKaTeX);
+    } else {
+      triggerKaTeX();
+    }
+    window.addEventListener('load', triggerKaTeX);
+  </script>
+
+  <style>
+    body { padding-bottom: 4rem; }
+    .page-container { max-width: 820px; margin: 0 auto; }
+
+    .page-title { font-size: 2rem; font-weight: 800; color: #111827; margin: 0 0 0.3rem 0; line-height: 1.2; }
+    .page-subtitle { font-size: 0.95rem; color: #64748b; margin: 0 0 1.5rem 0; }
+    .page-divider { border: none; border-top: 2px solid #2563eb; margin: 0 0 2.5rem 0; opacity: 0.25; }
+
+    /* Abschnitts-Badges */
+    .section-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 4px 14px 4px 4px; border-radius: 999px;
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.6px;
+      text-transform: uppercase; margin-bottom: 1.1rem;
+    }
+    .section-badge .badge-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 800; color: #fff;
+    }
+    .badge-erklaerung  { background: #eff6ff; color: #1d4ed8; }
+    .badge-erklaerung  .badge-num { background: #2563eb; }
+    .badge-hauptnenner { background: #fff7ed; color: #c2410c; }
+    .badge-hauptnenner .badge-num { background: #ea580c; }
+    .badge-zahlenstrahl{ background: #fdf4ff; color: #a21caf; }
+    .badge-zahlenstrahl .badge-num{ background: #c026d3; }
+    .badge-prozent     { background: #f0fdf4; color: #15803d; }
+    .badge-prozent     .badge-num { background: #16a34a; }
+    .badge-interaktiv  { background: #f5f3ff; color: #6d28d9; }
+    .badge-interaktiv  .badge-num { background: #7c3aed; }
+    .badge-uebungen    { background: #fdf2f8; color: #be185d; }
+    .badge-uebungen    .badge-num { background: #db2777; }
+    .badge-selbsttest  { background: #fef3c7; color: #b45309; }
+    .badge-selbsttest  .badge-num { background: #f59e0b; }
+
+    .content-block { margin-bottom: 3.5rem; }
+    .erklaer-text { font-size: 0.975rem; color: #111827; line-height: 1.75; margin-bottom: 1rem; }
+
+    /* MERKE-Box nach Schulblatt-Standard */
+    .merke-box {
+      border: 2.5px solid #dc2626; border-radius: 10px;
+      padding: 1.1rem 1.3rem; margin: 1.5rem 0; position: relative; background: #fff;
+    }
+    .merke-tag {
+      position: absolute; top: -11px; left: 14px;
+      background: #dc2626; color: #fff; font-size: 0.65rem; font-weight: 800;
+      letter-spacing: 0.8px; text-transform: uppercase; padding: 2px 9px; border-radius: 4px;
+    }
+    .merke-box p { font-size: 0.95rem; font-weight: 600; color: #111827; margin: 0; line-height: 1.65; }
+    .merke-box p + p { margin-top: 0.5rem; font-weight: 400; font-size: 0.875rem; color: #374151; }
+
+    /* Regel-Box */
+    .regel-box {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 1.25rem 1.4rem;
+      margin: 1.35rem 0;
+    }
+    .regel-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .regel-box p {
+      font-size: 0.925rem;
+      color: #1e293b;
+      line-height: 1.65;
+      margin: 0 0 0.5rem 0;
+    }
+    .regel-box p:last-child { margin-bottom: 0; }
+
+    /* Vergleiche visualisiert */
+    .comparison-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .compare-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.1rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .compare-card.winner {
+      border-color: #2563eb;
+      background: #eff6ff;
+    }
+    .compare-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.4rem;
+    }
+    .compare-fraction {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      margin: 0.4rem 0;
+    }
+    .compare-note {
+      font-size: 0.83rem;
+      color: #475569;
+      line-height: 1.45;
+    }
+
+    /* Fehlerfalle-Box */
+    .falle-box {
+      background: #fff5f5;
+      border: 1.5px solid #fecaca;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+    }
+    .falle-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #b91c1c;
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .falle-box p {
+      font-size: 0.9rem;
+      color: #7f1d1d;
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    /* Tabelle für Prozent-Merkwerte */
+    .prozent-table-wrap {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+    .prozent-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      text-align: center;
+      background: #ffffff;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1.5px solid #e2e8f0;
+    }
+    .prozent-table th {
+      background: #f1f5f9;
+      color: #1e293b;
+      padding: 0.75rem 0.6rem;
+      font-weight: 700;
+      border-bottom: 1.5px solid #cbd5e1;
+    }
+    .prozent-table td {
+      padding: 0.7rem 0.6rem;
+      border-bottom: 1px solid #e2e8f0;
+      color: #334155;
+    }
+    .prozent-table tr:last-child td {
+      border-bottom: none;
+    }
+    .prozent-table .col-frac { font-weight: 700; color: #1e3a8a; font-size: 1.05rem; }
+    .prozent-table .col-pct  { font-weight: 800; color: #16a34a; font-size: 1.05rem; background: #f0fdf4; }
+
+    /* Tool Panels */
+    .interactive-tool-card {
+      background: #ffffff;
+      border: 1.5px solid #ddd6fe;
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin: 1.5rem 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .tool-title { font-size: 1.05rem; font-weight: 700; color: #5b21b6; margin: 0 0 0.4rem 0; }
+    .tool-desc  { font-size: 0.88rem; color: #64748b; margin-bottom: 1.2rem; line-height: 1.55; }
+
+    .preset-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .btn-chip {
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      border: 1.5px solid #cbd5e1;
+      background: #f8fafc;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-chip:hover {
+      background: #ede9fe;
+      border-color: #8b5cf6;
+      color: #5b21b6;
+    }
+    .btn-chip.active {
+      background: #7c3aed;
+      border-color: #6d28d9;
+      color: #fff;
+    }
+
+    /* Vergleicher Display */
+    .compare-lab-display {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+    .compare-lab-columns {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+    .compare-side {
+      background: #fff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .compare-side.lead {
+      border-color: #2563eb;
+      background: #eff6ff;
+    }
+    .compare-sign-box {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      padding: 0 0.5rem;
+    }
+    .compare-result-banner {
+      background: #f1f5f9;
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      font-size: 0.95rem;
+      color: #1e293b;
+      line-height: 1.55;
+      text-align: center;
+    }
+
+    /* Hunderter-Gitter */
+    .grid-100-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.25rem 0;
+    }
+    .grid-100 {
+      display: grid;
+      grid-template-columns: repeat(10, 24px);
+      grid-template-rows: repeat(10, 24px);
+      gap: 2px;
+      background: #cbd5e1;
+      padding: 4px;
+      border-radius: 8px;
+    }
+    .grid-cell {
+      background: #ffffff;
+      border-radius: 2px;
+      transition: background 0.15s;
+    }
+    .grid-cell.filled {
+      background: #2563eb;
+    }
+
+    /* Sortier Trainer */
+    .sorter-container {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+    .sorter-slots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+    .sorter-item {
+      background: #ffffff;
+      border: 2px solid #8b5cf6;
+      border-radius: 10px;
+      padding: 0.6rem 1rem;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #5b21b6;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s, background 0.15s;
+    }
+    .sorter-item:hover {
+      transform: translateY(-2px);
+      background: #f5f3ff;
+    }
+    .sorter-item.selected {
+      background: #7c3aed;
+      color: #fff;
+    }
+    .sorter-lt {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #94a3b8;
+    }
+
+    /* Übungs-Karten */
+    .uebung-card {
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 1.75rem;
+      background: #fff;
+    }
+    .uebung-header {
+      display: flex; align-items: flex-start; gap: 0.85rem;
+      padding: 1.15rem 1.3rem 0.75rem 1.3rem; background: #fff;
+    }
+    .uebung-num {
+      width: 30px; height: 30px; border-radius: 50%; border: 2px solid #db2777;
+      color: #be185d; font-size: 0.85rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
+    }
+    .uebung-text { font-size: 0.935rem; color: #111827; line-height: 1.65; flex: 1; }
+    .uebung-text strong { display: block; font-weight: 700; margin-bottom: 3px; font-size: 1rem; }
+    .uebung-tag {
+      display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.4px;
+      text-transform: uppercase; padding: 2px 8px; border-radius: 4px; margin-bottom: 4px;
+    }
+    .tag-vergleich { background: #eff6ff; color: #1d4ed8; }
+    .tag-hauptnenner { background: #fff7ed; color: #c2410c; }
+    .tag-ordnung { background: #fdf4ff; color: #a21caf; }
+    .tag-prozent { background: #f0fdf4; color: #15803d; }
+
+    .uebung-body { padding: 0 1.3rem 1.15rem 1.3rem; }
+    .btn-toggle-loesung {
+      background: #fdf2f8; border: 1.5px solid #fbcfe8; color: #be185d;
+      font-size: 0.83rem; font-weight: 700; padding: 0.45rem 1rem;
+      border-radius: 7px; cursor: pointer; transition: all 0.15s;
+    }
+    .btn-toggle-loesung:hover { background: #fce7f3; border-color: #f472b6; }
+    .loesung-content {
+      display: none; margin-top: 1rem; padding: 1rem 1.2rem;
+      background: #fdf2f8; border-radius: 9px; border-left: 3px solid #db2777;
+      font-size: 0.915rem; color: #111827; line-height: 1.7;
+    }
+    .loesung-content.open { display: block; }
+    .loesung-ergebnis {
+      font-weight: 700; color: #be185d; font-size: 0.975rem; margin-top: 0.6rem;
+    }
+
+    /* Selbsttest Styles */
+    .quiz-card {
+      background: #ffffff;
+      border: 1.5px solid #fde68a;
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin: 1.5rem 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .quiz-status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #92400e;
+    }
+    .quiz-progress-track {
+      width: 100%;
+      height: 8px;
+      background: #fef3c7;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+    .quiz-progress-bar {
+      height: 100%;
+      width: 10%;
+      background: #f59e0b;
+      transition: width 0.3s ease;
+    }
+    .quiz-question-box {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #111827;
+      line-height: 1.55;
+      margin-bottom: 1.25rem;
+    }
+    .quiz-options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      margin-bottom: 1.25rem;
+    }
+    .quiz-opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.75rem 1rem;
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 0.925rem;
+      color: #1e293b;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .quiz-opt-btn:hover:not(:disabled) {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+    .quiz-opt-letter {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      color: #475569;
+      font-size: 0.8rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .quiz-opt-btn.correct {
+      background: #ecfdf5 !important;
+      border-color: #10b981 !important;
+      color: #065f46 !important;
+    }
+    .quiz-opt-btn.correct .quiz-opt-letter {
+      background: #10b981;
+      color: #fff;
+    }
+    .quiz-opt-btn.wrong {
+      background: #fef2f2 !important;
+      border-color: #ef4444 !important;
+      color: #991b1b !important;
+    }
+    .quiz-opt-btn.wrong .quiz-opt-letter {
+      background: #ef4444;
+      color: #fff;
+    }
+    .quiz-explanation-box {
+      display: none;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: #334155;
+    }
+    .quiz-next-action {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .btn-quiz-next {
+      padding: 0.65rem 1.4rem;
+      background: #f59e0b;
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-quiz-next:hover {
+      background: #d97706;
+    }
+    .quiz-result-view {
+      display: none;
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+    .quiz-score-badge {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #d97706;
+      margin-bottom: 0.5rem;
+    }
+    .quiz-score-text {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.5rem;
+    }
+    .quiz-score-feedback {
+      font-size: 0.9rem;
+      color: #64748b;
+      max-width: 500px;
+      margin: 0 auto 1.5rem auto;
+      line-height: 1.6;
+    }
+    .quiz-intro-view {
+      text-align: center;
+      padding: 1.75rem 1rem;
+    }
+    .quiz-intro-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #fef3c7;
+      color: #92400e;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      margin-bottom: 0.75rem;
+    }
+    .quiz-intro-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #111827;
+      margin: 0 0 0.5rem 0;
+    }
+    .quiz-intro-desc {
+      font-size: 0.95rem;
+      color: #475569;
+      max-width: 520px;
+      margin: 0 auto 1.5rem auto;
+      line-height: 1.6;
+    }
+    .btn-quiz-start {
+      padding: 0.75rem 1.8rem;
+      background: #f59e0b;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 800;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+      transition: all 0.2s ease;
+    }
+    .btn-quiz-start:hover {
+      background: #d97706;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(217, 119, 6, 0.35);
+    }
+    .quick-jump-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: #fef3c7;
+      border: 1.5px solid #fde68a;
+      border-radius: 8px;
+      color: #92400e;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .quick-jump-btn:hover {
+      background: #fde68a;
+      border-color: #f59e0b;
+      color: #78350f;
+    }
+
+    /* Bottom Nav */
+    .bottom-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; gap: 1rem;
+    }
+    .btn-nav-prev {
+      padding: 0.65rem 1.2rem; border: 1.5px solid #d1d5db; border-radius: 9px;
+      background: #fff; color: #374151; font-size: 0.875rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-nav-prev:hover { border-color: #2563eb; color: #2563eb; }
+    .btn-nav-next {
+      padding: 0.65rem 1.4rem; border-radius: 9px; background: #1e3a8a; color: #fff;
+      font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: background 0.2s;
+    }
+    .btn-nav-next:hover { background: #1d4ed8; }
+
+    @media (max-width: 640px) {
+      .comparison-grid-2 { grid-template-columns: 1fr; }
+      .compare-lab-columns { grid-template-columns: 1fr; }
+      .compare-sign-box { text-align: center; }
+      .bottom-nav { flex-direction: column; align-items: stretch; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container page-container">
+
+  <!-- Navigation zurück zum Mathe-6-Portal -->
+  <nav class="portal-nav" style="justify-content: space-between; margin-bottom: 1.5rem;">
+    <a href="index.html" class="portal-back" style="font-weight: 700; font-size: 0.85rem; text-decoration: none; color: var(--theme-mathe);">
+      &larr; Zur Übersicht &middot; Mathe 6
+    </a>
+    <span class="badge-pill badge-mathe">Thema 3 &middot; Gymnasium</span>
+  </nav>
+
+  <!-- Modul Header -->
+  <header style="margin-bottom: 2rem;">
+    <h1 class="page-title">Brüche vergleichen, ordnen &amp; Prozente</h1>
+    <p class="page-subtitle">
+      Gleichnamig und ungleichnamig vergleichen, Hauptnenner-Methode, Zahlenstrahl und Brüche in Prozent (Hundertstelbrüche) verwandeln.
+    </p>
+    <a href="#selbsttest" class="quick-jump-btn">Direkt zum Selbsttest (10 Fragen) &darr;</a>
+  </header>
+  <hr class="page-divider">
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 1 — DIREKTER VERGLEICH (GLEICHER NENNER / ZÄHLER)
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block">
+    <div class="section-badge badge-erklaerung">
+      <span class="badge-num">1</span> Direkter Blick: Gleicher Nenner oder gleicher Zähler
+    </div>
+
+    <p class="erklaer-text">
+      Bevor du aufwendig rechnest, lohnt sich immer ein erster Blick auf die beiden Brüche:
+      Haben sie vielleicht schon den <strong>gleichen Nenner</strong> oder den <strong>gleichen Zähler</strong>?
+      In beiden Fällen kannst du die Entscheidung sofort im Kopf treffen!
+    </p>
+
+    <!-- Fall A: Gleicher Nenner -->
+    <div class="regel-box">
+      <div class="regel-title">
+        <span>Fall A: Gleicher Nenner (gleichnamige Brüche)</span>
+      </div>
+      <p>
+        Wenn zwei Brüche denselben Nenner haben, sind ihre Stücke <strong>exakt gleich groß</strong>.
+        Wer mehr Stücke besitzt, hat insgesamt den größeren Anteil.
+      </p>
+      <div class="comparison-grid-2">
+        <div class="compare-card">
+          <div class="compare-title">3 Siebtel</div>
+          <div class="compare-fraction">$\frac{3}{7}$</div>
+          <svg width="100%" height="32" viewBox="0 0 140 28" style="margin: 4px 0;">
+            <rect x="2" y="2" width="136" height="24" fill="#f1f5f9" stroke="#cbd5e1" rx="2" />
+            <rect x="2" y="2" width="58.3" height="24" fill="#3b82f6" rx="2" />
+            <line x1="19.4" y1="2" x2="19.4" y2="26" stroke="#94a3b8" stroke-dasharray="2 2" />
+            <line x1="38.8" y1="2" x2="38.8" y2="26" stroke="#94a3b8" stroke-dasharray="2 2" />
+            <line x1="58.3" y1="2" x2="58.3" y2="26" stroke="#1e3a8a" stroke-width="1.5" />
+            <line x1="77.7" y1="2" x2="77.7" y2="26" stroke="#cbd5e1" stroke-dasharray="2 2" />
+            <line x1="97.1" y1="2" x2="97.1" y2="26" stroke="#cbd5e1" stroke-dasharray="2 2" />
+            <line x1="116.5" y1="2" x2="116.5" y2="26" stroke="#cbd5e1" stroke-dasharray="2 2" />
+          </svg>
+          <div class="compare-note">3 von 7 gleich großen Stücken</div>
+        </div>
+        <div class="compare-card winner">
+          <div class="compare-title">5 Siebtel (Größer)</div>
+          <div class="compare-fraction">$\frac{5}{7}$</div>
+          <svg width="100%" height="32" viewBox="0 0 140 28" style="margin: 4px 0;">
+            <rect x="2" y="2" width="136" height="24" fill="#f1f5f9" stroke="#cbd5e1" rx="2" />
+            <rect x="2" y="2" width="97.1" height="24" fill="#2563eb" rx="2" />
+            <line x1="19.4" y1="2" x2="19.4" y2="26" stroke="#94a3b8" stroke-dasharray="2 2" />
+            <line x1="38.8" y1="2" x2="38.8" y2="26" stroke="#94a3b8" stroke-dasharray="2 2" />
+            <line x1="58.3" y1="2" x2="58.3" y2="26" stroke="#94a3b8" stroke-dasharray="2 2" />
+            <line x1="77.7" y1="2" x2="77.7" y2="26" stroke="#94a3b8" stroke-dasharray="2 2" />
+            <line x1="97.1" y1="2" x2="97.1" y2="26" stroke="#1e3a8a" stroke-width="1.5" />
+            <line x1="116.5" y1="2" x2="116.5" y2="26" stroke="#cbd5e1" stroke-dasharray="2 2" />
+          </svg>
+          <div class="compare-note">5 von 7 Stücken &rarr; mehr Stücke!</div>
+        </div>
+      </div>
+      <p style="text-align: center; font-weight: 700; color: #1e3a8a;">
+        Ergebnis: $\frac{3}{7} < \frac{5}{7}$
+      </p>
+    </div>
+
+    <div class="merke-box">
+      <div class="merke-tag">MERKE</div>
+      <p>Bei gleichem Nenner entscheidet der Zähler:</p>
+      <p>Der Bruch mit dem <strong>größeren Zähler</strong> ist der größere Bruch.</p>
+    </div>
+
+    <!-- Fall B: Gleicher Zähler -->
+    <div class="regel-box" style="margin-top: 2rem;">
+      <div class="regel-title">
+        <span>Fall B: Gleicher Zähler (gleiche Anzahl an Stücken)</span>
+      </div>
+      <p>
+        Hier haben wir von beiden Brüchen <strong>dieselbe Stückzahl</strong>.
+        Aber Achtung: Wie groß sind die Stücke?
+        Wird ein Ganzes in weniger Teile geteilt (kleinerer Nenner), dann ist jedes einzelne Stück <strong>deutlich größer</strong>!
+      </p>
+      <div class="comparison-grid-2">
+        <div class="compare-card winner">
+          <div class="compare-title">3 Viertel (Größer)</div>
+          <div class="compare-fraction">$\frac{3}{4}$</div>
+          <svg width="100%" height="32" viewBox="0 0 140 28" style="margin: 4px 0;">
+            <rect x="2" y="2" width="136" height="24" fill="#f1f5f9" stroke="#cbd5e1" rx="2" />
+            <rect x="2" y="2" width="102" height="24" fill="#2563eb" rx="2" />
+            <line x1="34" y1="2" x2="34" y2="26" stroke="#94a3b8" stroke-dasharray="2 2" />
+            <line x1="68" y1="2" x2="68" y2="26" stroke="#94a3b8" stroke-dasharray="2 2" />
+            <line x1="102" y1="2" x2="102" y2="26" stroke="#1e3a8a" stroke-width="1.5" />
+          </svg>
+          <div class="compare-note">3 riesige Stücke (nur in 4 Teile geteilt)</div>
+        </div>
+        <div class="compare-card">
+          <div class="compare-title">3 Achtel</div>
+          <div class="compare-fraction">$\frac{3}{8}$</div>
+          <svg width="100%" height="32" viewBox="0 0 140 28" style="margin: 4px 0;">
+            <rect x="2" y="2" width="136" height="24" fill="#f1f5f9" stroke="#cbd5e1" rx="2" />
+            <rect x="2" y="2" width="51" height="24" fill="#3b82f6" rx="2" />
+            <line x1="17" y1="2" x2="17" y2="26" stroke="#94a3b8" stroke-dasharray="2 2" />
+            <line x1="34" y1="2" x2="34" y2="26" stroke="#94a3b8" stroke-dasharray="2 2" />
+            <line x1="51" y1="2" x2="51" y2="26" stroke="#1e3a8a" stroke-width="1.5" />
+            <line x1="68" y1="2" x2="68" y2="26" stroke="#cbd5e1" stroke-dasharray="2 2" />
+            <line x1="85" y1="2" x2="85" y2="26" stroke="#cbd5e1" stroke-dasharray="2 2" />
+            <line x1="102" y1="2" x2="102" y2="26" stroke="#cbd5e1" stroke-dasharray="2 2" />
+            <line x1="119" y1="2" x2="119" y2="26" stroke="#cbd5e1" stroke-dasharray="2 2" />
+          </svg>
+          <div class="compare-note">3 kleine Stücke (in 8 Teile zerlegt)</div>
+        </div>
+      </div>
+      <p style="text-align: center; font-weight: 700; color: #1e3a8a;">
+        Ergebnis: $\frac{3}{4} > \frac{3}{8}$
+      </p>
+    </div>
+
+    <!-- Häufige Fehlerfalle -->
+    <div class="falle-box">
+      <div class="falle-title">Typische Fehlerfalle im Nenner</div>
+      <p>
+        Lass dich nicht von großen Zahlen im Nenner täuschen! Eine größere Zahl im Nenner bedeutet:
+        Das Ganze wird in <strong>mehr Stücke zerteilt</strong>, wodurch jedes Stück <strong>kleiner</strong> wird.
+        Deshalb ist z.&nbsp;B. $\frac{1}{100}$ winzig klein, während $\frac{1}{2}$ eine riesige Hälfte ist!
+      </p>
+    </div>
+
+    <div class="merke-box">
+      <div class="merke-tag">MERKE</div>
+      <p>Bei gleichem Zähler ist die Sache umgekehrt:</p>
+      <p>Der Bruch mit dem <strong>kleineren Nenner</strong> ist der größere Bruch (kleinerer Nenner = größere Stücke!).</p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 2 — UNGLEICHNAMIGE BRÜCHE & HAUPTNENNER
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block">
+    <div class="section-badge badge-hauptnenner">
+      <span class="badge-num">2</span> Ungleichnamige Brüche: Die Hauptnenner-Methode
+    </div>
+
+    <p class="erklaer-text">
+      Was tun wir, wenn <strong>sowohl Zähler als auch Nenner verschieden</strong> sind?
+      Zum Beispiel beim Vergleich von $\frac{5}{6}$ und $\frac{7}{9}$?
+      Direkt können wir die Stücke nicht vergleichen – das wäre wie der sprichwörtliche Vergleich von Äpfeln und Birnen.
+    </p>
+    <p class="erklaer-text">
+      Die Lösung heißt: <strong>Gleichnamig machen!</strong>
+      Wir erweitern beide Brüche so, dass sie denselben gemeinsamen Nenner (den <strong>Hauptnenner</strong>) erhalten.
+      Sobald sie denselben Nenner haben, schauen wir einfach wieder auf den Zähler!
+    </p>
+
+    <div class="regel-box">
+      <div class="regel-title">Schritt-für-Schritt: Ungleichnamige Brüche vergleichen</div>
+      <p><strong>1. Schritt: Hauptnenner (gemeinsames Vielfaches) finden</strong><br>
+        Gehe die Vielfachen des größeren Nenners durch, bis du eine Zahl findest, die auch durch den kleineren Nenner teilbar ist.<br>
+        Bei $6$ und $9$: Vielfache von $9$ sind $9$ (nicht durch 6 teilbar), dann $18$ (durch 6 teilbar!). Der Hauptnenner ist <strong>$18$</strong>.
+      </p>
+      <p><strong>2. Schritt: Beide Brüche auf den Hauptnenner erweitern</strong><br>
+        Erweiterungsfaktor für $\frac{5}{6}$: $18 : 6 = 3 \implies \frac{5 \cdot 3}{6 \cdot 3} = \frac{15}{18}$<br>
+        Erweiterungsfaktor für $\frac{7}{9}$: $18 : 9 = 2 \implies \frac{7 \cdot 2}{9 \cdot 2} = \frac{14}{18}$
+      </p>
+      <p><strong>3. Schritt: Zähler vergleichen und Ergebnis aufschreiben</strong><br>
+        Da $15 > 14$ ist, gilt $\frac{15}{18} > \frac{14}{18}$.<br>
+        Daraus folgt für die Ausgangsbrüche: $\mathbf{\frac{5}{6} > \frac{7}{9}}$.
+      </p>
+    </div>
+
+    <!-- Gymnasiale Profi-Tricks -->
+    <div class="regel-box" style="background: #fdfaf6; border-color: #fed7aa; margin-top: 1.5rem;">
+      <div class="regel-title" style="color: #9a3412;">
+        Profi-Strategien am Gymnasium (Vergleich ohne Hauptnenner)
+      </div>
+      <p>
+        <strong>1. Der $\frac{1}{2}$-Benchmark (Halbierungs-Test):</strong><br>
+        Prüfe, ob ein Bruch kleiner oder größer als die Hälfte ist.
+        Beispiel: Vergleiche $\frac{3}{8}$ und $\frac{4}{7}$.<br>
+        Die Hälfte von $8$ ist $4 \implies \frac{3}{8} < \frac{1}{2}$.<br>
+        Die Hälfte von $7$ ist $3{,}5 \implies \frac{4}{7} > \frac{1}{2}$.<br>
+        Sofort klar: $\mathbf{\frac{3}{8} < \frac{4}{7}}$ – ganz ohne Hauptnenner!
+      </p>
+      <p style="margin-top: 0.75rem;">
+        <strong>2. Abstand zum Ganzen (Ergänzung zu 1):</strong><br>
+        Beispiel: Vergleiche $\frac{7}{8}$ und $\frac{9}{10}$.<br>
+        Beiden Brüchen fehlt genau <strong>ein einziges Stück</strong> zum vollen Ganzen ($1$).<br>
+        Einem Zehntel fehlt $\frac{1}{10}$, einem Achtel fehlt $\frac{1}{8}$.<br>
+        Da ein Zehntel kleiner ist als ein Achtel, fehlt $\frac{9}{10}$ <em>weniger</em> zum Ganzen als $\frac{7}{8}$.<br>
+        Folglich ist $\mathbf{\frac{9}{10} > \frac{7}{8}}$!
+      </p>
+    </div>
+
+    <div class="merke-box">
+      <div class="merke-tag">MERKE</div>
+      <p>Ungleichnamige Brüche vergleichen:</p>
+      <p>Erweitere beide Brüche auf ihren <strong>Hauptnenner</strong> (kleinstes gemeinsames Vielfaches der Nenner). Vergleiche anschließend die Zähler.</p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 3 — BRÜCHE ORDNEN & DER ZAHLENSTRAHL
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block">
+    <div class="section-badge badge-zahlenstrahl">
+      <span class="badge-num">3</span> Brüche ordnen &amp; der Zahlenstrahl
+    </div>
+
+    <p class="erklaer-text">
+      Sollen mehrere Brüche der Größe nach sortiert werden (z.&nbsp;B. mit Kleiner-Zeichen $<$ in einer <strong>Größenkette</strong>),
+      bringt man am besten alle beteiligten Brüche auf einen <strong>gemeinsamen Hauptnenner</strong>.
+    </p>
+
+    <div class="regel-box">
+      <div class="regel-title">Beispiel: Sortiere $\frac{1}{2}$, $\frac{2}{3}$, $\frac{5}{12}$ und $\frac{3}{4}$</div>
+      <p>
+        <strong>Schritt 1:</strong> Finde den Hauptnenner aller vier Nenner ($2, 3, 12, 4$).<br>
+        Die $12$ ist durch $2, 3$ und $4$ teilbar. Der Hauptnenner ist <strong>$12$</strong>!
+      </p>
+      <p>
+        <strong>Schritt 2:</strong> Alle Brüche auf Nenner $12$ erweitern:<br>
+        $\frac{1}{2} = \frac{6}{12} \quad\vert\quad \frac{2}{3} = \frac{8}{12} \quad\vert\quad \frac{5}{12} = \frac{5}{12} \quad\vert\quad \frac{3}{4} = \frac{9}{12}$
+      </p>
+      <p>
+        <strong>Schritt 3:</strong> Nach den Zählern sortieren ($5 < 6 < 8 < 9$):<br>
+        $\frac{5}{12} < \frac{6}{12} < \frac{8}{12} < \frac{9}{12}$
+      </p>
+      <p>
+        <strong>Schritt 4:</strong> In der ursprünglichen Bruchform aufschreiben:<br>
+        $\mathbf{\frac{5}{12} < \frac{1}{2} < \frac{2}{3} < \frac{3}{4}}$
+      </p>
+    </div>
+
+    <p class="erklaer-text" style="margin-top: 1.5rem;">
+      <strong>Der Zahlenstrahl:</strong> Um Brüche sauber auf dem Zahlenstrahl einzuzeichnen, wählt man als
+      Länge für eine Einheit (von $0$ bis $1$) genau so viele Kästchen, wie der <strong>Hauptnenner</strong> vorgibt.
+      Bei Nenner $12$ nimmst du z.&nbsp;B. $12$ Kästchen (oder $6\,\text{cm}$). Jeder Bruch lässt sich dann exakt abzählen!
+    </p>
+
+    <!-- Illustrierter Zahlenstrahl als SVG -->
+    <div style="background: #fff; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; margin: 1.25rem 0;">
+      <div style="font-weight: 700; font-size: 0.85rem; color: #64748b; text-transform: uppercase; margin-bottom: 0.75rem;">
+        Zahlenstrahl mit Einheitsstrecke 12 Kästchen:
+      </div>
+      <svg width="100%" height="90" viewBox="0 0 520 90">
+        <!-- Hauptstrahl -->
+        <line x1="30" y1="45" x2="490" y2="45" stroke="#1e293b" stroke-width="2.5" />
+        <polyline points="480,38 495,45 480,52" fill="none" stroke="#1e293b" stroke-width="2.5" />
+
+        <!-- 12 Teilstriche -->
+        <!-- Start 0: x=40, Ende 1: x=440. Delta = 400px / 12 = 33.33px -->
+        <!-- 0 -->
+        <line x1="40" y1="35" x2="40" y2="55" stroke="#1e293b" stroke-width="2.5" />
+        <text x="40" y="70" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#1e293b">0</text>
+
+        <!-- Teilstriche 1 bis 11 -->
+        <line x1="73.3" y1="40" x2="73.3" y2="50" stroke="#94a3b8" stroke-width="1.5" />
+        <line x1="106.6" y1="40" x2="106.6" y2="50" stroke="#94a3b8" stroke-width="1.5" />
+        <line x1="140" y1="40" x2="140" y2="50" stroke="#94a3b8" stroke-width="1.5" />
+        <line x1="173.3" y1="40" x2="173.3" y2="50" stroke="#94a3b8" stroke-width="1.5" />
+        <!-- 5/12 (x = 40 + 5*33.33 = 206.6) -->
+        <line x1="206.6" y1="32" x2="206.6" y2="58" stroke="#a21caf" stroke-width="2.5" />
+        <circle cx="206.6" cy="45" r="4" fill="#c026d3" />
+        <text x="206.6" y="24" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="800" text-anchor="middle" fill="#a21caf">5/12</text>
+
+        <!-- 6/12 = 1/2 (x = 40 + 6*33.33 = 240) -->
+        <line x1="240" y1="30" x2="240" y2="60" stroke="#2563eb" stroke-width="2.5" />
+        <circle cx="240" cy="45" r="4" fill="#2563eb" />
+        <text x="240" y="75" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="800" text-anchor="middle" fill="#2563eb">1/2</text>
+
+        <line x1="273.3" y1="40" x2="273.3" y2="50" stroke="#94a3b8" stroke-width="1.5" />
+        <!-- 8/12 = 2/3 (x = 40 + 8*33.33 = 306.6) -->
+        <line x1="306.6" y1="32" x2="306.6" y2="58" stroke="#ea580c" stroke-width="2.5" />
+        <circle cx="306.6" cy="45" r="4" fill="#ea580c" />
+        <text x="306.6" y="24" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="800" text-anchor="middle" fill="#ea580c">2/3</text>
+
+        <!-- 9/12 = 3/4 (x = 40 + 9*33.33 = 340) -->
+        <line x1="340" y1="32" x2="340" y2="58" stroke="#16a34a" stroke-width="2.5" />
+        <circle cx="340" cy="45" r="4" fill="#16a34a" />
+        <text x="340" y="75" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="800" text-anchor="middle" fill="#16a34a">3/4</text>
+
+        <line x1="373.3" y1="40" x2="373.3" y2="50" stroke="#94a3b8" stroke-width="1.5" />
+        <line x1="406.6" y1="40" x2="406.6" y2="50" stroke="#94a3b8" stroke-width="1.5" />
+
+        <!-- 1 -->
+        <line x1="440" y1="35" x2="440" y2="55" stroke="#1e293b" stroke-width="2.5" />
+        <text x="440" y="70" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" text-anchor="middle" fill="#1e293b">1</text>
+      </svg>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 4 — BRÜCHE UND PROZENTE (HUNDERTSTELBRÜCHE)
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block">
+    <div class="section-badge badge-prozent">
+      <span class="badge-num">4</span> Brüche und Prozente: Der Hundertstelbruch
+    </div>
+
+    <p class="erklaer-text">
+      Ob beim Akkuladestand auf dem Smartphone ($85\%$), bei Rabatten im Schaufenster ($-20\%$) oder bei Notenspiegeln:
+      Im Alltag begegnen uns Anteile fast immer als <strong>Prozentangaben</strong>.
+    </p>
+
+    <div class="regel-box">
+      <div class="regel-title">Was bedeutet das Wort „Prozent“?</div>
+      <p>
+        Das Wort stammt aus dem Lateinischen: <em>pro centum</em> bedeutet wörtlich <strong>„von Hundert“</strong> oder <strong>„pro Hundert“</strong>.
+        Das Zeichen $\%$ ist eine stilisierte Schreibweise für eine $100$.
+      </p>
+      <p style="font-size: 1.05rem; font-weight: 700; color: #166534; text-align: center; margin: 0.5rem 0;">
+        $1\% = \frac{1}{100} = 0{,}01 \qquad\text{und allgemein:}\qquad p\% = \frac{p}{100}$
+      </p>
+      <p>
+        Ein Prozentsatz ist also <strong>nichts anderes als ein Bruch mit dem Nenner $100$</strong>!
+      </p>
+    </div>
+
+    <div class="merke-box">
+      <div class="merke-tag">MERKE</div>
+      <p>Prozent heißt Hundertstel:</p>
+      <p>Jede Prozentangabe ist ein Bruch mit dem Nenner $100$. Umgekehrt entspricht jeder Bruch mit dem Nenner $100$ direkt der Prozentzahl: $\frac{p}{100} = p\%$.</p>
+    </div>
+
+    <p class="erklaer-text" style="margin-top: 1.5rem;">
+      <strong>Wie verwandelt man einen beliebigen Bruch in Prozent?</strong><br>
+      Ganz einfach mit unserem Wissen aus Thema 2: <strong>Wir erweitern den Bruch auf den Nenner $100$!</strong>
+      Dazu überlegen wir, mit welcher Zahl wir den Nenner multiplizieren müssen, um $100$ zu erhalten:
+    </p>
+
+    <div class="regel-box">
+      <div class="regel-title">Die wichtigsten Erweiterungspartner auf Nenner 100</div>
+      <p>
+        &bull; Nenner $2$: $2 \cdot \mathbf{50} = 100 \implies \frac{1}{2} = \frac{1 \cdot 50}{2 \cdot 50} = \frac{50}{100} = \mathbf{50\%}$<br>
+        &bull; Nenner $4$: $4 \cdot \mathbf{25} = 100 \implies \frac{1}{4} = \frac{25}{100} = \mathbf{25\%} \quad\text{und}\quad \frac{3}{4} = \frac{75}{100} = \mathbf{75\%}$<br>
+        &bull; Nenner $5$: $5 \cdot \mathbf{20} = 100 \implies \frac{1}{5} = \frac{20}{100} = \mathbf{20\%} \quad\text{und}\quad \frac{3}{5} = \frac{60}{100} = \mathbf{60\%}$<br>
+        &bull; Nenner $10$: $10 \cdot \mathbf{10} = 100 \implies \frac{7}{10} = \frac{70}{100} = \mathbf{70\%}$<br>
+        &bull; Nenner $20$: $20 \cdot \mathbf{5} = 100 \implies \frac{7}{20} = \frac{35}{100} = \mathbf{35\%}$<br>
+        &bull; Nenner $25$: $25 \cdot \mathbf{4} = 100 \implies \frac{11}{25} = \frac{44}{100} = \mathbf{44\%}$<br>
+        &bull; Nenner $50$: $50 \cdot \mathbf{2} = 100 \implies \frac{19}{50} = \frac{38}{100} = \mathbf{38\%}$
+      </p>
+    </div>
+
+    <!-- Zweistufige Umwandlung: Erst kürzen, dann auf 100 erweitern -->
+    <div class="regel-box" style="background: #f0fdf4; border-color: #86efac;">
+      <div class="regel-title" style="color: #15803d;">
+        Spezialfall: Der Kürz-Trick vor dem Erweitern
+      </div>
+      <p>
+        Was machen wir bei einem Bruch wie $\frac{9}{30}$ oder $\frac{12}{60}$? Die Zahl $30$ lässt sich nicht glatt auf $100$ erweitern!
+      </p>
+      <p>
+        <strong>Der zweistufige Lösungsweg:</strong><br>
+        1. Schritt: Kürze den Bruch zuerst so weit, dass ein passender Teiler von $100$ im Nenner entsteht.<br>
+        2. Schritt: Erweitere das Ergebnis anschließend auf den Nenner $100$.
+      </p>
+      <p style="font-weight: 700; color: #166534; margin-top: 0.5rem;">
+        Beispiel: $\frac{9}{30} \xrightarrow{\text{kürzen mit } 3} \frac{3}{10} \xrightarrow{\text{erweitern mit } 10} \frac{30}{100} = \mathbf{30\%}$<br>
+        Beispiel: $\frac{12}{40} \xrightarrow{\text{kürzen mit } 4} \frac{3}{10} \xrightarrow{\text{erweitern mit } 10} \frac{30}{100} = \mathbf{30\%}$
+      </p>
+    </div>
+
+    <!-- Übersichtstabelle Merkwerte -->
+    <div class="prozent-table-wrap">
+      <table class="prozent-table">
+        <thead>
+          <tr>
+            <th>Bruch</th>
+            <th>Erweiterungs-Schritt</th>
+            <th>Hundertstelbruch</th>
+            <th>Prozentsatz</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-frac">$\frac{1}{2}$</td>
+            <td>mit $50$ erweitern</td>
+            <td>$\frac{50}{100}$</td>
+            <td class="col-pct">$50\%$</td>
+          </tr>
+          <tr>
+            <td class="col-frac">$\frac{1}{4}$</td>
+            <td>mit $25$ erweitern</td>
+            <td>$\frac{25}{100}$</td>
+            <td class="col-pct">$25\%$</td>
+          </tr>
+          <tr>
+            <td class="col-frac">$\frac{3}{4}$</td>
+            <td>mit $25$ erweitern</td>
+            <td>$\frac{75}{100}$</td>
+            <td class="col-pct">$75\%$</td>
+          </tr>
+          <tr>
+            <td class="col-frac">$\frac{1}{5}$</td>
+            <td>mit $20$ erweitern</td>
+            <td>$\frac{20}{100}$</td>
+            <td class="col-pct">$20\%$</td>
+          </tr>
+          <tr>
+            <td class="col-frac">$\frac{2}{5}$</td>
+            <td>mit $20$ erweitern</td>
+            <td>$\frac{40}{100}$</td>
+            <td class="col-pct">$40\%$</td>
+          </tr>
+          <tr>
+            <td class="col-frac">$\frac{1}{10}$</td>
+            <td>mit $10$ erweitern</td>
+            <td>$\frac{10}{100}$</td>
+            <td class="col-pct">$10\%$</td>
+          </tr>
+          <tr>
+            <td class="col-frac">$\frac{1}{8}$</td>
+            <td>$100 : 8 = 12{,}5$</td>
+            <td>$\frac{12{,}5}{100}$</td>
+            <td class="col-pct">$12{,}5\%$</td>
+          </tr>
+          <tr>
+            <td class="col-frac">$\frac{1}{1}$ (Ganzes)</td>
+            <td>mit $100$ erweitern</td>
+            <td>$\frac{100}{100}$</td>
+            <td class="col-pct">$100\%$</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Anteile vergleichen mit Prozenten -->
+    <div class="regel-box">
+      <div class="regel-title">Warum Prozente beim Vergleichen so unschlagbar sind:</div>
+      <p>
+        Stell dir vor: Paul hat beim Freiwurftraining <strong>$17$ von $20$ Würfen</strong> getroffen.
+        Marie hat <strong>$21$ von $25$ Würfen</strong> getroffen. Wer von beiden war treffsicherer?
+      </p>
+      <p>
+        Ohne gemeinsamen Maßstab ist das schwer zu sagen. Rechnen wir beide Anteile in Prozente um:
+      </p>
+      <p>
+        Paul: $\frac{17}{20} = \frac{17 \cdot 5}{20 \cdot 5} = \frac{85}{100} = \mathbf{85\%}$ Trefferquote.<br>
+        Marie: $\frac{21}{25} = \frac{21 \cdot 4}{25 \cdot 4} = \frac{84}{100} = \mathbf{84\%}$ Trefferquote.
+      </p>
+      <p style="font-weight: 700; color: #1e3a8a;">
+        Ergebnis: Paul hat mit $85\%$ Trefferquote knapp gewonnen (denn $85\% > 84\%$)!
+      </p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 5 — INTERAKTIVE LABORE & WERKZEUGE
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block">
+    <div class="section-badge badge-interaktiv">
+      <span class="badge-num">5</span> Interaktive Labore
+    </div>
+
+    <!-- WERKZEUG 1: BRUCH-VERGLEICHER MIT HAUPTNENNER -->
+    <div class="interactive-tool-card">
+      <h3 class="tool-title">Labor 1: Interaktiver Bruch-Vergleicher</h3>
+      <p class="tool-desc">
+        Wähle eine Vorgabe oder passe die Zahlen an. Das Labor ermittelt sofort den Hauptnenner,
+        erweitert beide Brüche und veranschaulicht das Ergebnis mit Streifenmodellen.
+      </p>
+
+      <div class="preset-group">
+        <button class="btn-chip active" onclick="loadComparePreset(2, 3, 3, 4, this)">$\frac{2}{3}$ vs. $\frac{3}{4}$</button>
+        <button class="btn-chip" onclick="loadComparePreset(5, 6, 7, 9, this)">$\frac{5}{6}$ vs. $\frac{7}{9}$</button>
+        <button class="btn-chip" onclick="loadComparePreset(3, 5, 3, 8, this)">$\frac{3}{5}$ vs. $\frac{3}{8}$</button>
+        <button class="btn-chip" onclick="loadComparePreset(5, 8, 7, 12, this)">$\frac{5}{8}$ vs. $\frac{7}{12}$</button>
+        <button class="btn-chip" onclick="loadComparePreset(7, 10, 4, 5, this)">$\frac{7}{10}$ vs. $\frac{4}{5}$</button>
+      </div>
+
+      <div class="compare-lab-display">
+        <div class="compare-lab-columns">
+          <!-- Bruch 1 -->
+          <div class="compare-side" id="cside-1">
+            <div style="font-weight: 700; font-size: 0.82rem; color: #64748b; margin-bottom: 4px;">Bruch 1</div>
+            <div id="cfrac-1-val" style="font-size: 1.8rem; font-weight: 800; color: #1e3a8a;">$\frac{2}{3}$</div>
+            <div id="cbar-1" style="margin: 8px 0;"></div>
+            <div id="cexpand-1" style="font-size: 0.9rem; color: #475569; font-weight: 600;">$= \frac{8}{12}$</div>
+          </div>
+
+          <!-- Zeichen -->
+          <div class="compare-sign-box" id="csign">&lt;</div>
+
+          <!-- Bruch 2 -->
+          <div class="compare-side" id="cside-2">
+            <div style="font-weight: 700; font-size: 0.82rem; color: #64748b; margin-bottom: 4px;">Bruch 2</div>
+            <div id="cfrac-2-val" style="font-size: 1.8rem; font-weight: 800; color: #1e3a8a;">$\frac{3}{4}$</div>
+            <div id="cbar-2" style="margin: 8px 0;"></div>
+            <div id="cexpand-2" style="font-size: 0.9rem; color: #475569; font-weight: 600;">$= \frac{9}{12}$</div>
+          </div>
+        </div>
+
+        <div class="compare-result-banner" id="cresult-text">
+          Hauptnenner ist <strong>12</strong>. Auf Nenner 12 erweitert: $\frac{8}{12} < \frac{9}{12}$. Daher ist $\frac{2}{3} < \frac{3}{4}$.
+        </div>
+      </div>
+    </div>
+
+
+    <!-- WERKZEUG 2: PROZENT-WANDLER & HUNDERTERFELD -->
+    <div class="interactive-tool-card" style="border-color: #86efac; margin-top: 2rem;">
+      <h3 class="tool-title" style="color: #15803d;">Labor 2: Interaktives Hunderterfeld &amp; Prozent-Wandler</h3>
+      <p class="tool-desc">
+        Wähle einen Bruch aus. Das Labor zeigt dir den Erweiterungsschritt auf den Nenner $100$
+        und färbt genau die entsprechenden Felder im $10 \times 10$ Hunderter-Gitter ein.
+      </p>
+
+      <div class="preset-group">
+        <button class="btn-chip active" onclick="loadPctPreset(1, 2, this)">$\frac{1}{2}$</button>
+        <button class="btn-chip" onclick="loadPctPreset(1, 4, this)">$\frac{1}{4}$</button>
+        <button class="btn-chip" onclick="loadPctPreset(3, 4, this)">$\frac{3}{4}$</button>
+        <button class="btn-chip" onclick="loadPctPreset(2, 5, this)">$\frac{2}{5}$</button>
+        <button class="btn-chip" onclick="loadPctPreset(7, 20, this)">$\frac{7}{20}$</button>
+        <button class="btn-chip" onclick="loadPctPreset(9, 25, this)">$\frac{9}{25}$</button>
+        <button class="btn-chip" onclick="loadPctPreset(17, 50, this)">$\frac{17}{50}$</button>
+        <button class="btn-chip" onclick="loadPctPreset(7, 10, this)">$\frac{7}{10}$</button>
+      </div>
+
+      <div style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 1.25rem;">
+        <!-- Rechenweg KaTeX -->
+        <div id="pct-formula-display" style="text-align: center; font-size: 1.35rem; color: #1e3a8a; font-weight: 700; margin-bottom: 1rem;">
+          $\frac{1}{2} = \frac{1 \cdot 50}{2 \cdot 50} = \frac{50}{100} = 50\%$
+        </div>
+
+        <div class="grid-100-wrap">
+          <div class="grid-100" id="hunderter-grid"></div>
+          <div style="font-size: 0.9rem; font-weight: 700; color: #166534;" id="grid-caption">
+            50 von 100 Feldern gefärbt &bull; entspricht 50%
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- WERKZEUG 3: INTERAKTIVER KETTEN-SORTIERER -->
+    <div class="interactive-tool-card" style="border-color: #fbcfe8; margin-top: 2rem;">
+      <h3 class="tool-title" style="color: #be185d;">Labor 3: Kettensortier-Trainer</h3>
+      <p class="tool-desc">
+        Bringe die vier Brüche in die richtige aufsteigende Reihenfolge (von kleinstem zu größtem Bruch).
+        Klicke nacheinander auf zwei Kärtchen, um ihre Positionen zu tauschen, und klicke dann auf „Prüfen“.
+      </p>
+
+      <div class="sorter-container">
+        <div class="sorter-slots" id="sorter-slots">
+          <!-- Dynamisch gefüllt per JavaScript -->
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; justify-content: center; margin-top: 1.25rem;">
+          <button class="btn-chip" style="background: #db2777; color: #fff; border-color: #be185d;" onclick="checkSortOrder()">
+            Reihenfolge prüfen
+          </button>
+          <button class="btn-chip" onclick="generateNewSortTask()">
+            Neue Aufgabe generieren
+          </button>
+        </div>
+
+        <div id="sorter-feedback" style="margin-top: 1rem; text-align: center; font-size: 0.925rem; font-weight: 600; display: none;"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 6 — ÜBUNGSAUFGABEN MIT MUSTERLÖSUNGEN
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block">
+    <div class="section-badge badge-uebungen">
+      <span class="badge-num">6</span> Übungsaufgaben mit Musterlösungen
+    </div>
+
+    <!-- AUFGABE 1 -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">1</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-vergleich">Schneller Blick</span>
+          <strong>Aufgabe 1: Gleicher Zähler oder gleicher Nenner</strong>
+          Setze das passende Relationszeichen ($<$, $>$, $=$) im Kopf ein und begründe deine Entscheidung kurz:<br>
+          a) $\frac{5}{11} \;\square\; \frac{8}{11} \qquad$
+          b) $\frac{4}{7} \;\square\; \frac{4}{9} \qquad$
+          c) $\frac{7}{15} \;\square\; \frac{11}{15} \qquad$
+          d) $\frac{9}{14} \;\square\; \frac{9}{10}$
+        </div>
+      </div>
+      <div class="uebung-body">
+        <button class="btn-toggle-loesung" onclick="toggleSolution('sol-1', this)">Lösung &amp; Rechenweg aufdecken</button>
+        <div class="loesung-content" id="sol-1">
+          <p><strong>Rechenwege &amp; Begründungen:</strong></p>
+          <p>
+            <strong>a) $\frac{5}{11} < \frac{8}{11}$:</strong> Gleicher Nenner ($11$). Wer $8$ Stücke hat, hat mehr als wer $5$ Stücke hat.<br>
+            <strong>b) $\frac{4}{7} > \frac{4}{9}$:</strong> Gleicher Zähler ($4$). Siebtel sind größer als Neuntel (kleinerer Nenner = größere Stücke!).<br>
+            <strong>c) $\frac{7}{15} < \frac{11}{15}$:</strong> Gleicher Nenner ($15$). Der größere Zähler entscheidet ($7 < 11$).<br>
+            <strong>d) $\frac{9}{14} < \frac{9}{10}$:</strong> Gleicher Zähler ($9$). Zehntel sind größer als Vierzehntel ($14 > 10$, daher ist der Bruch mit Nenner 10 größer).
+          </p>
+          <div class="loesung-ergebnis">
+            Ergebnisse: a) $<$, b) $>$, c) $<$, d) $<$
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUFGABE 2 -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">2</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-hauptnenner">Hauptnenner-Methode</span>
+          <strong>Aufgabe 2: Ungleichnamige Brüche vergleichen</strong>
+          Bringe die Brüche jeweils auf den Hauptnenner und setze das passende Zeichen ein:<br>
+          a) $\frac{3}{4} \;\square\; \frac{5}{6} \qquad$
+          b) $\frac{4}{5} \;\square\; \frac{7}{10} \qquad$
+          c) $\frac{5}{8} \;\square\; \frac{7}{12}$
+        </div>
+      </div>
+      <div class="uebung-body">
+        <button class="btn-toggle-loesung" onclick="toggleSolution('sol-2', this)">Lösung &amp; Rechenweg aufdecken</button>
+        <div class="loesung-content" id="sol-2">
+          <p>
+            <strong>a) $\frac{3}{4}$ und $\frac{5}{6}$:</strong><br>
+            Hauptnenner von $4$ und $6$ ist $12$.<br>
+            $\frac{3}{4} = \frac{3 \cdot 3}{4 \cdot 3} = \frac{9}{12} \quad$ und $\quad \frac{5}{6} = \frac{5 \cdot 2}{6 \cdot 2} = \frac{10}{12}$.<br>
+            Da $\frac{9}{12} < \frac{10}{12}$ ist: $\mathbf{\frac{3}{4} < \frac{5}{6}}$.
+          </p>
+          <p>
+            <strong>b) $\frac{4}{5}$ und $\frac{7}{10}$:</strong><br>
+            Hauptnenner ist $10$. Nur der erste Bruch muss erweitert werden!<br>
+            $\frac{4}{5} = \frac{4 \cdot 2}{5 \cdot 2} = \frac{8}{10}$.<br>
+            Da $\frac{8}{10} > \frac{7}{10}$ ist: $\mathbf{\frac{4}{5} > \frac{7}{10}}$.
+          </p>
+          <p>
+            <strong>c) $\frac{5}{8}$ und $\frac{7}{12}$:</strong><br>
+            Vielfache von $12$: $12$ (nicht durch 8), $24$ (teilbar durch 8!). Hauptnenner ist $24$.<br>
+            $\frac{5}{8} = \frac{5 \cdot 3}{8 \cdot 3} = \frac{15}{24} \quad$ und $\quad \frac{7}{12} = \frac{7 \cdot 2}{12 \cdot 2} = \frac{14}{24}$.<br>
+            Da $\frac{15}{24} > \frac{14}{24}$ ist: $\mathbf{\frac{5}{8} > \frac{7}{12}}$.
+          </p>
+          <div class="loesung-ergebnis">
+            Ergebnisse: a) $<$, b) $>$, c) $>$
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUFGABE 3 -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">3</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-ordnung">Profi-Strategien</span>
+          <strong>Aufgabe 3: Blitzvergleich ohne Hauptnenner</strong>
+          Nutze den $\frac{1}{2}$-Benchmark oder den Abstand zu $1$, um die Brüche ohne schriftliches Erweitern zu vergleichen:<br>
+          a) $\frac{3}{7}$ und $\frac{5}{9} \qquad$
+          b) $\frac{7}{8}$ und $\frac{11}{12}$
+        </div>
+      </div>
+      <div class="uebung-body">
+        <button class="btn-toggle-loesung" onclick="toggleSolution('sol-3', this)">Lösung &amp; Rechenweg aufdecken</button>
+        <div class="loesung-content" id="sol-3">
+          <p>
+            <strong>a) Vergleich über $\frac{1}{2}$ (Benchmark):</strong><br>
+            Die Hälfte von $7$ ist $3{,}5$. Daher ist $\frac{3}{7} < \frac{1}{2}$.<br>
+            Die Hälfte von $9$ ist $4{,}5$. Daher ist $\frac{5}{9} > \frac{1}{2}$.<br>
+            Weil der eine Bruch kleiner und der andere größer als ein Halbes ist, folgt sofort: $\mathbf{\frac{3}{7} < \frac{5}{9}}$.
+          </p>
+          <p>
+            <strong>b) Vergleich über den Abstand zum Ganzen ($1$):</strong><br>
+            Beiden Brüchen fehlt genau ein einziges Stück bis zu $1$ Ganzem:<br>
+            $1 - \frac{7}{8} = \frac{1}{8} \quad$ und $\quad 1 - \frac{11}{12} = \frac{1}{12}$.<br>
+            Weil Zwölftel kleiner sind als Achtel ($\frac{1}{12} < \frac{1}{8}$), fehlt $\frac{11}{12}$ weniger zum Ganzen als $\frac{7}{8}$.<br>
+            Damit ist $\frac{11}{12}$ näher an $1$, also größer: $\mathbf{\frac{7}{8} < \frac{11}{12}}$.
+          </p>
+          <div class="loesung-ergebnis">
+            Ergebnisse: a) $<$, b) $<$
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUFGABE 4 -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">4</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-prozent">Hundertstelbruch</span>
+          <strong>Aufgabe 4: Brüche in Prozente umwandeln</strong>
+          Erweitere die Brüche jeweils auf den Nenner $100$ und schreibe sie als Prozentsatz auf:<br>
+          a) $\frac{3}{4} \qquad$
+          b) $\frac{4}{5} \qquad$
+          c) $\frac{13}{20} \qquad$
+          d) $\frac{18}{25}$
+        </div>
+      </div>
+      <div class="uebung-body">
+        <button class="btn-toggle-loesung" onclick="toggleSolution('sol-4', this)">Lösung &amp; Rechenweg aufdecken</button>
+        <div class="loesung-content" id="sol-4">
+          <p>
+            <strong>a) $\frac{3}{4}$ mit $25$ erweitern:</strong> $\frac{3 \cdot 25}{4 \cdot 25} = \frac{75}{100} = \mathbf{75\%}$<br>
+            <strong>b) $\frac{4}{5}$ mit $20$ erweitern:</strong> $\frac{4 \cdot 20}{5 \cdot 20} = \frac{80}{100} = \mathbf{80\%}$<br>
+            <strong>c) $\frac{13}{20}$ mit $5$ erweitern:</strong> $\frac{13 \cdot 5}{20 \cdot 5} = \frac{65}{100} = \mathbf{65\%}$<br>
+            <strong>d) $\frac{18}{25}$ mit $4$ erweitern:</strong> $\frac{18 \cdot 4}{25 \cdot 4} = \frac{72}{100} = \mathbf{72\%}$
+          </p>
+          <div class="loesung-ergebnis">
+            Ergebnisse: a) $75\%$, b) $80\%$, c) $65\%$, d) $72\%$
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUFGABE 5 -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">5</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-prozent">Kürz-Zwischenschritt</span>
+          <strong>Aufgabe 5: Vorher kürzen, dann auf 100 erweitern</strong>
+          Kürze den Bruch zuerst geschickt und erweitere das Zwischenergebnis anschließend auf den Nenner $100$:<br>
+          a) $\frac{6}{30} \qquad$
+          b) $\frac{14}{35} \qquad$
+          c) $\frac{18}{60}$
+        </div>
+      </div>
+      <div class="uebung-body">
+        <button class="btn-toggle-loesung" onclick="toggleSolution('sol-5', this)">Lösung &amp; Rechenweg aufdecken</button>
+        <div class="loesung-content" id="sol-5">
+          <p>
+            <strong>a) $\frac{6}{30}$ zuerst mit $6$ kürzen:</strong><br>
+            $\frac{6 : 6}{30 : 6} = \frac{1}{5} \xrightarrow{\cdot 20} \frac{20}{100} = \mathbf{20\%}$
+          </p>
+          <p>
+            <strong>b) $\frac{14}{35}$ zuerst mit $7$ kürzen:</strong><br>
+            $\frac{14 : 7}{35 : 7} = \frac{2}{5} \xrightarrow{\cdot 20} \frac{40}{100} = \mathbf{40\%}$
+          </p>
+          <p>
+            <strong>c) $\frac{18}{60}$ zuerst mit $6$ kürzen:</strong><br>
+            $\frac{18 : 6}{60 : 6} = \frac{3}{10} \xrightarrow{\cdot 10} \frac{30}{100} = \mathbf{30\%}$
+          </p>
+          <div class="loesung-ergebnis">
+            Ergebnisse: a) $20\%$, b) $40\%$, c) $30\%$
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUFGABE 6 -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">6</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-prozent">Anwendung</span>
+          <strong>Aufgabe 6: Alltagsvergleich im Sport</strong>
+          Im Schulturnier spielen zwei Klassen Völkerball. In Klasse 6a haben $18$ von $24$ Schülern den Ball gefangen.
+          In Klasse 6b haben $19$ von $25$ Schülern den Ball gefangen.<br>
+          Berechne für beide Klassen die Fangquote in Prozent und stelle fest, welche Klasse die höhere Quote erreichte.
+        </div>
+      </div>
+      <div class="uebung-body">
+        <button class="btn-toggle-loesung" onclick="toggleSolution('sol-6', this)">Lösung &amp; Rechenweg aufdecken</button>
+        <div class="loesung-content" id="sol-6">
+          <p>
+            <strong>Klasse 6a ($18$ von $24$):</strong><br>
+            Bruch: $\frac{18}{24}$. Zuerst mit $6$ kürzen: $\frac{18 : 6}{24 : 6} = \frac{3}{4}$.<br>
+            Jetzt auf $100$ erweitern (mit $25$): $\frac{3 \cdot 25}{4 \cdot 25} = \frac{75}{100} = \mathbf{75\%}$.
+          </p>
+          <p>
+            <strong>Klasse 6b ($19$ von $25$):</strong><br>
+            Bruch: $\frac{19}{25}$. Direkt auf $100$ erweitern (mit $4$):<br>
+            $\frac{19 \cdot 4}{25 \cdot 4} = \frac{76}{100} = \mathbf{76\%}$.
+          </p>
+          <p>
+            <strong>Vergleich:</strong> Da $76\% > 75\%$ ist, hat Klasse 6b die höhere Fangquote erzielt.
+          </p>
+          <div class="loesung-ergebnis">
+            Ergebnis: Klasse 6a hat $75\%$, Klasse 6b hat $76\%$. Klasse 6b ist knapp besser!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 7 — INTERAKTIVER SELBSTTEST (10 FRAGEN)
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block" id="selbsttest">
+    <div class="section-badge badge-selbsttest">
+      <span class="badge-num">7</span> Interaktiver Selbsttest
+    </div>
+
+    <div class="quiz-card">
+      <!-- Status & Progress -->
+      <div class="quiz-status-bar" id="quiz-status-bar" style="display: none;">
+        <span id="quiz-counter">Frage 1 von 10</span>
+        <span id="quiz-score-text">Punkte: 0 / 10</span>
+      </div>
+      <div class="quiz-progress-track" id="quiz-progress-track" style="display: none;">
+        <div class="quiz-progress-bar" id="quiz-progress-bar"></div>
+      </div>
+
+      <!-- Intro View -->
+      <div class="quiz-intro-view" id="quiz-intro">
+        <span class="quiz-intro-badge">Lernziel-Kontrolle</span>
+        <h3 class="quiz-intro-title">Teste dein Wissen: Vergleichen, Ordnen &amp; Prozente</h3>
+        <p class="quiz-intro-desc">
+          10 gymnasiale Fragen zum direkten Vergleich, Hauptnenner, Zahlenstrahl und zur Prozentumwandlung.
+          Du erhältst zu jeder Frage sofort eine anschauliche mathematische Erklärung.
+        </p>
+        <button class="btn-quiz-start" onclick="startQuiz()">Selbsttest jetzt starten</button>
+      </div>
+
+      <!-- Active Question Area -->
+      <div id="quiz-active-area" style="display: none;">
+        <div class="quiz-question-box" id="quiz-question-text">Fragentext</div>
+        <div class="quiz-options-grid" id="quiz-options"></div>
+        <div class="quiz-explanation-box" id="quiz-explanation"></div>
+        <div class="quiz-next-action">
+          <button class="btn-quiz-next" id="quiz-next-btn" style="display: none;" onclick="nextQuestion()">
+            Nächste Frage &rarr;
+          </button>
+        </div>
+      </div>
+
+      <!-- Results View -->
+      <div class="quiz-result-view" id="quiz-results">
+        <div class="quiz-score-badge" id="quiz-final-score">0 / 10</div>
+        <div class="quiz-score-text" id="quiz-final-title">Ergebnis</div>
+        <div class="quiz-score-feedback" id="quiz-final-desc">Rückmeldung</div>
+        <button class="btn-quiz-start" onclick="restartQuiz()">Test wiederholen</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BOTTOM NAVIGATION
+  ═══════════════════════════════════════════════════════ -->
+  <div class="bottom-nav">
+    <a href="erweitern-kuerzen.html" class="btn-nav-prev">
+      &larr; Zurück zu Thema 2: Brüche erweitern &amp; kürzen
+    </a>
+    <a href="gemischte-zahlen.html" class="btn-nav-next">
+      Weiter zu Thema 4: Unechte Brüche &amp; Gemischte Zahlen &rarr;
+    </a>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     JAVASCRIPT: INTERAKTIVE LABORE & QUIZ-ENGINE
+═══════════════════════════════════════════════════════ -->
+<script>
+  /* ----------------------------------------------------
+     1. LÖSUNG TOGGLER
+  ---------------------------------------------------- */
+  function toggleSolution(id, btn) {
+    const box = document.getElementById(id);
+    box.classList.toggle('open');
+    if (box.classList.contains('open')) {
+      btn.innerText = 'Lösung verbergen';
+      setTimeout(triggerKaTeX, 30);
+    } else {
+      btn.innerText = 'Lösung & Rechenweg aufdecken';
+    }
+  }
+
+  /* ----------------------------------------------------
+     2. LABOR 1: BRUCH-VERGLEICHER
+  ---------------------------------------------------- */
+  let curZ1 = 2, curN1 = 3, curZ2 = 3, curN2 = 4;
+
+  function gcd(a, b) {
+    return b === 0 ? a : gcd(b, a % b);
+  }
+  function lcm(a, b) {
+    return (a * b) / gcd(a, b);
+  }
+
+  function loadComparePreset(z1, n1, z2, n2, btn) {
+    curZ1 = z1; curN1 = n1; curZ2 = z2; curN2 = n2;
+    if (btn) {
+      btn.parentElement.querySelectorAll('.btn-chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+    }
+    renderCompareLab();
+  }
+
+  function renderCompareLab() {
+    const hn = lcm(curN1, curN2);
+    const f1 = hn / curN1;
+    const f2 = hn / curN2;
+    const expZ1 = curZ1 * f1;
+    const expZ2 = curZ2 * f2;
+
+    document.getElementById('cfrac-1-val').innerHTML = `$\\frac{${curZ1}}{${curN1}}$`;
+    document.getElementById('cfrac-2-val').innerHTML = `$\\frac{${curZ2}}{${curN2}}$`;
+
+    document.getElementById('cexpand-1').innerHTML = `$= \\frac{${curZ1} \\cdot ${f1}}{${curN1} \\cdot ${f1}} = \\frac{${expZ1}}{${hn}}$`;
+    document.getElementById('cexpand-2').innerHTML = `$= \\frac{${curZ2} \\cdot ${f2}}{${curN2} \\cdot ${f2}} = \\frac{${expZ2}}{${hn}}$`;
+
+    // SVG Balken
+    document.getElementById('cbar-1').innerHTML = generateFractionSvg(curZ1, curN1, '#2563eb');
+    document.getElementById('cbar-2').innerHTML = generateFractionSvg(curZ2, curN2, '#3b82f6');
+
+    // Vergleichszeichen & Hervorhebung
+    const signBox = document.getElementById('csign');
+    const side1 = document.getElementById('cside-1');
+    const side2 = document.getElementById('cside-2');
+    const resText = document.getElementById('cresult-text');
+
+    side1.classList.remove('lead');
+    side2.classList.remove('lead');
+
+    if (expZ1 > expZ2) {
+      signBox.innerText = '>';
+      side1.classList.add('lead');
+      resText.innerHTML = `Hauptnenner ist <strong>${hn}</strong>. Auf Nenner ${hn} erweitert: $\\frac{${expZ1}}{${hn}} > \\frac{${expZ2}}{${hn}}$. Daher ist $\\mathbf{\\frac{${curZ1}}{${curN1}} > \\frac{${curZ2}}{${curN2}}}$.`;
+    } else if (expZ1 < expZ2) {
+      signBox.innerText = '<';
+      side2.classList.add('lead');
+      resText.innerHTML = `Hauptnenner ist <strong>${hn}</strong>. Auf Nenner ${hn} erweitert: $\\frac{${expZ1}}{${hn}} < \\frac{${expZ2}}{${hn}}$. Daher ist $\\mathbf{\\frac{${curZ1}}{${curN1}} < \\frac{${curZ2}}{${curN2}}}$.`;
+    } else {
+      signBox.innerText = '=';
+      resText.innerHTML = `Beide Brüche haben denselben Wert: $\\mathbf{\\frac{${curZ1}}{${curN1}} = \\frac{${curZ2}}{${curN2}}}$.`;
+    }
+
+    setTimeout(triggerKaTeX, 30);
+  }
+
+  function generateFractionSvg(z, n, color) {
+    const width = 140, height = 24;
+    const segW = (width - 4) / n;
+    let rects = `<rect x="2" y="2" width="${width - 4}" height="${height}" fill="#f1f5f9" stroke="#cbd5e1" rx="2" />`;
+    rects += `<rect x="2" y="2" width="${z * segW}" height="${height}" fill="${color}" rx="2" />`;
+    for (let i = 1; i < n; i++) {
+      const x = 2 + i * segW;
+      rects += `<line x1="${x}" y1="2" x2="${x}" y2="${height + 2}" stroke="#94a3b8" stroke-dasharray="1.5 1.5" />`;
+    }
+    return `<svg width="100%" height="${height + 4}" viewBox="0 0 ${width} ${height + 4}">${rects}</svg>`;
+  }
+
+
+  /* ----------------------------------------------------
+     3. LABOR 2: PROZENT-WANDLER & HUNDERTERFELD
+  ---------------------------------------------------- */
+  let curPctZ = 1, curPctN = 2;
+
+  function loadPctPreset(z, n, btn) {
+    curPctZ = z; curPctN = n;
+    if (btn) {
+      btn.parentElement.querySelectorAll('.btn-chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+    }
+    renderPctLab();
+  }
+
+  function renderPctLab() {
+    const f = 100 / curPctN;
+    const p = Math.round(curPctZ * f);
+
+    document.getElementById('pct-formula-display').innerHTML =
+      `$\\frac{${curPctZ}}{${curPctN}} = \\frac{${curPctZ} \\cdot ${f}}{${curPctN} \\cdot ${f}} = \\frac{${p}}{100} = \\mathbf{${p}\\%}$`;
+
+    // 100er Gitter generieren
+    const grid = document.getElementById('hunderter-grid');
+    grid.innerHTML = '';
+    for (let i = 0; i < 100; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'grid-cell' + (i < p ? ' filled' : '');
+      grid.appendChild(cell);
+    }
+
+    document.getElementById('grid-caption').innerText =
+      `${p} von 100 Feldern gefärbt • entspricht ${p}%`;
+
+    setTimeout(triggerKaTeX, 30);
+  }
+
+
+  /* ----------------------------------------------------
+     4. LABOR 3: KETTEN-SORTIERER
+  ---------------------------------------------------- */
+  let sortItems = [];
+  let selectedIdx = null;
+
+  const sortPool = [
+    [ {z:1, n:4}, {z:2, n:5}, {z:1, n:2}, {z:3, n:4} ],
+    [ {z:1, n:3}, {z:5, n:12}, {z:1, n:2}, {z:2, n:3} ],
+    [ {z:1, n:6}, {z:1, n:4}, {z:5, n:12}, {z:2, n:3} ],
+    [ {z:3, n:10}, {z:2, n:5}, {z:7, n:10}, {z:4, n:5} ],
+    [ {z:1, n:8}, {z:3, n:8}, {z:1, n:2}, {z:3, n:4} ]
+  ];
+
+  function generateNewSortTask() {
+    const task = sortPool[Math.floor(Math.random() * sortPool.length)];
+    // Mischen
+    sortItems = [...task].sort(() => Math.random() - 0.5);
+    selectedIdx = null;
+    document.getElementById('sorter-feedback').style.display = 'none';
+    renderSorter();
+  }
+
+  function renderSorter() {
+    const container = document.getElementById('sorter-slots');
+    container.innerHTML = '';
+    sortItems.forEach((item, idx) => {
+      const div = document.createElement('div');
+      div.className = 'sorter-item' + (selectedIdx === idx ? ' selected' : '');
+      div.innerHTML = `$\\frac{${item.z}}{${item.n}}$`;
+      div.onclick = () => selectSortItem(idx);
+      container.appendChild(div);
+
+      if (idx < sortItems.length - 1) {
+        const lt = document.createElement('span');
+        lt.className = 'sorter-lt';
+        lt.innerText = '<';
+        container.appendChild(lt);
+      }
+    });
+    setTimeout(triggerKaTeX, 30);
+  }
+
+  function selectSortItem(idx) {
+    if (selectedIdx === null) {
+      selectedIdx = idx;
+    } else if (selectedIdx === idx) {
+      selectedIdx = null;
+    } else {
+      // Tauschen
+      const tmp = sortItems[selectedIdx];
+      sortItems[selectedIdx] = sortItems[idx];
+      sortItems[idx] = tmp;
+      selectedIdx = null;
+    }
+    renderSorter();
+  }
+
+  function checkSortOrder() {
+    let correct = true;
+    for (let i = 0; i < sortItems.length - 1; i++) {
+      const val1 = sortItems[i].z / sortItems[i].n;
+      const val2 = sortItems[i+1].z / sortItems[i+1].n;
+      if (val1 >= val2) {
+        correct = false;
+        break;
+      }
+    }
+    const fb = document.getElementById('sorter-feedback');
+    fb.style.display = 'block';
+    if (correct) {
+      fb.style.color = '#15803d';
+      fb.innerText = 'Richtig gelöst! Alle 4 Brüche stehen in exakt aufsteigender Reihenfolge.';
+    } else {
+      fb.style.color = '#b91c1c';
+      fb.innerText = 'Noch nicht ganz richtig! Tipp: Bringe die Brüche gedanklich auf einen gemeinsamen Nenner.';
+    }
+  }
+
+
+  /* ----------------------------------------------------
+     5. SELBSTTEST (10 MULTIPLE-CHOICE FRAGEN)
+  ---------------------------------------------------- */
+  const quizQuestions = [
+    {
+      q: 'Welche Aussage zum Vergleich von $\\frac{4}{9}$ und $\\frac{7}{9}$ ist korrekt?',
+      opts: [
+        '$\\frac{4}{9} > \\frac{7}{9}$, weil die Zahl 4 kleiner ist.',
+        '$\\frac{4}{9} < \\frac{7}{9}$, weil bei gleichem Nenner der Bruch mit dem größeren Zähler größer ist.',
+        'Die beiden Brüche sind gleich groß, da sie denselben Nenner haben.',
+        'Man kann die Brüche ohne Taschenrechner nicht vergleichen.'
+      ],
+      c: 1,
+      exp: 'Beide Brüche haben denselben Nenner ($9$), die Stücke sind also gleich groß. 7 Neuntel sind folglich mehr als 4 Neuntel: $\\frac{4}{9} < \\frac{7}{9}$.'
+    },
+    {
+      q: 'Wie verhalten sich die Brüche $\\frac{5}{8}$ und $\\frac{5}{12}$ zueinander?',
+      opts: [
+        '$\\frac{5}{8} > \\frac{5}{12}$, weil Achtel größere Stücke sind als Zwölftel.',
+        '$\\frac{5}{8} < \\frac{5}{12}$, weil 12 größer ist als 8.',
+        '$\\frac{5}{8} = \\frac{5}{12}$, weil beide Zähler 5 betragen.',
+        '$\\frac{5}{8} < \\frac{5}{12}$, weil ein kleinerer Nenner einen kleineren Bruch bedeutet.'
+      ],
+      c: 0,
+      exp: 'Gleicher Zähler ($5$): Das Ganze wird bei Achteln nur in 8 Stücke geteilt, bei Zwölfteln in 12. Daher ist ein Achtel größer als ein Zwölftel, und $\\frac{5}{8} > \\frac{5}{12}$.'
+    },
+    {
+      q: 'Warum ist $\\frac{3}{5}$ größer als $\\frac{3}{7}$?',
+      opts: [
+        'Weil 7 größer ist als 5.',
+        'Weil Fünftelstücke größer sind als Siebtelstücke.',
+        'Weil 5 eine Primzahl ist.',
+        'Das stimmt gar nicht, $\\frac{3}{7}$ ist größer.'
+      ],
+      c: 1,
+      exp: 'Je weniger Teile ein Ganzes hat (kleinerer Nenner), desto größer ist jedes Stück. 3 Fünftel sind mehr Pizza als 3 Siebtel: $\\frac{3}{5} > \\frac{3}{7}$.'
+    },
+    {
+      q: 'Was ist der kleinste gemeinsame Hauptnenner für $\\frac{3}{4}$ und $\\frac{5}{6}$?',
+      opts: [
+        '10',
+        '24',
+        '12',
+        '18'
+      ],
+      c: 2,
+      exp: 'Die Vielfachen von 6 sind 6, 12, 18, 24... Die 12 ist die kleinste Zahl, die sowohl durch 4 als auch durch 6 ohne Rest teilbar ist. Der Hauptnenner ist 12.'
+    },
+    {
+      q: 'Welches Relationszeichen gehört zwischen $\\frac{2}{3}$ und $\\frac{5}{8}$?',
+      opts: [
+        '$>$',
+        '$<$',
+        '$=$',
+        '$\\le$'
+      ],
+      c: 0,
+      exp: 'Hauptnenner von 3 und 8 ist 24. Erweitert: $\\frac{2}{3} = \\frac{16}{24}$ und $\\frac{5}{8} = \\frac{15}{24}$. Da $16 > 15$, gilt $\\frac{2}{3} > \\frac{5}{8}$.'
+    },
+    {
+      q: 'Welcher der folgenden Brüche ist echt GRÖSSER als $\\frac{1}{2}$?',
+      opts: [
+        '$\\frac{3}{7}$',
+        '$\\frac{4}{9}$',
+        '$\\frac{5}{8}$',
+        '$\\frac{6}{13}$'
+      ],
+      c: 2,
+      exp: 'Benchmark-Test: Die Hälfte von 8 ist 4. Da der Zähler 5 größer als 4 ist, ist $\\frac{5}{8} > \\frac{1}{2}$. Bei den anderen Brüchen ist der Zähler kleiner als die halbe Nennerzahl!'
+    },
+    {
+      q: 'Welchem Prozentsatz entspricht der Bruch $\\frac{7}{20}$?',
+      opts: [
+        '$7\\%$',
+        '$35\\%$',
+        '$14\\%$',
+        '$20\\%$'
+      ],
+      c: 1,
+      exp: 'Erweitern auf Nenner 100: Da $20 \\cdot 5 = 100$ ist, erweitern wir Zähler und Nenner mit 5: $\\frac{7 \\cdot 5}{20 \\cdot 5} = \\frac{35}{100} = 35\\%$.'
+    },
+    {
+      q: 'Wie viel Prozent sind $\\frac{18}{25}$?',
+      opts: [
+        '$18\\%$',
+        '$54\\%$',
+        '$72\\%$',
+        '$90\\%$'
+      ],
+      c: 2,
+      exp: 'Erweitern mit 4: $\\frac{18 \\cdot 4}{25 \\cdot 4} = \\frac{72}{100} = 72\\%$.'
+    },
+    {
+      q: 'Wie wandelt man $\\frac{12}{40}$ geschickt in einen Prozentsatz um?',
+      opts: [
+        'Mit 2,5 erweitern.',
+        'Zuerst mit 4 kürzen zu $\\frac{3}{10}$, dann mit 10 erweitern zu $\\frac{30}{100} = 30\\%$.',
+        'Einfach das Prozentzeichen an die 12 hängen ($12\\%$).',
+        'Das geht nicht, weil 40 kein Teiler von 100 ist.'
+      ],
+      c: 1,
+      exp: 'Zweistufige Umwandlung: Durch Kürzen mit 4 entsteht der Bruch $\\frac{3}{10}$. Dieser lässt sich durch Erweitern mit 10 problemlos in $\\frac{30}{100} = 30\\%$ verwandeln.'
+    },
+    {
+      q: 'Beim Basketball trifft Jonas 13 von 20 Würfen, Simon trifft 16 von 25 Würfen. Wer hat die bessere Trefferquote?',
+      opts: [
+        'Simon mit $64\\%$, weil er 16 Treffer hatte.',
+        'Jonas mit $65\\%$, denn $\\frac{13}{20} = 65\\%$ und $\\frac{16}{25} = 64\\%$.',
+        'Beide haben exakt dieselbe Quote von $60\\%$.',
+        'Man kann das nicht vergleichen, weil die Wurfanzahl verschieden war.'
+      ],
+      c: 1,
+      exp: 'Jonas: $\\frac{13}{20} = \\frac{65}{100} = 65\\%$. Simon: $\\frac{16}{25} = \\frac{64}{100} = 64\\%$. Da $65\\% > 64\\%$, hat Jonas die bessere Quote.'
+    }
+  ];
+
+  let currentQIdx = 0;
+  let quizScore = 0;
+  let answered = false;
+
+  function startQuiz() {
+    document.getElementById('quiz-intro').style.display = 'none';
+    document.getElementById('quiz-results').style.display = 'none';
+    document.getElementById('quiz-status-bar').style.display = 'flex';
+    document.getElementById('quiz-progress-track').style.display = 'block';
+    document.getElementById('quiz-active-area').style.display = 'block';
+
+    currentQIdx = 0;
+    quizScore = 0;
+    renderQuizQuestion();
+  }
+
+  function renderQuizQuestion() {
+    answered = false;
+    const q = quizQuestions[currentQIdx];
+
+    document.getElementById('quiz-counter').innerText = `Frage ${currentQIdx + 1} von 10`;
+    document.getElementById('quiz-score-text').innerText = `Punkte: ${quizScore} / 10`;
+    document.getElementById('quiz-progress-bar').style.width = `${(currentQIdx + 1) * 10}%`;
+
+    document.getElementById('quiz-question-text').innerHTML = q.q;
+
+    const optContainer = document.getElementById('quiz-options');
+    optContainer.innerHTML = '';
+    const letters = ['A', 'B', 'C', 'D'];
+
+    q.opts.forEach((optText, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt-btn';
+      btn.innerHTML = `<span class="quiz-opt-letter">${letters[i]}</span> <span>${optText}</span>`;
+      btn.onclick = () => selectQuizOption(i, btn);
+      optContainer.appendChild(btn);
+    });
+
+    const expBox = document.getElementById('quiz-explanation');
+    expBox.style.display = 'none';
+    expBox.innerHTML = '';
+
+    const nextBtn = document.getElementById('quiz-next-btn');
+    nextBtn.style.display = 'none';
+    nextBtn.innerText = (currentQIdx === 9) ? 'Ergebnis anzeigen' : 'Nächste Frage \u2192';
+
+    setTimeout(triggerKaTeX, 30);
+  }
+
+  function selectQuizOption(selectedIdx, clickedBtn) {
+    if (answered) return;
+    answered = true;
+
+    const q = quizQuestions[currentQIdx];
+    const buttons = document.querySelectorAll('#quiz-options .quiz-opt-btn');
+    buttons.forEach(b => b.disabled = true);
+
+    if (selectedIdx === q.c) {
+      clickedBtn.classList.add('correct');
+      quizScore++;
+      document.getElementById('quiz-score-text').innerText = `Punkte: ${quizScore} / 10`;
+    } else {
+      clickedBtn.classList.add('wrong');
+      buttons[q.c].classList.add('correct');
+    }
+
+    const expBox = document.getElementById('quiz-explanation');
+    expBox.style.display = 'block';
+    expBox.innerHTML = '<strong>Erklärung:</strong> ' + q.exp;
+
+    document.getElementById('quiz-next-btn').style.display = 'inline-block';
+    setTimeout(triggerKaTeX, 30);
+  }
+
+  function nextQuestion() {
+    currentQIdx++;
+    if (currentQIdx < 10) {
+      renderQuizQuestion();
+    } else {
+      showQuizResults();
+    }
+  }
+
+  function showQuizResults() {
+    document.getElementById('quiz-status-bar').style.display = 'none';
+    document.getElementById('quiz-progress-track').style.display = 'none';
+    document.getElementById('quiz-active-area').style.display = 'none';
+    const res = document.getElementById('quiz-results');
+    res.style.display = 'block';
+
+    document.getElementById('quiz-final-score').innerText = `${quizScore} / 10 Punkte`;
+
+    let title = '', desc = '';
+    if (quizScore === 10) {
+      title = 'Hervorragend! Volle Punktzahl!';
+      desc = 'Du beherrschst das Vergleichen und Ordnen von Brüchen sowie die Prozentrechnung meisterhaft. Sowohl Hauptnenner als auch Blitz-Benchmarks sitzen perfekt!';
+    } else if (quizScore >= 8) {
+      title = 'Sehr starke Leistung!';
+      desc = 'Fast alles richtig! Du hast die wesentlichen Zusammenhänge zwischen Brüchen, Hauptnennern und Prozenten sicher verstanden.';
+    } else if (quizScore >= 5) {
+      title = 'Solide Leistung!';
+      desc = 'Mehr als die Hälfte der Fragen hast du richtig beantwortet. Schau dir die Merkboxen und die interaktiven Labore oben noch einmal an.';
+    } else {
+      title = 'Noch etwas Übung nötig!';
+      desc = 'Gehe die Erklärungen zu Block 1 und Block 2 noch einmal in Ruhe durch. Starte dann einfach einen neuen Testdurchlauf!';
+    }
+
+    document.getElementById('quiz-final-title').innerText = title;
+    document.getElementById('quiz-final-desc').innerText = desc;
+  }
+
+  function restartQuiz() {
+    startQuiz();
+  }
+
+  // Initialisierung beim Laden
+  document.addEventListener('DOMContentLoaded', () => {
+    renderCompareLab();
+    renderPctLab();
+    generateNewSortTask();
+  });
+</script>
+
+</body>
+</html>

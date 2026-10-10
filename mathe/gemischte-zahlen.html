@@ -1,0 +1,2013 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Unechte Brüche & Gemischte Zahlen | Mathe 6</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <!-- KaTeX für mathematische Formeln -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+  <script>
+    function triggerKaTeX(target) {
+      const el = (target && target.nodeType) ? target : document.body;
+      if (typeof renderMathInElement === "function") {
+        renderMathInElement(el, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+          ],
+          throwOnError: false
+        });
+      } else {
+        setTimeout(() => triggerKaTeX(target), 30);
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => triggerKaTeX());
+    } else {
+      triggerKaTeX();
+    }
+    window.addEventListener('load', () => triggerKaTeX());
+  </script>
+
+  <style>
+    body { padding-bottom: 4rem; }
+    .page-container { max-width: 820px; margin: 0 auto; }
+
+    .page-title { font-size: 2rem; font-weight: 800; color: #111827; margin: 0 0 0.3rem 0; line-height: 1.2; }
+    .page-subtitle { font-size: 0.95rem; color: #64748b; margin: 0 0 1.5rem 0; line-height: 1.6; }
+    .page-divider { border: none; border-top: 2px solid #2563eb; margin: 0 0 2.5rem 0; opacity: 0.25; }
+
+    /* Abschnitts-Badges */
+    .section-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 4px 14px 4px 4px; border-radius: 999px;
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.6px;
+      text-transform: uppercase; margin-bottom: 1.1rem;
+    }
+    .section-badge .badge-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 800; color: #fff;
+    }
+    .badge-typen           { background: #eff6ff; color: #1d4ed8; }
+    .badge-typen .badge-num{ background: #2563eb; }
+    .badge-unecht-gemischt { background: #fff7ed; color: #c2410c; }
+    .badge-unecht-gemischt .badge-num { background: #ea580c; }
+    .badge-gemischt-unecht { background: #f0fdf4; color: #15803d; }
+    .badge-gemischt-unecht .badge-num { background: #16a34a; }
+    .badge-interaktiv      { background: #f5f3ff; color: #6d28d9; }
+    .badge-interaktiv .badge-num      { background: #7c3aed; }
+    .badge-uebungen        { background: #fdf2f8; color: #be185d; }
+    .badge-uebungen .badge-num        { background: #db2777; }
+    .badge-selbsttest      { background: #fef3c7; color: #b45309; }
+    .badge-selbsttest .badge-num      { background: #f59e0b; }
+
+    .content-block { margin-bottom: 3.5rem; }
+    .erklaer-text { font-size: 0.975rem; color: #111827; line-height: 1.75; margin-bottom: 1rem; }
+
+    /* MERKE-Box nach Schulblatt-Standard */
+    .merke-box {
+      border: 2.5px solid #dc2626; border-radius: 10px;
+      padding: 1.1rem 1.3rem; margin: 1.5rem 0; position: relative; background: #fff;
+    }
+    .merke-tag {
+      position: absolute; top: -11px; left: 14px;
+      background: #dc2626; color: #fff; font-size: 0.65rem; font-weight: 800;
+      letter-spacing: 0.8px; text-transform: uppercase; padding: 2px 9px; border-radius: 4px;
+    }
+    .merke-box p { font-size: 0.95rem; font-weight: 600; color: #111827; margin: 0; line-height: 1.65; }
+    .merke-box p + p { margin-top: 0.5rem; font-weight: 400; font-size: 0.875rem; color: #374151; }
+
+    /* Regel-Box */
+    .regel-box {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 1.25rem 1.4rem;
+      margin: 1.35rem 0;
+    }
+    .regel-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .regel-box p {
+      font-size: 0.925rem;
+      color: #1e293b;
+      line-height: 1.65;
+      margin: 0 0 0.5rem 0;
+    }
+    .regel-box p:last-child { margin-bottom: 0; }
+
+    /* Drei Bruch-Typen Grid */
+    .types-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .type-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.2rem 1rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .type-card.type-echt { border-top: 4px solid #2563eb; }
+    .type-card.type-unecht { border-top: 4px solid #ea580c; }
+    .type-card.type-schein { border-top: 4px solid #16a34a; }
+    .type-title { font-size: 0.92rem; font-weight: 800; color: #111827; margin-bottom: 0.35rem; }
+    .type-formula { font-size: 1.3rem; font-weight: 800; margin: 0.5rem 0; }
+    .type-desc { font-size: 0.83rem; color: #475569; line-height: 1.5; margin-bottom: 0.75rem; }
+    .type-badge {
+      display: inline-block; padding: 2px 10px; border-radius: 999px;
+      font-size: 0.72rem; font-weight: 800;
+    }
+    .badge-tag-echt { background: #eff6ff; color: #1d4ed8; }
+    .badge-tag-unecht { background: #fff7ed; color: #c2410c; }
+    .badge-tag-schein { background: #f0fdf4; color: #15803d; }
+
+    /* Beispiel-Schritt-Karten */
+    .step-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.15rem 1.3rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .step-card-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: #1e3a8a; color: #fff; font-weight: 800; font-size: 0.88rem;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .step-card-body { flex: 1; }
+    .step-card-title { font-size: 0.92rem; font-weight: 700; color: #111827; margin-bottom: 2px; }
+    .step-card-calc { font-size: 1.15rem; font-weight: 700; color: #1e3a8a; }
+
+    /* Interaktive Labore Styles */
+    .lab-box {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .lab-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      margin-bottom: 0.4rem;
+    }
+    .lab-subtitle {
+      font-size: 0.875rem;
+      color: #64748b;
+      margin-bottom: 1.2rem;
+    }
+    .lab-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      border-bottom: 1.5px solid #e2e8f0;
+      padding-bottom: 0.5rem;
+    }
+    .lab-tab-btn {
+      padding: 0.45rem 1.1rem;
+      background: transparent;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .lab-tab-btn.active {
+      background: #7c3aed;
+      color: #ffffff;
+    }
+    .lab-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.25rem;
+      background: #f8fafc;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+    .btn-chip {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-chip:hover {
+      border-color: #7c3aed;
+      color: #7c3aed;
+    }
+    .lab-vis-area {
+      background: #ffffff;
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+    .lab-result-line {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .lab-explanation {
+      font-size: 0.9rem;
+      color: #334155;
+      line-height: 1.6;
+      margin-top: 0.75rem;
+      background: #f8fafc;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      border-left: 3px solid #7c3aed;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       ECHTE BRUCH-SCHABLONEN (VISUAL FRACTION TEMPLATES)
+    ═══════════════════════════════════════════════════════════ */
+    .trainer-interactive-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 1.2rem;
+      margin: 1.4rem 0;
+      padding: 1.3rem;
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+    }
+    .trainer-task-math {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      display: flex;
+      align-items: center;
+    }
+    .fraction-template {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #ffffff;
+      padding: 10px 14px;
+      border: 2px solid #cbd5e1;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s ease;
+    }
+    .fraction-template:focus-within {
+      border-color: #7c3aed;
+      box-shadow: 0 0 0 3.5px rgba(124, 58, 237, 0.18);
+    }
+    .whole-box-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .input-whole {
+      width: 58px;
+      height: 72px;
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      text-align: center;
+      border: 2px solid #94a3b8;
+      border-radius: 8px;
+      background: #ffffff;
+      outline: none;
+      transition: all 0.15s;
+    }
+    .input-whole:focus {
+      border-color: #7c3aed;
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+    }
+    .fraction-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+    .input-frac {
+      width: 54px;
+      height: 33px;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      text-align: center;
+      border: 1.5px solid #94a3b8;
+      border-radius: 6px;
+      background: #ffffff;
+      outline: none;
+      transition: all 0.15s;
+    }
+    .input-frac:focus {
+      border-color: #7c3aed;
+      background: #ffffff;
+      box-shadow: 0 0 0 2.5px rgba(124, 58, 237, 0.2);
+    }
+    .fraction-bar-line {
+      width: 100%;
+      min-width: 48px;
+      height: 3px;
+      background: #1e3a8a;
+      border-radius: 2px;
+      margin: 2px 0;
+    }
+    .template-sublabel {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    /* Trainer Styles */
+    .trainer-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.3rem;
+      margin-top: 1rem;
+    }
+    .trainer-task-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .trainer-score {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #16a34a;
+      background: #f0fdf4;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+    .btn-trainer-action {
+      padding: 0.65rem 1.5rem;
+      background: #7c3aed;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-trainer-action:hover {
+      background: #6d28d9;
+    }
+    .trainer-feedback {
+      display: none;
+      padding: 0.85rem 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+    .trainer-feedback.correct {
+      display: block;
+      background: #ecfdf5;
+      border: 1.5px solid #10b981;
+      color: #065f46;
+    }
+    .trainer-feedback.wrong {
+      display: block;
+      background: #fef2f2;
+      border: 1.5px solid #ef4444;
+      color: #991b1b;
+    }
+
+    /* Übungs-Karten */
+    .uebung-card {
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 1.75rem;
+      background: #fff;
+    }
+    .uebung-header {
+      display: flex; align-items: flex-start; gap: 0.85rem;
+      padding: 1.15rem 1.3rem 0.75rem 1.3rem; background: #fff;
+    }
+    .uebung-num {
+      width: 30px; height: 30px; border-radius: 50%; border: 2px solid #db2777;
+      color: #be185d; font-size: 0.85rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
+    }
+    .uebung-text { font-size: 0.935rem; color: #111827; line-height: 1.65; flex: 1; }
+    .uebung-text strong { display: block; font-weight: 700; margin-bottom: 3px; font-size: 1rem; }
+    .uebung-tag {
+      display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.4px;
+      text-transform: uppercase; padding: 2px 8px; border-radius: 4px; margin-bottom: 4px;
+    }
+    .tag-typen { background: #eff6ff; color: #1d4ed8; }
+    .tag-wandeln { background: #fff7ed; color: #c2410c; }
+    .tag-kuerzen { background: #fdf4ff; color: #a21caf; }
+    .tag-sach { background: #f0fdf4; color: #15803d; }
+
+    .uebung-body { padding: 0 1.3rem 1.15rem 1.3rem; }
+    .btn-toggle-loesung {
+      background: #fdf2f8; border: 1.5px solid #fbcfe8; color: #be185d;
+      font-size: 0.83rem; font-weight: 700; padding: 0.45rem 1rem;
+      border-radius: 7px; cursor: pointer; transition: all 0.15s;
+    }
+    .btn-toggle-loesung:hover { background: #fce7f3; border-color: #f472b6; }
+    .loesung-content {
+      display: none; margin-top: 1rem; padding: 1rem 1.2rem;
+      background: #fdf2f8; border-radius: 9px; border-left: 3px solid #db2777;
+      font-size: 0.915rem; color: #111827; line-height: 1.7;
+    }
+    .loesung-content.open { display: block; }
+    .loesung-ergebnis {
+      font-weight: 700; color: #be185d; font-size: 0.975rem; margin-top: 0.6rem;
+    }
+
+    /* Selbsttest Styles */
+    .quiz-card {
+      background: #ffffff;
+      border: 1.5px solid #fde68a;
+      border-radius: 14px;
+      padding: 1.4rem;
+      margin: 1.5rem 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .quiz-status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #92400e;
+    }
+    .quiz-progress-track {
+      width: 100%;
+      height: 8px;
+      background: #fef3c7;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+    .quiz-progress-bar {
+      height: 100%;
+      width: 10%;
+      background: #f59e0b;
+      transition: width 0.3s ease;
+    }
+    .quiz-question-box {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #111827;
+      line-height: 1.55;
+      margin-bottom: 1.25rem;
+    }
+    .quiz-options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      margin-bottom: 1.25rem;
+    }
+    .quiz-opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 0.925rem;
+      color: #1e293b;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .quiz-opt-btn:hover:not(:disabled) {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+    .quiz-opt-letter {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      color: #475569;
+      font-size: 0.8rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .quiz-opt-btn.correct {
+      background: #ecfdf5 !important;
+      border-color: #10b981 !important;
+      color: #065f46 !important;
+    }
+    .quiz-opt-btn.correct .quiz-opt-letter {
+      background: #10b981;
+      color: #fff;
+    }
+    .quiz-opt-btn.wrong {
+      background: #fef2f2 !important;
+      border-color: #ef4444 !important;
+      color: #991b1b !important;
+    }
+    .quiz-opt-btn.wrong .quiz-opt-letter {
+      background: #ef4444;
+      color: #fff;
+    }
+    .quiz-explanation-box {
+      display: none;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: #334155;
+    }
+    .quiz-next-action {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .btn-quiz-next {
+      padding: 0.65rem 1.4rem;
+      background: #f59e0b;
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-quiz-next:hover {
+      background: #d97706;
+    }
+    .quiz-result-view {
+      display: none;
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+    .quiz-score-badge {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #d97706;
+      margin-bottom: 0.5rem;
+    }
+    .quiz-score-text {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.5rem;
+    }
+    .quiz-score-feedback {
+      font-size: 0.9rem;
+      color: #64748b;
+      max-width: 500px;
+      margin: 0 auto 1.5rem auto;
+      line-height: 1.6;
+    }
+    .quiz-intro-view {
+      text-align: center;
+      padding: 1.75rem 1rem;
+    }
+    .quiz-intro-badge {
+      display: inline-block;
+      padding: 3px 12px;
+      background: #fef3c7;
+      color: #92400e;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      margin-bottom: 0.75rem;
+    }
+    .quiz-intro-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #111827;
+      margin: 0 0 0.5rem 0;
+    }
+    .quiz-intro-desc {
+      font-size: 0.95rem;
+      color: #475569;
+      max-width: 520px;
+      margin: 0 auto 1.5rem auto;
+      line-height: 1.6;
+    }
+    .btn-quiz-start {
+      padding: 0.75rem 1.8rem;
+      background: #f59e0b;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 800;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+      transition: all 0.2s ease;
+    }
+    .btn-quiz-start:hover {
+      background: #d97706;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(217, 119, 6, 0.35);
+    }
+    .quick-jump-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: #fef3c7;
+      border: 1.5px solid #fde68a;
+      border-radius: 8px;
+      color: #92400e;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .quick-jump-btn:hover {
+      background: #fde68a;
+      border-color: #f59e0b;
+      color: #78350f;
+    }
+
+    /* Bottom Nav */
+    .bottom-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; gap: 1rem;
+    }
+    .btn-nav-prev {
+      padding: 0.65rem 1.2rem; border: 1.5px solid #d1d5db; border-radius: 9px;
+      background: #fff; color: #374151; font-size: 0.875rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-nav-prev:hover { border-color: #2563eb; color: #2563eb; }
+    .btn-nav-next {
+      padding: 0.65rem 1.4rem; border-radius: 9px; background: #1e3a8a; color: #fff;
+      font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: background 0.2s;
+    }
+    .btn-nav-next:hover { background: #1d4ed8; }
+
+    @media (max-width: 640px) {
+      .types-grid { grid-template-columns: 1fr; }
+      .step-card { flex-direction: column; align-items: flex-start; }
+      .trainer-interactive-wrap { flex-direction: column; }
+      .bottom-nav { flex-direction: column; align-items: stretch; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container page-container">
+
+  <!-- Navigation zurück zum Mathe-6-Portal -->
+  <nav class="portal-nav" style="justify-content: space-between; margin-bottom: 1.5rem;">
+    <a href="index.html" class="portal-back" style="font-weight: 700; font-size: 0.85rem; text-decoration: none; color: var(--theme-mathe);">
+      &larr; Zur Übersicht &middot; Mathe 6
+    </a>
+    <span class="badge-pill badge-mathe">Thema 4 &middot; Gymnasium</span>
+  </nav>
+
+  <!-- Header -->
+  <header style="margin-bottom: 2rem;">
+    <h1 class="page-title">Unechte Brüche &amp; Gemischte Zahlen</h1>
+    <p class="page-subtitle">
+      Die drei Bruch-Typen verstehen, zwischen unechten Brüchen und gemischten Zahlen hin- und herwandeln
+      und Ergebnisse stets sauber kürzen.
+    </p>
+
+    <!-- Schnellzugriff -->
+    <div style="display: flex; gap: 0.65rem; flex-wrap: wrap; margin-bottom: 1rem;">
+      <a href="#labor" class="quick-jump-btn">Zum Wandler-Labor</a>
+      <a href="#uebungen" class="quick-jump-btn" style="background: #fdf2f8; border-color: #fbcfe8; color: #9d174d;">Zu den Übungen</a>
+      <a href="#selbsttest" class="quick-jump-btn" style="background: #fef3c7; border-color: #fde68a; color: #92400e;">Zum Selbsttest</a>
+    </div>
+
+    <hr class="page-divider">
+  </header>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 1 — DIE DREI BRUCH-TYPEN IM ÜBERBLICK
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block" id="typen">
+    <div class="section-badge badge-typen">
+      <span class="badge-num">1</span> Die drei Bruch-Typen im Überblick
+    </div>
+
+    <p class="erklaer-text">
+      In der Bruchrechnung unterscheiden wir drei grundlegende Arten von Brüchen.
+      Entscheidend ist immer der Vergleich zwischen dem <strong>Zähler</strong> (oben) und dem <strong>Nenner</strong> (unten):
+      Ist der Zähler kleiner, mindestens gleich groß oder sogar ein glattes Vielfaches?
+    </p>
+
+    <!-- Kacheln: Drei Bruchtypen -->
+    <div class="types-grid">
+
+      <!-- Typ 1: Echter Bruch -->
+      <div class="type-card type-echt">
+        <div>
+          <span class="type-badge badge-tag-echt">Typ 1</span>
+          <div class="type-title" style="margin-top: 0.5rem;">Echter Bruch</div>
+          <div class="type-formula" style="color: #2563eb;">$$\text{Zähler} < \text{Nenner}$$</div>
+          <div class="type-desc">
+            Der Wert ist <strong>kleiner als 1 Ganzes</strong> ($0 < \text{Wert} < 1$).
+            Beispiel: $\frac{3}{4}$ Pizza (ein Stück fehlt noch zum vollen Kreis).
+          </div>
+        </div>
+        <div style="background: #f8fafc; padding: 0.5rem; border-radius: 8px; font-weight: 700; color: #1e3a8a; font-size: 0.88rem;">
+          Beispiele: $\frac{1}{2}$, $\frac{3}{4}$, $\frac{5}{8}$
+        </div>
+      </div>
+
+      <!-- Typ 2: Unechter Bruch -->
+      <div class="type-card type-unecht">
+        <div>
+          <span class="type-badge badge-tag-unecht">Typ 2</span>
+          <div class="type-title" style="margin-top: 0.5rem;">Unechter Bruch</div>
+          <div class="type-formula" style="color: #ea580c;">$$\text{Zähler} \ge \text{Nenner}$$</div>
+          <div class="type-desc">
+            Der Wert ist <strong>mindestens 1 Ganzes</strong> ($\text{Wert} \ge 1$).
+            Beispiel: $\frac{7}{4}$ Pizza (mehr als eine ganze Pizza!).
+          </div>
+        </div>
+        <div style="background: #fff7ed; padding: 0.5rem; border-radius: 8px; font-weight: 700; color: #c2410c; font-size: 0.88rem;">
+          Beispiele: $\frac{5}{3}$, $\frac{7}{4}$, $\frac{11}{2}$
+        </div>
+      </div>
+
+      <!-- Typ 3: Scheinbruch -->
+      <div class="type-card type-schein">
+        <div>
+          <span class="type-badge badge-tag-schein">Typ 3</span>
+          <div class="type-title" style="margin-top: 0.5rem;">Scheinbruch</div>
+          <div class="type-formula" style="color: #16a34a;">$$Z : N = \text{glatt}$$</div>
+          <div class="type-desc">
+            Der Zähler ist ein <strong>Vielfaches des Nenners</strong>.
+            Der Bruch „tarnt“ sich als Bruch, ist aber in Wahrheit eine <strong>ganze Zahl</strong>!
+          </div>
+        </div>
+        <div style="background: #f0fdf4; padding: 0.5rem; border-radius: 8px; font-weight: 700; color: #15803d; font-size: 0.88rem;">
+          Beispiele: $\frac{8}{4} = 2$, $\frac{15}{3} = 5$
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MERKE BOX NACH SCHULBLATT-STANDARD -->
+    <div class="merke-box">
+      <span class="merke-tag">MERKE</span>
+      <p>
+        Ein <strong>echter Bruch</strong> beschreibt stets weniger als ein Ganzes ($\text{Zähler} < \text{Nenner}$).
+      </p>
+      <p>
+        Ein <strong>unechter Bruch</strong> ($\text{Zähler} \ge \text{Nenner}$) beschreibt ein Ganzes oder mehr.
+        Er kann immer in eine <strong>gemischte Zahl</strong> (Ganze und Restbruch) oder eine <strong>ganze Zahl</strong> (Scheinbruch) umgewandelt werden.
+      </p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 2 — RICHTUNG A: UNECHTER BRUCH → GEMISCHTE ZAHL
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block" id="unecht-nach-gemischt">
+    <div class="section-badge badge-unecht-gemischt">
+      <span class="badge-num">2</span> Richtung A: Unechter Bruch &rarr; Gemischte Zahl
+    </div>
+
+    <p class="erklaer-text">
+      Stell dir vor, du hast viele gleich große Pizzastücke auf dem Tisch liegen.
+      Um zu sehen, wie viele Pizzen das eigentlich sind, packst du immer so viele Stücke zusammen, wie eine volle Pizza benötigt.
+      Mathematisch ist das genau eine <strong>Division mit Rest</strong>!
+    </p>
+
+    <div class="regel-box">
+      <div class="regel-title">Die Rechenregel: Division mit Rest</div>
+      <p>
+        <strong>Schritt 1:</strong> Rechne $\text{Zähler} : \text{Nenner}$ mit Rest.<br>
+        <strong>Schritt 2:</strong> Das ganzzahlige Ergebnis ist die <strong>große Ganze Zahl</strong> vor dem Bruch.<br>
+        <strong>Schritt 3:</strong> Der <strong>Rest</strong> wird der neue <strong>Zähler</strong>.<br>
+        <strong>Schritt 4:</strong> Der <strong>Nenner bleibt unverändert</strong>!
+      </p>
+      <p style="margin-top: 0.6rem; font-weight: 700; color: #1e3a8a;">
+        $$\frac{\text{Zähler}}{\text{Nenner}} \quad\longrightarrow\quad \text{Zähler} : \text{Nenner} = \text{Ganze} \text{ Rest } R \quad\longrightarrow\quad \mathbf{\text{Ganze}\frac{R}{\text{Nenner}}}$$
+      </p>
+    </div>
+
+    <h3 style="font-size: 1.05rem; font-weight: 800; color: #111827; margin: 1.5rem 0 0.8rem 0;">
+      Schritt-für-Schritt-Musterbeispiele
+    </h3>
+
+    <!-- Beispiel 1 -->
+    <div class="step-card">
+      <div class="step-card-num">1</div>
+      <div class="step-card-body">
+        <div class="step-card-title">Beispiel 1: $\frac{11}{4}$ (Viertelstücke)</div>
+        <div class="step-card-calc">
+          $$11 : 4 = 2 \text{ Rest } 3 \quad\implies\quad \mathbf{2\frac{3}{4}}$$
+        </div>
+        <div style="font-size: 0.85rem; color: #475569; margin-top: 4px;">
+          Begründung: $4$ passt $2$-mal ganz in die $11$ ($2 \cdot 4 = 8$). Es bleiben $11 - 8 = 3$ Viertelstücke übrig.
+        </div>
+      </div>
+    </div>
+
+    <!-- Beispiel 2 -->
+    <div class="step-card">
+      <div class="step-card-num">2</div>
+      <div class="step-card-body">
+        <div class="step-card-title">Beispiel 2: $\frac{23}{5}$ (Fünftelstücke)</div>
+        <div class="step-card-calc">
+          $$23 : 5 = 4 \text{ Rest } 3 \quad\implies\quad \mathbf{4\frac{3}{5}}$$
+        </div>
+        <div style="font-size: 0.85rem; color: #475569; margin-top: 4px;">
+          Begründung: $4 \cdot 5 = 20$. Rest bis $23$ sind $3$ Fünftel.
+        </div>
+      </div>
+    </div>
+
+    <!-- Beispiel 3 (Scheinbruch) -->
+    <div class="step-card">
+      <div class="step-card-num">3</div>
+      <div class="step-card-body">
+        <div class="step-card-title">Beispiel 3: $\frac{24}{6}$ (Scheinbruch!)</div>
+        <div class="step-card-calc">
+          $$24 : 6 = 4 \text{ Rest } 0 \quad\implies\quad \mathbf{4}$$
+        </div>
+        <div style="font-size: 0.85rem; color: #475569; margin-top: 4px;">
+          Bleibt der Rest $0$, schreiben wir <strong>keinen Bruch</strong> mehr dahinter. Das Ergebnis ist eine glatte ganze Zahl.
+        </div>
+      </div>
+    </div>
+
+    <!-- Kürzungs-Check -->
+    <div style="background: #fffbeb; border: 1.5px solid #fde68a; border-radius: 10px; padding: 1rem 1.2rem; margin-top: 1.25rem;">
+      <div style="font-weight: 800; color: #92400e; font-size: 0.92rem; margin-bottom: 0.35rem;">
+        Wichtige gymnasiale Qualitätsregel: Der Kürzungs-Check!
+      </div>
+      <p style="font-size: 0.88rem; color: #78350f; line-height: 1.6; margin: 0;">
+        Prüfe nach dem Umwandeln immer, ob der verbleibende Bruch noch gekürzt werden kann!
+        <br>
+        Beispiel: $\frac{14}{4} = 3\text{ Rest } 2 \implies 3\frac{2}{4}$.
+        Da $\frac{2}{4}$ mit $2$ kürzbar ist, lautet das vollständige Endergebnis: $\mathbf{3\frac{1}{2}}$.
+      </p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 3 — RICHTUNG B: GEMISCHTE ZAHL → UNECHTER BRUCH
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block" id="gemischt-nach-unecht">
+    <div class="section-badge badge-gemischt-unecht">
+      <span class="badge-num">3</span> Richtung B: Gemischte Zahl &rarr; Unechter Bruch
+    </div>
+
+    <p class="erklaer-text">
+      Jetzt drehen wir den Spieß um: Du hast $3$ ganze Tafeln Schokolade und noch $2$ einzelne Rippen von einer angebrochenen Tafel.
+      Jede Tafel besteht aus $5$ Rippen. Wie viele Rippen hast du insgesamt?
+      <br>
+      Rechnung: Die $3$ ganzen Tafeln haben $3 \cdot 5 = 15$ Rippen. Plus die $2$ einzelnen Rippen $= 17$ Rippen.
+      Als Bruch: $\mathbf{\frac{17}{5}}$.
+    </p>
+
+    <div class="regel-box">
+      <div class="regel-title">Die Rechenregel: „Ganze mal Nenner plus Zähler“</div>
+      <p>
+        Um eine gemischte Zahl in einen unechten Bruch zu verwandeln:
+      </p>
+      <p style="font-size: 1.15rem; font-weight: 700; color: #16a34a; text-align: center; margin: 0.75rem 0;">
+        $$\mathbf{\text{Ganze}\frac{\text{Zähler}}{\text{Nenner}} = \frac{(\text{Ganze} \cdot \text{Nenner}) + \text{Zähler}}{\text{Nenner}}}$$
+      </p>
+      <p>
+        <strong>Der praktische Dreiecks-Merkspruch:</strong><br>
+        <em>„Von unten nach links multiplizieren, dann nach oben addieren.“</em>
+        (Nenner $\cdot$ Ganze $+$ Zähler). Der Nenner bleibt stets derselbe!
+      </p>
+    </div>
+
+    <h3 style="font-size: 1.05rem; font-weight: 800; color: #111827; margin: 1.5rem 0 0.8rem 0;">
+      Schritt-für-Schritt-Musterbeispiele
+    </h3>
+
+    <!-- Beispiel B1 -->
+    <div class="step-card">
+      <div class="step-card-num">1</div>
+      <div class="step-card-body">
+        <div class="step-card-title">Beispiel 1: $2\frac{3}{4}$ umwandeln</div>
+        <div class="step-card-calc">
+          $$2\frac{3}{4} = \frac{2 \cdot 4 + 3}{4} = \frac{8 + 3}{4} = \mathbf{\frac{11}{4}}$$
+        </div>
+        <div style="font-size: 0.85rem; color: #475569; margin-top: 4px;">
+          Zwei Ganze haben $2 \cdot 4 = 8$ Viertel. Mit den $3$ vorhandenen Vierteln sind es insgesamt $11$ Viertel.
+        </div>
+      </div>
+    </div>
+
+    <!-- Beispiel B2 -->
+    <div class="step-card">
+      <div class="step-card-num">2</div>
+      <div class="step-card-body">
+        <div class="step-card-title">Beispiel 2: $4\frac{2}{5}$ umwandeln</div>
+        <div class="step-card-calc">
+          $$4\frac{2}{5} = \frac{4 \cdot 5 + 2}{5} = \frac{20 + 2}{5} = \mathbf{\frac{22}{5}}$$
+        </div>
+        <div style="font-size: 0.85rem; color: #475569; margin-top: 4px;">
+          $4$ Ganze haben $4 \cdot 5 = 20$ Fünftel. Dazu die $2$ Fünftel addieren ergibt $22$ Fünftel.
+        </div>
+      </div>
+    </div>
+
+    <!-- Beispiel B3 -->
+    <div class="step-card">
+      <div class="step-card-num">3</div>
+      <div class="step-card-body">
+        <div class="step-card-title">Beispiel 3: $5\frac{1}{6}$ umwandeln</div>
+        <div class="step-card-calc">
+          $$5\frac{1}{6} = \frac{5 \cdot 6 + 1}{6} = \frac{30 + 1}{6} = \mathbf{\frac{31}{6}}$$
+        </div>
+        <div style="font-size: 0.85rem; color: #475569; margin-top: 4px;">
+          $5 \cdot 6 = 30$, plus $1 = 31$. Der Nenner $6$ bleibt unverändert.
+        </div>
+      </div>
+    </div>
+
+    <div class="merke-box">
+      <span class="merke-tag">MERKE</span>
+      <p>
+        Beim Hin- und Herwandeln ändert sich der <strong>Nenner niemals</strong>!
+        Er gibt immer an, in wie viele gleich große Teile jedes Ganze geteilt ist.
+      </p>
+      <p>
+        $\text{Unechter Bruch} \xrightarrow{\text{Division mit Rest}} \text{Gemischte Zahl}$<br>
+        $\text{Gemischte Zahl} \xrightarrow{(\text{Ganze} \cdot \text{Nenner}) + \text{Zähler}} \text{Unechter Bruch}$
+      </p>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 4 — INTERAKTIVE LABORE
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block" id="labor">
+    <div class="section-badge badge-interaktiv">
+      <span class="badge-num">4</span> Interaktive Labore
+    </div>
+
+    <!-- LABOR 1: BRUCH-WANDLER -->
+    <div class="lab-box">
+      <div class="lab-title">Labor 1: Der visuelle Bruch-Wandler</div>
+      <div class="lab-subtitle">
+        Gib beliebige Werte in die Bruch-Schablone ein oder wähle typische Beispiele. Verfolge live die Rechenschritte und das Kachel-Modell.
+      </div>
+
+      <!-- Tabs -->
+      <div class="lab-tabs">
+        <button class="lab-tab-btn active" id="tab-btn-a" onclick="switchLabTab('a')">
+          Richtung A: Unecht &rarr; Gemischt
+        </button>
+        <button class="lab-tab-btn" id="tab-btn-b" onclick="switchLabTab('b')">
+          Richtung B: Gemischt &rarr; Unecht
+        </button>
+      </div>
+
+      <!-- Tab-Inhalt A: Unecht zu Gemischt -->
+      <div id="tab-content-a">
+        <div class="lab-controls" style="justify-content: flex-start; align-items: center;">
+          <div style="font-size: 0.88rem; font-weight: 800; color: #1e3a8a; margin-right: 0.5rem;">Unechter Bruch:</div>
+          
+          <!-- Bruch-Schablone für unechten Bruch -->
+          <div class="fraction-template" style="background: #ffffff; padding: 6px 12px;">
+            <div class="fraction-stack">
+              <input type="number" id="inp-a-z" class="input-frac" value="11" min="1" max="60" oninput="updateLabA()" title="Zähler" style="width: 58px; height: 32px;">
+              <div class="fraction-bar-line" style="min-width: 52px;"></div>
+              <input type="number" id="inp-a-n" class="input-frac" value="4" min="1" max="24" oninput="updateLabA()" title="Nenner" style="width: 58px; height: 32px;">
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 4px; align-items: center; margin-left: auto; flex-wrap: wrap;">
+            <span style="font-size: 0.75rem; color: #64748b; font-weight: 700; margin-right: 4px;">Vorlagen:</span>
+            <button class="btn-chip" onclick="setPresetA(7, 4)">7/4</button>
+            <button class="btn-chip" onclick="setPresetA(13, 3)">13/3</button>
+            <button class="btn-chip" onclick="setPresetA(17, 5)">17/5</button>
+            <button class="btn-chip" onclick="setPresetA(14, 4)">14/4 (Kürzen)</button>
+            <button class="btn-chip" onclick="setPresetA(18, 6)">18/6 (Scheinbruch)</button>
+          </div>
+        </div>
+
+        <div class="lab-vis-area">
+          <div class="lab-result-line" id="out-a-result">--</div>
+          <div id="out-a-svg-container" style="margin: 1rem 0;"></div>
+          <div class="lab-explanation" id="out-a-explanation">--</div>
+        </div>
+      </div>
+
+      <!-- Tab-Inhalt B: Gemischt zu Unecht -->
+      <div id="tab-content-b" style="display: none;">
+        <div class="lab-controls" style="justify-content: flex-start; align-items: center;">
+          <div style="font-size: 0.88rem; font-weight: 800; color: #1e3a8a; margin-right: 0.5rem;">Gemischte Zahl:</div>
+          
+          <!-- Bruch-Schablone für gemischten Bruch -->
+          <div class="fraction-template" style="background: #ffffff; padding: 6px 12px;">
+            <div class="whole-box-wrap">
+              <input type="number" id="inp-b-g" class="input-whole" value="3" min="1" max="15" oninput="updateLabB()" title="Ganze" style="width: 50px; height: 66px; font-size: 1.45rem;">
+              <span class="template-sublabel" style="font-size: 0.62rem;">Ganze</span>
+            </div>
+            <div class="fraction-stack">
+              <input type="number" id="inp-b-z" class="input-frac" value="2" min="1" max="23" oninput="updateLabB()" title="Zähler" style="width: 50px; height: 30px;">
+              <div class="fraction-bar-line" style="min-width: 44px;"></div>
+              <input type="number" id="inp-b-n" class="input-frac" value="5" min="2" max="24" oninput="updateLabB()" title="Nenner" style="width: 50px; height: 30px;">
+              <span class="template-sublabel" style="font-size: 0.62rem;">Bruch</span>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 4px; align-items: center; margin-left: auto; flex-wrap: wrap;">
+            <span style="font-size: 0.75rem; color: #64748b; font-weight: 700; margin-right: 4px;">Vorlagen:</span>
+            <button class="btn-chip" onclick="setPresetB(2, 3, 4)">2 3/4</button>
+            <button class="btn-chip" onclick="setPresetB(3, 2, 5)">3 2/5</button>
+            <button class="btn-chip" onclick="setPresetB(4, 1, 6)">4 1/6</button>
+            <button class="btn-chip" onclick="setPresetB(5, 1, 2)">5 1/2</button>
+          </div>
+        </div>
+
+        <div class="lab-vis-area">
+          <div class="lab-result-line" id="out-b-result">--</div>
+          <div id="out-b-svg-container" style="margin: 1rem 0;"></div>
+          <div class="lab-explanation" id="out-b-explanation">--</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- LABOR 2: SPEED-TRAINER -->
+    <div class="lab-box" style="margin-top: 2rem;">
+      <div class="lab-title">Labor 2: Der Hin- und Her-Speedtrainer</div>
+      <div class="lab-subtitle">
+        Trage deine Lösung direkt in die Bruch-Schablone ein und überprüfe dein Ergebnis mit einem Klick oder mit der Enter-Taste.
+      </div>
+
+      <div class="trainer-card">
+        <div class="trainer-task-header">
+          <span style="font-size: 0.88rem; font-weight: 800; color: #1e3a8a;" id="trainer-task-type">
+            Aufgabe: Unechten Bruch in gemischte Zahl umwandeln
+          </span>
+          <span class="trainer-score" id="trainer-score-display">0 gelöst</span>
+        </div>
+
+        <!-- Zentrierter Formel- und Schablonen-Bereich -->
+        <div class="trainer-interactive-wrap">
+          <div class="trainer-task-math" id="trainer-task-display">
+            <!-- Wird per JS befüllt: z. B. 16/3 = -->
+          </div>
+
+          <div id="trainer-inputs-area">
+            <!-- Wird per JS mit der echten Bruch-Schablone befüllt -->
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 0.75rem; margin-top: 1rem;">
+          <button class="btn-trainer-action" onclick="checkTrainerAnswer()">Ergebnis prüfen</button>
+          <button class="btn-trainer-action" style="background: #e2e8f0; color: #334155;" onclick="generateNewTrainerTask()">
+            Nächste Aufgabe
+          </button>
+        </div>
+
+        <div class="trainer-feedback" id="trainer-feedback-box">
+          <!-- Feedback wird hier eingefügt -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 5 — ÜBUNGSAUFGABEN MIT MUSTERLÖSUNGEN
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block" id="uebungen">
+    <div class="section-badge badge-uebungen">
+      <span class="badge-num">5</span> Übungsaufgaben mit Musterlösungen
+    </div>
+
+    <!-- AUFGABE 1: BRUCHTYPEN SORTIEREN -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">1</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-typen">Klassifikation</span>
+          <strong>Aufgabe 1: Bruch-Typen erkennen und sortieren</strong>
+          Ordne die folgenden sechs Brüche in die drei Kategorien <em>Echter Bruch</em>, <em>Unechter Bruch</em> und <em>Scheinbruch</em> ein:
+          $$\frac{4}{7}, \quad \frac{11}{5}, \quad \frac{16}{4}, \quad \frac{8}{8}, \quad \frac{5}{12}, \quad \frac{27}{9}$$
+        </div>
+      </div>
+      <div class="uebung-body">
+        <button class="btn-toggle-loesung" onclick="toggleSolution('sol-1', this)">Lösung &amp; Rechenweg aufdecken</button>
+        <div class="loesung-content" id="sol-1">
+          <p>
+            <strong>1. Echte Brüche ($\text{Zähler} < \text{Nenner}$):</strong><br>
+            • $\frac{4}{7}$ (da $4 < 7$)<br>
+            • $\frac{5}{12}$ (da $5 < 12$)
+          </p>
+          <p>
+            <strong>2. Unechte Brüche ($\text{Zähler} \ge \text{Nenner}$, kein glattes Vielfaches):</strong><br>
+            • $\frac{11}{5}$ (da $11 > 5$ und $11 : 5 = 2 \text{ Rest } 1$)
+          </p>
+          <p>
+            <strong>3. Scheinbrüche (Zähler ist glattes Vielfaches des Nenners):</strong><br>
+            • $\frac{8}{8} = 1$ ($8 : 8 = 1$, Rest $0$)<br>
+            • $\frac{16}{4} = 4$ ($16 : 4 = 4$, Rest $0$)<br>
+            • $\frac{27}{9} = 3$ ($27 : 9 = 3$, Rest $0$)
+          </p>
+          <div class="loesung-ergebnis">
+            Ergebnis: Echte Brüche: $\frac{4}{7}, \frac{5}{12}$ &middot; Unechter Bruch: $\frac{11}{5}$ &middot; Scheinbrüche: $\frac{8}{8}, \frac{16}{4}, \frac{27}{9}$.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUFGABE 2: UNECHT ZU GEMISCHT (BASICS) -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">2</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-wandeln">Basis-Training</span>
+          <strong>Aufgabe 2: Unechte Brüche in gemischte Zahlen umwandeln</strong>
+          Wandle durch Division mit Rest in eine gemischte Zahl um:
+          <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 0.6rem; font-size: 1.05rem;">
+            <span><strong>a)</strong> $\frac{13}{4}$</span>
+            <span><strong>b)</strong> $\frac{19}{6}$</span>
+            <span><strong>c)</strong> $\frac{23}{3}$</span>
+            <span><strong>d)</strong> $\frac{31}{8}$</span>
+          </div>
+        </div>
+      </div>
+      <div class="uebung-body">
+        <button class="btn-toggle-loesung" onclick="toggleSolution('sol-2', this)">Lösung &amp; Rechenweg aufdecken</button>
+        <div class="loesung-content" id="sol-2">
+          <p>
+            <strong>a) $\frac{13}{4}$</strong>: $13 : 4 = 3 \text{ Rest } 1 \implies \mathbf{3\frac{1}{4}}$<br>
+            <strong>b) $\frac{19}{6}$</strong>: $19 : 6 = 3 \text{ Rest } 1 \implies \mathbf{3\frac{1}{6}}$<br>
+            <strong>c) $\frac{23}{3}$</strong>: $23 : 3 = 7 \text{ Rest } 2 \implies \mathbf{7\frac{2}{3}}$<br>
+            <strong>d) $\frac{31}{8}$</strong>: $31 : 8 = 3 \text{ Rest } 7 \implies \mathbf{3\frac{7}{8}}$
+          </p>
+          <div class="loesung-ergebnis">
+            Ergebnisse: a) $3\frac{1}{4}$, b) $3\frac{1}{6}$, c) $7\frac{2}{3}$, d) $3\frac{7}{8}$.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUFGABE 3: GEMISCHT ZU UNECHT (BASICS) -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">3</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-wandeln">Basis-Training</span>
+          <strong>Aufgabe 3: Gemischte Zahlen in unechte Brüche umwandeln</strong>
+          Wandle mithilfe der Regel „Ganze mal Nenner plus Zähler“ in unechte Brüche um:
+          <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 0.6rem; font-size: 1.05rem;">
+            <span><strong>a)</strong> $2\frac{3}{5}$</span>
+            <span><strong>b)</strong> $4\frac{1}{4}$</span>
+            <span><strong>c)</strong> $3\frac{5}{7}$</span>
+            <span><strong>d)</strong> $6\frac{2}{3}$</span>
+          </div>
+        </div>
+      </div>
+      <div class="uebung-body">
+        <button class="btn-toggle-loesung" onclick="toggleSolution('sol-3', this)">Lösung &amp; Rechenweg aufdecken</button>
+        <div class="loesung-content" id="sol-3">
+          <p>
+            <strong>a) $2\frac{3}{5}$</strong>: $\frac{2 \cdot 5 + 3}{5} = \frac{10 + 3}{5} = \mathbf{\frac{13}{5}}$<br>
+            <strong>b) $4\frac{1}{4}$</strong>: $\frac{4 \cdot 4 + 1}{4} = \frac{16 + 1}{4} = \mathbf{\frac{17}{4}}$<br>
+            <strong>c) $3\frac{5}{7}$</strong>: $\frac{3 \cdot 7 + 5}{7} = \frac{21 + 5}{7} = \mathbf{\frac{26}{7}}$<br>
+            <strong>d) $6\frac{2}{3}$</strong>: $\frac{6 \cdot 3 + 2}{3} = \frac{18 + 2}{3} = \mathbf{\frac{20}{3}}$
+          </p>
+          <div class="loesung-ergebnis">
+            Ergebnisse: a) $\frac{13}{5}$, b) $\frac{17}{4}$, c) $\frac{26}{7}$, d) $\frac{20}{3}$.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUFGABE 4: KÜRZUNGS-CHECK -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">4</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-kuerzen">Gymnasialer Kürzungs-Check</span>
+          <strong>Aufgabe 4: Wandeln mit anschließendem Kürzen</strong>
+          Wandle in eine gemischte Zahl um und kürze den entstandenen Bruch vollständig:
+          <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 0.6rem; font-size: 1.05rem;">
+            <span><strong>a)</strong> $\frac{14}{4}$</span>
+            <span><strong>b)</strong> $\frac{20}{6}$</span>
+            <span><strong>c)</strong> $\frac{26}{8}$</span>
+            <span><strong>d)</strong> $\frac{45}{10}$</span>
+          </div>
+        </div>
+      </div>
+      <div class="uebung-body">
+        <button class="btn-toggle-loesung" onclick="toggleSolution('sol-4', this)">Lösung &amp; Rechenweg aufdecken</button>
+        <div class="loesung-content" id="sol-4">
+          <p>
+            <strong>a) $\frac{14}{4}$</strong>:<br>
+            $14 : 4 = 3 \text{ Rest } 2 \implies 3\frac{2}{4}$.<br>
+            Kürzen mit $2$: $\frac{2:2}{4:2} = \frac{1}{2} \implies \mathbf{3\frac{1}{2}}$.
+          </p>
+          <p>
+            <strong>b) $\frac{20}{6}$</strong>:<br>
+            $20 : 6 = 3 \text{ Rest } 2 \implies 3\frac{2}{6}$.<br>
+            Kürzen mit $2$: $\frac{2:2}{6:2} = \frac{1}{3} \implies \mathbf{3\frac{1}{3}}$.
+          </p>
+          <p>
+            <strong>c) $\frac{26}{8}$</strong>:<br>
+            $26 : 8 = 3 \text{ Rest } 2 \implies 3\frac{2}{8}$.<br>
+            Kürzen mit $2$: $\frac{2:2}{8:2} = \frac{1}{4} \implies \mathbf{3\frac{1}{4}}$.
+          </p>
+          <p>
+            <strong>d) $\frac{45}{10}$</strong>:<br>
+            $45 : 10 = 4 \text{ Rest } 5 \implies 4\frac{5}{10}$.<br>
+            Kürzen mit $5$: $\frac{5:5}{10:5} = \frac{1}{2} \implies \mathbf{4\frac{1}{2}}$.
+          </p>
+          <div class="loesung-ergebnis">
+            Ergebnisse: a) $3\frac{1}{2}$, b) $3\frac{1}{3}$, c) $3\frac{1}{4}$, d) $4\frac{1}{2}$.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUFGABE 5: LÜCKEN-PUZZLE -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">5</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-wandeln">Knobelaufgabe</span>
+          <strong>Aufgabe 5: Lückenrechnen &amp; Umkehrung</strong>
+          Bestimme die fehlende Zahl $\Box$:
+          <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 0.6rem; font-size: 1.05rem;">
+            <span><strong>a)</strong> $\frac{\Box}{5} = 4\frac{2}{5}$</span>
+            <span><strong>b)</strong> $3\frac{\Box}{7} = \frac{26}{7}$</span>
+            <span><strong>c)</strong> $\frac{29}{\Box} = 4\frac{1}{7}$</span>
+            <span><strong>d)</strong> $\frac{38}{8} = 4\frac{\Box}{4}$</span>
+          </div>
+        </div>
+      </div>
+      <div class="uebung-body">
+        <button class="btn-toggle-loesung" onclick="toggleSolution('sol-5', this)">Lösung &amp; Rechenweg aufdecken</button>
+        <div class="loesung-content" id="sol-5">
+          <p>
+            <strong>a) $\frac{\Box}{5} = 4\frac{2}{5}$</strong>:<br>
+            Rechne $4\frac{2}{5}$ in einen unechten Bruch um: $4 \cdot 5 + 2 = 22$. Also ist $\mathbf{\Box = 22}$.
+          </p>
+          <p>
+            <strong>b) $3\frac{\Box}{7} = \frac{26}{7}$</strong>:<br>
+            Die $3$ Ganzen sind $3 \cdot 7 = 21$ Siebtel. Bis zu $26$ fehlen $26 - 21 = 5$ Siebtel. Also ist $\mathbf{\Box = 5}$.
+          </p>
+          <p>
+            <strong>c) $\frac{29}{\Box} = 4\frac{1}{7}$</strong>:<br>
+            Da der Nenner bei der Umwandlung unverändert bleibt, muss der Nenner $7$ sein. Probe: $29 : 7 = 4 \text{ Rest } 1$. Stimmt! Also ist $\mathbf{\Box = 7}$.
+          </p>
+          <p>
+            <strong>d) $\frac{38}{8} = 4\frac{\Box}{4}$</strong>:<br>
+            Zuerst $38 : 8 = 4 \text{ Rest } 6 \implies 4\frac{6}{8}$.<br>
+            Jetzt den Bruch $\frac{6}{8}$ mit $2$ kürzen: $\frac{6:2}{8:2} = \frac{3}{4} \implies 4\frac{3}{4}$. Also ist $\mathbf{\Box = 3}$.
+          </p>
+          <div class="loesung-ergebnis">
+            Ergebnisse: a) $\Box = 22$, b) $\Box = 5$, c) $\Box = 7$, d) $\Box = 3$.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUFGABE 6: SACHAUFGABEN -->
+    <div class="uebung-card">
+      <div class="uebung-header">
+        <div class="uebung-num">6</div>
+        <div class="uebung-text">
+          <span class="uebung-tag tag-sach">Alltag &amp; Sachrechnen</span>
+          <strong>Aufgabe 6: Sachsituationen im Alltag</strong><br>
+          <strong>a) Pizza-Party:</strong> Auf einem Schulfest werden $23$ Viertelstücke Pizza verteilt.
+          Wie viele ganze Pizzen und wie viele Viertelstücke sind das?<br><br>
+          <strong>b) Getränkeausgabe:</strong> In der Pause trinken die Schüler insgesamt $19$ Becher Apfelsaft zu je $\frac{1}{4}\,\text{Liter}$.
+          Wie viele Liter Saft sind das als gemischte Zahl? Wie viele ganze 1-Liter-Flaschen mussten dafür mindestens geöffnet werden?
+        </div>
+      </div>
+      <div class="uebung-body">
+        <button class="btn-toggle-loesung" onclick="toggleSolution('sol-6', this)">Lösung &amp; Rechenweg aufdecken</button>
+        <div class="loesung-content" id="sol-6">
+          <p>
+            <strong>a) Pizza-Party ($23$ Viertel):</strong><br>
+            Rechnung: $\frac{23}{4}$ Pizzen $\implies 23 : 4 = 5 \text{ Rest } 3$.<br>
+            Antwort: Das entspricht $\mathbf{5}$ ganzen Pizzen und $\mathbf{3}$ Viertelstücken (also $5\frac{3}{4}$ Pizzen).
+          </p>
+          <p>
+            <strong>b) Getränkeausgabe ($19$ Becher zu je $\frac{1}{4}\,\text{l}$):</strong><br>
+            Rechnung: $19 \cdot \frac{1}{4}\,\text{l} = \frac{19}{4}\,\text{l}$.<br>
+            Division mit Rest: $19 : 4 = 4 \text{ Rest } 3 \implies \mathbf{4\frac{3}{4}\,\text{Liter}}$.<br>
+            Flaschenanzahl: Da $4$ Liter nicht ausreichen und eine fünfte Flasche angebrochen werden muss, mussten mindestens $\mathbf{5}$ Flaschen geöffnet werden.
+          </p>
+          <div class="loesung-ergebnis">
+            Ergebnisse: a) $5$ ganze Pizzen und $3$ Viertel ($5\frac{3}{4}$) &middot; b) $4\frac{3}{4}$ Liter Saft; es mussten $5$ Flaschen geöffnet werden.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BLOCK 6 — INTERAKTIVER SELBSTTEST (10 FRAGEN)
+  ═══════════════════════════════════════════════════════ -->
+  <div class="content-block" id="selbsttest">
+    <div class="section-badge badge-selbsttest">
+      <span class="badge-num">6</span> Interaktiver Selbsttest
+    </div>
+
+    <div class="quiz-card">
+
+      <!-- INTRO VIEW -->
+      <div id="quiz-intro-view" class="quiz-intro-view">
+        <span class="quiz-intro-badge">10 Fragen &middot; Gymnasium</span>
+        <h3 class="quiz-intro-title">Selbsttest: Unechte Brüche &amp; Gemischte Zahlen</h3>
+        <p class="quiz-intro-desc">
+          Teste dein Wissen über Bruch-Typen, die Division mit Rest, die Rückwandlung und den Kürzungs-Check.
+          Direktes Feedback zu jeder Frage hilft dir, deine Treffsicherheit zu prüfen!
+        </p>
+        <button class="btn-quiz-start" onclick="startQuiz()">Selbsttest jetzt starten</button>
+      </div>
+
+      <!-- QUESTION VIEW -->
+      <div id="quiz-question-view" style="display: none;">
+        <div class="quiz-status-bar">
+          <span id="quiz-q-counter">Frage 1 von 10</span>
+          <span id="quiz-score-live">Punkte: 0</span>
+        </div>
+        <div class="quiz-progress-track">
+          <div class="quiz-progress-bar" id="quiz-progress-bar"></div>
+        </div>
+
+        <div class="quiz-question-box" id="quiz-question-text">
+          <!-- Frage-Text per JS -->
+        </div>
+
+        <div class="quiz-options-grid" id="quiz-options-container">
+          <!-- 4 Antwort-Buttons per JS -->
+        </div>
+
+        <div class="quiz-explanation-box" id="quiz-explanation-box">
+          <!-- Erklärung nach Klick -->
+        </div>
+
+        <div class="quiz-next-action">
+          <button class="btn-quiz-next" id="btn-quiz-next" style="display: none;" onclick="nextQuestion()">
+            Nächste Frage &rarr;
+          </button>
+        </div>
+      </div>
+
+      <!-- RESULT VIEW -->
+      <div id="quiz-result-view" class="quiz-result-view">
+        <div class="quiz-score-badge" id="quiz-final-score">0 / 10</div>
+        <div class="quiz-score-text" id="quiz-final-title">Hervorragend!</div>
+        <div class="quiz-score-feedback" id="quiz-final-desc">
+          Du beherrschst die gemischte Schreibweise und das Hin- und Herwandeln sicher!
+        </div>
+        <button class="btn-quiz-start" onclick="restartQuiz()">Test wiederholen</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+       BOTTOM NAVIGATION
+  ═══════════════════════════════════════════════════════ -->
+  <div class="bottom-nav">
+    <a href="vergleichen-ordnen.html" class="btn-nav-prev">
+      &larr; Zurück zu Thema 3: Brüche vergleichen, ordnen &amp; Prozente
+    </a>
+    <a href="index.html" class="btn-nav-next">
+      Zur Übersicht aller Themen &rarr;
+    </a>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     JAVASCRIPT: LABORE, TRAINER, QUIZ & TOGGLES
+═══════════════════════════════════════════════════════ -->
+<script>
+  /* ----------------------------------------------------
+     1. LÖSUNGEN AUFKLAPPEN / VERBERGEN
+  ---------------------------------------------------- */
+  function toggleSolution(id, btn) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const isOpen = el.classList.contains('open');
+    if (isOpen) {
+      el.classList.remove('open');
+      btn.innerText = 'Lösung & Rechenweg aufdecken';
+    } else {
+      el.classList.add('open');
+      btn.innerText = 'Lösung verbergen';
+      triggerKaTeX(el);
+    }
+  }
+
+  /* ----------------------------------------------------
+     2. HILFSFUNKTIONEN MATHEMATIK
+  ---------------------------------------------------- */
+  function gcd(a, b) {
+    a = Math.abs(a); b = Math.abs(b);
+    while (b) { const t = b; b = a % b; a = t; }
+    return a;
+  }
+
+  /* ----------------------------------------------------
+     3. LABOR 1: BRUCH-WANDLER
+  ---------------------------------------------------- */
+  function switchLabTab(tab) {
+    const btnA = document.getElementById('tab-btn-a');
+    const btnB = document.getElementById('tab-btn-b');
+    const contA = document.getElementById('tab-content-a');
+    const contB = document.getElementById('tab-content-b');
+
+    if (tab === 'a') {
+      btnA.classList.add('active');
+      btnB.classList.remove('active');
+      contA.style.display = 'block';
+      contB.style.display = 'none';
+      updateLabA();
+    } else {
+      btnB.classList.add('active');
+      btnA.classList.remove('active');
+      contB.style.display = 'block';
+      contA.style.display = 'none';
+      updateLabB();
+    }
+  }
+
+  function setPresetA(z, n) {
+    document.getElementById('inp-a-z').value = z;
+    document.getElementById('inp-a-n').value = n;
+    updateLabA();
+  }
+
+  function setPresetB(g, z, n) {
+    document.getElementById('inp-b-g').value = g;
+    document.getElementById('inp-b-z').value = z;
+    document.getElementById('inp-b-n').value = n;
+    updateLabB();
+  }
+
+  function updateLabA() {
+    const z = parseInt(document.getElementById('inp-a-z').value) || 1;
+    const n = parseInt(document.getElementById('inp-a-n').value) || 1;
+
+    const g = Math.floor(z / n);
+    const r = z % n;
+
+    const resEl = document.getElementById('out-a-result');
+    const expEl = document.getElementById('out-a-explanation');
+    const svgEl = document.getElementById('out-a-svg-container');
+
+    if (n <= 0 || z <= 0) {
+      resEl.innerText = 'Bitte positive Zahlen eingeben.';
+      return;
+    }
+
+    // Fall 1: Scheinbruch (Rest 0)
+    if (r === 0) {
+      resEl.innerHTML = `$\\frac{${z}}{${n}} = ${z} : ${n} = \\mathbf{${g}}$ (Scheinbruch!)`;
+      expEl.innerHTML = `Der Zähler <strong>${z}</strong> lässt sich ohne Rest durch <strong>${n}</strong> teilen ($${z} : ${n} = ${g}$). Es entsteht genau die ganze Zahl <strong>${g}</strong>.`;
+    }
+    // Fall 2: Echter Bruch (Ganze = 0)
+    else if (g === 0) {
+      resEl.innerHTML = `$\\frac{${z}}{${n}}$ ist ein <strong>echter Bruch</strong> (Wert &lt; 1).`;
+      expEl.innerHTML = `Da der Zähler (${z}) kleiner als der Nenner (${n}) ist, gibt es noch kein volles Ganzes.`;
+    }
+    // Fall 3: Unechter Bruch -> Gemischte Zahl
+    else {
+      const teiler = gcd(r, n);
+      if (teiler > 1) {
+        const rK = r / teiler;
+        const nK = n / teiler;
+        resEl.innerHTML = `$\\frac{${z}}{${n}} = ${z} : ${n} = ${g} \\text{ Rest } ${r} \\implies ${g}\\frac{${r}}{${n}} = \\mathbf{${g}\\frac{${rK}}{${nK}}}$ <span style="font-size: 0.88rem; font-weight: normal; color: #16a34a;">(mit ${teiler} gekürzt)</span>`;
+      } else {
+        resEl.innerHTML = `$\\frac{${z}}{${n}} = ${z} : ${n} = ${g} \\text{ Rest } ${r} \\implies \\mathbf{${g}\\frac{${r}}{${n}}}$`;
+      }
+
+      expEl.innerHTML = `
+        <strong>Rechenschritt:</strong> $${z} : ${n} = ${g}$ Ganze mit Rest $${r}$.<br>
+        Die $${g}$ Ganzen ergeben $${g} \\cdot ${n} = ${g * n}$ Teile. Zusammen mit den restlichen $${r}$ Teilen sind das genau die $${z}$ Teile.
+      `;
+    }
+
+    // SVG zeichnen (Balken)
+    svgEl.innerHTML = renderFractionSvgBlocks(g, r, n, '#2563eb');
+    setTimeout(() => {
+      triggerKaTeX(resEl);
+      triggerKaTeX(expEl);
+    }, 20);
+  }
+
+  function updateLabB() {
+    const g = parseInt(document.getElementById('inp-b-g').value) || 1;
+    const z = parseInt(document.getElementById('inp-b-z').value) || 1;
+    const n = parseInt(document.getElementById('inp-b-n').value) || 2;
+
+    const resEl = document.getElementById('out-b-result');
+    const expEl = document.getElementById('out-b-explanation');
+    const svgEl = document.getElementById('out-b-svg-container');
+
+    if (g < 0 || z < 0 || n <= 0) return;
+
+    const zNeu = (g * n) + z;
+
+    resEl.innerHTML = `$\\mathbf{${g}\\frac{${z}}{${n}}} = \\frac{${g} \\cdot ${n} + ${z}}{${n}} = \\frac{${g * n} + ${z}}{${n}} = \\mathbf{\\frac{${zNeu}}{${n}}}$`;
+    expEl.innerHTML = `
+      <strong>Rechenschritt:</strong> Jedes der $${g}$ Ganzen besteht aus $${n}$ Teilen $\\implies ${g} \\cdot ${n} = ${g * n}$ Teile.<br>
+      Dazu kommen die bereits vorhandenen $${z}$ Teile $\\implies ${g * n} + ${z} = ${zNeu}$ Teile. Der Nenner bleibt $${n}$.
+    `;
+
+    svgEl.innerHTML = renderFractionSvgBlocks(g, z, n, '#16a34a');
+    setTimeout(() => {
+      triggerKaTeX(resEl);
+      triggerKaTeX(expEl);
+    }, 20);
+  }
+
+  function renderFractionSvgBlocks(g, r, n, color) {
+    const totalBlocks = Math.min(g + (r > 0 ? 1 : 0), 8);
+    const blockW = 68;
+    const blockH = 28;
+    const gap = 10;
+    const totalW = totalBlocks * (blockW + gap);
+
+    let svgs = '';
+
+    // Ganze Blöcke
+    for (let i = 0; i < g && i < 7; i++) {
+      const x = i * (blockW + gap);
+      const segW = blockW / n;
+      let segments = '';
+      for (let s = 0; s < n; s++) {
+        segments += `<rect x="${x + s * segW + 1}" y="2" width="${segW - 2}" height="${blockH - 4}" fill="${color}" rx="2" />`;
+      }
+      svgs += `
+        <g>
+          <rect x="${x}" y="0" width="${blockW}" height="${blockH}" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" rx="4" />
+          ${segments}
+          <text x="${x + blockW / 2}" y="${blockH + 15}" font-size="11" font-weight="700" fill="#475569" text-anchor="middle">1 Ganzes</text>
+        </g>
+      `;
+    }
+
+    // Restblock
+    if (r > 0 && g < 7) {
+      const x = g * (blockW + gap);
+      const segW = blockW / n;
+      let segments = '';
+      for (let s = 0; s < n; s++) {
+        const fill = s < r ? color : '#e2e8f0';
+        segments += `<rect x="${x + s * segW + 1}" y="2" width="${segW - 2}" height="${blockH - 4}" fill="${fill}" rx="2" />`;
+      }
+      svgs += `
+        <g>
+          <rect x="${x}" y="0" width="${blockW}" height="${blockH}" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" rx="4" />
+          ${segments}
+          <text x="${x + blockW / 2}" y="${blockH + 15}" font-size="11" font-weight="700" fill="#be185d" text-anchor="middle">Rest ${r}/${n}</text>
+        </g>
+      `;
+    }
+
+    return `
+      <div style="overflow-x: auto; padding: 0.5rem 0;">
+        <svg width="${Math.max(totalW, 300)}" height="${blockH + 24}" viewBox="0 0 ${Math.max(totalW, 300)} ${blockH + 24}">
+          ${svgs}
+        </svg>
+      </div>
+    `;
+  }
+
+
+  /* ----------------------------------------------------
+     4. LABOR 2: SPEED-TRAINER MIT BRUCH-SCHABLONE
+  ---------------------------------------------------- */
+  let trainerSolvedCount = 0;
+  let trainerCurrentTask = null;
+
+  function handleTrainerKeyDown(e) {
+    if (e.key === 'Enter') {
+      checkTrainerAnswer();
+    }
+  }
+
+  function generateNewTrainerTask() {
+    const feedbackBox = document.getElementById('trainer-feedback-box');
+    feedbackBox.className = 'trainer-feedback';
+    feedbackBox.style.display = 'none';
+
+    // Typ: 0 = Unecht -> Gemischt, 1 = Gemischt -> Unecht
+    const type = Math.random() < 0.5 ? 0 : 1;
+    const n = Math.floor(Math.random() * 6) + 3; // 3 bis 8
+    const g = Math.floor(Math.random() * 4) + 2; // 2 bis 5
+    const r = Math.floor(Math.random() * (n - 1)) + 1; // 1 bis n-1
+
+    const z = (g * n) + r;
+
+    trainerCurrentTask = { type, g, r, n, z };
+
+    const taskTitle = document.getElementById('trainer-task-type');
+    const taskDisplay = document.getElementById('trainer-task-display');
+    const inputsArea = document.getElementById('trainer-inputs-area');
+
+    if (type === 0) {
+      taskTitle.innerText = 'Wandle den unechten Bruch in eine gemischte Zahl um:';
+      taskDisplay.innerHTML = `$\\mathbf{\\frac{${z}}{${n}}} \\; = $`;
+      inputsArea.innerHTML = `
+        <div class="fraction-template mixed-template">
+          <div class="whole-box-wrap">
+            <input type="number" id="tr-in-g" class="input-whole" placeholder="G" title="Ganze Zahl" onkeydown="handleTrainerKeyDown(event)">
+            <span class="template-sublabel">Ganze</span>
+          </div>
+          <div class="fraction-stack">
+            <input type="number" id="tr-in-z" class="input-frac" placeholder="Z" title="Rest-Zähler" onkeydown="handleTrainerKeyDown(event)">
+            <div class="fraction-bar-line"></div>
+            <input type="number" id="tr-in-n" class="input-frac" placeholder="N" title="Nenner" onkeydown="handleTrainerKeyDown(event)">
+            <span class="template-sublabel">Bruch</span>
+          </div>
+        </div>
+      `;
+      setTimeout(() => {
+        const inpG = document.getElementById('tr-in-g');
+        if (inpG) inpG.focus();
+      }, 50);
+    } else {
+      taskTitle.innerText = 'Wandle die gemischte Zahl in einen unechten Bruch um:';
+      taskDisplay.innerHTML = `$\\mathbf{${g}\\frac{${r}}{${n}}} \\; = $`;
+      inputsArea.innerHTML = `
+        <div class="fraction-template pure-template">
+          <div class="fraction-stack">
+            <input type="number" id="tr-in-z" class="input-frac" style="width: 74px;" placeholder="Zähler" title="Neuer Zähler" onkeydown="handleTrainerKeyDown(event)">
+            <div class="fraction-bar-line" style="min-width: 68px;"></div>
+            <input type="number" id="tr-in-n" class="input-frac" style="width: 74px;" placeholder="Nenner" title="Nenner" onkeydown="handleTrainerKeyDown(event)">
+            <span class="template-sublabel">Unechter Bruch</span>
+          </div>
+        </div>
+      `;
+      setTimeout(() => {
+        const inpZ = document.getElementById('tr-in-z');
+        if (inpZ) inpZ.focus();
+      }, 50);
+    }
+
+    setTimeout(() => {
+      triggerKaTeX(document.getElementById('trainer-task-display'));
+    }, 20);
+  }
+
+  function checkTrainerAnswer() {
+    if (!trainerCurrentTask) return;
+    const fb = document.getElementById('trainer-feedback-box');
+    const { type, g, r, n, z } = trainerCurrentTask;
+
+    if (type === 0) {
+      const userG = parseInt(document.getElementById('tr-in-g').value);
+      const userZ = parseInt(document.getElementById('tr-in-z').value);
+      const userN = parseInt(document.getElementById('tr-in-n').value);
+
+      if (isNaN(userG) || isNaN(userZ) || isNaN(userN)) {
+        fb.className = 'trainer-feedback wrong';
+        fb.innerHTML = 'Bitte alle Felder der Schablone (Ganze, Zähler und Nenner) ausfüllen!';
+        return;
+      }
+
+      // Kürzungs-Check berücksichtigen:
+      const teiler = gcd(r, n);
+      const isDirectCorrect = (userG === g && userZ === r && userN === n);
+      const isReducedCorrect = (userG === g && userZ === (r / teiler) && userN === (n / teiler));
+
+      if (isDirectCorrect || isReducedCorrect) {
+        trainerSolvedCount++;
+        document.getElementById('trainer-score-display').innerText = `${trainerSolvedCount} gelöst`;
+        fb.className = 'trainer-feedback correct';
+        if (isReducedCorrect && teiler > 1) {
+          fb.innerHTML = `<strong>Richtig gerechnet!</strong> $${z} : ${n} = ${g} \\text{ Rest } ${r} \\implies ${g}\\frac{${r}}{${n}} = \\mathbf{${g}\\frac{${r/teiler}}{${n/teiler}}}$ <span style="font-size: 0.88rem; color: #16a34a;">(vollständig gekürzt)</span>.`;
+        } else {
+          fb.innerHTML = `<strong>Richtig gerechnet!</strong> $${z} : ${n} = ${g} \\text{ Rest } ${r} \\implies \\mathbf{${g}\\frac{${r}}{${n}}}$.`;
+        }
+      } else {
+        fb.className = 'trainer-feedback wrong';
+        fb.innerHTML = `<strong>Noch nicht ganz richtig.</strong><br>Tipp: Rechne $${z} : ${n}$. Wie oft passt ${n} in ${z}? Das ganzzahlige Ergebnis kommt in das Feld <strong>Ganze</strong>, der Rest in den <strong>Zähler</strong>.`;
+      }
+    } else {
+      const userZ = parseInt(document.getElementById('tr-in-z').value);
+      const userN = parseInt(document.getElementById('tr-in-n').value);
+
+      if (isNaN(userZ) || isNaN(userN)) {
+        fb.className = 'trainer-feedback wrong';
+        fb.innerHTML = 'Bitte Zähler und Nenner in die Bruch-Schablone eintragen!';
+        return;
+      }
+
+      if (userZ === z && userN === n) {
+        trainerSolvedCount++;
+        document.getElementById('trainer-score-display').innerText = `${trainerSolvedCount} gelöst`;
+        fb.className = 'trainer-feedback correct';
+        fb.innerHTML = `<strong>Perfekt!</strong> ${g} Ganze mal ${n} ist $${g * n}$, plus ${r} ergibt $\\mathbf{\\frac{${z}}{${n}}}$.`;
+      } else {
+        fb.className = 'trainer-feedback wrong';
+        fb.innerHTML = `<strong>Leider falsch.</strong><br>Rechne: $(\\text{Ganze} \\cdot \\text{Nenner}) + \\text{Zähler} = (${g} \\cdot ${n}) + ${r} = ${z}$. Der Nenner bleibt ${n}!`;
+      }
+    }
+
+    setTimeout(() => {
+      triggerKaTeX(document.getElementById('trainer-feedback-box'));
+    }, 20);
+  }
+
+
+  /* ----------------------------------------------------
+     5. SELBSTTEST LOGIK (10 FRAGEN)
+  ---------------------------------------------------- */
+  const quizQuestions = [
+    {
+      question: "Wann bezeichnet man einen Bruch als 'echten Bruch'?",
+      options: [
+        "Wenn der Zähler kleiner ist als der Nenner (Wert < 1).",
+        "Wenn der Zähler größer ist als der Nenner (Wert > 1).",
+        "Wenn der Zähler durch den Nenner ohne Rest teilbar ist.",
+        "Wenn der Zähler genau 1 ist."
+      ],
+      correctIndex: 0,
+      explanation: "Ein echter Bruch hat immer einen Zähler, der kleiner ist als der Nenner ($Z < N$). Sein Wert liegt zwischen $0$ und $1$ (z. B. $\\frac{3}{4}$).",
+    },
+    {
+      question: "Welcher der folgenden Brüche ist ein Scheinbruch?",
+      options: [
+        "$\\frac{13}{4}$",
+        "$\\frac{24}{6}$",
+        "$\\frac{5}{8}$",
+        "$\\frac{11}{3}$"
+      ],
+      correctIndex: 1,
+      explanation: "Bei $\\frac{24}{6}$ geht die Division ohne Rest auf: $24 : 6 = 4$. Der Bruch ist in Wahrheit die ganze Zahl $4$!",
+    },
+    {
+      question: "Wandle den unechten Bruch $\\frac{15}{4}$ in eine gemischte Zahl um:",
+      options: [
+        "$3\\frac{3}{4}$",
+        "$4\\frac{1}{4}$",
+        "$3\\frac{1}{4}$",
+        "$2\\frac{7}{4}$"
+      ],
+      correctIndex: 0,
+      explanation: "$15 : 4 = 3 \\text{ Rest } 3$. Also lautet die gemischte Zahl $3\\frac{3}{4}$.",
+    },
+    {
+      question: "Wandle die gemischte Zahl $4\\frac{2}{3}$ in einen unechten Bruch um:",
+      options: [
+        "$\\frac{11}{3}$",
+        "$\\frac{14}{3}$",
+        "$\\frac{8}{3}$",
+        "$\\frac{24}{3}$"
+      ],
+      correctIndex: 1,
+      explanation: "Formel: $\\frac{G \\cdot N + Z}{N} = \\frac{4 \\cdot 3 + 2}{3} = \\frac{12 + 2}{3} = \\frac{14}{3}$.",
+    },
+    {
+      question: "Wandle $\\frac{22}{6}$ in eine gemischte Zahl um und gib das vollständig gekürzte Ergebnis an:",
+      options: [
+        "$3\\frac{4}{6}$",
+        "$3\\frac{2}{3}$",
+        "$4\\frac{1}{3}$",
+        "$3\\frac{1}{2}$"
+      ],
+      correctIndex: 1,
+      explanation: "$22 : 6 = 3 \\text{ Rest } 4 \\implies 3\\frac{4}{6}$. Kürzen des Bruchs $\\frac{4}{6}$ mit $2$ ergibt $\\mathbf{3\\frac{2}{3}}$.",
+    },
+    {
+      question: "Welchen Wert hat der Bruch $\\frac{35}{7}$?",
+      options: [
+        "$4\\frac{7}{7}$",
+        "$5\\frac{1}{7}$",
+        "Genau $5$",
+        "$\\frac{7}{35}$"
+      ],
+      correctIndex: 2,
+      explanation: "$35 : 7 = 5$ Rest $0$. Da der Rest $0$ ist, schreibt man keinen Bruch mehr dahinter. Es ist genau die ganze Zahl $5$.",
+    },
+    {
+      question: "Welche Umrechnung von $5\\frac{3}{8}$ in einen unechten Bruch ist korrekt gerechnet?",
+      options: [
+        "$\\frac{5 \\cdot 8 + 3}{8} = \\frac{43}{8}$",
+        "$\\frac{5 + 3}{8} = \\frac{8}{8}$",
+        "$\\frac{5 \\cdot 3 + 8}{8} = \\frac{23}{8}$",
+        "$\\frac{53}{8}$"
+      ],
+      correctIndex: 0,
+      explanation: "$5$ Ganze mit je $8$ Teilen ergeben $5 \\cdot 8 = 40$ Teile. Zusammen mit den $3$ vorhandenen Teilen sind es $43$ Teile: $\\frac{43}{8}$.",
+    },
+    {
+      question: "Aus welcher Division mit Rest entstand die gemischte Zahl $4\\frac{2}{5}$?",
+      options: [
+        "$42 : 5$",
+        "$22 : 5$",
+        "$20 : 5$",
+        "$24 : 5$"
+      ],
+      correctIndex: 1,
+      explanation: "Rückrechnung: $4 \\cdot 5 + 2 = 22$. Die ursprüngliche Division lautete also $22 : 5 = 4 \\text{ Rest } 2$.",
+    },
+    {
+      question: "Welcher unechte Bruch hat denselben Wert wie die gemischte Zahl $2\\frac{7}{10}$?",
+      options: [
+        "$\\frac{14}{10}$",
+        "$\\frac{27}{10}$",
+        "$\\frac{20}{10}$",
+        "$\\frac{17}{10}$"
+      ],
+      correctIndex: 1,
+      explanation: "$2 \\cdot 10 + 7 = 20 + 7 = 27$. Der Bruch lautet $\\frac{27}{10}$.",
+    },
+    {
+      question: "Sachaufgabe: Für eine Wanderung werden 19 halbe Brötchen geschmiert. Wie vielen ganzen Brötchen entspricht das?",
+      options: [
+        "$9$ ganze Brötchen",
+        "$9\\frac{1}{2}$ ganze Brötchen",
+        "$10$ ganze Brötchen",
+        "$19\\frac{1}{2}$ ganze Brötchen"
+      ],
+      correctIndex: 1,
+      explanation: "Bruch: $\\frac{19}{2}$ Brötchen. Division mit Rest: $19 : 2 = 9 \\text{ Rest } 1$. Das entspricht genau $9\\frac{1}{2}$ ganzen Brötchen.",
+    }
+  ];
+
+  let curQIndex = 0;
+  let quizScore = 0;
+  let qAnswered = false;
+
+  function startQuiz() {
+    curQIndex = 0;
+    quizScore = 0;
+    document.getElementById('quiz-intro-view').style.display = 'none';
+    document.getElementById('quiz-result-view').style.display = 'none';
+    document.getElementById('quiz-question-view').style.display = 'block';
+    renderQuizQuestion();
+  }
+
+  function renderQuizQuestion() {
+    qAnswered = false;
+    const q = quizQuestions[curQIndex];
+
+    document.getElementById('quiz-q-counter').innerText = `Frage ${curQIndex + 1} von ${quizQuestions.length}`;
+    document.getElementById('quiz-score-live').innerText = `Punkte: ${quizScore}`;
+    document.getElementById('quiz-progress-bar').style.width = `${((curQIndex + 1) / quizQuestions.length) * 100}%`;
+
+    document.getElementById('quiz-question-text').innerHTML = q.question;
+
+    const optCont = document.getElementById('quiz-options-container');
+    optCont.innerHTML = '';
+
+    const letters = ['A', 'B', 'C', 'D'];
+    q.options.forEach((opt, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt-btn';
+      btn.innerHTML = `<span class="quiz-opt-letter">${letters[idx]}</span><span>${opt}</span>`;
+      btn.onclick = () => selectQuizAnswer(idx, btn);
+      optCont.appendChild(btn);
+    });
+
+    const expBox = document.getElementById('quiz-explanation-box');
+    expBox.style.display = 'none';
+    expBox.innerHTML = '';
+
+    document.getElementById('btn-quiz-next').style.display = 'none';
+
+    triggerKaTeX(document.getElementById('quiz-question-view'));
+  }
+
+  function selectQuizAnswer(chosenIdx, clickedBtn) {
+    if (qAnswered) return;
+    qAnswered = true;
+
+    const q = quizQuestions[curQIndex];
+    const allBtns = document.querySelectorAll('.quiz-opt-btn');
+    allBtns.forEach(b => b.disabled = true);
+
+    const expBox = document.getElementById('quiz-explanation-box');
+
+    if (chosenIdx === q.correctIndex) {
+      clickedBtn.classList.add('correct');
+      quizScore++;
+      document.getElementById('quiz-score-live').innerText = `Punkte: ${quizScore}`;
+      expBox.innerHTML = `<strong>Richtig!</strong> ${q.explanation}`;
+    } else {
+      clickedBtn.classList.add('wrong');
+      allBtns[q.correctIndex].classList.add('correct');
+      expBox.innerHTML = `<strong>Leider nicht richtig.</strong> Richtige Antwort ist <strong>${['A','B','C','D'][q.correctIndex]}</strong>.<br>${q.explanation}`;
+    }
+
+    expBox.style.display = 'block';
+    document.getElementById('btn-quiz-next').style.display = 'inline-block';
+    triggerKaTeX(document.getElementById('quiz-explanation-box'));
+  }
+
+  function nextQuestion() {
+    curQIndex++;
+    if (curQIndex < quizQuestions.length) {
+      renderQuizQuestion();
+    } else {
+      showQuizResults();
+    }
+  }
+
+  function showQuizResults() {
+    document.getElementById('quiz-question-view').style.display = 'none';
+    const resView = document.getElementById('quiz-result-view');
+    resView.style.display = 'block';
+
+    document.getElementById('quiz-final-score').innerText = `${quizScore} / ${quizQuestions.length}`;
+
+    let title = '';
+    let desc = '';
+    if (quizScore === 10) {
+      title = 'Hervorragend! Volle Punktzahl!';
+      desc = 'Du hast alle Fragen fehlerfrei gelöst und beherrschst die gemischte Schreibweise meisterhaft!';
+    } else if (quizScore >= 8) {
+      title = 'Sehr starke Leistung!';
+      desc = 'Du hast den allergrößten Teil der Aufgaben sicher im Griff. Kleine Stolpersteine lassen sich mit den Merkboxen oben schnell klären.';
+    } else if (quizScore >= 5) {
+      title = 'Solide Leistung!';
+      desc = 'Mehr als die Hälfte der Fragen hast du richtig beantwortet. Schau dir die Rechenregeln in Block 2 und 3 noch einmal an.';
+    } else {
+      title = 'Noch etwas Übung nötig!';
+      desc = 'Gehe die Division mit Rest und das Rückwandeln noch einmal Schritt für Schritt im Labor durch und starte dann einen neuen Durchlauf!';
+    }
+
+    document.getElementById('quiz-final-title').innerText = title;
+    document.getElementById('quiz-final-desc').innerText = desc;
+  }
+
+  function restartQuiz() {
+    startQuiz();
+  }
+
+  // Initialisierung beim Laden
+  document.addEventListener('DOMContentLoaded', () => {
+    updateLabA();
+    generateNewTrainerTask();
+  });
+</script>
+
+</body>
+</html>

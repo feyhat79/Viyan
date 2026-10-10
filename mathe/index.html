@@ -1,104 +1,271 @@
 <!DOCTYPE html>
-<html lang="de" class="theme-mathe-page">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <title>Mathematik | Lernportal Viyan</title>
+  <meta name="apple-mobile-web-app-title" content="Mathe 6">
+  <title>Mathematik Klasse 6 | Gymnasium</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/main.css">
+
+  <style>
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .topic-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topic-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--theme-mathe);
+    }
+
+    .topic-card:hover {
+      border-color: var(--theme-mathe);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .topic-card.coming-soon {
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .topic-card.coming-soon::before {
+      background: var(--border-color);
+    }
+
+    .topic-num {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--theme-mathe);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .topic-num.cs {
+      background: var(--border-color);
+      color: var(--text-muted);
+    }
+
+    .topic-header {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .topic-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .topic-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .topic-tag {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+      width: fit-content;
+    }
+
+    .tag-aktiv {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .tag-soon {
+      background: var(--bg-subtle);
+      color: var(--text-light);
+    }
+
+    .info-banner {
+      background: #eff6ff;
+      border: 1.5px solid #bfdbfe;
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .info-banner p {
+      font-size: 0.875rem;
+      color: #1e40af;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .semester-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 2rem 0 0.6rem 0;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+  </style>
 </head>
-<body class="theme-mathe-page">
+<body>
 
   <div class="container">
     <!-- Navigation -->
-    <nav class="portal-nav">
+    <nav class="portal-nav" style="justify-content: space-between;">
       <a href="../index.html" class="nav-back-link">← Zurück zum Hauptportal</a>
-      <span class="nav-current-title">Fach: Mathematik</span>
+      <span class="badge-pill badge-mathe" style="margin-bottom: 0;">Mathematik 6</span>
     </nav>
 
     <!-- Header -->
-    <header class="portal-header" style="padding-top: 0.5rem;">
-      <span class="badge-pill badge-mathe">Mathematik • Klasse 5/6</span>
-      <h1>Mathematik Kapitel</h1>
-      <p class="subtitle">Wähle ein Kapitel aus, um Regeln, Beispiele, Formeln und interaktive Übungsaufgaben durchzuarbeiten.</p>
+    <header class="portal-header" style="text-align: left; padding-top: 1rem;">
+      <div class="badge-pill badge-mathe" style="margin-bottom: 0.75rem;">Gymnasium · Klasse 6</div>
+      <h1 style="font-size: 1.9rem;">Mathematik 6</h1>
+      <p class="subtitle" style="text-align: left; max-width: 600px;">
+        Anschauliche Erklärungen, visuelle Modelle, interaktive Werkzeuge und Schritt-für-Schritt-Musterlösungen
+        für die Klasse 6 am Gymnasium.
+      </p>
     </header>
 
-    <!-- Kapitel-Raster -->
+    <!-- Info-Banner -->
+    <div class="info-banner">
+      <span class="badge-pill badge-mathe" style="margin-bottom: 0; font-size: 0.72rem; padding: 2px 8px; flex-shrink: 0;">Lernportal</span>
+      <p>
+        <strong>Schuljahr 2026/27 · Begleitendes Übungs- &amp; Vertiefungsportal.</strong>
+        Hier findest du Schritt-für-Schritt-Erklärungen, Bildmodelle und Rechenhilfen zu den Themen der 6. Klasse.
+      </p>
+    </div>
+
+    <!-- 1. Halbjahr -->
+    <div class="semester-label">1. Halbjahr · Brüche &amp; Rechnen</div>
+
     <div class="topic-grid">
 
-      <!-- Kapitel 1: Grundrechenarten -->
-      <a href="kapitel-1-grundrechenarten.html" class="topic-card">
+      <!-- Thema 1: Anteile & Größen -->
+      <a href="anteile.html" class="topic-card">
         <div class="topic-header">
           <div class="topic-num">1</div>
-          <div class="topic-title">Grundrechenarten &amp; Gesetze</div>
+          <div class="topic-title">Brüche: Anteile &amp; Größen</div>
         </div>
-        <p class="topic-desc">
-          Punkt-vor-Strich, Klammerregeln, Kommutativ- &amp; Assoziativgesetz und cleveres, vorteilhaftes Rechnen mit großen Zahlen.
-        </p>
-        <span class="topic-tag status-active">Aktiv • Jetzt üben</span>
+        <div class="topic-desc">
+          Was ist ein Bruch? Zähler, Nenner und Bruchstrich. Die drei Bildmodelle (Kreis, Schokolade, Strecke)
+          und der Einheiten-Trick zur Berechnung von Bruchteilen echter Größen.
+        </div>
+        <span class="topic-tag tag-aktiv">Aktuell</span>
       </a>
 
-      <!-- Kapitel 2: Ganze Zahlen & Teilbarkeit -->
-      <div class="topic-card coming-soon">
+      <!-- Thema 2: Erweitern & Kürzen -->
+      <a href="erweitern-kuerzen.html" class="topic-card">
         <div class="topic-header">
-          <div class="topic-num cs">2</div>
-          <div class="topic-title">Ganze Zahlen &amp; Teilbarkeit</div>
+          <div class="topic-num">2</div>
+          <div class="topic-title">Brüche erweitern &amp; kürzen</div>
         </div>
-        <p class="topic-desc">
-          Zahlenstrahl, negative Zahlen im Alltag (Thermometer, Kontostand), Teilbarkeitsregeln für 2, 3, 5, 9 und Primzahlen.
-        </p>
-        <span class="topic-tag status-soon">In Vorbereitung</span>
-      </div>
+        <div class="topic-desc">
+          Derselbe Wert in feineren oder gröberen Stücken. Erweiterungs- und Kürzungsregeln, der vollständig gekürzte Bruch (Grundform) sowie interaktiver Bruch-Schneider &amp; Kürz-Labor.
+        </div>
+        <span class="topic-tag tag-aktiv">Aktuell</span>
+      </a>
 
-      <!-- Kapitel 3: Brüche verstehen -->
-      <div class="topic-card coming-soon">
+      <!-- Thema 3: Vergleichen, Ordnen & Prozente -->
+      <a href="vergleichen-ordnen.html" class="topic-card">
         <div class="topic-header">
-          <div class="topic-num cs">3</div>
-          <div class="topic-title">Brüche &amp; Anteile</div>
+          <div class="topic-num">3</div>
+          <div class="topic-title">Brüche vergleichen, ordnen &amp; Prozente</div>
         </div>
-        <p class="topic-desc">
-          Zähler und Nenner anschaulich verstehen, Bruchteile von Größen (z. B. 3/4 von 100 m), Erweitern und Kürzen von Brüchen.
-        </p>
-        <span class="topic-tag status-soon">In Vorbereitung</span>
-      </div>
+        <div class="topic-desc">
+          Gleichnamig und ungleichnamig vergleichen, Hauptnenner-Methode, Größenketten auf dem Zahlenstrahl und Brüche in Hundertstelbrüche (Prozente) umwandeln.
+        </div>
+        <span class="topic-tag tag-aktiv">Aktuell</span>
+      </a>
 
-      <!-- Kapitel 4: Größen & Einheiten -->
-      <div class="topic-card coming-soon">
+      <!-- Thema 4: Unechte Brüche & Gemischte Zahlen -->
+      <a href="gemischte-zahlen.html" class="topic-card">
         <div class="topic-header">
-          <div class="topic-num cs">4</div>
-          <div class="topic-title">Größen &amp; Einheiten</div>
+          <div class="topic-num">4</div>
+          <div class="topic-title">Unechte Brüche &amp; Gemischte Zahlen</div>
         </div>
-        <p class="topic-desc">
-          Sicheres Umrechnen von Längen (mm, cm, dm, m, km), Gewichten (g, kg, t) und Zeitspannen (Sekunden, Minuten, Stunden).
-        </p>
-        <span class="topic-tag status-soon">In Vorbereitung</span>
-      </div>
+        <div class="topic-desc">
+          Die drei Bruch-Typen (echt, unecht, Scheinbruch), Hin- und Herwandeln via Division mit Rest, die Umkehr-Regel, gymnasialer Kürzungs-Check und interaktives Wandler-Labor.
+        </div>
+        <span class="topic-tag tag-aktiv">Aktuell</span>
+      </a>
 
-      <!-- Kapitel 5: Geometrie -->
+      <!-- Thema 5: Addition & Subtraktion (coming soon) -->
       <div class="topic-card coming-soon">
         <div class="topic-header">
           <div class="topic-num cs">5</div>
-          <div class="topic-title">Geometrie &amp; Flächen</div>
+          <div class="topic-title">Brüche addieren &amp; subtrahieren</div>
         </div>
-        <p class="topic-desc">
-          Punkte, Strecken, Geraden, parallele und senkrechte Linien, Koordinatensystem sowie Umfang und Fläche von Rechtecken.
-        </p>
-        <span class="topic-tag status-soon">In Vorbereitung</span>
+        <div class="topic-desc">
+          Zusammenzählen und Abziehen von Bruchteilen mit gleichem und ungleichem Nenner sowie gemischten Zahlen.
+        </div>
+        <span class="topic-tag tag-soon">In Vorbereitung</span>
       </div>
 
     </div>
 
+    <!-- 2. Halbjahr -->
+    <div class="semester-label" style="margin-top: 2.5rem;">2. Halbjahr · Dezimalzahlen &amp; Geometrie</div>
+    <div class="topic-grid">
+      <div class="topic-card coming-soon">
+        <div class="topic-header">
+          <div class="topic-num cs">—</div>
+          <div class="topic-title">Themen folgen im 2. Halbjahr</div>
+        </div>
+        <div class="topic-desc">
+          Dezimalbrüche, Rechnen mit Kommazahlen, Winkel und Kreisgeometrie.
+        </div>
+        <span class="topic-tag tag-soon">Noch nicht begonnen</span>
+      </div>
+    </div>
+
     <!-- Footer -->
-    <footer>
-      <strong>Lernportal Viyan</strong> • Mathematik Klasse 5/6
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); text-align: center;">
+      <p style="color: var(--text-muted); font-size: 0.85rem;">
+        <strong>Mathematik 6 · Gymnasium · Schuljahr 2026/27</strong><br>
+        Begleitendes Lern- und Vertiefungsportal zur Unterstützung und Vorbereitung.
+      </p>
     </footer>
+
   </div>
 
-  <script src="../assets/js/main.js"></script>
 </body>
 </html>
