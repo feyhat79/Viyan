@@ -1,9 +1,24 @@
 # Projekt-Richtlinien: Lernportal Viyan
 
 ## 1. Webseiten & Lerninhalte (HTML / CSS / JS)
-- Neue oder überarbeitete Inhalte für das interaktive Lernportal werden direkt in die jeweiligen Dateien eingepflegt.
-- Das Portal wird anschließend automatisch über `publish-portal.ps1 -Push` mit GitHub Pages synchronisiert.
-- Auf Nicht-Mathe-Seiten (Englisch, Deutsch) ausschließlich natives HTML (z. B. `&rarr;`) verwenden, kein ungerendertes LaTeX (`$\rightarrow$`).
+1. **Design & Seitenaufbau:**
+   - Bewährter Stil: Moderner, touch- und iPad-optimierter Aufbau (Plus Jakarta Sans, saubere Badges, farblich abgestimmte Merkkästen).
+   - Auf Nicht-Mathe-Seiten (Englisch, Deutsch) ausschließlich natives HTML (z. B. `&rarr;`) verwenden, kein ungerendertes LaTeX (`$\rightarrow$`).
+
+2. **Interaktiver Selbsttest (Standard für jedes Thema / jede Kachel):**
+   - Der Selbsttest am Ende jedes Themas wird **immer als interaktives Multiple-Choice Quiz** umgesetzt (`quiz-engine.js` & `quiz.css`).
+   - **Fragenpool:** Jedes Thema erhält einen festen Pool aus **20 bis 25 Fragen**.
+   - **Zwei Spielmodi zur Auswahl auf dem Startscreen:**
+     - ⚡ **Schnelltest:** 10 zufällig gezogene Fragen für die schnelle Runde zwischendurch.
+     - 📚 **Kompletter Test:** Alle 20–25 Fragen am Stück für das intensive Prüfungstraining.
+   - **Interaktivität & Feedback:**
+     - Sofortige visuelle Rückmeldung beim Antippen (Grün bei richtig, Rot bei falsch mit automatischer Hervorhebung der richtigen Lösung).
+     - Zu jeder Frage eine kurze, verständliche didaktische Erklärbox.
+     - Fortschrittsbalken, Live-Punktestand und Auswertungsscreen mit motivierendem Ergebnis-Feedback & Neustart-Option.
+   - Zusätzliche schriftliche Aufgaben (z. B. Übersetzungen, freies Schreiben) werden optional darunter in einem aufklappbaren `<details>`-Bereich bereitgestellt.
+
+3. **Automatische Synchronisation:**
+   - Neue Webseiten-Inhalte werden nach dem Einpflegen automatisch über `publish-portal.ps1 -Push` mit GitHub Pages synchronisiert.
 
 ## 2. Arbeitsblätter & Druck-PDFs (Druckerfreundlich & Lokal)
 1. **Fachspezifische Unterordner & nur PDF-Dateien:**
