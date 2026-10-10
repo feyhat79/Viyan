@@ -22,12 +22,12 @@
 
 ## 2. Arbeitsblätter & Druck-PDFs (Druckerfreundlich & Lokal)
 1. **Fachspezifische Unterordner & nur PDF-Dateien:**
-   - Arbeitsblätter werden **immer in fachspezifischen Unterordnern** abgelegt:
-     - `arbeitsblaetter/englisch/`
-     - `arbeitsblaetter/mathe/`
-     - `arbeitsblaetter/deutsch/`
+   - Arbeitsblätter werden **immer in Unterordnern direkt im jeweiligen Fach** abgelegt:
+     - `englisch/arbeitsblaetter/`
+     - `mathe/arbeitsblaetter/`
+     - `deutsch/arbeitsblaetter/`
    - Für Arbeitsblätter wird **ausschließlich die finale PDF-Datei** im jeweiligen Fachordner abgelegt.
-   - Es werden **keine `.html`-Dateien** im Ordner `arbeitsblaetter/` belassen (temporäre HTML-Dateien zum PDF-Generieren werden nach dem Rendern sofort gelöscht).
+   - Es werden **keine `.html`-Dateien** in den Arbeitsblätter-Ordnern belassen (temporäre HTML-Dateien zum PDF-Generieren werden nach dem Rendern sofort gelöscht).
 
 2. **Drucker- & Tintensparend (Eco-Print):**
    - **Keine bunten Flächen oder Hintergründe:** Tintenpatronen schonen!
