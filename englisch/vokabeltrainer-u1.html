@@ -18,6 +18,72 @@
       margin: 0 auto;
     }
 
+    /* Mode Switcher (Lernrichtung) */
+    .mode-switch-box {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 6px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .mode-btn {
+      padding: 0.65rem 1rem;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: transparent;
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .mode-btn:hover {
+      color: var(--text-main);
+    }
+    .mode-btn.active {
+      background: var(--theme-englisch);
+      color: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Audio Toggle Bar */
+    .audio-settings-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #faf5ff;
+      border: 1px solid #e9d5ff;
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 1rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .audio-toggle-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #6b21a8;
+      cursor: pointer;
+      user-select: none;
+    }
+    .audio-toggle-label input {
+      accent-color: var(--theme-englisch);
+      width: 17px;
+      height: 17px;
+      cursor: pointer;
+    }
+
     /* Filter Tabs */
     .filter-tabs {
       display: flex;
@@ -90,7 +156,7 @@
     /* 3D Flashcard Container */
     .flashcard-scene {
       width: 100%;
-      height: 320px;
+      height: 330px;
       perspective: 1000px;
       margin-bottom: 1.5rem;
     }
@@ -99,7 +165,7 @@
       height: 100%;
       position: relative;
       transform-style: preserve-3d;
-      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
       border-radius: 20px;
     }
@@ -138,60 +204,69 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       color: var(--text-muted);
     }
-    .card-audio-btn {
-      background: #ede9fe;
-      border: none;
-      color: #6d28d9;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: transform 0.15s;
-    }
-    .card-audio-btn:hover {
-      transform: scale(1.1);
-    }
 
     .card-body-center {
       text-align: center;
       margin: auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     .card-main-word {
-      font-size: 2rem;
+      font-size: 2.1rem;
       font-weight: 800;
       color: var(--text-main);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
       line-height: 1.2;
     }
     .card-phonetic {
       font-family: ui-monospace, Menlo, Consolas, monospace;
       font-size: 0.95rem;
       color: var(--text-muted);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.6rem;
     }
-    .card-example {
+
+    /* Prominenter Audio-Button */
+    .btn-speak-audio {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ede9fe;
+      color: #6d28d9;
+      border: 1px solid #ddd6fe;
+      padding: 5px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin: 6px 0;
+      transition: all 0.15s ease;
+    }
+    .btn-speak-audio:hover {
+      background: #ddd6fe;
+      transform: scale(1.05);
+    }
+
+    .card-example-box {
       font-size: 0.92rem;
       color: #475569;
       font-style: italic;
       line-height: 1.45;
       max-width: 90%;
-      margin: 0 auto;
+      margin-top: 0.75rem;
     }
 
     .card-hint-bottom {
       text-align: center;
       font-size: 0.78rem;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text-light);
     }
 
@@ -203,7 +278,7 @@
       margin-bottom: 1.5rem;
     }
     .action-btn {
-      padding: 0.9rem 1.25rem;
+      padding: 0.95rem 1.25rem;
       border-radius: var(--radius-md);
       font-size: 1rem;
       font-weight: 800;
@@ -245,7 +320,7 @@
     .btn-util {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
-      padding: 6px 14px;
+      padding: 7px 16px;
       border-radius: var(--radius-sm);
       font-size: 0.85rem;
       font-weight: 700;
@@ -285,12 +360,31 @@
     </nav>
 
     <!-- Header -->
-    <header style="margin-bottom: 1.5rem; text-align: center;">
+    <header style="margin-bottom: 1.25rem; text-align: center;">
       <h1 style="font-size: 2rem; margin-bottom: 0.3rem;">🗂️ Vokabeltrainer Unit 1</h1>
       <p style="color: var(--text-muted); font-size: 0.95rem;">
-        Karteikartensystem nach den Buchseiten 209 – 213 (Green Line 2 G9)
+        Digitales Karteikartensystem nach den Buchseiten 209 – 213 (Green Line 2 G9)
       </p>
     </header>
+
+    <!-- Lernrichtung-Umschalter -->
+    <div class="mode-switch-box">
+      <button class="mode-btn active" id="btnModeEnDe">
+        <span>🇬🇧 Englisch ➔ 🇩🇪 Deutsch</span>
+      </button>
+      <button class="mode-btn" id="btnModeDeEn">
+        <span>🇩🇪 Deutsch ➔ 🇬🇧 Englisch</span>
+      </button>
+    </div>
+
+    <!-- Audio-Leiste -->
+    <div class="audio-settings-bar">
+      <label class="audio-toggle-label">
+        <input type="checkbox" id="autoAudioCheckbox">
+        <span>🔊 Aussprache automatisch vorlesen</span>
+      </label>
+      <span style="font-size: 0.78rem; color: #7c3aed; font-weight: 700;">Britisches Englisch (en-GB)</span>
+    </div>
 
     <!-- Filter Tabs -->
     <div class="filter-tabs">
@@ -320,31 +414,38 @@
       <!-- 3D Flashcard Scene -->
       <div class="flashcard-scene">
         <div class="flashcard" id="cardElement">
-          <!-- Front Face -->
+          <!-- Front Face (Frage) -->
           <div class="card-face card-front">
             <div class="card-meta-top">
-              <span id="cardCategory">Check-in • S. 209</span>
-              <button class="card-audio-btn" id="audioBtn" title="Englische Aussprache anhören">🔊</button>
+              <span id="frontMetaCategory">Check-in • S. 209</span>
+              <span id="frontMetaLang">Frage</span>
             </div>
             <div class="card-body-center">
-              <div class="card-main-word" id="frontWord">invitation</div>
-              <div class="card-phonetic" id="frontPhonetic">[ˌɪnvɪˈteɪʃn]</div>
-              <div class="card-example" id="frontExample">„Would you like to come to my party?“</div>
+              <div class="card-main-word" id="frontMainWord">Word</div>
+              <button type="button" class="btn-speak-audio" id="frontAudioBtn" style="display: none;">
+                🔊 Anhören
+              </button>
+              <div class="card-phonetic" id="frontPhonetic"></div>
+              <div class="card-example-box" id="frontExampleBox"></div>
             </div>
-            <div class="card-hint-bottom">
+            <div class="card-hint-bottom" id="frontHintBottom">
               👆 Tippen oder Leertaste drücken zum Umdrehen
             </div>
           </div>
 
-          <!-- Back Face -->
+          <!-- Back Face (Antwort) -->
           <div class="card-face card-back">
             <div class="card-meta-top">
-              <span>Deutsche Übersetzung</span>
-              <span style="color: #10b981;">Lösung ✓</span>
+              <span id="backMetaLang">Antwort</span>
+              <span style="color: #10b981; font-weight: 800;">Lösung ✓</span>
             </div>
             <div class="card-body-center">
-              <div class="card-main-word" style="color: #10b981;" id="backWord">Einladung</div>
-              <div class="card-example" id="backExample" style="margin-top: 0.75rem;">„invitation → to invite (einladen)“</div>
+              <div class="card-main-word" style="color: #10b981;" id="backMainWord">Übersetzung</div>
+              <button type="button" class="btn-speak-audio" id="backAudioBtn" style="display: none;">
+                🔊 Anhören
+              </button>
+              <div class="card-phonetic" id="backPhonetic"></div>
+              <div class="card-example-box" id="backExampleBox"></div>
             </div>
             <div class="card-hint-bottom">
               Wähle unten: Gewusst oder Noch üben?
@@ -489,6 +590,7 @@
     ];
 
     // State Variables
+    let currentMode = 'en-de'; // 'en-de' (Englisch -> Deutsch) oder 'de-en' (Deutsch -> Englisch)
     let currentDeck = [];
     let currentIndex = 0;
     let correctCount = 0;
@@ -498,21 +600,61 @@
 
     // DOM Elements
     const cardEl = document.getElementById('cardElement');
-    const frontWordEl = document.getElementById('frontWord');
+    const frontMetaCatEl = document.getElementById('frontMetaCategory');
+    const frontMetaLangEl = document.getElementById('frontMetaLang');
+    const frontMainWordEl = document.getElementById('frontMainWord');
+    const frontAudioBtnEl = document.getElementById('frontAudioBtn');
     const frontPhoneticEl = document.getElementById('frontPhonetic');
-    const frontExampleEl = document.getElementById('frontExample');
-    const backWordEl = document.getElementById('backWord');
-    const backExampleEl = document.getElementById('backExample');
-    const cardCategoryEl = document.getElementById('cardCategory');
+    const frontExampleBoxEl = document.getElementById('frontExampleBox');
+    const frontHintBottomEl = document.getElementById('frontHintBottom');
+
+    const backMetaLangEl = document.getElementById('backMetaLang');
+    const backMainWordEl = document.getElementById('backMainWord');
+    const backAudioBtnEl = document.getElementById('backAudioBtn');
+    const backPhoneticEl = document.getElementById('backPhonetic');
+    const backExampleBoxEl = document.getElementById('backExampleBox');
+
     const counterDisplayEl = document.getElementById('counterDisplay');
     const correctCounterEl = document.getElementById('correctCounter');
     const repeatCounterEl = document.getElementById('repeatCounter');
     const progressBarEl = document.getElementById('progressBar');
-    const audioBtnEl = document.getElementById('audioBtn');
     const trainerAreaEl = document.getElementById('trainerArea');
     const completionScreenEl = document.getElementById('completionScreen');
     const completionTextEl = document.getElementById('completionText');
     const btnRepeatMistakesEl = document.getElementById('btnRepeatMistakes');
+    const autoAudioCheckEl = document.getElementById('autoAudioCheckbox');
+
+    const btnModeEnDe = document.getElementById('btnModeEnDe');
+    const btnModeDeEn = document.getElementById('btnModeDeEn');
+
+    // Speech Synthesis (Britisches Englisch)
+    let britishVoice = null;
+    function initVoices() {
+      if ('speechSynthesis' in window) {
+        const voices = window.speechSynthesis.getVoices();
+        britishVoice = voices.find(v => v.lang === 'en-GB' || v.lang.startsWith('en_GB')) 
+                    || voices.find(v => v.lang.startsWith('en'))
+                    || null;
+      }
+    }
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = initVoices;
+      initVoices();
+    }
+
+    function speakEnglish(text) {
+      if (!('speechSynthesis' in window) || !text) return;
+      window.speechSynthesis.cancel();
+      // Säubere Text von Notizen wie (pl) oder [ipa]
+      const cleanWord = text.replace(/\(.*?\)/g, '').trim();
+      const utterance = new SpeechSynthesisUtterance(cleanWord);
+      if (britishVoice) {
+        utterance.voice = britishVoice;
+      }
+      utterance.lang = 'en-GB';
+      utterance.rate = 0.85; // Kindgerechtes Tempo
+      window.speechSynthesis.speak(utterance);
+    }
 
     // Init Deck
     function initDeck(filter) {
@@ -540,15 +682,59 @@
         return;
       }
 
+      // WICHTIG: Karte IMMER sofort zurück auf die unumgedrehte Vorderseite setzen!
       cardEl.classList.remove('is-flipped');
       const item = currentDeck[currentIndex];
 
-      frontWordEl.textContent = item.en;
-      frontPhoneticEl.textContent = item.ipa || '';
-      frontExampleEl.textContent = item.ex ? `„${item.ex}“` : '';
-      backWordEl.textContent = item.de;
-      backExampleEl.textContent = item.ex ? `„${item.ex}“` : '';
-      cardCategoryEl.textContent = item.catName;
+      if (currentMode === 'en-de') {
+        // ==========================================
+        // MODUS 1: ENGLISCH -> DEUTSCH
+        // ==========================================
+        // VORDERSEITE: Englisch (Frage)
+        frontMetaCatEl.textContent = item.catName;
+        frontMetaLangEl.textContent = '🇬🇧 Englisch';
+        frontMainWordEl.textContent = item.en;
+        frontMainWordEl.style.color = 'var(--text-main)';
+        frontPhoneticEl.textContent = item.ipa || '';
+        frontAudioBtnEl.style.display = 'inline-flex';
+        // Englischer Beispielsatz auf der Vorderseite ist erlaubt
+        frontExampleBoxEl.textContent = item.ex ? `„${item.ex}“` : '';
+        frontHintBottomEl.textContent = '👆 Tippen für deutsche Übersetzung';
+
+        // RÜCKSEITE: Deutsch (Antwort) - KEINE ENGLISCHEN SPOILER!
+        backMetaLangEl.textContent = '🇩🇪 Deutsche Übersetzung';
+        backMainWordEl.textContent = item.de;
+        backPhoneticEl.textContent = '';
+        backAudioBtnEl.style.display = 'none';
+        backExampleBoxEl.textContent = ''; // Kein englischer Beispielsatz auf Deutsch-Rückseite!
+
+        // Auto-Audio Vorlesen (falls aktiviert)
+        if (autoAudioCheckEl.checked) {
+          setTimeout(() => speakEnglish(item.en), 120);
+        }
+
+      } else {
+        // ==========================================
+        // MODUS 2: DEUTSCH -> ENGLISCH
+        // ==========================================
+        // VORDERSEITE: Nur Deutsch (Frage) - STRENG KEINE ENGLISCHEN SPOILER!
+        frontMetaCatEl.textContent = item.catName;
+        frontMetaLangEl.textContent = '🇩🇪 Deutsch';
+        frontMainWordEl.textContent = item.de;
+        frontMainWordEl.style.color = '#0284c7';
+        frontPhoneticEl.textContent = '';
+        frontAudioBtnEl.style.display = 'none';
+        frontExampleBoxEl.textContent = ''; // LEER! Kein englischer Satz, damit die Lösung nicht verraten wird!
+        frontHintBottomEl.textContent = '👆 Tippen für englische Vokabel';
+
+        // RÜCKSEITE: Englisch (Antwort)
+        backMetaLangEl.textContent = '🇬🇧 Englische Vokabel';
+        backMainWordEl.textContent = item.en;
+        backPhoneticEl.textContent = item.ipa || '';
+        backAudioBtnEl.style.display = 'inline-flex';
+        // Beispielsatz erst jetzt auf der Lösungs-Rückseite einblenden!
+        backExampleBoxEl.textContent = item.ex ? `„${item.ex}“` : '';
+      }
 
       updateCounters();
     }
@@ -564,7 +750,16 @@
     }
 
     function flipCard() {
+      const isFlippingToBack = !cardEl.classList.contains('is-flipped');
       cardEl.classList.toggle('is-flipped');
+
+      // Wenn im Modus DE->EN auf die englische Rückseite umgedreht wird und Auto-Audio aktiv ist:
+      if (isFlippingToBack && currentMode === 'de-en' && autoAudioCheckEl.checked) {
+        const item = currentDeck[currentIndex];
+        if (item) {
+          setTimeout(() => speakEnglish(item.en), 200);
+        }
+      }
     }
 
     function handleAnswer(isCorrect) {
@@ -577,6 +772,7 @@
       }
 
       currentIndex++;
+      // Sofort zurückdrehen und neue Karte laden
       renderCard();
     }
 
@@ -598,20 +794,9 @@
       }
     }
 
-    // Audio Speech Synthesis
-    function playAudio(text) {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'en-GB';
-        utterance.rate = 0.85;
-        window.speechSynthesis.speak(utterance);
-      }
-    }
-
-    // Event Listeners
+    // Event Listeners für Card & Buttons
     cardEl.addEventListener('click', (e) => {
-      if (e.target.closest('#audioBtn')) return;
+      if (e.target.closest('.btn-speak-audio')) return;
       flipCard();
     });
 
@@ -620,14 +805,37 @@
     document.getElementById('btnCorrect').addEventListener('click', () => handleAnswer(true));
     document.getElementById('btnWrong').addEventListener('click', () => handleAnswer(false));
 
-    audioBtnEl.addEventListener('click', (e) => {
+    // Audio-Buttons
+    frontAudioBtnEl.addEventListener('click', (e) => {
       e.stopPropagation();
       const word = currentDeck[currentIndex]?.en;
-      if (word) playAudio(word);
+      if (word) speakEnglish(word);
+    });
+
+    backAudioBtnEl.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const word = currentDeck[currentIndex]?.en;
+      if (word) speakEnglish(word);
+    });
+
+    // Modus-Umschalter
+    btnModeEnDe.addEventListener('click', () => {
+      if (currentMode === 'en-de') return;
+      currentMode = 'en-de';
+      btnModeEnDe.classList.add('active');
+      btnModeDeEn.classList.remove('active');
+      renderCard();
+    });
+
+    btnModeDeEn.addEventListener('click', () => {
+      if (currentMode === 'de-en') return;
+      currentMode = 'de-en';
+      btnModeDeEn.classList.add('active');
+      btnModeEnDe.classList.remove('active');
+      renderCard();
     });
 
     document.getElementById('btnShuffle').addEventListener('click', () => {
-      // Fisher-Yates Shuffle ab aktuellem Index
       const remaining = currentDeck.slice(currentIndex);
       for (let i = remaining.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
