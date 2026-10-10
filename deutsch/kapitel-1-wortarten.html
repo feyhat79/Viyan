@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/quiz.css">
 </head>
 <body class="theme-deutsch-page">
 
@@ -110,7 +111,7 @@
       </div>
     </section>
 
-    <!-- 3. Interaktive Übungen -->
+    <!-- 3. Interaktiver Selbsttest (Multiple-Choice) -->
     <section style="margin-bottom: 2.5rem;">
       <div class="section-badge badge-uebungen">
         <span class="badge-num" style="background: var(--theme-deutsch);">2</span>
@@ -118,74 +119,86 @@
       </div>
 
       <p style="margin-bottom: 1.25rem;">
-        Bestimme die Wortarten in den Sätzen und überprüfe deine Antworten anschließend mit einem Klick:
+        Teste dein Wissen über die <strong>Wortarten</strong>! Wähle den <strong>Schnelltest (10 zufällige Fragen)</strong> oder den <strong>kompletten Test (alle 20 Fragen)</strong>:
       </p>
 
-      <!-- Übung 1 -->
-      <div class="exercise-card">
-        <div class="exercise-header">
-          <span class="exercise-title">Aufgabe 1: Wortarten im Satz bestimmen</span>
-          <span class="code-pill">Basis</span>
-        </div>
-        <div class="exercise-body">
-          Bestimme die Wortart der unterstrichenen Wörter im folgenden Satz:<br>
-          <div style="background: var(--bg-main); padding: 0.85rem 1rem; border-radius: var(--radius-sm); margin: 0.75rem 0; font-size: 1.05rem;">
-            <em>„<u>Der</u> <u>schnelle</u> Gepard <u>jagt</u> eine <u>kleine</u> Antilope.“</em>
+      <!-- Quiz Container -->
+      <div id="wortartenQuizContainer" class="quiz-container"></div>
+
+      <!-- Zusätzliche Übungsaufgaben zum Aufklappen -->
+      <details style="background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem;">
+        <summary style="font-weight: 700; color: var(--theme-deutsch); cursor: pointer; font-size: 1rem; user-select: none;">
+          📝 Zusätzliche schriftliche Übungsaufgaben anzeigen (3 Aufgaben)
+        </summary>
+        <div style="margin-top: 1.5rem;">
+
+          <!-- Übung 1 -->
+          <div class="exercise-card">
+            <div class="exercise-header">
+              <span class="exercise-title">Aufgabe 1: Wortarten im Satz bestimmen</span>
+              <span class="code-pill">Basis</span>
+            </div>
+            <div class="exercise-body">
+              Bestimme die Wortart der unterstrichenen Wörter im folgenden Satz:<br>
+              <div style="background: var(--bg-main); padding: 0.85rem 1rem; border-radius: var(--radius-sm); margin: 0.75rem 0; font-size: 1.05rem;">
+                <em>„<u>Der</u> <u>schnelle</u> Gepard <u>jagt</u> eine <u>kleine</u> Antilope.“</em>
+              </div>
+              Welche Wortarten sind: <strong>Der</strong>, <strong>schnelle</strong>, <strong>jagt</strong>, <strong>kleine</strong>?
+            </div>
+            <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
+            <div class="solution-box">
+              <strong>Lösung:</strong><br>
+              • <strong>Der:</strong> Bestimmter Artikel (Begleiter zu Gepard)<br>
+              • <strong>schnelle:</strong> Adjektiv (Wie ist der Gepard? schnell)<br>
+              • <strong>jagt:</strong> Verb (Personalform von <em>jagen</em>: er jagt)<br>
+              • <strong>kleine:</strong> Adjektiv (Wie ist die Antilope? klein)
+            </div>
           </div>
-          Welche Wortarten sind: <strong>Der</strong>, <strong>schnelle</strong>, <strong>jagt</strong>, <strong>kleine</strong>?
-        </div>
-        <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
-        <div class="solution-box">
-          <strong>Lösung:</strong><br>
-          • <strong>Der:</strong> Bestimmter Artikel (Begleiter zu Gepard)<br>
-          • <strong>schnelle:</strong> Adjektiv (Wie ist der Gepard? schnell)<br>
-          • <strong>jagt:</strong> Verb (Personalform von <em>jagen</em>: er jagt)<br>
-          • <strong>kleine:</strong> Adjektiv (Wie ist die Antilope? klein)
-        </div>
-      </div>
 
-      <!-- Übung 2 -->
-      <div class="exercise-card">
-        <div class="exercise-header">
-          <span class="exercise-title">Aufgabe 2: Adjektive richtig steigern</span>
-          <span class="code-pill">Steigerung</span>
-        </div>
-        <div class="exercise-body">
-          Bilde die Steigerungsformen (Höherstufe &amp; Höchststufe) für diese drei Adjektive:
-          <ol style="margin-left: 1.25rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 4px;">
-            <li>klug</li>
-            <li>hoch (Achtung, Ausnahme!)</li>
-            <li>gut (Achtung, Ausnahme!)</li>
-          </ol>
-        </div>
-        <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
-        <div class="solution-box">
-          <strong>Lösung:</strong><br>
-          1. <em>klug</em> → <strong>klüger</strong> → <strong>am klügsten</strong><br>
-          2. <em>hoch</em> → <strong>höher</strong> (ohne 'c'!) → <strong>am höchsten</strong><br>
-          3. <em>gut</em> → <strong>besser</strong> → <strong>am besten</strong>
-        </div>
-      </div>
+          <!-- Übung 2 -->
+          <div class="exercise-card">
+            <div class="exercise-header">
+              <span class="exercise-title">Aufgabe 2: Adjektive richtig steigern</span>
+              <span class="code-pill">Steigerung</span>
+            </div>
+            <div class="exercise-body">
+              Bilde die Steigerungsformen (Höherstufe &amp; Höchststufe) für diese drei Adjektive:
+              <ol style="margin-left: 1.25rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 4px;">
+                <li>klug</li>
+                <li>hoch (Achtung, Ausnahme!)</li>
+                <li>gut (Achtung, Ausnahme!)</li>
+              </ol>
+            </div>
+            <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
+            <div class="solution-box">
+              <strong>Lösung:</strong><br>
+              1. <em>klug</em> → <strong>klüger</strong> → <strong>am klügsten</strong><br>
+              2. <em>hoch</em> → <strong>höher</strong> (ohne 'c'!) → <strong>am höchsten</strong><br>
+              3. <em>gut</em> → <strong>besser</strong> → <strong>am besten</strong>
+            </div>
+          </div>
 
-      <!-- Übung 3 -->
-      <div class="exercise-card">
-        <div class="exercise-header">
-          <span class="exercise-title">Aufgabe 3: Personalpronomen einsetzen</span>
-          <span class="code-pill">Pronomen</span>
-        </div>
-        <div class="exercise-body">
-          Ersetze das fettgedruckte Nomen durch das passende Personalpronomen (er, sie, es, wir, ihr, sie):<br>
-          <em>„<strong>Die Schüler</strong> packen ihre Schultaschen.“</em> → <em>„_____ packen ihre Schultaschen.“</em><br>
-          <em>„<strong>Das Mädchen</strong> lacht fröhlich.“</em> → <em>„_____ lacht fröhlich.“</em>
-        </div>
-        <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
-        <div class="solution-box">
-          <strong>Lösung:</strong><br>
-          • <em>Die Schüler</em> (Mehrzahl) → <strong>Sie</strong> packen ihre Schultaschen.<br>
-          • <em>Das Mädchen</em> (sächlich / sächliches Geschlecht) → <strong>Es</strong> lacht fröhlich. (oder im Alltag auch: <em>Sie</em>)
-        </div>
-      </div>
+          <!-- Übung 3 -->
+          <div class="exercise-card">
+            <div class="exercise-header">
+              <span class="exercise-title">Aufgabe 3: Personalpronomen einsetzen</span>
+              <span class="code-pill">Pronomen</span>
+            </div>
+            <div class="exercise-body">
+              Ersetze das fettgedruckte Nomen durch das passende Personalpronomen (er, sie, es, wir, ihr, sie):<br>
+              <em>„<strong>Die Schüler</strong> packen ihre Schultaschen.“</em> → <em>„_____ packen ihre Schultaschen.“</em><br>
+              <em>„<strong>Das Mädchen</strong> lacht fröhlich.“</em> → <em>„_____ lacht fröhlich.“</em>
+            </div>
+            <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
+            <div class="solution-box">
+              <strong>Lösung:</strong><br>
+              • <em>Die Schüler</em> (Mehrzahl) → <strong>Sie</strong> packen ihre Schultaschen.<br>
+              • <em>Das Mädchen</em> (sächlich / sächliches Geschlecht) → <strong>Es</strong> lacht fröhlich. (oder im Alltag auch: <em>Sie</em>)
+            </div>
+          </div>
 
+        </div>
+      </details>
     </section>
 
     <!-- Footer -->
@@ -196,5 +209,134 @@
   </div>
 
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/quiz-engine.js"></script>
+  <script>
+    const wortartenQuizData = [
+      {
+        q: "Was ist das wichtigste äußere Erkennungszeichen für alle <strong>Nomen</strong> im Deutschen?",
+        options: ["Sie werden immer großgeschrieben", "Sie enden immer auf „-en“", "Sie stehen immer am Satzanfang", "Sie werden immer kleingeschrieben"],
+        correct: 0,
+        exp: "Nomen (Substantive) werden im Deutschen <strong>immer mit großem Anfangsbuchstaben</strong> geschrieben."
+      },
+      {
+        q: "Zu welcher Wortart gehört das Wort <strong>„Freude“</strong>?",
+        options: ["Nomen (Gefühl / Gedanke)", "Adjektiv", "Verb", "Artikel"],
+        correct: 0,
+        exp: "<strong>Freude</strong> ist ein Nomen (Abstraktum / Gefühl), man kann auch sagen: <em>die Freude</em>."
+      },
+      {
+        q: "Mit welcher Probe kannst du ein <strong>Nomen</strong> sicher nachweisen?",
+        options: ["Mit der Artikelprobe (der, die, das) und der Pluralprobe", "Mit der Konjugationsprobe (ich, du, er)", "Mit der Steigerungsprobe (schnell, schneller)", "Mit der Umstellprobe"],
+        correct: 0,
+        exp: "Vor Nomen kann man einen <strong>Artikel</strong> setzen (<em>das Haus</em>) und meist eine <strong>Mehrzahl</strong> bilden (<em>die Häuser</em>)."
+      },
+      {
+        q: "Welche Wortart beschreibt Tätigkeiten, Vorgänge oder Zustände?",
+        options: ["Verben (Zeitwörter / Tunwörter)", "Nomen (Namenwörter)", "Adjektive (Wie-Wörter)", "Pronomen (Fürwörter)"],
+        correct: 0,
+        exp: "<strong>Verben</strong> drücken aus, was jemand tut oder was geschieht (z. B. <em>rennen, schlafen, wachsen</em>)."
+      },
+      {
+        q: "Wie nennt man die ungebeugte Grundform eines Verbs (z. B. <em>lernen</em>, <em>spielen</em>)?",
+        options: ["Infinitiv", "Prädikat", "Komparativ", "Imperativ"],
+        correct: 0,
+        exp: "Die Grundform eines Verbs heißt <strong>Infinitiv</strong> (meistens mit der Endung <em>-en</em>)."
+      },
+      {
+        q: "Welche Wortart beschreibt, <strong>WIE</strong> ein Lebewesen oder Gegenstand ist?",
+        options: ["Adjektiv (Eigenschaftswort)", "Verb (Zeitwort)", "Nomen (Substantiv)", "Artikel (Begleiter)"],
+        correct: 0,
+        exp: "<strong>Adjektive</strong> sind Wie-Wörter (z. B. <em>schnell, bunt, freundlich</em>)."
+      },
+      {
+        q: "Wie lauten die Steigerungsstufen für das Adjektiv <strong>„hoch“</strong>?",
+        options: ["hoch → höher → am höchsten", "hoch → hocher → am hochsten", "hoch → mehr hoch → am meisten hoch", "hoch → höcher → am höchstens"],
+        correct: 0,
+        exp: "Achtung Ausnahme: In der Höherstufe fällt das „c“ weg: <strong>hoch → höher → am höchsten</strong>."
+      },
+      {
+        q: "Wie lauten die Steigerungsstufen für das Adjektiv <strong>„gut“</strong>?",
+        options: ["gut → besser → am besten", "gut → güter → am gütigsten", "gut → guter → am gutesten", "gut → lieber → am liebsten"],
+        correct: 0,
+        exp: "<strong>gut</strong> ist unregelmäßig: <strong>gut → besser → am besten</strong>."
+      },
+      {
+        q: "Welches der folgenden Wörter ist ein <strong>unbestimmter Artikel</strong>?",
+        options: ["eine", "der", "sie", "das"],
+        correct: 0,
+        exp: "<strong>ein / eine</strong> sind unbestimmte Artikel. <em>der / die / das</em> sind bestimmte Artikel."
+      },
+      {
+        q: "Welches Wort ist ein <strong>Personalpronomen</strong> (persönliches Fürwort)?",
+        options: ["wir", "Baum", "rennen", "schnell"],
+        correct: 0,
+        exp: "<strong>wir</strong> ist ein Personalpronomen (1. Person Plural). Weitere: <em>ich, du, er, sie, es, ihr, sie</em>."
+      },
+      {
+        q: "Ersetze das Nomen durch das passende Fürwort:<br><em>„Lukas liest ein Buch. Lukas lacht.“</em> → <em>„Lukas liest ein Buch. _____ lacht.“</em>",
+        options: ["Er", "Der", "Ihn", "Sein"],
+        correct: 0,
+        exp: "Für die männliche Einzahl (Lukas) steht das Personalpronomen <strong>Er</strong>."
+      },
+      {
+        q: "Bestimme die Wortart von <strong>„flüstern“</strong>:",
+        options: ["Verb", "Nomen", "Adjektiv", "Pronomen"],
+        correct: 0,
+        exp: "<strong>flüstern</strong> ist eine Tätigkeit und ein Verb (ich flüstere, du flüsterst...)."
+      },
+      {
+        q: "Bestimme die Wortart von <strong>„wunderschön“</strong>:",
+        options: ["Adjektiv", "Verb", "Nomen", "Artikel"],
+        correct: 0,
+        exp: "<strong>wunderschön</strong> beschreibt eine Eigenschaft (Wie ist es?) und ist daher ein Adjektiv."
+      },
+      {
+        q: "Welches Wort in folgendem Satz ist ein <strong>Verb</strong>?<br><em>„Die Katze schleicht leise durch den Garten.“</em>",
+        options: ["schleicht", "Katze", "leise", "Garten"],
+        correct: 0,
+        exp: "<strong>schleicht</strong> ist die Personalform des Verbs <em>schleichen</em>."
+      },
+      {
+        q: "Welches Wort in folgendem Satz ist ein <strong>Adjektiv</strong>?<br><em>„Am Abend essen wir leckere Pizza.“</em>",
+        options: ["leckere", "Abend", "essen", "Pizza"],
+        correct: 0,
+        exp: "<strong>leckere</strong> beschreibt, WIE die Pizza ist, und ist ein Adjektiv."
+      },
+      {
+        q: "Zu welcher Wortart gehört <strong>„ihr“</strong> im Satz: <em>„Geht ihr heute zum Sport?“</em>?",
+        options: ["Personalpronomen", "Bestimmter Artikel", "Verb", "Nomen"],
+        correct: 0,
+        exp: "<strong>ihr</strong> spricht eine Gruppe von Personen direkt an und ist ein Personalpronomen (2. Person Plural)."
+      },
+      {
+        q: "Welches dieser vier Wörter lässt sich <strong>steigern</strong>?",
+        options: ["mutig", "Tisch", "schwimmen", "wir"],
+        correct: 0,
+        exp: "Nur Adjektive lassen sich steigern: <strong>mutig → mutiger → am mutigsten</strong>."
+      },
+      {
+        q: "Welche Form von <em>„fahren“</em> ist die Personalform für <strong>„wir“</strong> in der Gegenwart?",
+        options: ["fahren (wir fahren)", "fahrt", "fährst", "fuhr"],
+        correct: 0,
+        exp: "In der Gegenwart heißt es: <em>wir fahren</em>. (<em>fuhr</em> wäre die Vergangenheit)."
+      },
+      {
+        q: "Welches dieser Wörter ist ein <strong>Nomen</strong>, obwohl man es nicht anfassen kann?",
+        options: ["Hoffnung", "hoffen", "hoffnungsvoll", "gehofft"],
+        correct: 0,
+        exp: "<strong>die Hoffnung</strong> ist ein abstraktes Nomen und wird großgeschrieben."
+      },
+      {
+        q: "Bestimme der Reihe nach die Wortarten im Satz: <em>„Das schnelle Auto fährt.“</em>",
+        options: ["Artikel • Adjektiv • Nomen • Verb", "Pronomen • Nomen • Verb • Adjektiv", "Nomen • Verb • Artikel • Adjektiv", "Artikel • Nomen • Adjektiv • Verb"],
+        correct: 0,
+        exp: "<strong>Das</strong> (Artikel) · <strong>schnelle</strong> (Adjektiv) · <strong>Auto</strong> (Nomen) · <strong>fährt</strong> (Verb)."
+      }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initViyanQuiz('wortartenQuizContainer', wortartenQuizData);
+    });
+  </script>
 </body>
 </html>

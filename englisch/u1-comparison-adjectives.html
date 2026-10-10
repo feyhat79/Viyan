@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/quiz.css">
 </head>
 <body class="theme-englisch-page">
 
@@ -112,53 +113,70 @@
     </section>
 
     <!-- 4. Interaktive Übungen -->
+    <!-- 4. Interaktiver Selbsttest (Multiple-Choice) -->
     <section style="margin-bottom: 2.5rem;">
       <div class="section-badge badge-uebungen">
         <span class="badge-num" style="background: var(--theme-englisch);">4</span>
-        <span>Selbsttest: Übungsaufgaben</span>
+        <span>Selbsttest &amp; Übungsaufgaben</span>
       </div>
 
-      <!-- Übung 1 -->
-      <div class="exercise-card">
-        <div class="exercise-header">
-          <span class="exercise-title">Aufgabe 1: Die richtige Form einsetzen</span>
-          <span class="code-pill">Training</span>
-        </div>
-        <div class="exercise-body">
-          Setze das Adjektiv in der richtigen Steigerungsform ein:<br>
-          1. <em>My birthday present is _______ (big) than yours.</em><br>
-          2. <em>This chocolate cake is the _______ (delicious) cake in the world!</em><br>
-          3. <em>Dave thinks playing games is _______ (funny) than watching TV.</em><br>
-          4. <em>The film was good, but the book was _______ (good).</em>
-        </div>
-        <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
-        <div class="solution-box">
-          <strong>Lösung:</strong><br>
-          1. <strong>bigger</strong> (Doppel-g nach kurzem Vokal!)<br>
-          2. <strong>most delicious</strong> (Langes Adjektiv mit 3 Silben)<br>
-          3. <strong>funnier</strong> (y verwandelt sich in -ie!)<br>
-          4. <strong>better</strong> (Ausnahme von <em>good</em>!)
-        </div>
-      </div>
+      <p style="margin-bottom: 1.25rem;">
+        Teste dein Wissen zur <strong>Steigerung der Adjektive (Comparative &amp; Superlative)</strong>! Wähle den <strong>Schnelltest (10 zufällige Fragen)</strong> oder den <strong>kompletten Test (alle 20 Fragen)</strong>:
+      </p>
 
-      <!-- Übung 2 -->
-      <div class="exercise-card">
-        <div class="exercise-header">
-          <span class="exercise-title">Aufgabe 2: Fehler-Detektiv</span>
-          <span class="code-pill">Klassenarbeits-Falle</span>
-        </div>
-        <div class="exercise-body">
-          Welcher der beiden Sätze ist richtig?<br>
-          A: <em>„This party game is more easyer than the other one.“</em><br>
-          B: <em>„This party game is easier than the other one.“</em>
-        </div>
-        <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
-        <div class="solution-box">
-          <strong>Lösung: Satz B ist richtig!</strong> ✅<br>
-          In Satz A ist eine doppelte Steigerung (<em>more easyer</em>), das ist ein schwerer Fehler! Kurze Adjektive auf -y bekommen nur die Endung <em>-ier</em>, niemals <em>more</em> davor!
-        </div>
-      </div>
+      <!-- Quiz Container -->
+      <div id="comparisonQuizContainer" class="quiz-container"></div>
 
+      <!-- Zusätzliche Übungsaufgaben zum Aufklappen -->
+      <details style="background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem;">
+        <summary style="font-weight: 700; color: var(--theme-englisch); cursor: pointer; font-size: 1rem; user-select: none;">
+          📝 Zusätzliche schriftliche Übungsaufgaben anzeigen (2 Aufgaben)
+        </summary>
+        <div style="margin-top: 1.5rem;">
+
+          <!-- Übung 1 -->
+          <div class="exercise-card">
+            <div class="exercise-header">
+              <span class="exercise-title">Aufgabe 1: Die richtige Form einsetzen</span>
+              <span class="code-pill">Training</span>
+            </div>
+            <div class="exercise-body">
+              Setze das Adjektiv in der richtigen Steigerungsform ein:<br>
+              1. <em>My birthday present is _______ (big) than yours.</em><br>
+              2. <em>This chocolate cake is the _______ (delicious) cake in the world!</em><br>
+              3. <em>Dave thinks playing games is _______ (funny) than watching TV.</em><br>
+              4. <em>The film was good, but the book was _______ (good).</em>
+            </div>
+            <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
+            <div class="solution-box">
+              <strong>Lösung:</strong><br>
+              1. <strong>bigger</strong> (Doppel-g nach kurzem Vokal!)<br>
+              2. <strong>most delicious</strong> (Langes Adjektiv mit 3 Silben)<br>
+              3. <strong>funnier</strong> (y verwandelt sich in -ie!)<br>
+              4. <strong>better</strong> (Ausnahme von <em>good</em>!)
+            </div>
+          </div>
+
+          <!-- Übung 2 -->
+          <div class="exercise-card">
+            <div class="exercise-header">
+              <span class="exercise-title">Aufgabe 2: Fehler-Detektiv</span>
+              <span class="code-pill">Klassenarbeits-Falle</span>
+            </div>
+            <div class="exercise-body">
+              Welcher der beiden Sätze ist richtig?<br>
+              A: <em>„This party game is more easyer than the other one.“</em><br>
+              B: <em>„This party game is easier than the other one.“</em>
+            </div>
+            <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
+            <div class="solution-box">
+              <strong>Lösung: Satz B ist richtig!</strong> ✅<br>
+              In Satz A ist eine doppelte Steigerung (<em>more easyer</em>), das ist ein schwerer Fehler! Kurze Adjektive auf -y bekommen nur die Endung <em>-ier</em>, niemals <em>more</em> davor!
+            </div>
+          </div>
+
+        </div>
+      </details>
     </section>
 
     <!-- Bottom Navigation -->
@@ -174,5 +192,134 @@
   </div>
 
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/quiz-engine.js"></script>
+  <script>
+    const comparisonQuizData = [
+      {
+        q: "Wie steigert man kurze, einsilbige Adjektive wie <em>tall</em> oder <em>cool</em>?",
+        options: ["mit more und most", "mit der Endung -er und the ... -est", "mit -y und -iest", "gar nicht"],
+        correct: 1,
+        exp: "Kurze Adjektive (1 Silbe): <em>tall &rarr; taller &rarr; the tallest</em>."
+      },
+      {
+        q: "Wie lautet die richtige Steigerung von <strong>big</strong>?",
+        options: ["biger, the bigest", "bigger, the biggest", "more big, the most big", "bigist"],
+        correct: 1,
+        exp: "Nach kurzem Vokal wird der Endkonsonant verdoppelt: <strong>bigger &rarr; the biggest</strong>."
+      },
+      {
+        q: "Was passiert mit dem -y bei <strong>funny</strong> bei der Steigerung?",
+        options: ["Es bleibt: funnyer", "Es wird zu -ie-: funnier, the funniest", "Es fällt weg: funner", "Es heißt more funny"],
+        correct: 1,
+        exp: "Steht vor dem -y ein Konsonant, verwandelt es sich in -ie-: <strong>funnier &rarr; the funniest</strong>."
+      },
+      {
+        q: "Wie steigert man lange Adjektive mit 3 Silben wie <strong>expensive</strong>?",
+        options: ["expensiver, the expensivest", "more expensive, the most expensive", "expensivier", "most expensiver"],
+        correct: 1,
+        exp: "Lange Adjektive klingen mit -er zu holprig und werden mit <strong>more</strong> und <strong>the most</strong> gesteigert."
+      },
+      {
+        q: "Wie lautet die Höherstufe (Comparative) der Ausnahme <strong>good</strong>?",
+        options: ["gooder", "better", "best", "more good"],
+        correct: 1,
+        exp: "<strong>good</strong> ist unregelmäßig: <em>good &rarr; better &rarr; the best</em>!"
+      },
+      {
+        q: "Wie lautet die Höchststufe (Superlative) von <strong>bad</strong>?",
+        options: ["the baddest", "the worse", "the worst", "the most bad"],
+        correct: 2,
+        exp: "<strong>bad</strong> ist unregelmäßig: <em>bad &rarr; worse &rarr; the worst</em>!"
+      },
+      {
+        q: "Welches Wort steht bei einem Vergleich zweier Dinge immer nach dem Komparativ?<br><em>„My bag is bigger _______ yours.“</em>",
+        options: ["then", "than", "as", "like"],
+        correct: 1,
+        exp: "Bei Vergleichen heißt es „größer als...“ &rarr; <strong>bigger than</strong> (immer mit 'a', nicht mit 'e'!)."
+      },
+      {
+        q: "Welcher Satz ist grammatikalisch VOLLKOMMEN KORREKT?",
+        options: ["Luke is more taller than Dave.", "Luke is taller than Dave.", "Luke is taller as Dave.", "Luke is tall than Dave."],
+        correct: 1,
+        exp: "Keine Doppelsteigerung! Richtig: <strong>„Luke is taller than Dave.“</strong>"
+      },
+      {
+        q: "Wie steigert man <strong>nice</strong> (endet bereits auf ein stummes -e)?",
+        options: ["niceer, the niceest", "nicer, the nicest", "more nice, most nice", "nicerer"],
+        correct: 1,
+        exp: "Da das -e schon da ist, hängt man nur noch -r und -st an: <strong>nicer &rarr; the nicest</strong>."
+      },
+      {
+        q: "Film vs. Buch:<br><em>„This film is _______ (exciting) than the book.“</em>",
+        options: ["excitinger", "more exciting", "the most exciting", "most excitinger"],
+        correct: 1,
+        exp: "<em>exciting</em> hat 3 Silben &rarr; <strong>more exciting than</strong>."
+      },
+      {
+        q: "Der höchste Berg:<br><em>„Mount Everest is the _______ (high) mountain in the world.“</em>",
+        options: ["higher", "highest", "most high", "more higher"],
+        correct: 1,
+        exp: "Der Superlativ von <em>high</em> ist <strong>the highest</strong>."
+      },
+      {
+        q: "Was ist an <em>„This puzzle is more easier than that one“</em> falsch?",
+        options: ["puzzle wird großgeschrieben", "„more easier“ ist eine falsche Doppelsteigerung", "than muss then heißen", "that one gibt es nicht"],
+        correct: 1,
+        exp: "<em>easy</em> wird mit -ier gesteigert (<em>easier</em>). Ein zusätzliches <em>more</em> davor ist verboten!"
+      },
+      {
+        q: "Heißes Wetter:<br>Wie lautet der Superlativ von <strong>hot</strong>?",
+        options: ["the hotest", "the hottest", "the most hot", "the hotter"],
+        correct: 1,
+        exp: "Kurzer Vokal &rarr; Konsonant t verdoppeln: <strong>the hottest</strong>."
+      },
+      {
+        q: "Der Hund des Nachbarn:<br><em>„My dog is _______ (friendly) than his dog.“</em>",
+        options: ["friendlier", "more friendlier", "friendlyer", "friendliest"],
+        correct: 0,
+        exp: "<em>friendly</em> (2 Silben auf -y) &rarr; y wird zu -ie-: <strong>friendlier</strong>."
+      },
+      {
+        q: "Wie lautet die vollständige Steigerungsreihe von <strong>cool</strong>?",
+        options: ["cool &rarr; cooler &rarr; the coolest", "cool &rarr; more cool &rarr; the most cool", "cool &rarr; coolier &rarr; the cooliest", "cool &rarr; coolst"],
+        correct: 0,
+        exp: "1 Silbe &rarr; <strong>cool &rarr; cooler &rarr; the coolest</strong>."
+      },
+      {
+        q: "Schlüssel verloren:<br><em>„Today is the _______ (bad) day of the week!“</em>",
+        options: ["baddest", "worse", "worst", "most bad"],
+        correct: 2,
+        exp: "Der Superlativ von <em>bad</em> ist unregelmäßig: <strong>the worst</strong>."
+      },
+      {
+        q: "Städtevergleich:<br><em>„London is _______ (large) than Oxford.“</em>",
+        options: ["larger", "more large", "more larger", "largest"],
+        correct: 0,
+        exp: "<em>large</em> hat 1 Silbe (stummes -e) &rarr; <strong>larger than</strong>."
+      },
+      {
+        q: "Omas Kuchen schmeckt noch besser:<br><em>„Grandma's cake is _______ than this cake.“</em>",
+        options: ["deliciouser", "more delicious", "most delicious", "the deliciousest"],
+        correct: 1,
+        exp: "Komparativ von <em>delicious</em> (3 Silben): <strong>more delicious</strong>."
+      },
+      {
+        q: "Glücklichster Hund:<br><em>„Sherlock is the _______ (happy) dog in Greenwich.“</em>",
+        options: ["happyest", "happiest", "most happy", "more happy"],
+        correct: 1,
+        exp: "Superlativ von <em>happy</em> ist <strong>the happiest</strong> (-y &rarr; -ie-)."
+      },
+      {
+        q: "Wann benutzt man <strong>more</strong> und <strong>most</strong> zur Steigerung?",
+        options: ["Bei allen einsilbigen Adjektiven", "Bei langen Adjektiven ab zwei Silben (außer auf -y)", "Nur bei good und bad", "Niemals im Englischen"],
+        correct: 1,
+        exp: "Lange Adjektive (ab zwei Silben, wie <em>boring, exciting, expensive</em>) werden mit <strong>more / most</strong> gesteigert."
+      }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initViyanQuiz('comparisonQuizContainer', comparisonQuizData);
+    });
+  </script>
 </body>
 </html>

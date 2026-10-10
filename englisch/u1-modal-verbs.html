@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/quiz.css">
 </head>
 <body class="theme-englisch-page">
 
@@ -88,57 +89,69 @@
       </div>
     </section>
 
-    <!-- 3. Interaktive Übungen -->
+    <!-- 3. Interaktiver Selbsttest (Multiple-Choice) -->
     <section style="margin-bottom: 2.5rem;">
       <div class="section-badge badge-uebungen">
         <span class="badge-num" style="background: var(--theme-englisch);">3</span>
-        <span>Selbsttest: Übungsaufgaben</span>
+        <span>Selbsttest &amp; Übungsaufgaben</span>
       </div>
 
       <p style="margin-bottom: 1.25rem;">
-        Wähle das passende Modalverb aus und prüfe deine Antwort mit <strong>„Lösung anzeigen“</strong>:
+        Teste dein Wissen zu <strong>can, can't &amp; must</strong>! Wähle den <strong>Schnelltest (10 zufällige Fragen)</strong> oder den <strong>kompletten Test (alle 20 Fragen)</strong>:
       </p>
 
-      <!-- Übung 1 -->
-      <div class="exercise-card">
-        <div class="exercise-header">
-          <span class="exercise-title">Aufgabe 1: can, can't oder must?</span>
-          <span class="code-pill">Basis</span>
-        </div>
-        <div class="exercise-body">
-          Setze <strong>can</strong>, <strong>can't</strong> oder <strong>must</strong> in die Lücken ein:<br>
-          1. <em>Luke _______ ride a bike, but he hasn't got a helmet with him today.</em><br>
-          2. <em>Tomorrow is a big school test, so I _______ study tonight.</em><br>
-          3. <em>I am sorry, I _______ hear you, the music is too loud!</em>
-        </div>
-        <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
-        <div class="solution-box">
-          <strong>Lösung:</strong><br>
-          1. <strong>can</strong> (Fähigkeit: Er kann Fahrrad fahren)<br>
-          2. <strong>must</strong> (Pflicht: Ich muss heute Abend lernen)<br>
-          3. <strong>can't</strong> (Ich kann dich nicht hören, weil die Musik zu laut ist)
-        </div>
-      </div>
+      <!-- Quiz Container -->
+      <div id="modalQuizContainer" class="quiz-container"></div>
 
-      <!-- Übung 2 -->
-      <div class="exercise-card">
-        <div class="exercise-header">
-          <span class="exercise-title">Aufgabe 2: Den Grammatikfehler finden</span>
-          <span class="code-pill">Falle</span>
-        </div>
-        <div class="exercise-body">
-          In diesem Satz ist ein typischer Fehler. Welcher?<br>
-          <em>„David cans play the piano, but he musts practice more.“</em>
-        </div>
-        <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
-        <div class="solution-box">
-          <strong>Lösung:</strong><br>
-          Falsch sind <em>cans</em> und <em>musts</em>! ❌<br>
-          Richtig ist: <strong>„David can play the piano, but he must practice more.“</strong> ✅<br>
-          (Modalverben bekommen <u>niemals</u> ein -s bei he/she/it!).
-        </div>
-      </div>
+      <!-- Zusätzliche Übungsaufgaben zum Aufklappen -->
+      <details style="background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem;">
+        <summary style="font-weight: 700; color: var(--theme-englisch); cursor: pointer; font-size: 1rem; user-select: none;">
+          📝 Zusätzliche schriftliche Übungsaufgaben anzeigen (2 Aufgaben)
+        </summary>
+        <div style="margin-top: 1.5rem;">
 
+          <!-- Übung 1 -->
+          <div class="exercise-card">
+            <div class="exercise-header">
+              <span class="exercise-title">Aufgabe 1: can, can't oder must?</span>
+              <span class="code-pill">Basis</span>
+            </div>
+            <div class="exercise-body">
+              Setze <strong>can</strong>, <strong>can't</strong> oder <strong>must</strong> in die Lücken ein:<br>
+              1. <em>Luke _______ ride a bike, but he hasn't got a helmet with him today.</em><br>
+              2. <em>Tomorrow is a big school test, so I _______ study tonight.</em><br>
+              3. <em>I am sorry, I _______ hear you, the music is too loud!</em>
+            </div>
+            <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
+            <div class="solution-box">
+              <strong>Lösung:</strong><br>
+              1. <strong>can</strong> (Fähigkeit: Er kann Fahrrad fahren)<br>
+              2. <strong>must</strong> (Pflicht: Ich muss heute Abend lernen)<br>
+              3. <strong>can't</strong> (Ich kann dich nicht hören, weil die Musik zu laut ist)
+            </div>
+          </div>
+
+          <!-- Übung 2 -->
+          <div class="exercise-card">
+            <div class="exercise-header">
+              <span class="exercise-title">Aufgabe 2: Den Grammatikfehler finden</span>
+              <span class="code-pill">Falle</span>
+            </div>
+            <div class="exercise-body">
+              In diesem Satz ist ein typischer Fehler. Welcher?<br>
+              <em>„David cans play the piano, but he musts practice more.“</em>
+            </div>
+            <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
+            <div class="solution-box">
+              <strong>Lösung:</strong><br>
+              Falsch sind <em>cans</em> und <em>musts</em>! ❌<br>
+              Richtig ist: <strong>„David can play the piano, but he must practice more.“</strong> ✅<br>
+              (Modalverben bekommen <u>niemals</u> ein -s bei he/she/it!).
+            </div>
+          </div>
+
+        </div>
+      </details>
     </section>
 
     <!-- Bottom Navigation -->
@@ -154,5 +167,134 @@
   </div>
 
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/quiz-engine.js"></script>
+  <script>
+    const modalQuizData = [
+      {
+        q: "Welches Verb folgt direkt nach einem Modalverb wie <em>can</em> oder <em>must</em>?",
+        options: ["Das Verb mit „to“", "Der reine Infinitiv ohne „to“", "Das Verb mit „-ing“", "Die Vergangenheitsform"],
+        correct: 1,
+        exp: "Nach Modalverben steht immer die <strong>reine Grundform (Infinitiv) ohne „to“</strong> (z. B. <em>can dance</em>, <em>must wait</em>)."
+      },
+      {
+        q: "Dave ist krank im Bett:<br><em>„Dave _______ come to the party because he is ill.“</em>",
+        options: ["can", "can't", "musts", "not can"],
+        correct: 1,
+        exp: "<strong>can't</strong> drückt aus, dass er nicht kommen kann (verhindert / krank ist)."
+      },
+      {
+        q: "Welche Regel gilt für <strong>he / she / it</strong> bei Modalverben?",
+        options: ["Man hängt immer ein „-s“ an", "Man hängt NIEMALS ein „-s“ an", "Nur bei „must“ hängt man ein „-s“ an", "Man verdoppelt das Verb"],
+        correct: 1,
+        exp: "Die He/She/It-Regel gilt hier <strong>NICHT</strong>! Es heißt: <em>he can</em>, <em>she must</em> (niemals <em>cans</em> oder <em>musts</em>)."
+      },
+      {
+        q: "Olivia spielt seit Jahren Gitarre:<br><em>„Olivia _______ play the guitar very well.“</em>",
+        options: ["can", "musts", "cans", "can to"],
+        correct: 0,
+        exp: "<strong>can</strong> drückt eine Fähigkeit oder ein Können aus."
+      },
+      {
+        q: "Wie wird eine Frage mit <em>can</em> im Englischen gebildet?",
+        options: ["Do you can dance?", "Can you dance?", "Are you can dancing?", "Does you can dance?"],
+        correct: 1,
+        exp: "Modalverben bilden Fragen durch einfache <strong>Umstellung</strong> (<em>Can you dance?</em>), niemals mit <em>do/does</em>!"
+      },
+      {
+        q: "Es ist 23 Uhr:<br><em>„It's late. You _______ go to sleep now, tomorrow is school!“</em>",
+        options: ["can't", "must", "cans", "must to"],
+        correct: 1,
+        exp: "<strong>must</strong> drückt eine Notwendigkeit oder Pflicht aus (du musst jetzt schlafen)."
+      },
+      {
+        q: "Was ist die korrekte Langform von <strong>can't</strong>?",
+        options: ["can not (getrennt)", "cannot (zusammen)", "can't not", "canned"],
+        correct: 1,
+        exp: "Im Englischen wird die Langform als ein einziges Wort geschrieben: <strong>cannot</strong>."
+      },
+      {
+        q: "Welcher Satz ist grammatikalisch VOLLKOMMEN KORREKT?",
+        options: ["He cans speak English.", "He can speaks English.", "He can speak English.", "He can to speak English."],
+        correct: 2,
+        exp: "Keine Endung und kein „to“: <strong>„He can speak English.“</strong>"
+      },
+      {
+        q: "<em>„Can I borrow your pencil, please?“</em> Was drückt <em>can</em> hier aus?",
+        options: ["Eine Fähigkeit", "Eine höfliche Bitte / Erlaubnis", "Eine feste Pflicht", "Ein Verbot"],
+        correct: 1,
+        exp: "<strong>„Can I...?“</strong> wird im Alltag für höfliche Bitten und Erlaubnisfragen genutzt."
+      },
+      {
+        q: "Wir müssen das Wohnzimmer vor Mamas Ankunft aufräumen:<br><em>„We _______ tidy up the room.“</em>",
+        options: ["must", "cans", "are must", "must to"],
+        correct: 0,
+        exp: "<strong>must</strong> steht für Pflicht und Notwendigkeit."
+      },
+      {
+        q: "Wie verneint man den Satz: <em>„She can swim.“</em>?",
+        options: ["She doesn't can swim.", "She can't swim.", "She cans not swim.", "She isn't can swim."],
+        correct: 1,
+        exp: "Die Verneinung lautet einfach <strong>can't</strong> (oder <em>cannot</em>)."
+      },
+      {
+        q: "Hund Sherlock kann sehr hoch springen:<br><em>„Look at Sherlock! He _______ jump really high!“</em>",
+        options: ["can", "cans", "must to", "does can"],
+        correct: 0,
+        exp: "Sherlock ist ein Tier (he/it), aber <em>can</em> bekommt <strong>trotzdem niemals ein -s</strong>!"
+      },
+      {
+        q: "Warum ist <em>„I must to do my homework“</em> falsch?",
+        options: ["Es muss „homeworks“ heißen", "Nach „must“ darf niemals „to“ stehen", "„must“ gehört ans Satzende", "Nach „must“ braucht man „-ing“"],
+        correct: 1,
+        exp: "Niemals <em>„must to“</em>! Immer direkt die Grundform ohne to: <strong>„I must do my homework.“</strong>"
+      },
+      {
+        q: "Fußball im Haus ist verboten:<br><em>„We _______ play football inside the house, it's not allowed!“</em>",
+        options: ["can", "can't", "must", "can to"],
+        correct: 1,
+        exp: "<strong>can't</strong> bedeutet hier: Wir dürfen / können nicht im Haus spielen."
+      },
+      {
+        q: "Wie fragst du auf Englisch: <em>„Musst du jetzt gehen?“</em>",
+        options: ["Do you must go now?", "Must you go now?", "Are you must go?", "Does you must go?"],
+        correct: 1,
+        exp: "Modalverben bilden Fragen durch Umstellung des Subjekts: <strong>„Must you go now?“</strong>"
+      },
+      {
+        q: "Holly hat eine wunderschöne Stimme:<br><em>„Holly _______ sing beautifully.“</em>",
+        options: ["can", "cans", "musts", "can to"],
+        correct: 0,
+        exp: "<strong>can</strong> für Fähigkeit / Können."
+      },
+      {
+        q: "Welche Übersetzung für <em>„Du musst dein Zimmer aufräumen“</em> ist richtig?",
+        options: ["You can clean your room.", "You must clean your room.", "You must to clean your room.", "You must cleans your room."],
+        correct: 1,
+        exp: "<strong>„You must clean your room.“</strong>"
+      },
+      {
+        q: "Es tut mir leid, ich habe keine Zeit:<br><em>„I'm sorry, I _______ help you right now.“</em>",
+        options: ["can", "can't", "must", "cans"],
+        correct: 1,
+        exp: "<strong>can't</strong> = nicht können / verhindert sein."
+      },
+      {
+        q: "Du darfst dir noch einen Muffin nehmen:<br><em>„You _______ have another muffin if you want.“</em>",
+        options: ["can", "must", "can't", "cans"],
+        correct: 0,
+        exp: "<strong>can</strong> drückt hier die Erlaubnis aus (du darfst / kannst noch einen nehmen)."
+      },
+      {
+        q: "Brauchen Modalverben wie <em>can</em> oder <em>must</em> das Hilfsverb <em>do/does</em>?",
+        options: ["Ja, immer", "Nein, niemals", "Nur bei he/she/it", "Nur im Sommer"],
+        correct: 1,
+        exp: "Modalverben sind eigenständige Hilfsverben und brauchen <strong>niemals do/does</strong>!"
+      }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initViyanQuiz('modalQuizContainer', modalQuizData);
+    });
+  </script>
 </body>
 </html>

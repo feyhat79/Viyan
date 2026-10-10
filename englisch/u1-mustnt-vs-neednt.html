@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/quiz.css">
 </head>
 <body class="theme-englisch-page">
 
@@ -95,97 +96,109 @@
       </div>
     </section>
 
-    <!-- 3. Interaktives Prüfungstraining -->
+    <!-- 3. Interaktives Prüfungstraining & Selbsttest -->
     <section style="margin-bottom: 2.5rem;">
       <div class="section-badge badge-uebungen">
         <span class="badge-num" style="background: var(--theme-englisch);">3</span>
-        <span>Klassenarbeits-Training (5 typische Aufgaben)</span>
+        <span>Selbsttest &amp; Klassenarbeits-Training</span>
       </div>
 
       <p style="margin-bottom: 1.25rem;">
-        Entscheide für jeden Satz: <strong>mustn't</strong> oder <strong>needn't</strong>?
+        Teste dein Wissen zum Klassenarbeits-Hit <strong>mustn't vs. needn't</strong>! Wähle den <strong>Schnelltest (10 zufällige Fragen)</strong> oder den <strong>kompletten Test (alle 20 Fragen)</strong>:
       </p>
 
-      <!-- Übung 1 -->
-      <div class="exercise-card">
-        <div class="exercise-header">
-          <span class="exercise-title">Satz 1: Auf der Party</span>
-          <span class="code-pill">Typ 1</span>
-        </div>
-        <div class="exercise-body">
-          <em>„You ________ bring crisps or drinks to the party. We have already bought everything.“</em>
-        </div>
-        <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
-        <div class="solution-box">
-          <strong>Lösung: needn't</strong><br>
-          <strong>Begründung:</strong> Wir haben schon alles gekauft, also ist es nicht nötig. Es ist aber nicht verboten, etwas mitzubringen → keine Notwendigkeit = <em>needn't</em>.
-        </div>
-      </div>
+      <!-- Quiz Container -->
+      <div id="mustntQuizContainer" class="quiz-container"></div>
 
-      <!-- Übung 2 -->
-      <div class="exercise-card">
-        <div class="exercise-header">
-          <span class="exercise-title">Satz 2: Im Museum</span>
-          <span class="code-pill">Typ 2</span>
-        </div>
-        <div class="exercise-body">
-          <em>„Look at the sign! You ________ touch the paintings in the museum.“</em>
-        </div>
-        <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
-        <div class="solution-box">
-          <strong>Lösung: mustn't</strong><br>
-          <strong>Begründung:</strong> Im Museum herrscht ein klares Berührungsverbot! Verbot = <em>mustn't</em>.
-        </div>
-      </div>
+      <!-- Zusätzliche Übungsaufgaben zum Aufklappen -->
+      <details style="background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem;">
+        <summary style="font-weight: 700; color: var(--theme-englisch); cursor: pointer; font-size: 1rem; user-select: none;">
+          📝 Zusätzliche schriftliche Übungsaufgaben anzeigen (5 Aufgaben)
+        </summary>
+        <div style="margin-top: 1.5rem;">
 
-      <!-- Übung 3 -->
-      <div class="exercise-card">
-        <div class="exercise-header">
-          <span class="exercise-title">Satz 3: Am Wochenende</span>
-          <span class="code-pill">Typ 3</span>
-        </div>
-        <div class="exercise-body">
-          <em>„It's the weekend! Viyan ________ go to school today.“</em>
-        </div>
-        <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
-        <div class="solution-box">
-          <strong>Lösung: needn't</strong><br>
-          <strong>Begründung:</strong> Am Wochenende hat Viyan schulfrei (er muss nicht zur Schule) = <em>needn't</em>.
-        </div>
-      </div>
+          <!-- Übung 1 -->
+          <div class="exercise-card">
+            <div class="exercise-header">
+              <span class="exercise-title">Satz 1: Auf der Party</span>
+              <span class="code-pill">Typ 1</span>
+            </div>
+            <div class="exercise-body">
+              <em>„You ________ bring crisps or drinks to the party. We have already bought everything.“</em>
+            </div>
+            <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
+            <div class="solution-box">
+              <strong>Lösung: needn't</strong><br>
+              <strong>Begründung:</strong> Wir haben schon alles gekauft, also ist es nicht nötig. Es ist aber nicht verboten, etwas mitzubringen &rarr; keine Notwendigkeit = <em>needn't</em>.
+            </div>
+          </div>
 
-      <!-- Übung 4 -->
-      <div class="exercise-card">
-        <div class="exercise-header">
-          <span class="exercise-title">Satz 4: Der Hund Sherlock</span>
-          <span class="code-pill">Green Line Story</span>
-        </div>
-        <div class="exercise-body">
-          <em>„Luke says: 'You ________ leave the garden gate open, or Sherlock will run away!'“</em>
-        </div>
-        <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
-        <div class="solution-box">
-          <strong>Lösung: mustn't</strong><br>
-          <strong>Begründung:</strong> Das Gartentor darf auf keinen Fall offengelassen werden, weil der Hund sonst wegläuft! Verbot/Gefahr = <em>mustn't</em>.
-        </div>
-      </div>
+          <!-- Übung 2 -->
+          <div class="exercise-card">
+            <div class="exercise-header">
+              <span class="exercise-title">Satz 2: Im Museum</span>
+              <span class="code-pill">Typ 2</span>
+            </div>
+            <div class="exercise-body">
+              <em>„Look at the sign! You ________ touch the paintings in the museum.“</em>
+            </div>
+            <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
+            <div class="solution-box">
+              <strong>Lösung: mustn't</strong><br>
+              <strong>Begründung:</strong> Im Museum herrscht ein klares Berührungsverbot! Verbot = <em>mustn't</em>.
+            </div>
+          </div>
 
-      <!-- Übung 5 -->
-      <div class="exercise-card">
-        <div class="exercise-header">
-          <span class="exercise-title">Satz 5: Vokabeltest</span>
-          <span class="code-pill">Schulsituation</span>
-        </div>
-        <div class="exercise-body">
-          <em>„During the English test, students ________ talk to each other.“</em>
-        </div>
-        <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
-        <div class="solution-box">
-          <strong>Lösung: mustn't</strong><br>
-          <strong>Begründung:</strong> Reden während einer Arbeit ist streng verboten = <em>mustn't</em>.
-        </div>
-      </div>
+          <!-- Übung 3 -->
+          <div class="exercise-card">
+            <div class="exercise-header">
+              <span class="exercise-title">Satz 3: Am Wochenende</span>
+              <span class="code-pill">Typ 3</span>
+            </div>
+            <div class="exercise-body">
+              <em>„It's the weekend! Viyan ________ go to school today.“</em>
+            </div>
+            <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
+            <div class="solution-box">
+              <strong>Lösung: needn't</strong><br>
+              <strong>Begründung:</strong> Am Wochenende hat Viyan schulfrei (er muss nicht zur Schule) = <em>needn't</em>.
+            </div>
+          </div>
 
+          <!-- Übung 4 -->
+          <div class="exercise-card">
+            <div class="exercise-header">
+              <span class="exercise-title">Satz 4: Der Hund Sherlock</span>
+              <span class="code-pill">Green Line Story</span>
+            </div>
+            <div class="exercise-body">
+              <em>„Luke says: 'You ________ leave the garden gate open, or Sherlock will run away!'“</em>
+            </div>
+            <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
+            <div class="solution-box">
+              <strong>Lösung: mustn't</strong><br>
+              <strong>Begründung:</strong> Das Gartentor darf auf keinen Fall offengelassen werden, weil der Hund sonst wegläuft! Verbot/Gefahr = <em>mustn't</em>.
+            </div>
+          </div>
+
+          <!-- Übung 5 -->
+          <div class="exercise-card">
+            <div class="exercise-header">
+              <span class="exercise-title">Satz 5: Vokabeltest</span>
+              <span class="code-pill">Schulsituation</span>
+            </div>
+            <div class="exercise-body">
+              <em>„During the English test, students ________ talk to each other.“</em>
+            </div>
+            <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
+            <div class="solution-box">
+              <strong>Lösung: mustn't</strong><br>
+              <strong>Begründung:</strong> Reden während einer Arbeit ist streng verboten = <em>mustn't</em>.
+            </div>
+          </div>
+
+        </div>
+      </details>
     </section>
 
     <!-- Bottom Navigation -->
@@ -201,5 +214,134 @@
   </div>
 
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/quiz-engine.js"></script>
+  <script>
+    const mustntQuizData = [
+      {
+        q: "Was bedeutet <strong>mustn't</strong> im Englischen?",
+        options: ["Nicht müssen / nicht brauchen", "Nicht dürfen (strenges Verbot!)", "Nicht können", "Müssen"],
+        correct: 1,
+        exp: "<strong>mustn't</strong> ist ein falscher Freund und bedeutet ein <strong>strenges Verbot (nicht dürfen!)</strong>."
+      },
+      {
+        q: "Was bedeutet <strong>needn't</strong> im Englischen?",
+        options: ["Nicht dürfen", "Nicht müssen / nicht brauchen (keine Pflicht)", "Dürfen", "Müssen"],
+        correct: 1,
+        exp: "<strong>needn't</strong> bedeutet, dass etwas <strong>nicht nötig / freiwillig</strong> ist (du musst/brauchst nicht)."
+      },
+      {
+        q: "In der Klassenarbeit:<br><em>„Shh! You _______ talk during the English exam.“</em>",
+        options: ["needn't", "mustn't", "must", "can"],
+        correct: 1,
+        exp: "Reden während einer Klassenarbeit ist streng verboten &rarr; <strong>mustn't</strong>!"
+      },
+      {
+        q: "Morgen ist Sonntag:<br><em>„Tomorrow is Sunday, so I _______ get up early.“</em>",
+        options: ["mustn't", "needn't", "can't to", "must"],
+        correct: 1,
+        exp: "Am Sonntag ausschlafen dürfen = es ist nicht nötig, früh aufzustehen &rarr; <strong>needn't</strong>!"
+      },
+      {
+        q: "Gefahr für den Hund Sherlock:<br><em>„You _______ give him chocolate, it's poisonous!“</em>",
+        options: ["needn't", "mustn't", "can", "must"],
+        correct: 1,
+        exp: "Schokolade ist giftig für Hunde &rarr; Verbot und Gefahr &rarr; <strong>mustn't</strong>!"
+      },
+      {
+        q: "Wir haben noch 5 Flaschen Milch im Kühlschrank:<br><em>„We have plenty of milk. You _______ buy any.“</em>",
+        options: ["mustn't", "needn't", "can't", "must"],
+        correct: 1,
+        exp: "Es ist genug da, einkaufen ist nicht nötig &rarr; <strong>needn't</strong>!"
+      },
+      {
+        q: "Rote Ampel:<br><em>„Stop! You _______ cross the street when the light is red!“</em>",
+        options: ["needn't", "mustn't", "can", "need"],
+        correct: 1,
+        exp: "Rote Ampel = klares Verkehrsverbot &rarr; <strong>mustn't</strong>!"
+      },
+      {
+        q: "Lockere Geburtstagsparty:<br><em>„The party is casual. You _______ wear a suit or fancy dress.“</em>",
+        options: ["mustn't", "needn't", "can't", "must"],
+        correct: 1,
+        exp: "Es ist keine Pflicht, einen Anzug zu tragen &rarr; <strong>needn't</strong>!"
+      },
+      {
+        q: "Welches Signalwort deutet in einem Klassenarbeitssatz auf <strong>mustn't</strong> hin?",
+        options: ["„it is forbidden“ oder „danger“", "„we have enough“", "„tomorrow is a holiday“", "„you can if you want“"],
+        correct: 0,
+        exp: "Verbote, Schulregeln und Gefahren signalisieren immer <strong>mustn't</strong>!"
+      },
+      {
+        q: "Welches Signal deutet auf <strong>needn't</strong> hin?",
+        options: ["„it is against the school rules“", "„tomorrow is free / no school“", "„poisonous“", "„be quiet in the library“"],
+        correct: 1,
+        exp: "Schulfrei oder Vorräte zeigen, dass etwas nicht erledigt werden muss &rarr; <strong>needn't</strong>."
+      },
+      {
+        q: "Im Zoo:<br><em>„You _______ feed the zoo animals, it makes them sick!“</em>",
+        options: ["needn't", "mustn't", "can", "need"],
+        correct: 1,
+        exp: "Tiere füttern ist im Zoo streng verboten &rarr; <strong>mustn't</strong>!"
+      },
+      {
+        q: "Kein Zeitdruck:<br><em>„You _______ finish the whole book today, you have two weeks.“</em>",
+        options: ["mustn't", "needn't", "must", "can't"],
+        correct: 1,
+        exp: "Nicht nötig, heute schon fertig zu werden &rarr; <strong>needn't</strong>."
+      },
+      {
+        q: "Was ist die größte Klassenarbeitsfalle für deutsche Schüler?",
+        options: ["„can“ mit können zu übersetzen", "„mustn't“ fälschlicherweise als „musst nicht“ zu verstehen", "„good“ mit gut zu übersetzen", "„party“ als Feier zu verstehen"],
+        correct: 1,
+        exp: "<strong>mustn't</strong> klingt auf Deutsch wie „musst nicht“, bedeutet aber <strong>„du darfst nicht!“</strong>"
+      },
+      {
+        q: "Im Kunstmuseum:<br><em>„In the museum, visitors _______ touch the paintings.“</em>",
+        options: ["needn't", "mustn't", "can", "need"],
+        correct: 1,
+        exp: "Gemälde anfassen ist im Museum verboten &rarr; <strong>mustn't</strong>!"
+      },
+      {
+        q: "Mama hat schon abgewaschen:<br><em>„Mum has done the dishes. You _______ do them now.“</em>",
+        options: ["mustn't", "needn't", "can't", "must"],
+        correct: 1,
+        exp: "Bereits erledigt &rarr; Hilfe ist nicht mehr nötig &rarr; <strong>needn't</strong>."
+      },
+      {
+        q: "Wie übersetzt man: <em>„Du brauchst dir keine Sorgen machen“</em>?",
+        options: ["You mustn't worry.", "You needn't worry.", "You don't can worry.", "You must worry."],
+        correct: 1,
+        exp: "„nicht brauchen / nicht müssen“ = <strong>needn't</strong> &rarr; <em>„You needn't worry.“</em>"
+      },
+      {
+        q: "Wie übersetzt man: <em>„Du darfst das Geheimnis niemandem verraten!“</em>?",
+        options: ["You needn't tell anyone.", "You mustn't tell anyone.", "You can tell anyone.", "You must tell anyone."],
+        correct: 1,
+        exp: "Geheimnis nicht verraten = strenges Verbot &rarr; <em>„You mustn't tell anyone.“</em>"
+      },
+      {
+        q: "Es regnet draußen in Strömen:<br><em>„It's raining. You _______ water the flowers.“</em>",
+        options: ["mustn't", "needn't", "must", "can't"],
+        correct: 1,
+        exp: "Der Regen gießt die Blumen schon &rarr; nicht nötig &rarr; <strong>needn't</strong>."
+      },
+      {
+        q: "Ehrlichkeit:<br><em>„You _______ tell lies to your parents and friends.“</em>",
+        options: ["needn't", "mustn't", "can", "need"],
+        correct: 1,
+        exp: "Lügen ist verboten &rarr; <strong>mustn't</strong>."
+      },
+      {
+        q: "Folgt nach <em>needn't</em> ein <em>to</em> vor dem nächsten Verb?",
+        options: ["Ja, immer: You needn't to go", "Nein, niemals: You needn't go", "Nur bei he/she/it", "Nur in Fragen"],
+        correct: 1,
+        exp: "Nach <strong>needn't</strong> folgt immer direkt der Infinitiv <strong>ohne to</strong>: <em>You needn't go</em>."
+      }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initViyanQuiz('mustntQuizContainer', mustntQuizData);
+    });
+  </script>
 </body>
 </html>

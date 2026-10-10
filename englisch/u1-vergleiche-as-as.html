@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/quiz.css">
 </head>
 <body class="theme-englisch-page">
 
@@ -87,49 +88,65 @@
       </div>
     </section>
 
-    <!-- 3. Interaktive Übungen -->
+    <!-- 3. Interaktiver Selbsttest (Multiple-Choice) -->
     <section style="margin-bottom: 2.5rem;">
       <div class="section-badge badge-uebungen">
-        <span class="badge-num" style="background: var(--theme-englisch);">2</span>
-        <span>Selbsttest: Übungsaufgaben</span>
+        <span class="badge-num" style="background: var(--theme-englisch);">3</span>
+        <span>Selbsttest &amp; Übungsaufgaben</span>
       </div>
 
-      <!-- Übung 1 -->
-      <div class="exercise-card">
-        <div class="exercise-header">
-          <span class="exercise-title">Aufgabe 1: Satz vervollständigen</span>
-          <span class="code-pill">Training</span>
-        </div>
-        <div class="exercise-body">
-          Bilde aus den Vorgaben einen Satz mit <strong>as ... as</strong> oder <strong>not as ... as</strong>:<br>
-          <em>[ chocolate cake / is / as / delicious / as / apple pie ]</em>
-        </div>
-        <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
-        <div class="solution-box">
-          <strong>Lösung:</strong><br>
-          👉 <strong>„Chocolate cake is as delicious as apple pie.“</strong><br>
-          (Schokoladenkuchen ist genauso lecker wie Apfelkuchen).
-        </div>
-      </div>
+      <p style="margin-bottom: 1.25rem;">
+        Teste dein Wissen zu <strong>as ... as</strong> und <strong>not as ... as</strong>! Wähle den <strong>Schnelltest (10 zufällige Fragen)</strong> oder den <strong>kompletten Test (alle 20 Fragen)</strong>:
+      </p>
 
-      <!-- Übung 2 -->
-      <div class="exercise-card">
-        <div class="exercise-header">
-          <span class="exercise-title">Aufgabe 2: Den Satz ins Englische übersetzen</span>
-          <span class="code-pill">Übersetzung</span>
-        </div>
-        <div class="exercise-body">
-          Übersetze diesen Satz auf Englisch:<br>
-          <em>„Mein Zimmer ist nicht so groß wie dein Zimmer.“</em>
-        </div>
-        <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
-        <div class="solution-box">
-          <strong>Lösung:</strong><br>
-          👉 <strong>„My room is not as big as your room.“</strong><br>
-          (Wichtig: <em>big</em> bleibt in der Grundform, kein <em>bigger</em>!).
-        </div>
-      </div>
+      <!-- Quiz Container -->
+      <div id="asAsQuizContainer" class="quiz-container"></div>
 
+      <!-- Zusätzliche Übungsaufgaben zum Aufklappen -->
+      <details style="background: var(--bg-card); border: 1.5px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-top: 2rem;">
+        <summary style="font-weight: 700; color: var(--theme-englisch); cursor: pointer; font-size: 1rem; user-select: none;">
+          📝 Zusätzliche schriftliche Übungsaufgaben anzeigen (2 Aufgaben)
+        </summary>
+        <div style="margin-top: 1.5rem;">
+
+          <!-- Übung 1 -->
+          <div class="exercise-card">
+            <div class="exercise-header">
+              <span class="exercise-title">Aufgabe 1: Satz vervollständigen</span>
+              <span class="code-pill">Training</span>
+            </div>
+            <div class="exercise-body">
+              Bilde aus den Vorgaben einen Satz mit <strong>as ... as</strong> oder <strong>not as ... as</strong>:<br>
+              <em>[ chocolate cake / is / as / delicious / as / apple pie ]</em>
+            </div>
+            <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
+            <div class="solution-box">
+              <strong>Lösung:</strong><br>
+              👉 <strong>„Chocolate cake is as delicious as apple pie.“</strong><br>
+              (Schokoladenkuchen ist genauso lecker wie Apfelkuchen).
+            </div>
+          </div>
+
+          <!-- Übung 2 -->
+          <div class="exercise-card">
+            <div class="exercise-header">
+              <span class="exercise-title">Aufgabe 2: Den Satz ins Englische übersetzen</span>
+              <span class="code-pill">Übersetzung</span>
+            </div>
+            <div class="exercise-body">
+              Übersetze diesen Satz auf Englisch:<br>
+              <em>„Mein Zimmer ist nicht so groß wie dein Zimmer.“</em>
+            </div>
+            <button type="button" class="btn-toggle-solution">Lösung anzeigen</button>
+            <div class="solution-box">
+              <strong>Lösung:</strong><br>
+              👉 <strong>„My room is not as big as your room.“</strong><br>
+              (Wichtig: <em>big</em> bleibt in der Grundform, kein <em>bigger</em>!).
+            </div>
+          </div>
+
+        </div>
+      </details>
     </section>
 
     <!-- Bottom Navigation -->
@@ -145,5 +162,134 @@
   </div>
 
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/quiz-engine.js"></script>
+  <script>
+    const asAsQuizData = [
+      {
+        q: "Was bedeutet die Formulierung <strong>„as ... as“</strong> auf Deutsch?",
+        options: ["nicht so ... wie", "genauso ... wie", "viel besser als", "am besten von allen"],
+        correct: 1,
+        exp: "<strong>as ... as</strong> drückt <strong>Gleichheit</strong> aus: <em>„Luke is as tall as Dave.“</em> = Luke ist genauso groß wie Dave."
+      },
+      {
+        q: "Was bedeutet <strong>„not as ... as“</strong> im Deutschen?",
+        options: ["genauso ... wie", "nicht so ... wie", "mindestens so ... wie", "viel schneller als"],
+        correct: 1,
+        exp: "<strong>not as ... as</strong> drückt <strong>Ungleichheit</strong> aus: <em>„Tea is not as sweet as cola.“</em> = Tee ist nicht so süß wie Cola."
+      },
+      {
+        q: "Welche goldene Regel gilt für das Adjektiv zwischen den beiden <em>as</em>?",
+        options: ["Es bekommt die Endung „-er“", "Es wird mit „more“ gesteigert", "Es bleibt immer in der reinen Grundform", "Es muss im Superlativ mit „-est“ stehen"],
+        correct: 2,
+        exp: "Merke: <strong>Zwischen „as ... as“ steht immer die unveränderte Grundform</strong> (z. B. <em>as tall as</em>, niemals <em>as taller as</em>)."
+      },
+      {
+        q: "Luke und Dave sind beide 1,55 Meter groß:<br><em>„Luke is as _______ as Dave.“</em>",
+        options: ["tall", "taller", "tallest", "more tall"],
+        correct: 0,
+        exp: "Grundform einsetzen: <strong>as tall as</strong> (genauso groß wie)."
+      },
+      {
+        q: "Tee schmeckt weniger süß als Cola:<br><em>„Tea is not as _______ as cola.“</em>",
+        options: ["sweeter", "sweetest", "sweet", "more sweet"],
+        correct: 2,
+        exp: "Auch bei der Verneinung bleibt das Adjektiv in der reinen Grundform: <strong>not as sweet as</strong>."
+      },
+      {
+        q: "Welcher Satz ist grammatikalisch VOLLKOMMEN KORREKT?",
+        options: ["Dave is as older as Luke.", "Dave is as old as Luke.", "Dave is as oldest as Luke.", "Dave is as more old as Luke."],
+        correct: 1,
+        exp: "<strong>„Dave is as old as Luke.“</strong> Das Adjektiv <em>old</em> bleibt ungesteigert."
+      },
+      {
+        q: "Finde den typischen Klassenarbeitsfehler:<br><em>„My dog Sherlock is as faster as your cat.“</em>",
+        options: ["Sherlock ist falsch geschrieben", "Es muss „as fast as“ heißen", "Es muss „as fastest as“ heißen", "Hinter cat fehlt ein -s"],
+        correct: 1,
+        exp: "Fehler erkannt! <em>faster</em> ist gesteigert. Richtig ist die Grundform: <strong>as fast as</strong>."
+      },
+      {
+        q: "Übersetze korrekt:<br><em>„Dieses Spiel ist genauso spannend wie Fußball.“</em>",
+        options: ["This game is more exciting than football.", "This game is as exciting as football.", "This game is not as exciting as football.", "This game is the most exciting football."],
+        correct: 1,
+        exp: "Gleichheit bei langem Adjektiv: <strong>„This game is as exciting as football.“</strong>"
+      },
+      {
+        q: "Apfelkuchen schmeckt genauso gut wie Erdbeerkuchen:<br><em>„Apple pie is as _______ as strawberry cake.“</em>",
+        options: ["good", "better", "best", "more good"],
+        correct: 0,
+        exp: "Hier wird NICHT zu <em>better</em> gesteigert, sondern die Grundform <strong>good</strong> verwendet!"
+      },
+      {
+        q: "Konzertkarten sind teurer als Kinokarten. Wie sagt man es umgekehrt?",
+        options: ["Cinema tickets are as expensive than concert tickets.", "Cinema tickets are not as expensive as concert tickets.", "Cinema tickets are more expensive as concert tickets.", "Cinema tickets are as cheap than concert tickets."],
+        correct: 1,
+        exp: "Kinokarten sind <strong>nicht so teuer wie</strong> Konzertkarten: <strong>„... not as expensive as ...“</strong>."
+      },
+      {
+        q: "Welcher Satz drückt eine <strong>Ungleichheit</strong> aus?",
+        options: ["Luke is as fast as Dave.", "Dave's party was not as loud as Luke's party.", "Sherlock is as friendly as my cat.", "His bike is as cool as my bike."],
+        correct: 1,
+        exp: "Durch das Wörtchen <strong>not</strong> (<em>not as loud as</em>) wird ausgedrückt, dass die beiden Partys eben <strong>nicht gleich laut</strong> waren."
+      },
+      {
+        q: "Wann benutzt man im Englischen <strong>„than“</strong> statt <em>„as ... as“</em>?",
+        options: ["Bei Gleichheit zweier Dinge", "Bei echten Vergleichen mit Steigerungsform (z. B. bigger than)", "Immer vor Verneinungen", "Niemals, than gibt es im Englischen nicht"],
+        correct: 1,
+        exp: "<strong>than</strong> gehört zum Komparativ mit Steigerung (<em>„taller than...“</em>), während <strong>as ... as</strong> die unveränderte Grundform verlangt."
+      },
+      {
+        q: "Mein Zimmer ist kleiner als dein Zimmer:<br><em>„My room is not as _______ as your room.“</em>",
+        options: ["big", "bigger", "biggest", "more big"],
+        correct: 0,
+        exp: "Mein Zimmer ist nicht so groß wie deins: <strong>not as big as</strong> (Grundform <em>big</em>)."
+      },
+      {
+        q: "Welcher dieser vier Sätze enthält einen FEHLER?",
+        options: ["Pizza is as delicious as pasta.", "I am not as tall as my brother.", "Sherlock is as better as other dogs.", "Luke is as happy as Dave."],
+        correct: 2,
+        exp: "<em>„as better as“</em> ist falsch ❌! Die Grundform lautet <em>good</em>: <strong>„as good as“</strong> ✅."
+      },
+      {
+        q: "<em>„London is not as hot as Rome.“</em> Was bedeutet dieser Satz?",
+        options: ["London ist genauso heiß wie Rom.", "London ist heißer als Rom.", "London ist nicht so heiß wie Rom.", "London ist die heißeste Stadt."],
+        correct: 2,
+        exp: "<strong>not as hot as</strong> = nicht so heiß wie."
+      },
+      {
+        q: "Wie lautet die richtige Verneinung:<br><em>„Dave _______ as fast as Luke.“</em>",
+        options: ["is not", "does not", "has not", "are not"],
+        correct: 0,
+        exp: "Mit dem Hilfsverb <em>to be</em>: <strong>Dave is not as fast as Luke</strong> (oder kurz: <em>isn't</em>)."
+      },
+      {
+        q: "Warum ist der Satz <em>„He is not as taller than me“</em> gleich zweifach falsch?",
+        options: ["Weil he großgeschrieben ist", "Weil taller gesteigert ist und am Ende than statt as steht", "Weil me am Ende steht", "Weil not davor steht"],
+        correct: 1,
+        exp: "Es muss <strong>as tall as</strong> heißen: weder <em>taller</em> noch <em>than</em> gehören in dieses Muster!"
+      },
+      {
+        q: "Olivia und Holly können beide gleich gut singen:<br><em>„Olivia can sing as _______ as Holly.“</em>",
+        options: ["well", "better", "best", "gooder"],
+        correct: 0,
+        exp: "Beim Verb singen nutzt man das Adverb in der Grundform: <strong>as well as</strong>."
+      },
+      {
+        q: "Ein neues Smartphone (600 €) und ein Laptop (600 €) kosten gleich viel:<br><em>„The smartphone is _______ the laptop.“</em>",
+        options: ["as expensive as", "not as expensive as", "more expensive than", "cheaper than"],
+        correct: 0,
+        exp: "Beide kosten 600 €, also sind sie gleich teuer: <strong>as expensive as</strong>."
+      },
+      {
+        q: "Vervollständige die Merkregel:<br><em>„as ... as“</em> vergleicht zwei Dinge auf ________ Stufe.",
+        options: ["unterschiedlicher", "gleicher (Gleichheit)", "der höchsten (Superlativ)", "beliebiger"],
+        correct: 1,
+        exp: "<strong>as ... as</strong> drückt stets <strong>Gleichheit</strong> („auf gleicher Stufe“) aus."
+      }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initViyanQuiz('asAsQuizContainer', asAsQuizData);
+    });
+  </script>
 </body>
 </html>
