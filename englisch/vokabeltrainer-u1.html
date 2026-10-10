@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="de" class="theme-englisch-page">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Vokabeltrainer Unit 1 | Green Line 2 G9</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <style>
+    .trainer-container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Filter Tabs */
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .filter-btn {
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-card);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-btn:hover {
+      border-color: var(--theme-englisch);
+      color: var(--theme-englisch);
+    }
+    .filter-btn.active {
+      background: var(--theme-englisch);
+      border-color: var(--theme-englisch);
+      color: #fff;
+    }
+
+    /* Progress & Controls Header */
+    .trainer-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .progress-text {
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+    .stats-pill {
+      font-size: 0.82rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .stat-correct { color: #15803d; }
+    .stat-repeat { color: #b91c1c; }
+
+    /* Progress Bar */
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #7c3aed, #10b981);
+      border-radius: var(--radius-full);
+      transition: width 0.3s ease;
+    }
+
+    /* 3D Flashcard Container */
+    .flashcard-scene {
+      width: 100%;
+      height: 320px;
+      perspective: 1000px;
+      margin-bottom: 1.5rem;
+    }
+    .flashcard {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      border-radius: 20px;
+    }
+    .flashcard.is-flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.75rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      border: 2px solid var(--border-color);
+      box-sizing: border-box;
+      background: #ffffff;
+      user-select: none;
+    }
+
+    .card-front {
+      border-top: 6px solid var(--theme-englisch);
+    }
+    .card-back {
+      transform: rotateY(180deg);
+      border-top: 6px solid #10b981;
+      background: #fafaf9;
+    }
+
+    .card-meta-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+    .card-audio-btn {
+      background: #ede9fe;
+      border: none;
+      color: #6d28d9;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.15s;
+    }
+    .card-audio-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .card-body-center {
+      text-align: center;
+      margin: auto 0;
+    }
+    .card-main-word {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+    .card-phonetic {
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+    .card-example {
+      font-size: 0.92rem;
+      color: #475569;
+      font-style: italic;
+      line-height: 1.45;
+      max-width: 90%;
+      margin: 0 auto;
+    }
+
+    .card-hint-bottom {
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    /* Action Buttons */
+    .trainer-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .action-btn {
+      padding: 0.9rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-wrong {
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1.5px solid #fca5a5;
+    }
+    .btn-wrong:hover {
+      background: #fecaca;
+      transform: translateY(-2px);
+    }
+    .btn-correct {
+      background: #dcfce7;
+      color: #15803d;
+      border: 1.5px solid #86efac;
+    }
+    .btn-correct:hover {
+      background: #bbf7d0;
+      transform: translateY(-2px);
+    }
+
+    /* Utility Tools bar */
+    .utility-bar {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-util {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-util:hover {
+      border-color: var(--text-main);
+      color: var(--text-main);
+    }
+
+    /* Completion Overlay */
+    .completion-card {
+      display: none;
+      background: #ffffff;
+      border: 2px solid #86efac;
+      border-radius: 20px;
+      padding: 2.5rem 1.75rem;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+    }
+    .completion-card h2 {
+      font-size: 1.8rem;
+      color: #15803d;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body class="theme-englisch-page">
+
+  <div class="trainer-container">
+    <!-- Navigation -->
+    <nav class="portal-nav">
+      <a href="index.html" class="nav-back-link">← Zurück zu Englisch (Unit 1)</a>
+      <span class="badge-pill badge-englisch" style="margin-bottom: 0;">Green Line 2 G9 • Unit 1</span>
+    </nav>
+
+    <!-- Header -->
+    <header style="margin-bottom: 1.5rem; text-align: center;">
+      <h1 style="font-size: 2rem; margin-bottom: 0.3rem;">🗂️ Vokabeltrainer Unit 1</h1>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">
+        Karteikartensystem nach den Buchseiten 209 – 213 (Green Line 2 G9)
+      </p>
+    </header>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-filter="all">Alle Vokabeln (Gesamt)</button>
+      <button class="filter-btn" data-filter="checkin">Check-in (S. 209)</button>
+      <button class="filter-btn" data-filter="dates">Monate &amp; Datum (S. 209–210)</button>
+      <button class="filter-btn" data-filter="station1">Station 1: I can't wait! (S. 210–211)</button>
+      <button class="filter-btn" data-filter="station2">Station 2: Party Ideas (S. 211–213)</button>
+    </div>
+
+    <!-- Active Area -->
+    <div id="trainerArea">
+      <!-- Toolbar -->
+      <div class="trainer-toolbar">
+        <span class="progress-text" id="counterDisplay">Karte 1 von 10</span>
+        <div class="stats-pill">
+          <span class="stat-correct">✅ <strong id="correctCounter">0</strong></span>
+          <span class="stat-repeat">❌ <strong id="repeatCounter">0</strong></span>
+        </div>
+      </div>
+
+      <!-- Progress Track -->
+      <div class="progress-track">
+        <div class="progress-fill" id="progressBar"></div>
+      </div>
+
+      <!-- 3D Flashcard Scene -->
+      <div class="flashcard-scene">
+        <div class="flashcard" id="cardElement">
+          <!-- Front Face -->
+          <div class="card-face card-front">
+            <div class="card-meta-top">
+              <span id="cardCategory">Check-in • S. 209</span>
+              <button class="card-audio-btn" id="audioBtn" title="Englische Aussprache anhören">🔊</button>
+            </div>
+            <div class="card-body-center">
+              <div class="card-main-word" id="frontWord">invitation</div>
+              <div class="card-phonetic" id="frontPhonetic">[ˌɪnvɪˈteɪʃn]</div>
+              <div class="card-example" id="frontExample">„Would you like to come to my party?“</div>
+            </div>
+            <div class="card-hint-bottom">
+              👆 Tippen oder Leertaste drücken zum Umdrehen
+            </div>
+          </div>
+
+          <!-- Back Face -->
+          <div class="card-face card-back">
+            <div class="card-meta-top">
+              <span>Deutsche Übersetzung</span>
+              <span style="color: #10b981;">Lösung ✓</span>
+            </div>
+            <div class="card-body-center">
+              <div class="card-main-word" style="color: #10b981;" id="backWord">Einladung</div>
+              <div class="card-example" id="backExample" style="margin-top: 0.75rem;">„invitation → to invite (einladen)“</div>
+            </div>
+            <div class="card-hint-bottom">
+              Wähle unten: Gewusst oder Noch üben?
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="trainer-actions">
+        <button class="action-btn btn-wrong" id="btnWrong">
+          <span>❌ Noch nicht</span>
+        </button>
+        <button class="action-btn btn-correct" id="btnCorrect">
+          <span>✅ Gewusst!</span>
+        </button>
+      </div>
+
+      <!-- Utilities -->
+      <div class="utility-bar">
+        <button class="btn-util" id="btnFlip">🔄 Umdrehen</button>
+        <button class="btn-util" id="btnShuffle">🔀 Mischen</button>
+        <button class="btn-util" id="btnRestart">🔁 Von vorne</button>
+      </div>
+    </div>
+
+    <!-- Completion Screen -->
+    <div class="completion-card" id="completionScreen">
+      <div style="font-size: 3rem; margin-bottom: 0.5rem;">🎉</div>
+      <h2>Großartig gemacht, Viyan!</h2>
+      <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem;" id="completionText">
+        Du hast alle Karten dieser Runde durchgearbeitet!
+      </p>
+      <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+        <button class="action-btn btn-correct" id="btnRestartAll" style="font-size: 0.95rem;">
+          🔁 Alle Karten wiederholen
+        </button>
+        <button class="action-btn btn-wrong" id="btnRepeatMistakes" style="font-size: 0.95rem; display: none;">
+          ❌ Nur falsche Karten üben
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <a href="index.html" class="nav-back-link" style="margin-bottom: 1.5rem;">← Zurück zur Englisch-Übersicht</a><br>
+      <strong>Lernportal Viyan</strong> • Green Line 2 G9 • Vokabeltrainer
+    </footer>
+  </div>
+
+  <!-- VOKABEL-DATENBANK NACH DEN HOCHGELADENEN BUCHSEITEN 209-213 -->
+  <script>
+    const VOCABULARY_DATA = [
+      // Check-in (S. 209)
+      { cat: 'checkin', catName: 'Check-in (S. 209)', en: 'costume', de: 'Kostüm; Verkleidung', ipa: '[ˈkɒstjuːm]', ex: 'People often wear costumes at parties.' },
+      { cat: 'checkin', catName: 'Check-in (S. 209)', en: 'at the same time', de: 'gleichzeitig; zur selben Zeit', ipa: '[ət ðə seɪm ˈtaɪm]', ex: 'Don\'t write and talk at the same time!' },
+      { cat: 'checkin', catName: 'Check-in (S. 209)', en: 'bowling alley', de: 'Bowlingbahn', ipa: '[ˈbəʊlɪŋ ˌæli]', ex: 'Lots of people go to bowling alleys with their friends.' },
+      { cat: 'checkin', catName: 'Check-in (S. 209)', en: 'to give sb the bumps', de: 'jmdn. hochleben lassen', ipa: '[ˌgɪv ðə ˈbʌmps]', ex: 'In Britain people often give their friends the bumps at parties.' },
+      { cat: 'checkin', catName: 'Check-in (S. 209)', en: 'birthday', de: 'Geburtstag', ipa: '[ˈbɜːθdeɪ]', ex: 'My birthday is on 3rd May.' },
+      { cat: 'checkin', catName: 'Check-in (S. 209)', en: 'to celebrate', de: 'feiern', ipa: '[ˈseləbreɪt]', ex: 'How do you celebrate your birthday?' },
+      { cat: 'checkin', catName: 'Check-in (S. 209)', en: 'ice rink', de: 'Eisbahn; Schlittschuhbahn', ipa: '[ˈaɪs ˌrɪŋk]', ex: 'You can go skating at the ice rink.' },
+      { cat: 'checkin', catName: 'Check-in (S. 209)', en: 'to blow out', de: 'ausblasen; auspusten', ipa: '[ˌbləʊ ˈaʊt]', ex: 'Blow out the candles in the living room.' },
+      { cat: 'checkin', catName: 'Check-in (S. 209)', en: 'candle', de: 'Kerze', ipa: '[ˈkændl]', ex: 'Blow out the candles on your cake.' },
+      { cat: 'checkin', catName: 'Check-in (S. 209)', en: 'to make a wish', de: 'sich etwas wünschen', ipa: '[ˌmeɪk ə ˈwɪʃ]', ex: 'When you blow out the candles, make a wish.' },
+      { cat: 'checkin', catName: 'Check-in (S. 209)', en: 'wish', de: 'Wunsch', ipa: '[wɪʃ]', ex: 'Don\'t tell people your wish.' },
+      { cat: 'checkin', catName: 'Check-in (S. 209)', en: 'to blow', de: 'pusten; blasen; wehen', ipa: '[bləʊ]', ex: 'Make a wish then blow.' },
+      { cat: 'checkin', catName: 'Check-in (S. 209)', en: 'Happy Birthday!', de: 'Herzlichen Glückwunsch zum Geburtstag!', ipa: '[ˌhæpi ˈbɜːθdeɪ]', ex: 'Let\'s sing: Happy birthday to you!' },
+      { cat: 'checkin', catName: 'Check-in (S. 209)', en: 'kind (of)', de: 'Art; Sorte', ipa: '[kaɪnd (əv)]', ex: 'What kind of music do you like?' },
+
+      // Monate & Datum (S. 209–210)
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: 'January', de: 'Januar', ipa: '[ˈdʒænjuəri]', ex: 'January is the first month.' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: 'February', de: 'Februar', ipa: '[ˈfebruəri]', ex: 'February has 28 days.' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: 'March', de: 'März', ipa: '[mɑːtʃ]', ex: 'Spring starts in March.' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: 'April', de: 'April', ipa: '[ˈeɪprəl]', ex: 'April showers bring May flowers.' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: 'May', de: 'Mai', ipa: '[meɪ]', ex: 'My birthday is in May.' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: 'June', de: 'Juni', ipa: '[dʒuːn]', ex: 'Summer begins in June.' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: 'July', de: 'Juli', ipa: '[dʒuˈlaɪ]', ex: 'School holidays in July.' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: 'August', de: 'August', ipa: '[ɔːˈgʌst]', ex: 'August is very warm.' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: 'September', de: 'September', ipa: '[sepˈtembə]', ex: 'School starts in September.' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: 'October', de: 'Oktober', ipa: '[ɒkˈtəʊbə]', ex: 'Halloween is in October.' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: 'November', de: 'November', ipa: '[nəʊˈvembə]', ex: 'Bonfire night in November.' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: 'December', de: 'Dezember', ipa: '[dɪˈsembə]', ex: 'Christmas is in December.' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: '1st (first)', de: '1. erste(r)', ipa: '[fɜːst]', ex: 'the first of May' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: '2nd (second)', de: '2. zweite(r)', ipa: '[ˈseknd]', ex: 'the second of June' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: '3rd (third)', de: '3. dritte(r)', ipa: '[θɜːd]', ex: 'the third of July' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: '5th (fifth)', de: '5. fünfte(r)', ipa: '[fɪfθ]', ex: 'the fifth of August (! fifth mit f)' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: '8th (eighth)', de: '8. achte(r)', ipa: '[eɪtθ]', ex: 'the eighth of September' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: '9th (ninth)', de: '9. neunte(r)', ipa: '[naɪnθ]', ex: 'the ninth of October (! ninth ohne e)' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: '12th (twelfth)', de: '12. zwölfte(r)', ipa: '[twelfθ]', ex: 'the twelfth of December (! twelfth mit f)' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: '20th (twentieth)', de: '20. zwanzigste(r)', ipa: '[ˈtwentiəθ]', ex: 'the twentieth of March' },
+      { cat: 'dates', catName: 'Monate & Datum (S. 209–210)', en: '21st (twenty-first)', de: '21. einundzwanzigste(r)', ipa: '[ˌtwenti ˈfɜːst]', ex: 'on Saturday, 21st November' },
+
+      // Station 1: I can't wait! (S. 210–211)
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'to plan', de: 'planen', ipa: '[plæn]', ex: 'What are you planning for your birthday?' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'sleepover', de: 'Übernachtung; Pyjama-Party', ipa: '[ˈsliːpˌəʊvə]', ex: 'I want to have a sleepover party.' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'mustn\'t', de: 'nicht dürfen (Verbot!)', ipa: '[ˈmʌsnt]', ex: 'You mustn\'t touch the cake now!' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'needn\'t', de: 'nicht brauchen; nicht müssen (freiwillig)', ipa: '[ˈniːdnt]', ex: 'You needn\'t go to the supermarket.' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'theme', de: 'Thema; Motto', ipa: '[θiːm]', ex: 'Has your party got a theme?' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'decorations (pl)', de: 'Dekoration; Schmuck', ipa: '[ˌdekəˈreɪʃnz]', ex: 'Let\'s buy some colourful decorations.' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'to invite', de: 'einladen', ipa: '[ɪnˈvaɪt]', ex: 'I always invite all my friends.' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'invitation', de: 'Einladung', ipa: '[ˌɪnvɪˈteɪʃn]', ex: 'invitation → to invite' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'trifle', de: 'Trifle (britischer Schicht-Nachtisch)', ipa: '[ˈtraɪfl]', ex: 'Let\'s make a delicious trifle for the party!' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'what else', de: 'was sonst; was noch', ipa: '[ˌwɒt ˈels]', ex: 'What else does she want?' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'all night', de: 'die ganze Nacht', ipa: '[ˌɔːl ˈnaɪt]', ex: 'Don\'t listen to loud music all night!' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'each other', de: 'einander; sich gegenseitig', ipa: '[ˌiːtʃ ˈʌðə]', ex: 'The friends are looking at each other.' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'to clean', de: 'putzen; säubern; reinigen', ipa: '[kliːn]', ex: 'Please tidy your room and clean the windows.' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'to choose', de: 'auswählen; wählen', ipa: '[tʃuːz]', ex: 'Choose a card and talk about it.' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'locker', de: 'Schließfach; Spind', ipa: '[ˈlɒkə]', ex: 'You can put your bag in your locker.' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'glove', de: 'Handschuh', ipa: '[glʌv]', ex: 'You wear gloves on your hands in winter.' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'still', de: 'reglos; still; ruhig', ipa: '[stɪl]', ex: 'You must stand very still!' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'to be out', de: 'draußen sein (ausgeschieden)', ipa: '[bi ˈaʊt]', ex: 'If you move, you are out!' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'dessert', de: 'Dessert; Nachspeise', ipa: '[dɪˈzɜːt]', ex: 'Trifle is my favourite dessert.' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'jelly', de: 'Götterspeise; Wackelpudding', ipa: '[ˈdʒeli]', ex: 'You need red jelly for trifle.' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'custard', de: 'Vanillesoße; Vanillepudding', ipa: '[ˈkʌstəd]', ex: 'All my family love jelly with custard.' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'cream', de: 'Sahne; Creme', ipa: '[kriːm]', ex: 'I love cake with fresh cream.' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'to slice', de: 'in Scheiben schneiden', ipa: '[slaɪs]', ex: 'Can you slice the apples, please?' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'on top', de: 'oben; obendrauf', ipa: '[ɒn ˈtɒp]', ex: 'Let\'s put cream on top of the cake.' },
+      { cat: 'station1', catName: 'Station 1 (S. 210–211)', en: 'to pour', de: 'gießen; schütten; einschenken', ipa: '[pɔː]', ex: 'Pour milk into a bowl.' },
+
+      // Station 2: Party Ideas (S. 211–213)
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'famous', de: 'berühmt', ipa: '[ˈfeɪməs]', ex: 'I want to be a famous singer.' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'pirate', de: 'Pirat/-in; Seeräuber/-in', ipa: '[ˈpaɪrət]', ex: 'A costume party with pirates.' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'ghost', de: 'Geist; Gespenst', ipa: '[gəʊst]', ex: 'Stories about ghosts in old houses.' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'witch', de: 'Hexe', ipa: '[wɪtʃ]', ex: 'A scary witch with a black cat.' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'scary', de: 'unheimlich; gruselig', ipa: '[ˈskeəri]', ex: 'Climbing is scary, but fun.' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'challenge', de: 'Herausforderung', ipa: '[ˈtʃælɪndʒ]', ex: 'My friends love a challenge.' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'to enjoy', de: 'genießen', ipa: '[ɪnˈdʒɔɪ]', ex: 'The party was great, I really enjoyed it.' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'climbing', de: 'Klettern; Kletter-', ipa: '[ˈklaɪmɪŋ]', ex: 'You can climb in lower places too.' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'route', de: 'Strecke; Route', ipa: '[ruːt]', ex: 'Let\'s try the easier climbing route first.' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'confident', de: 'selbstsicher; selbstbewusst', ipa: '[ˈkɒnfɪdənt]', ex: 'I am confident about the test.' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'adventure', de: 'Abenteuer', ipa: '[ədˈventʃə]', ex: 'Adventure stories are about exciting events.' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'outdoor', de: 'Freiluft-; Outdoor-', ipa: '[ˌaʊtˈdɔː]', ex: 'Football is an outdoor sport.' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'better', de: 'besser; lieber', ipa: '[ˈbetə]', ex: 'Ice cream is better. (Ausnahme: good → better)' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'the best', de: 'der/die/das beste', ipa: '[ðə ˈbest]', ex: 'This is the best party ever!' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'worse', de: 'schlimmer; schlechter', ipa: '[wɜːs]', ex: 'My cold is worse today. (bad → worse)' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'the worst', de: 'der/die/das schlimmste/schlechteste', ipa: '[ðə ˈwɜːst]', ex: 'Rain on sports day is the worst.' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'nervous', de: 'nervös; aufgeregt', ipa: '[ˈnɜːvəs]', ex: 'I am always nervous before exams.' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'superhero', de: 'Superheld', ipa: '[ˈsuːpəhɪərəʊ]', ex: 'Superman is a famous superhero.' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'wizard', de: 'Zauberer', ipa: '[ˈwɪzəd]', ex: 'Harry Potter is a wizard.' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'clean', de: 'sauber', ipa: '[kliːn]', ex: 'My room is clean now.' },
+      { cat: 'station2', catName: 'Station 2 (S. 211–213)', en: 'dirty', de: 'dreckig; schmutzig', ipa: '[ˈdɜːti]', ex: 'Your shoes are dirty (dirty ↔ clean).' }
+    ];
+
+    // State Variables
+    let currentDeck = [];
+    let currentIndex = 0;
+    let correctCount = 0;
+    let repeatCount = 0;
+    let missedCards = [];
+    let currentFilter = 'all';
+
+    // DOM Elements
+    const cardEl = document.getElementById('cardElement');
+    const frontWordEl = document.getElementById('frontWord');
+    const frontPhoneticEl = document.getElementById('frontPhonetic');
+    const frontExampleEl = document.getElementById('frontExample');
+    const backWordEl = document.getElementById('backWord');
+    const backExampleEl = document.getElementById('backExample');
+    const cardCategoryEl = document.getElementById('cardCategory');
+    const counterDisplayEl = document.getElementById('counterDisplay');
+    const correctCounterEl = document.getElementById('correctCounter');
+    const repeatCounterEl = document.getElementById('repeatCounter');
+    const progressBarEl = document.getElementById('progressBar');
+    const audioBtnEl = document.getElementById('audioBtn');
+    const trainerAreaEl = document.getElementById('trainerArea');
+    const completionScreenEl = document.getElementById('completionScreen');
+    const completionTextEl = document.getElementById('completionText');
+    const btnRepeatMistakesEl = document.getElementById('btnRepeatMistakes');
+
+    // Init Deck
+    function initDeck(filter) {
+      currentFilter = filter;
+      if (filter === 'all') {
+        currentDeck = [...VOCABULARY_DATA];
+      } else {
+        currentDeck = VOCABULARY_DATA.filter(item => item.cat === filter);
+      }
+      currentIndex = 0;
+      correctCount = 0;
+      repeatCount = 0;
+      missedCards = [];
+      
+      trainerAreaEl.style.display = 'block';
+      completionScreenEl.style.display = 'none';
+
+      updateCounters();
+      renderCard();
+    }
+
+    function renderCard() {
+      if (currentIndex >= currentDeck.length) {
+        showCompletion();
+        return;
+      }
+
+      cardEl.classList.remove('is-flipped');
+      const item = currentDeck[currentIndex];
+
+      frontWordEl.textContent = item.en;
+      frontPhoneticEl.textContent = item.ipa || '';
+      frontExampleEl.textContent = item.ex ? `„${item.ex}“` : '';
+      backWordEl.textContent = item.de;
+      backExampleEl.textContent = item.ex ? `„${item.ex}“` : '';
+      cardCategoryEl.textContent = item.catName;
+
+      updateCounters();
+    }
+
+    function updateCounters() {
+      const total = currentDeck.length;
+      counterDisplayEl.textContent = `Karte ${currentIndex + 1} von ${total}`;
+      correctCounterEl.textContent = correctCount;
+      repeatCounterEl.textContent = repeatCount;
+
+      const progressPercent = total > 0 ? (currentIndex / total) * 100 : 0;
+      progressBarEl.style.width = `${progressPercent}%`;
+    }
+
+    function flipCard() {
+      cardEl.classList.toggle('is-flipped');
+    }
+
+    function handleAnswer(isCorrect) {
+      const currentItem = currentDeck[currentIndex];
+      if (isCorrect) {
+        correctCount++;
+      } else {
+        repeatCount++;
+        missedCards.push(currentItem);
+      }
+
+      currentIndex++;
+      renderCard();
+    }
+
+    function showCompletion() {
+      trainerAreaEl.style.display = 'none';
+      completionScreenEl.style.display = 'block';
+      progressBarEl.style.width = '100%';
+
+      completionTextEl.innerHTML = `
+        Runde beendet!<br>
+        <strong>${correctCount} von ${currentDeck.length} Vokabeln</strong> direkt gewusst!
+        ${repeatCount > 0 ? `<br><span style="color: #b91c1c;">${repeatCount} Vokabeln solltest du noch wiederholen.</span>` : '<br><span style="color: #15803d; font-weight: 700;">Perfekt! Alle Vokabeln fehlerfrei beherrscht! 🏆</span>'}
+      `;
+
+      if (missedCards.length > 0) {
+        btnRepeatMistakesEl.style.display = 'inline-flex';
+      } else {
+        btnRepeatMistakesEl.style.display = 'none';
+      }
+    }
+
+    // Audio Speech Synthesis
+    function playAudio(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Event Listeners
+    cardEl.addEventListener('click', (e) => {
+      if (e.target.closest('#audioBtn')) return;
+      flipCard();
+    });
+
+    document.getElementById('btnFlip').addEventListener('click', flipCard);
+    
+    document.getElementById('btnCorrect').addEventListener('click', () => handleAnswer(true));
+    document.getElementById('btnWrong').addEventListener('click', () => handleAnswer(false));
+
+    audioBtnEl.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const word = currentDeck[currentIndex]?.en;
+      if (word) playAudio(word);
+    });
+
+    document.getElementById('btnShuffle').addEventListener('click', () => {
+      // Fisher-Yates Shuffle ab aktuellem Index
+      const remaining = currentDeck.slice(currentIndex);
+      for (let i = remaining.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [remaining[i], remaining[j]] = [remaining[j], remaining[i]];
+      }
+      currentDeck = [...currentDeck.slice(0, currentIndex), ...remaining];
+      renderCard();
+    });
+
+    document.getElementById('btnRestart').addEventListener('click', () => {
+      initDeck(currentFilter);
+    });
+
+    document.getElementById('btnRestartAll').addEventListener('click', () => {
+      initDeck(currentFilter);
+    });
+
+    btnRepeatMistakesEl.addEventListener('click', () => {
+      currentDeck = [...missedCards];
+      currentIndex = 0;
+      correctCount = 0;
+      repeatCount = 0;
+      missedCards = [];
+      trainerAreaEl.style.display = 'block';
+      completionScreenEl.style.display = 'none';
+      renderCard();
+    });
+
+    // Filter Buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        initDeck(btn.dataset.filter);
+      });
+    });
+
+    // Tastatur-Steuerung
+    document.addEventListener('keydown', (e) => {
+      if (trainerAreaEl.style.display === 'none') return;
+      if (e.code === 'Space') {
+        e.preventDefault();
+        flipCard();
+      } else if (e.code === 'ArrowRight' || e.key === '1') {
+        handleAnswer(true);
+      } else if (e.code === 'ArrowLeft' || e.key === '2') {
+        handleAnswer(false);
+      }
+    });
+
+    // Start
+    initDeck('all');
+  </script>
+</body>
+</html>
