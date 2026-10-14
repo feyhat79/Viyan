@@ -31,10 +31,13 @@
   --theme-englisch-light: #f5f3ff;
   --theme-englisch-dark: #6d28d9;
 
-  /* Naturwissenschaften (Grün) */
+  /* Biologie / Naturwissenschaften (Grün) */
   --theme-nawi: #059669;
   --theme-nawi-light: #ecfdf5;
   --theme-nawi-dark: #047857;
+  --theme-biologie: var(--theme-nawi);
+  --theme-biologie-light: var(--theme-nawi-light);
+  --theme-biologie-dark: var(--theme-nawi-dark);
 
   /* Gesellschaftslehre (Bernstein / Warm-Orange) */
   --theme-gesellschaft: #d97706;
@@ -158,9 +161,10 @@ body {
   color: var(--theme-englisch);
 }
 
-.badge-nawi {
-  background: var(--theme-nawi-light);
-  color: var(--theme-nawi);
+.badge-nawi,
+.badge-biologie {
+  background: var(--theme-biologie-light);
+  color: var(--theme-biologie);
 }
 
 .badge-gesellschaft {
@@ -246,7 +250,8 @@ h1 {
 .subject-card.theme-mathe::before { background: var(--theme-mathe); }
 .subject-card.theme-deutsch::before { background: var(--theme-deutsch); }
 .subject-card.theme-englisch::before { background: var(--theme-englisch); }
-.subject-card.theme-nawi::before { background: var(--theme-nawi); }
+.subject-card.theme-biologie::before,
+.subject-card.theme-nawi::before { background: var(--theme-biologie); }
 .subject-card.theme-gesellschaft::before { background: var(--theme-gesellschaft); }
 
 .subject-card:hover {
@@ -257,7 +262,8 @@ h1 {
 .subject-card.theme-mathe:hover { border-color: var(--theme-mathe); }
 .subject-card.theme-deutsch:hover { border-color: var(--theme-deutsch); }
 .subject-card.theme-englisch:hover { border-color: var(--theme-englisch); }
-.subject-card.theme-nawi:hover { border-color: var(--theme-nawi); }
+.subject-card.theme-biologie:hover,
+.subject-card.theme-nawi:hover { border-color: var(--theme-biologie); }
 .subject-card.theme-gesellschaft:hover { border-color: var(--theme-gesellschaft); }
 
 .subject-card-header {
@@ -281,7 +287,8 @@ h1 {
 .theme-mathe .subject-icon-box { background: var(--theme-mathe-light); color: var(--theme-mathe); }
 .theme-deutsch .subject-icon-box { background: var(--theme-deutsch-light); color: var(--theme-deutsch); }
 .theme-englisch .subject-icon-box { background: var(--theme-englisch-light); color: var(--theme-englisch); }
-.theme-nawi .subject-icon-box { background: var(--theme-nawi-light); color: var(--theme-nawi); }
+.theme-biologie .subject-icon-box,
+.theme-nawi .subject-icon-box { background: var(--theme-biologie-light); color: var(--theme-biologie); }
 .theme-gesellschaft .subject-icon-box { background: var(--theme-gesellschaft-light); color: var(--theme-gesellschaft); }
 
 .subject-card-title {
@@ -302,6 +309,8 @@ h1 {
 .subject-card:hover .btn-mathe { background: var(--theme-mathe-dark); }
 .subject-card:hover .btn-deutsch { background: var(--theme-deutsch-dark); }
 .subject-card:hover .btn-englisch { background: var(--theme-englisch-dark); }
+.subject-card:hover .btn-biologie,
+.subject-card:hover .btn-nawi { background: var(--theme-biologie-dark); }
 
 /* Chapter preview in subject card */
 .chapters-preview-list {
@@ -396,8 +405,10 @@ h1 {
 .btn-englisch { background: var(--theme-englisch); }
 .btn-englisch:hover { background: var(--theme-englisch-dark); }
 
-.btn-nawi { background: var(--theme-nawi); }
-.btn-nawi:hover { background: var(--theme-nawi-dark); }
+.btn-nawi,
+.btn-biologie { background: var(--theme-biologie); }
+.btn-nawi:hover,
+.btn-biologie:hover { background: var(--theme-biologie-dark); }
 
 .btn-gesellschaft { background: var(--theme-gesellschaft); }
 .btn-gesellschaft:hover { background: var(--theme-gesellschaft-dark); }
@@ -436,6 +447,7 @@ h1 {
 .theme-mathe-page .topic-card::before { background: var(--theme-mathe); }
 .theme-deutsch-page .topic-card::before { background: var(--theme-deutsch); }
 .theme-englisch-page .topic-card::before { background: var(--theme-englisch); }
+.theme-biologie-page .topic-card::before { background: var(--theme-biologie); }
 
 .topic-card:hover {
   box-shadow: var(--shadow-md);
@@ -445,6 +457,7 @@ h1 {
 .theme-mathe-page .topic-card:hover { border-color: var(--theme-mathe); }
 .theme-deutsch-page .topic-card:hover { border-color: var(--theme-deutsch); }
 .theme-englisch-page .topic-card:hover { border-color: var(--theme-englisch); }
+.theme-biologie-page .topic-card:hover { border-color: var(--theme-biologie); }
 
 .topic-card.coming-soon {
   opacity: 0.65;
@@ -483,6 +496,7 @@ h1 {
 .theme-mathe-page .topic-num { background: var(--theme-mathe); }
 .theme-deutsch-page .topic-num { background: var(--theme-deutsch); }
 .theme-englisch-page .topic-num { background: var(--theme-englisch); }
+.theme-biologie-page .topic-num { background: var(--theme-biologie); }
 
 .topic-num.cs {
   background: var(--border-color);
@@ -619,6 +633,7 @@ h1 {
 
 .theme-deutsch-page .merke-box { border-left-color: var(--theme-deutsch); }
 .theme-englisch-page .merke-box { border-left-color: var(--theme-englisch); }
+.theme-biologie-page .merke-box { border-left-color: var(--theme-biologie); }
 
 .merke-title {
   font-weight: 800;
@@ -833,6 +848,8 @@ footer strong {
 .theme-englisch-page .btn-nav-next:hover { background: var(--theme-englisch-dark); }
 .theme-deutsch-page .btn-nav-next { background: var(--theme-deutsch); }
 .theme-deutsch-page .btn-nav-next:hover { background: var(--theme-deutsch-dark); }
+.theme-biologie-page .btn-nav-next { background: var(--theme-biologie); }
+.theme-biologie-page .btn-nav-next:hover { background: var(--theme-biologie-dark); }
 .theme-mathe-page .btn-nav-next:hover { background: var(--theme-mathe-dark); }
 .btn-nav-next:hover { transform: translateX(2px); }
 
